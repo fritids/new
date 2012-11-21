@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+		<Text type="text" name="TestimonialTitle" label="Enter Testimonial Title here:">
+        	<![CDATA[Consumer Loans]]>
+    	</Text>
+</widget>

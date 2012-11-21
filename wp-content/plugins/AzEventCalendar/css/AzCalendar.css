@@ -1,0 +1,321 @@
+html body {
+	width:100%;
+	height:100%;
+}
+
+#AzEventCalendar, #AzEventCalendar table{
+	width:100%;
+}
+#AzEventCalendar table td{
+	text-align:center;
+	border:none;
+}
+#AzEventCalendar td, #AzEventCalendar th{
+	padding:10px;	
+	text-align:center;
+	padding-left:0;
+	padding-right:0;
+}
+#AzEventCalendar td.evented{
+	background:#fafafa;
+}
+#AzEventCalendar td.evented a{
+	text-decoration:underline;
+	position:relative;
+}
+#AzEventCalendar a{
+	display:block;
+	text-decoration:none;
+}
+#AzEventCalendar div.tooltip{
+	position:absolute;
+	width:289px;
+	background:#fff;
+	font-size:12px;
+	z-index:101;
+	font-weight:normal;
+	border-left:solid 1px #648596;
+	border-right:solid 1px #648596;
+	border-bottom:solid 1px #648596;
+	color:#333;
+}
+#AzEventCalendar div.eventWrap{
+	position:relative;	
+}
+#AzEventCalendar div.tooltip span{
+	display:block;
+	text-align:left;
+	font-size:11px;
+	font-weight:bold;
+	position:relative;
+	
+}
+#AzEventCalendar div.tooltip span small, 
+#AzEventCalendar div.tooltip span em{
+	display: block;
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 0;
+    padding: 5px;
+	
+}
+#AzEventCalendar div.tooltip span em{
+	font-size:10px;
+}
+#AzEventCalendar div.tooltip span h4{
+	background: none repeat scroll 0 0 #648596;
+    color: #FFFFFF;
+    line-height: 19px;
+    margin: 0;
+    min-height: 20px;
+    padding: 5px;
+}
+#AzEventCalendar div.tooltip span span.kure{
+	background:url(no-theme/images/kure.png) no-repeat left;
+	display:block;
+	width:10px;
+	padding:0;
+	margin:0;
+	height:20px;
+	margin-left:-10px;
+	float:left;
+
+	
+}
+ul.callHolder{
+		line-height:16px;
+}
+.sidebarContent li ul.callHolder li{
+	padding:12px 0;
+}
+#AzEventCal{
+	margin:0 auto;
+	padding:0px;
+}
+
+.neutralColor{
+	color:#648596;	
+}
+.neutralColorGray th{
+	background:#E6EEF2;	
+	border-right:solid 1px #fff;
+	
+}
+
+/*
+	client submitEvent popup form
+*/
+
+.popUp{
+	width:553px;
+	height:425px;
+	position:fixed;
+	z-index:9998;
+	top:50%;
+	left:50%;
+	margin-top:-212px;
+	margin-left:-276px;
+	background-color:#fff;
+	_position:absolute; /* hack for internet explorer 6*/
+	display:none;
+}
+
+.backgroundPopup{
+	position:fixed;
+	_position:absolute; /* hack for internet explorer 6*/
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	background:#000;
+	z-index:9997;
+	display:none;
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+
+}
+.ui-datepicker{
+	z-index:10011;
+}
+.popupHeding{
+	width:100%;
+	background:#cccccc;
+	height:20px;
+	line-height:20px;
+}
+.SubmitEventFormHolder td{
+	padding-left:10px;
+	padding-top:7px;
+}
+.SubmitEventFormHolder td input{
+	height:17px;
+	width:371px;
+	border:0;
+	border:1px solid #cccccc;
+}
+.SubmitEventFormHolder td input.dateInput{
+	width:143px;
+}
+.SubmitEventFormHolder td textarea{
+	width:371px;
+	border:0;
+	border:1px solid #cccccc;
+}
+.SubmitEventFormHolder td textarea#eventDesc{
+	height:	63px;
+}
+.SubmitEventFormHolder td input.submintPopUp{
+	width:65px;
+	height:17px;
+	background:none;
+	border:0;
+	background:url(no-theme/images/submitBtnPopup.jpg) no-repeat;
+	
+}
+.SubmitEventFormHolder td input.smallerInput{
+	width:163px;	
+}
+.submitEvent{
+	padding-right:14px;
+	padding-top:5px;
+}
+.submitEvent a {
+	text-decoration:none;
+	color:#000;
+	text-align:right;
+	display:block;
+	
+}
+.submitEvent a:hover {
+	text-decoration:underline;
+	color:#000;
+}
+.SubmitEventFormHolder td input.error, .SubmitEventFormHolder td textarea.error{
+	border:1px solid #ff0000;
+}
+.az_Cal_preloader{
+	background:url(ajax-loader.gif);
+	width:16px;
+	height:16px;
+	display:none;
+}
+
+.boldText{
+	font-weight:bold;
+}
+.closeBtn{
+	
+	display:block;
+	width:50px;
+	float:right;
+	padding-right:5px;
+	cursor:pointer;
+	
+}
+.headLineText{
+	display:block;
+	float:left;
+	padding-left:5px;
+}
+.clear-fix{
+	clear:both;
+	float:none;
+}
+#eventDesc, .popUp input{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
+#AzEventCalendar th.reducePadding{
+	padding:0px;	
+}
+.eventWraper{
+	padding-bottom:20px;	
+}
+
+/* EVENT ICONS */
+
+.eventWraper h2{
+	background: url("images/info_icon.png") no-repeat;
+	background-position: 4px 5px;
+	clear: both;
+	margin: 0 0 14px 0;
+	padding: 0 0 0 40px;	
+}
+
+.eventWraper small{
+	background: url("images/calendar_icon.png") no-repeat;
+	background-position: 4px 0px;
+	clear: both;
+	display: block;
+	margin-bottom: 22px;
+	padding: 0 0 5px 40px;
+}
+
+.eventWraper .az_event_content{
+	border-left: 3px solid #2c2c2c;
+	clear: both;
+	margin: 0 0 0 18px;
+	padding: 0 0 0 19px;
+}
+
+
+/* END EVENT ICONS */
+
+.eventImgWraper{
+	margin:10px 0;	
+}
+#AzEventCalendar td.present_day{
+	/*padding-left:5px;
+	padding-right:5px;*/
+}
+#AzEventCalendar td.present_day a, #AzEventCalendar td.present_day a.notactiv{
+	background:#ccc;
+	position:relative;
+	color:#fff;
+	
+}
+#AzEventCalendar td.present_day a.notactiv{
+	cursor:default;
+	text-decoration:none;
+	
+}
+
+.az_pages ul{
+	list-style: none;
+	padding: 0;
+	margin: 0 0 20px 0;
+}
+
+.az_pages ul li{
+	border-bottom: 1px dashed #E6E6E6;
+	margin-bottom: 30px;
+}
+
+.az_pagination{
+	margin: 0;
+    padding: 0;
+}
+
+.az_pagination a{
+	display: block;
+	padding: 4px 10px;
+	margin: 0 7px 0 0;
+	color: white;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color: #FA8611;
+}
+
+.active_page{
+	background-color: #E5DED7 !important;
+	color: black !important;
+}
+
+.ellipse{
+	float: left;
+	margin: 0 10px 10px 0;
+}

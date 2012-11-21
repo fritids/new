@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage user_type="student" name="OmniSettings_One" title="Hello World">
+       <TabBegin id="AlternativeContent" />
+	   		<Options type="select" name="Gender">
+		    	<Option value="male" label="male" />
+				<Option value="female" label="female" />
+		    </Options>
+			<subheading value="Date of Birth:" />
+			<Options type="select" name="DOB_Day">
+		    	<Option value="1" label="1" />
+				<Option value="2" label="2" />
+				<Option value="3" label="3" />
+				<Option value="4" label="4" />
+				<Option value="5" label="5" />
+				<Option value="6" label="6" />
+				<Option value="7" label="7" />
+		    </Options>
+			<Options type="select" name="DOB_Month">
+		    	<Option value="January" label="January" />
+				<Option value="February" label="February" />
+				<Option value="March" label="March" />
+				<Option value="April" label="April" />
+				<Option value="May" label="May" />
+		    </Options>
+			<Options type="select" name="DOB_Year">
+		    	<Option value="2010" label="2010" />
+				<Option value="2009" label="2009" />
+				<Option value="2008" label="2008" />
+				<Option value="2007" label="2007" />
+				<Option value="2006" label="2006" />
+				<Option value="2005" label="2005" />
+				<Option value="2004" label="2004" />
+		    </Options>
+			<Text type="text" name="PrimaryPhone" label="Phone:"></Text>
+			<Text type="text" name="SecondaryPhone" label=""></Text>
+			<subheading value="Graduation Year:" />
+			<Options type="select" name="Graduation_Year">
+		    	<Option value="2010" label="2010" />
+				<Option value="2009" label="2009" />
+				<Option value="2008" label="2008" />
+				<Option value="2007" label="2007" />
+				<Option value="2006" label="2006" />
+				<Option value="2005" label="2005" />
+				<Option value="2004" label="2004" />
+		    </Options>
+			<Options type="checkBoxList" name="recieve_info">
+				<Option value="recieve_newsletters" label="I want to receive Promos and Newsletters from Edge in College Prep:" />
+				<Option value="recieve_information" label="I want to receive information and promotions from ECP Partners which will help me in the college admission process" />
+		    </Options>
+			<Text type="text" name="ParentName" label="Parent Name:"></Text>
+			<Text type="text" name="ParentEmail" label="Parent Email:"></Text>
+			
+			<Text type="text" name="Pretest_Scores" label="Pretest Scores:"></Text>
+			<Text type="text" name="Final_SAT_Scores" label="Final SAT Scores:"></Text>
+	  <TabEnd />
+    </OptionPage>
+	<OptionPage user_type="teacher" name="OmniSettings_One" title="Hello World">
+       <TabBegin id="AlternativeContent" />
+	    <GoogleMap label="mapLocation" name="mapLocation" >
+		</GoogleMap>
+		<Image width="696" height="359" type="siet" name="IE6AltImage" label="upload IE6 alternative Image here (696px x 359px):" >
+		</Image>
+		 <DatePicker type="DatePicker" name="Date" label="Date">
+        </DatePicker>
+		 <TabEnd />
+    </OptionPage>
+	<OptionPage user_type="raver" name="OmniSettings_One" title="Hello World">
+       <TabBegin id="AlternativeContent" />
+	   <Color type="color" name="SlideTitleFontColor1" label="Enter Title Color here:">
+            <![CDATA[#393838]]>
+        </Color>
+		 <Color type="color" name="headerColor" label="Enter headerColor here:">
+            <![CDATA[#393838]]>
+        </Color>
+		 <TabEnd />
+    </OptionPage>
+</IDGConfig>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+  
+    <OptionPage name="ecpMail" title="ECP Mail">
+    	<TabBegin id="User_Registration_Mail" title="User Registration Mail"/>
+	    	 <Text type="text" name="ecpRegisterMailSubject" label="Subject of the mail:" ></Text>
+			<Wysiwyg type="text" name="ecpRegisterMailBody" label="Body of the mail:" ></Wysiwyg>
+			<html value="(This is a  raw draft)
+			You can use the following keywords that can be customized:
+			{user} - for the first and last name of the user,
+			{username} - for the username of the user,
+			{password} - for the password of the user." />
+    	<TabEnd/>
+    	<TabBegin id="User_Tryout_Mail" title="User Tryout Mail"/>
+	    	 <Text type="text" name="ecpTryoutMailSubject" label="Subject of the mail:" ></Text>
+			<Wysiwyg type="text" name="ecpTryoutMailBody" label="Body of the mail:" ></Wysiwyg>
+			<html value="(This is a  raw draft)
+			You can use the following keywords that can be customized:
+			{user} - for the first and last name of the user,
+			{username} - for the username of the user,
+			{password} - for the password of the user." />
+    	<TabEnd/>
+    	<TabBegin id="Online_Course" title="Online Course"/>
+	    	 <Text type="text" name="online-sat-course-subject" label="Subject of the mail:" ></Text>
+			<Wysiwyg type="text" name="online-sat-course-body" label="Body of the mail:" ></Wysiwyg>
+			<html value="(This is a raw draft)
+			You can use the following keywords that can be customized:
+			{user} - for the first and last name of the user" />
+    	<TabEnd/>
+    	<TabBegin id="Admissions_Counseling" title="Online Admissions Counseling"/>
+	    	 <Text type="text" name="online-coaching-subject" label="Subject of the mail:" ></Text>
+			<Wysiwyg type="text" name="online-coaching-body" label="Body of the mail:" ></Wysiwyg>
+			<html value="(This is a raw draft)
+			You can use the following keywords that can be customized:
+			{user} - for the first and last name of the user" />
+    	<TabEnd/>
+    	<TabBegin id="Test_Prep" title="Online Test Prep"/>
+	    	 <Text type="text" name="online-test-prep-subject" label="Subject of the mail:" ></Text>
+			<Wysiwyg type="text" name="online-test-prep-body" label="Body of the mail:" ></Wysiwyg>
+			<html value="(This is a raw draft)
+			You can use the following keywords that can be customized:
+			{user} - for the first and last name of the user" />
+    	<TabEnd/>
+    	<TabBegin id="Essay_Grading" title="Essay/Grading"/>
+	    	 <Text type="text" name="essay-subject" label="Subject of the mail:" ></Text>
+			<Wysiwyg type="text" name="essay-body" label="Body of the mail:" ></Wysiwyg>
+			<html value="(This is a raw draft)
+			You can use the following keywords that can be customized:
+			{user} - for the first and last name of the user" />
+    	<TabEnd/>
+    </OptionPage>
+    <OptionPage name="ecpCoupons" title="ECP Coupons">
+            <TabBegin id="AvailableCoupons" title="Available Coupons" />
+            	<Callback type="text" name="ecp_coupons_callback" label="ecpCoupons" fname="ecp_coupons_callback_manage" params=""></Callback>
+            <TabEnd />
+            <TabBegin id="ProductsWithCoupons" title="Products With Coupons"/>
+            	<Callback type="text" name="ecp_coupons_callback" label="ecpCoupons" fname="ecp_coupons_callback_products" params=""></Callback>
+            <TabEnd />
+            <TabBegin id="AddNewCoupon" title="Add New Coupon"/>
+            	<Callback type="text" name="ecp_coupons_callback" label="ecpCoupons" fname="ecp_coupons_callback_add" params=""></Callback>
+            <TabEnd />
+    </OptionPage>
+    <OptionPage name="ecpDownloadManager" title="ECP Download Manager">
+            <TabBegin id="Files Uploader" />
+            <Callback type="text" name="ecp_download_manager" label="ecp_download_manager" fname="ecp_dm_file_uploader" params=""></Callback>
+            <TabEnd />
+    </OptionPage>
+</IDGConfig>

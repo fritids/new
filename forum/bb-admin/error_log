@@ -1,0 +1,1 @@
+[21-Dec-2010 03:03:00] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/edgeinco/public_html/forum/bb-includes/backpress/class.bpdb.php:569) in /home/edgeinco/public_html/forum/bb-includes/functions.bb-core.php on line 1101

@@ -1,0 +1,1 @@
+<?php return array('portal', 'enroll', 'news');

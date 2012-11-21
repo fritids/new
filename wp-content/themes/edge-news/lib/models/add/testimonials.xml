@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+<OptionPage name="TestimonialName" title="TestimonialName">
+	<TabBegin id="TestimonialName" />
+		<Text type="text" name="name_input" label="Enter Name here:"></Text>
+		<Text type="text" name="name_atributes" label="Enter Name Attribute here:"></Text>
+	<TabEnd />
+</OptionPage>
+</IDGConfig>

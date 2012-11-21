@@ -1,0 +1,221 @@
+.imageWrap{
+	padding:10px;
+	background:#f5f5f5;
+	border:1px #bbbbbb dashed;
+}
+
+.nodeContent{
+	background:#fff;
+} 
+li.pluginNode{
+	min-height:74px;
+	background:#f3f3f3 no-repeat 10px center;
+	border-color:#d0d4d8;
+	color:#666;
+}
+li.pluginNode h2{
+	display:inline;
+}
+li.pluginNode span.label{
+	margin-left:90px;
+	font-size:20px;
+	line-height:74px;
+}
+li.bankSiteQuestions{
+	background-image:url(images/bankSiteQuestions_icon.png);
+}
+li.ColorPicker{
+	background-image:url(images/colorPicker.png);
+}
+li.ImageSlider{
+	background-image:url(images/imageSlider.png);
+}
+li.SocialNetworkIcons{
+	background-image:url(images/socialNet.png);
+}
+li.FeaturedArea{
+	background-image:url(images/featuredAreaIcon.png);
+}
+.actions{
+	background:#f3f3f3;
+	padding:10px;
+	margin-bottom:20px;
+	min-height:30px;
+}
+.selectArchive{
+	float:left;
+	width:250px;
+}
+.actionButtons{
+	text-align:right;
+	float:right;
+	width:450px;
+}
+a#insertItem{
+	background:url(images/bankSiteQuestions_insert.png) 20px center no-repeat;
+	display:inline-block;
+	width:70px;
+	padding-left:60px;
+	height:28px;
+	line-height:28px;
+	margin-bottom:10px;
+}
+a#previewItem{
+	background:url(images/peviewIcon.png) 20px center no-repeat;
+	display:inline-block;
+	width:75px;
+	padding-left:60px;
+	height:28px;
+	line-height:28px;
+	margin-bottom:10px;
+	margin-left:10px;
+}
+a#toggleOptions{
+	background:url(images/settingsIcon.png) 20px center no-repeat;
+	display:inline-block;
+	width:90px;
+	padding-left:60px;
+	height:28px;
+	line-height:28px;
+	margin-bottom:10px;
+	margin-left:10px;
+}
+.preloaderImage{
+	background:url(images/preloader.gif) center no-repeat;
+	display:block;
+	width:64px;
+	height:64px;
+	position:absolute;
+}
+.IDGL_listNode .label{
+	display:block;
+	margin-top:5px;
+	margin-bottom:10px;
+	font-size:x-small;
+}
+.IDGL_listNode input[type='text']{
+	width:100%;
+}
+.IDGL_listNode textarea{
+	width:100%;
+	height:100px;
+}
+.pluginNode span.label{
+
+}
+.imageMediaConnector a{
+	margin-top:10px;
+	display:inline-block;
+	margin-bottom:10px;
+}
+img.elem{
+	margin-bottom:10px;
+	background:#9a9a9a;
+}
+#optionsPanel{
+	background:#fff;
+	padding:20px;
+	border:solid 1px #cacaca;
+	margin:20px 0 20px 0;
+}
+
+fieldset.half{
+	width:49%;
+	float:left;
+}
+fieldset.third{
+	width:26%;
+	float:left;
+}
+fieldset.quart{
+	width:25%;
+	float:left;
+}
+
+/*** css done by Bojan ***/
+
+.IDGL_TabBegin fieldset{
+	padding-right:25px;
+	margin-left:25px;
+	border-right:1px dotted #bbbbbb; 
+	min-height:180px;
+}
+.IDGL_TabBegin fieldset.last-fieldset{
+	border:0;
+} 
+.IDGL_TabBegin fieldset legend{
+	margin-bottom:10px;
+}
+.IDGL_Wysiwyg a.mceResize{
+	top:0 !important;
+}
+.IDGL_Controls .submit{
+	padding-left:20px;
+}
+.IDGL_Options input[type="checkbox"], 
+.IDGL_Options input[type="radio"]{
+	margin:5px;
+}
+
+.IDGL_DatePicker, 
+.IDGL_GoogleMap, 
+.IDGL_Color {
+	overflow:hidden;
+}
+.IDGL_DatePicker img, 
+.IDGL_GoogleMap img, 
+.IDGL_Color img{
+	float:left;
+	cursor:pointer;
+	margin-top:2px;
+	width:2%;
+	display:block;
+}
+fieldset .IDGL_DatePicker img, 
+fieldset .IDGL_GoogleMap img, 
+fieldset .IDGL_Color img{
+	float:left;
+	cursor:pointer;
+	margin-top:2px;
+	width:11%;
+	display:block;
+}
+
+.widget-content .IDGL_DatePicker img, 
+.widget-content .IDGL_GoogleMap img, 
+.widget-content .IDGL_Color img{
+	float:left;
+	cursor:pointer;
+	margin-top:2px;
+	width:10%;
+	display:block;
+}
+.IDGL_DatePicker label, 
+.IDGL_GoogleMap label, 
+.IDGL_Color label{
+	clear:both;
+	float:none;
+	display:block;
+}
+
+.IDGL_DatePicker input[type="text"], 
+.IDGL_GoogleMap input[type="text"], 
+.IDGL_Color input[type="text"]{
+	float:right;
+	width:97%;
+}
+fieldset .IDGL_DatePicker input[type="text"], fieldset .IDGL_GoogleMap input[type="text"], fieldset .IDGL_Color input[type="text"]{
+	width:85%;
+}
+.widget-content .IDGL_DatePicker input[type="text"], .widget-content .IDGL_GoogleMap input[type="text"], .widget-content .IDGL_Color input[type="text"]{
+	width:88%;
+}
+.IDGL_ImageGallery ol li{
+	display:inline-block;
+	min-width:20px;
+	min-height:50px;
+}
+
+.ui-slider-horizontal{
+	margin:10px 0;
+}

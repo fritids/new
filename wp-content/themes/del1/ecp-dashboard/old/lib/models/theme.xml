@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage name="Headers" title="headers and footers">
+    	 <TabBegin id="CallbackFunction1" />
+			<Callback type="text" name="datagrid" label="Category Name:" fname="print_datagrid" params=""></Callback>
+		<TabEnd />
+		 <TabBegin id="laGalleria" />
+		 	<ImageGallery width="696" height="359" thumb_width="100" thumb_height="60" type="siet" name="imageGallery" label="upload ze images (696px x 359px):" >
+			</ImageGallery>
+		 <TabEnd />
+		  <TabBegin id="Generic" />
+		  	
+			<Textarea type="text" name="themeHeader" label="enter theme header here:" ></Textarea>
+		  	<Textarea type="text" name="themeFooter" label="enter theme footer here:" ></Textarea>
+		  <TabEnd />
+		  <TabBegin id="Content" />
+			<Text type="text" name="PageTitle" label="Page Title:">
+	    	</Text>
+	    	<Textarea type="text" name="Keywords" label="Keywords:">
+	        </Textarea>
+			<Textarea type="text" name="Description" label="Description:">
+	        </Textarea>
+		<TabEnd />
+		<TabBegin id="Headers" />
+			<Textarea type="text" name="Styles" label="Styles:">
+	        </Textarea>
+			<Textarea type="text" name="Scripts" label="Scripts:">
+	        </Textarea>
+			<Textarea type="text" name="AdditionalLinks" label="AdditionalLinks:">
+	        </Textarea>
+		<TabEnd />
+		<TabBegin id="CallbackFunction" />
+			<Callback type="text" name="ColorSchemeControl" label="Category Name:" fname="IDGL_BgImagesList" params=""></Callback>
+		<TabEnd />
+		 <TabBegin id="laGalleria1" />
+		 	<ImageGallery width="696" height="359" thumb_width="100" thumb_height="60" type="siet" name="imageGallery1" label="upload ze images (696px x 359px):" >
+			</ImageGallery>
+		 <TabEnd />
+		  
+	</OptionPage>
+	<OptionPage name="OmniSettings_One" title="Hello World">
+        <TabBegin id="AlternativeContent" />
+		    
+			<Options type="select" name="selectOne">
+		    	<Option value="1" label="one" />
+				<Option value="2" label="one1" />
+				<Option value="3" label="one2" />	
+		    </Options>
+			 <Options type="checkBoxList" name="selectTwo">
+		    	<Option value="1" label="one" />
+				<Option value="2" label="one1" />
+				<Option value="3" label="one2" />	
+		    </Options>
+			 <Options type="radioList" name="selectThree">
+		    	<Option value="1" label="one" />
+				<Option value="2" label="one1" />
+				<Option value="3" label="one2" />	
+		    </Options>
+			
+			
+			
+			<Text type="text" name="SlideTitle1" label="3Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+			<GoogleMap label="mapLocation" name="mapLocation" >
+			</GoogleMap>
+			<Image width="696" height="359" type="siet" name="IE6AltImage" label="upload IE6 alternative Image here (696px x 359px):" >
+			</Image>
+			 <DatePicker type="DatePicker" name="Date" label="Date">
+	        </DatePicker>
+	        <Color type="color" name="SlideTitleFontColor1" label="Enter Title Color here:">
+	            <![CDATA[#393838]]>
+	        </Color>
+		<TabEnd />
+		<TabBegin id="Tabanje" />
+		    <Text type="text" name="SlideTitle15" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+			<Text type="text" name="SlideTitle11111" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+			<GoogleMap label="mapLocation" name="mapLocation1111" >
+			</GoogleMap>
+			<Image width="696" height="359" type="siet" name="IE6AltImage1111" label="upload IE6 alternative Image here (696px x 359px):" >
+			</Image>
+		<TabEnd />
+		<TabBegin id="Tabanje2" />
+		    <Text type="text" name="SlideTitle16" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+		<TabEnd />
+		<TabBegin id="Tabanje3" />
+		    <Text type="text" name="SlideTitle17" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+		<TabEnd />
+		<TabBegin id="Tabanje4" />
+		    <Text type="text" name="SlideTitle18" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+		<TabEnd />
+		<TabBegin id="Tabanje5" />
+		    <Text type="text" name="SlideTitle19" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+		<TabEnd />
+		<TabBegin id="Tabanje6" />
+		    <Text type="text" name="SlideTitle199" label="Enter Title here:">
+	            <![CDATA[Consumer Loans]]>
+	        </Text>
+		<TabEnd />
+    </OptionPage>
+	 <OptionPage name="OmniSettings_Two" title="Hello World Two">
+        <Text type="text" name="heading1" label="enter heading here:" ></Text>
+		<Wysiwyg type="text" name="content2" label="enter content here:" ></Wysiwyg>
+		<Text type="text" name="link3" label="enter link here:" ></Text>
+    </OptionPage>
+	 <OptionPage name="OmniSettings_Three" title="Hello World Three">
+        <Text type="text" name="heading4" label="enter heading here:" ></Text>
+		<Text type="text" name="link5" label="enter link here:" ></Text>
+    </OptionPage>
+	<OptionPage name="MyNewPanel" title="Sample Panel">
+        <Text type="text" name="Naslov" label="Внеси го насловот овде:" ></Text>
+		<Wysiwyg type="text" name="opis" label="Опис:" ></Wysiwyg>
+		<DatePicker type="Datum" name="Datum" label="Date"></DatePicker>
+		 <Color type="color" name="Boja" label="Enter Boja here:">
+            <![CDATA[#393838]]>
+        </Color>
+    </OptionPage>
+</IDGConfig>

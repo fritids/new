@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage name="ProductDiscount" title="Product Discount">
+	   <Text name="ProductPrice" label="Product Price:"></Text>
+	   <Callback name="productDiscount" label="Product Discount:" fname="ecp_product_dicount_callback" params="array()"></Callback>
+    </OptionPage>
+</IDGConfig>

@@ -1,0 +1,21 @@
+html{  
+   background : url(null) fixed no-repeat; 
+   overflow-x:hidden; 
+} 
+* html .backgroundPopup { 
+/*\*/position: absolute; top: expression((0 + (ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop)) + 'px'); /**/
+   margin:0px;
+   padding:0px;
+}
+.popUp{
+/*\*/position: absolute; top: expression((276 + (ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop)) + 'px'); /**/  x');
+	margin:0px;
+	padding:0px; 	
+}
+.backgroundPopup{		
+	filter:alpha(opacity=50)
+}
+#AzEventCalendar div.tooltip span span.kure{
+	background: none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/wp-content/plugins/AzEventCalendar/css/no-theme/images/kure.png', sizingMethod='crop');
+}

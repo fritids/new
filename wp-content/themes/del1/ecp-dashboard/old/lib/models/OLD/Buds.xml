@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage name="SpaceShipDetails" title="Space Ship Details">
+       <TabBegin id="BasicData" />
+		    <Text type="text" name="ShipName" label="Enter Ship Name:">
+	        </Text>
+			<Wysiwyg type="text" name="ShipDetails" label="enter Ship Details:" ></Wysiwyg>
+			<Image width="696" height="359" type="siet" name="ShipMainImage" label="upload main Image here (696px x 359px):" >
+			</Image>
+	        <Color type="color" name="SlideTitleFontColor1" label="Enter Title Color here:">
+	            <![CDATA[#393838]]>
+	        </Color>
+			 <Color type="color" name="headerColor" label="Enter headerColor here:">
+	            <![CDATA[#393838]]>
+	        </Color>
+		<TabEnd />
+		
+		 <TabBegin id="AdditionalImages" />
+			<Image width="696" height="359" type="siet" name="ShipImage1t" label="upload Image1 thumb here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage1" label="upload Image1 here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage2t" label="upload Image1 thumb here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage2" label="upload Image1 here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage3t" label="upload Image1 thumb here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage3" label="upload Image1 here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage4t" label="upload Image1 thumb here (696px x 359px):" >
+			</Image>
+			<Image width="696" height="359" type="siet" name="ShipImage4" label="upload Image1 here (696px x 359px):" >
+			</Image>
+		<TabEnd />
+
+    </OptionPage>
+	<OptionPage name="Headers" title="headers and footers">
+    	  <TabBegin id="Generic" />
+		  	<Textarea type="text" name="themeHeader" label="enter theme header here:" ></Textarea>
+		  	<Textarea type="text" name="themeFooter" label="enter theme footer here:" ></Textarea>
+		  <TabEnd />
+		  <TabBegin id="Content" />
+			<Text type="text" name="PageTitle" label="Page Title:">
+	    	</Text>
+	    	<Textarea type="text" name="Keywords" label="Keywords:">
+	        </Textarea>
+			<Textarea type="text" name="Description" label="Description:">
+	        </Textarea>
+		<TabEnd />
+		<TabBegin id="Headers" />
+			<Textarea type="text" name="Styles" label="Styles:">
+	        </Textarea>
+			<Textarea type="text" name="Scripts" label="Scripts:">
+	        </Textarea>
+			<Textarea type="text" name="AdditionalLinks" label="AdditionalLinks:">
+	        </Textarea>
+		<TabEnd />
+		  
+	</OptionPage>
+	
+</IDGConfig>

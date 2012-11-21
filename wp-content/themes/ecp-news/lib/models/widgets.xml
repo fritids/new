@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <IDGConfig>
+	<IDGLWidgetAreas>
+		<widget name="BlogSidebar">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="afterPost">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+	</IDGLWidgetAreas>
+ </IDGConfig>

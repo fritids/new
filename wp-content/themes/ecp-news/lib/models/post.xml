@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+	<OptionPage name="EventDetails" title="EventDetails">
+		<Text type="text" name="eventDate" label="Event Date:" />
+	</OptionPage>
+</IDGConfig>

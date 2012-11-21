@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <IDGConfig>
+	<IDGLWidgetAreas>
+		<widget name="Sidebar1">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar2">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar3">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar4">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar5">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar5">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar6">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar7">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar8">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="Sidebar9">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="afterPost">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="blogSidebar">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+		<widget name="forumSidebar">
+			<options>
+				<before_title>
+					<![CDATA[ <h2> ]]>
+				</before_title>
+				<after_title>
+					<![CDATA[ </h2> ]]>
+				</after_title>
+			</options>
+		</widget>
+	</IDGLWidgetAreas>
+ </IDGConfig>

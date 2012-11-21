@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+		<Image width="221" height="170" type="siet" name="form_ico" label="Upload Image here:(max 221px X 170px)" default="http://edgeincollegeprep.com/wp-content/themes/ecp-main-site/images/opt_form_default.jpg" >
+		</Image>
+</widget>

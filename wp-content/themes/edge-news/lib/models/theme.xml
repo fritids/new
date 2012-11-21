@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage name="Settings" title="Settings">
+		<TabBegin id="testimonialsSlider" />
+			<heading value="Choose Testimonials posts:" />
+			<Callback type="text" name="testimonialsSlider" label="Select Testimonials:" fname="IDGL_postList" params="array('post_type'=>'testimonials')"></Callback>
+		<TabEnd />
+		<TabBegin id="Slider" />
+			<heading value="Choose Post posts:" />
+			<Callback type="text" name="sliderWidget" label="Select Post:" fname="IDGL_postList" params="array('post_type'=>'slider')"></Callback>
+		<TabEnd />
+		<TabBegin id="Announcement" />
+			<heading value="Add Announcement Here:" />
+			<Wysiwyg type="text" name="AnnouncementText" label="Announcement Text:"></Wysiwyg>
+			<heading value="Add Announcement Link Here:" />
+			<Text type="text" name="link_text" label="Enter Text here:"></Text>
+			<Text type="text" name="actual_link" label="Enter Link here:"></Text>
+		<TabEnd />
+    </OptionPage>
+    <OptionPage name="VideoControl" title="VideoControl">
+    	<TabBegin id="PromotionalVideo" />
+			<Callback type="text" name="promotionalVideo" label="Add promotional video" fname="IDGL_promoVideoList" params=""></Callback>
+			<Image width="" height="" type="siet" name="videoStartImage" label="upload image here (635px x 358px):" ></Image>
+		<TabEnd />
+    </OptionPage>
+    <OptionPage name="PromotedProducts" title="PromotedProducts">
+        <TabBegin id="PromotedProducts" />
+
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod11" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod12" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod13" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod14" label="Enter color:" />
+
+        	<fieldSetStart class="quart" /><Text type="text" name="Prod21" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod22" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod23" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod24" label="Enter color:" />
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod31" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod32" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod33" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod34" label="Enter color:" />
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod41" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod42" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod43" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod44" label="Enter color:" />
+   			
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod51" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod52" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod53" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod54" label="Enter color:" />
+        
+        	
+        	<fieldSetStart class="quart" /><Text type="text" name="Prod61" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod62" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod63" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod64" label="Enter color:" />
+        	
+        	
+        	
+        	<fieldSetStart class="quart" /><Text type="text" name="Prod71" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod72" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod73" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod74" label="Enter color:" />
+   			
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod71" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod72" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod73" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod74" label="Enter color:" />
+   			
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod81" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod82" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod83" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod84" label="Enter color:" />
+   			
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod91" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod92" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod93" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod94" label="Enter color:" />
+   			
+   			
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod101" label="Label" /><fieldSetEnd/>
+   			<fieldSetStart class="quart" /><Text type="text" name="Prod102" label="Link" /><fieldSetEnd/>
+   			<fieldSetStart class="third" /><Text type="text" name="Prod103" label="Price" /><fieldSetEnd/>
+   			<clear />
+   			<Color type="color" name="Prod104" label="Enter color:" />
+        	
+        <TabEnd />
+    </OptionPage>
+    <OptionPage name="SocialMedia" title="SocialMedia">
+        <TabBegin id="SocialIcons" />
+			<heading value="Feedburner ID:" />
+			<Text type="text" name="feedID" label="Link for the Email icon:"></Text>
+			
+			<heading value="RSS link:" />
+			<Text type="text" name="rssLink" label="Link for the RSS icon:"></Text>
+			
+			<heading value="Twitter Account:" />
+			<Text type="text" name="twitterAccountinfo" label="Twitter Account link:"></Text>
+			<heading value="Facebook Account:" />
+			<Text type="text" name="facebookAccountinfo" label="Facebook Account link:"></Text>
+			<heading value="Youtube link:" />
+			<Text type="text" name="youtubeLink" label="Youtube link:"></Text>
+		<TabEnd />	
+    </OptionPage>
+    
+    
+     <OptionPage name="FooterText" title="FooterText">
+        <TabBegin id="FooterText" />
+			<Textarea type="text" name="FooterText" label="FooterText:"></Textarea>
+			<Text type="text" name="footer_text_link" label="Enter Text here:"></Text>
+			<Text type="text" name="footer_link" label="Enter Link here:"></Text>
+			
+			<Text type="text" name="footer_phone_numb" label="Enter Phone number here:"></Text>
+			<Text type="text" name="footer_date_numb" label="Enter Date here:"></Text>
+			
+		<TabEnd />	
+    </OptionPage>
+    
+    
+</IDGConfig>

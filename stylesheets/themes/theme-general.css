@@ -1,0 +1,322 @@
+/*
+	The Edge in College Prep - Scheme Stylesheet
+
+	Last Updated: 10/19/2012
+	http://Webdev.ly
+
+*/
+
+a, a:visited{color:#316e91;
+text-decoration: none;
+}
+a:hover, a:focus {color:#EE6D17;}
+
+::selection {
+	color: white;
+	background: #EE6D17;
+}
+
+.highlight1{color:white; background:#EE6D17!important;}
+.highlight2{border-bottom: 1px dotted #EE6D17!important;}
+
+.button,
+a.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+	background: #EE6D17; /* Old browsers */		
+	border:1px solid #fff;
+	color:#FFF;
+}
+
+body{color:#000!important;}
+ h3 { color: #EE6D17;
+	font-weight:bold;
+}
+h4 {
+	color: #000;
+	font-weight:bold;
+}
+h1, h2, h5 {
+	color: #2f607d;
+	font-weight:700;
+	font-size: 32px;
+	margin-top:20px;
+}
+
+h6 {
+color: #EE6D17;	
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color:#EE6D17!important;}
+
+div.white h1, div.white h2, div.white h3, div.white h4, div.white h5, div.white h6{color:#333;}
+.header {background: #bad4f0;}
+body {background: #bad4f0;}
+
+.band.navigation{background: url("../../images/band-header-general.png");}
+
+.content{background:url("../../images/content_bg4.png");}
+.content2{background:#c5d8e4;}
+.content3{background:#2b414e;}
+.content4{background:#ffc66d;}
+.content5{background:url("../../images/testimonial_bg.gif") repeat-x;}
+.content6{background:#13425d;}
+
+.box { background:#eee; border:1px solid #ccc;}
+
+.band.navigation {	
+	color: #bad4f0; 	
+}
+
+.band.footer {
+	color: #FFF; 
+	border-top:1px solid #EE6D17;
+}
+
+.band.bottom {
+	/*background: url(../../images/stitch_staggered.png) left top repeat-x,
+				url(../../images/zigzag.png) repeat,
+				#343434;	*/
+	color: #fff;
+	background:#ff4b00;
+	height: 24px;
+}
+
+/*ie multiple background image fallbacks*/
+.ie .band.navigation {
+	background: url(../../images/bg_dark.png) repeat left 2px #bad4f0;
+}
+.ie .band.footer {
+	background: url(../../images/bg_dark.png) repeat left 2px #FFF;
+}
+.ie .band.bottom {
+	background: url(../../images/bg_bottom.png) repeat #bad4f0;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:		#EE6D17!important;	
+}
+
+#nav{border-bottom: 0px solid #333;}
+
+nav.primary ul li a {
+	color: #13425d;
+}
+
+nav.primary ul li a:hover {
+	background: #424242;
+	color:#EE6D17;	
+}
+
+/*sub menu*/
+nav.primary ul ul {
+	/*background: url(../../images/bg_bottom.png);*/
+	background:#fffff;
+}
+
+nav.primary ul ul li {
+	border-bottom: 1px solid #fafafa;
+	background:#bad4f0;
+	color:#7995a3;
+}
+
+nav.primary ul ul li a {
+	color:#376f90;
+}
+
+nav.primary ul li:hover > a,  nav.primary ul li a.active{
+	background: #EE6D17;
+	color: white;
+}
+
+#tooltip, #colourTooltip {
+	background: #EE6D17;
+	color: 	white;
+
+}	
+h1.logo a {
+	
+	background: url(../../images/the-edge-logo-light.png) no-repeat;
+}
+
+/*images*/
+figure {
+	
+	border: 1px solid #ededed;
+	background: #ffffff;
+}
+.widget{
+	background:#f1f1f1;
+}
+
+.widget ul li a{ color:#EE6D17;}
+
+.widget h5{
+	color:#333;
+	background:	#D5D5D5 url('../../images/cat_icon_blue.png') no-repeat 10px center;
+}
+
+.sidebar ul.tabs-content li ol.postlist li,
+.sidebar ul.tabs-content li.active ol.postlist li,
+ol.postlist li{padding: 0px;
+
+border-bottom: 1px dotted #ccc;}
+
+hr {
+	border-bottom: 1px dashed #333;
+}
+
+.divider {
+	border-top: 1px solid #CCC;
+	border-bottom: 1px solid white;
+}
+
+	.flex-control-nav li a {
+		background: #363636;
+		border: 1px solid #363636;
+
+	}
+	
+	.flex-control-nav li a.active,
+	.flex-control-nav li a:hover {
+		background: #EE6D17;
+		border: 1px solid #363636;
+	}
+	
+	.prev{ background: #5e5e5e url('../../images/prev_icon.png') no-repeat;
+			}
+	.next{ background: #5e5e5e url('../../images/next_icon.png') no-repeat;
+			}
+	
+	a.prev:hover, a.next:hover{background-color:#EE6D17;}
+footer.bottom a,
+footer.bottom a:visited {
+	color: #FFF;
+}
+
+footer.bottom a:hover {
+	color: #EE6D17;
+}
+
+footer p{
+	color: #8eb8e5;
+	font-family:'Source Sans Pro', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+}
+footer a,
+footer a:visited {
+	color: #fff;
+}
+
+footer a:hover {
+	color: #EE6D17;
+
+}
+
+footer h3.logo {
+	margin: 13px 0 21px;
+}
+
+footer h3.logo a {
+
+	background: url(../../images/sprite.png) no-repeat 0 -50px;
+
+}
+
+footer.main div.footer_title h4 {
+	color: #8eb8e5;
+}
+
+/*lists*/
+footer.main li {
+	background: url(../../images/stitch_staggered.png) repeat-x left bottom;
+	}
+
+p.name{ font-size: 15px; color: #fcfcfc;}
+
+a.more{
+	background:url("../../images/icon_more_blue.png") no-repeat; 
+
+}
+
+ul.categories li {
+	border-bottom: 1px dashed #e5e5e5;
+}
+
+ul.categories li a:hover {
+	background: #ffffff;
+}
+
+ul.tabs li a.active {
+	background: #EE6D17;
+	color: white;
+}
+
+.tabs-content li {
+	border: 1px solid #DDD;
+}
+
+.icon.rss {
+	color: #ef7908;
+}
+
+.icon.twitter {
+	color: #39bae6;
+}
+
+nav.pagination li a {
+
+	border-bottom: 3px solid #cccccc;
+
+}
+
+nav.pagination li a:hover,
+nav.pagination li a.selected {
+	background: #ffffff;
+	color: #EE6D17;
+}
+
+/* #Page Styles
+================================================== */
+
+/*Typography*/
+div.band h4{color:#7995a3; text-shadow: none; font-weight: 500;}
+
+
+div.band h4.sub-meta a:hover{ color:#EE6D17;}
+
+
+h3.sectionhead {
+
+	border-bottom:1px solid #333;
+
+}
+
+h1.pageTitle
+{
+	border-bottom: 2px solid #EE6D17;	
+	background: #333;
+	color: #A4A4A4!important;
+	font-weight:bold;
+
+}
+
+p.blockquote { border-left:2px solid #EE6D17; }
+
+blockquote{ border-left: 1px solid #e91c6b; }
+
+blockquote.right{ border-right:1px solid #e91c6b!important; }
+
+/*Contacts*/
+.address{ background:url('../../images/address_icon_blue.png') no-repeat; padding-left:30px;}
+.phone{ background:none no-repeat 4px 3px; padding-left:0px; color:#EE6D17;
+font-size: 26px;
+font-weight: 600;
+}
+.email{ background:none no-repeat 4px 9px; padding-left:0px;padding-top: 3px; color:#FFF;
+font-size: 12px;
+font-weight: 600;}

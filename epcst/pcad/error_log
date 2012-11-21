@@ -1,0 +1,1 @@
+[20-Dec-2010 02:50:16] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Can't connect to MySQL server on '205.178.146.71' (4) in /home/edgeinco/public_html/epcst/pcad/header.php on line 72

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage name="QuestionDetails" title="Project Details">
+       <TabBegin id="ProjectData" />
+		    <Text type="text" name="Client" label="Enter Project Name:"></Text>
+			<Text type="text" name="Technology" label="Enter Technology:"></Text>
+			<Text type="text" name="Link" label="Enter Project Link:"></Text>
+			<Textarea type="text" name="Role" label="Enter Role Link:"></Textarea>
+		<TabEnd />
+		<TabBegin id="ProjectTestimonial" />
+			<Text type="text" name="TestimonialName" label="Enter Testimonial Name:"></Text>
+			<Text type="text" name="TestimonialPosition" label="Enter Testimonial Position:"></Text>
+			<Textarea type="text" name="Testimonial" label="Enter Testimonial:"></Textarea>
+		<TabEnd />
+		<TabBegin id="ProjectThumbnails" />
+			<Image width="160" height="105" type="siet" name="ProjectThumb" label="upload project thumb here (160px x 105px):" ></Image>
+			<Image width="240" height="240" type="siet" name="ProjectFrontPageImage" label="upload front page image here (240px x 240px):" ></Image>
+		<TabEnd />
+		<TabBegin id="ProjectImages" />
+			<Image width="640" height="360" type="siet" name="ProjectImage1" label="upload Image1 here (640px x 360px):" ></Image>
+			<Image width="640" height="360" type="siet" name="ProjectImage2" label="upload Image2 here (640px x 360px):" ></Image>
+			<Image width="640" height="360" type="siet" name="ProjectImage3" label="upload Image3 here (640px x 360px):" ></Image>
+			<Image width="640" height="360" type="siet" name="ProjectImage4" label="upload Image4 here (640px x 360px):" ></Image>
+			<Image width="640" height="360" type="siet" name="ProjectImage5" label="upload Image5 here (640px x 360px):" ></Image>
+		<TabEnd />
+		<TabBegin id="ProjectVideo1" />
+			<Image width="640" height="360" type="siet" name="videoThumb1" label="upload video thumbnail here (640px x 360px):" ></Image>
+			<Text type="text" name="videoPath1" label="Enter video path:"></Text>
+		<TabEnd />
+		<TabBegin id="ProjectVideo2" />
+			<Image width="640" height="360" type="siet" name="videoThumb2" label="upload video thumbnail here (640px x 360px):" ></Image>
+			<Text type="text" name="videoPath2" label="Enter video path:"></Text>
+		<TabEnd />
+		<TabBegin id="ProjectVideo3" />
+			<Image width="640" height="360" type="siet" name="videoThumb3" label="upload video thumbnail here (640px x 360px):" ></Image>
+			<Text type="text" name="videoPath3" label="Enter video path:"></Text>
+		<TabEnd />
+    </OptionPage>
+	<OptionPage name="Headers" title="Headers and Footers">
+    	  <TabBegin id="Generic" />
+		  	<Textarea type="text" name="themeHeader" label="enter theme header here:" ></Textarea>
+		  	<Textarea type="text" name="themeFooter" label="enter theme footer here:" ></Textarea>
+		  <TabEnd />
+		  <TabBegin id="Content" />
+			<Text type="text" name="PageTitle" label="Page Title:">
+	    	</Text>
+	    	<Textarea type="text" name="Keywords" label="Keywords:">
+	        </Textarea>
+			<Textarea type="text" name="Description" label="Description:">
+	        </Textarea>
+		<TabEnd />
+		<TabBegin id="Headers" />
+			<Textarea type="text" name="Styles" label="Styles:">
+	        </Textarea>
+			<Textarea type="text" name="Scripts" label="Scripts:">
+	        </Textarea>
+			<Textarea type="text" name="AdditionalLinks" label="AdditionalLinks:">
+	        </Textarea>
+		<TabEnd />	  
+	</OptionPage>
+</IDGConfig>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+    <OptionPage name="OmniSettings_One" title="Hello World">
+        <TabBegin id="laGalleria" />
+		 	<ImageGallery width="696" height="359" thumb_width="100" thumb_height="60" type="siet" name="imageGallery" label="upload ze images (696px x 359px):" >
+			</ImageGallery>
+		 <TabEnd />
+	   <TabBegin id="AlternativeContent" />
+	    <Slider type="text" name="IncrementalSlider" label="Enter IncrementalSlider here:" options="[value:100,min: 0,max: 500,step: 50,]"></Slider>
+		<Text type="text" name="SlideTitle1" label="Enter Title here:">
+            <![CDATA[Consumer Loans]]>
+        </Text>
+		<GoogleMap label="mapLocation" name="mapLocation" >
+		</GoogleMap>
+		<Image width="696" height="359" type="siet" name="IE6AltImage" label="upload IE6 alternative Image here (696px x 359px):" >
+		</Image>
+		 <DatePicker type="DatePicker" name="Date" label="Date">
+        </DatePicker>
+        <Color type="color" name="SlideTitleFontColor1" label="Enter Title Color here:">
+            <![CDATA[#393838]]>
+        </Color>
+		 <Color type="color" name="headerColor" label="Enter headerColor here:">
+            <![CDATA[#393838]]>
+        </Color>
+		<TabEnd />
+		 <TabBegin id="AlternativeContent2" />
+		 <Color type="color" name="SlideTitleFontColor2" label="Enter Title Color here:">
+            <![CDATA[#393838]]>
+        </Color>
+		<Wysiwyg type="text" name="content2" label="enter content here:" ></Wysiwyg>
+		 <TabEnd />
+    </OptionPage>
+</IDGConfig>

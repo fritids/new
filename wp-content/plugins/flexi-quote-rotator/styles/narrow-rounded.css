@@ -1,0 +1,24 @@
+#quotearea {
+   background: url(images/narrow-rounded.png) center center no-repeat;
+   width: 710px;
+   height: 200px;
+   margin: 0px auto;
+padding:30px 60px 30px 60px;
+}
+#quoterotator {
+   line-height: 112%;
+font-family:'Source Sans Pro', sans-serif;
+font-size:19px;
+color:#3d6f95;
+}
+#quoteauthor {
+	font-size:15px;
+	color:#eb731c;
+   display: block;
+   text-align: right;
+   font-weight: bold;
+   font-style: italic;
+   font-size: smaller;
+padding-top:4px;
+font-family:'Source Sans Pro', sans-serif;
+}

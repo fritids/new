@@ -1,0 +1,19 @@
+[18-Jan-2011 02:16:46] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/sendToCC.php on line 30
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  last_name in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 462
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  middle_name in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 463
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  company_name in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 464
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  job_title in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 465
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  status in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 467
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  home_number in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 472
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  work_number in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 473
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  address_line_1 in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 474
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  address_line_2 in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 475
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  address_line_3 in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 476
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  city_name in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 477
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  state_code in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 478
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  state_name in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 479
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  country_code in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 480
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  zip_code in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 481
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  sub_zip_code in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 482
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  notes in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 483
+[19-Jan-2011 03:54:52] PHP Notice:  Undefined index:  mail_type in /home/edgeinco/public_html/wp-content/themes/ecp-main-site/ConstantContact.php on line 484

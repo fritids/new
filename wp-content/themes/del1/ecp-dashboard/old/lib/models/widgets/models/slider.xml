@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+		<Text type="text" name="naslov" label="Enter Headline Title here:">
+        	<![CDATA[Consumer Loans]]>
+    	</Text>
+		<Text type="text" name="link" label="Enter  link here:">
+        	<![CDATA[Consumer Loans]]>
+    	</Text>
+		<Image width="200" height="150" type="siet" name="TestimonialImage" label="upload Testimonial Image here :" >
+		</Image>
+</widget>

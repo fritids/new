@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IDGConfig>
+   <OptionPage name="SliderLink" title="SliderLink">
+	<TabBegin id="SliderLink" />
+		<Text type="text" name="slider_url" label="Enter Link here:"></Text>
+	<TabEnd />
+</OptionPage>
+</IDGConfig>

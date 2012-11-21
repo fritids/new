@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+		<Text type="text" name="Link1" label="Enter Link here:">
+        	<![CDATA[#]]>
+    	</Text>
+		<Image width="200" height="150" type="siet" name="Slika1" label="upload Slika here :" >
+		</Image>
+		<Text type="text" name="Link2" label="Enter Link1 here:">
+        	<![CDATA[#]]>
+    	</Text>
+		<Image width="200" height="150" type="siet" name="Slika2" label="upload Slika1 here :" >
+		</Image>
+</widget>
