@@ -18,13 +18,13 @@
 /** The name of the database for WordPress */
 //define('WP_MEMORY_LIMIT', '128M');
 
-define('DB_NAME', 'jess'); 
+define('DB_NAME', 'edge');
 
 /** MySQL database username */
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'wp248mysql!');
+define('DB_PASSWORD', 'root');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -57,9 +57,9 @@ define('NONCE_SALT',       'kjE#+4zz9l/Wv!yof7+Nk,-!6Bb~PVA6G 9h)u@mFVju8c,+H}r]
 define( 'WP_ALLOW_MULTISITE', true );
 define( 'MULTISITE', true );
 define( 'SUBDOMAIN_INSTALL', false );
-$base = '/';
-define( 'DOMAIN_CURRENT_SITE', 'edgeincollegeprep.com' );
-define( 'PATH_CURRENT_SITE', '/' );
+// $base = '/';
+// define( 'DOMAIN_CURRENT_SITE', 'edgeincollegeprep.com' );
+// define( 'PATH_CURRENT_SITE', '/' );
 define( 'SITE_ID_CURRENT_SITE', 1 );
 define( 'BLOG_ID_CURRENT_SITE', 1 );
 /**#@-*/
