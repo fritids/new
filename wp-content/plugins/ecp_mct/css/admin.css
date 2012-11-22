@@ -1,0 +1,45 @@
+a {
+	cursor: pointer;
+}
+label {
+	font-weight: bold;
+}
+.page-title {
+	position: relative;
+	top: 3px;
+}
+
+.title-field {
+	margin-top: 20px;
+}
+
+.title-field input {
+	font-size: 1.7em;
+    line-height: 100%;
+    outline: 0 none;
+    padding: 3px 8px;
+    width: 50%;
+}
+
+.title-field input::-webkit-input-placeholder {
+	color: #BBBBBB;
+	padding: 2px 0;
+}
+.title-field input:-moz-placeholder {
+	color: #BBBBBB;
+	padding: 2px 0;
+}
+
+.field {
+	margin: 20px 0;
+}
+
+
+
+#poststuff .postbox h3 {
+	cursor: default;
+}
+
+a.remove-section { float: right; position: relative; top: 10px; }
+
+ol.options-list { margin: 10px 40px 20px; list-style: lower-alpha; clear: both; }
