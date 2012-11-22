@@ -8,15 +8,15 @@ UPDATE  `wp_blogs` SET  `domain` =  @MOVEDOMAIN, `path` =  CONCAT(@MOVEFOLDER, '
 
 
 UPDATE  `wp_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/') WHERE  `wp_options`.`option_name` ='siteurl';
-UPDATE  `wp_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/' WHERE  `wp_options`.`option_name` ='home';
+UPDATE  `wp_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/') WHERE  `wp_options`.`option_name` ='home';
 
-UPDATE  `wp_4_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/news/') WHERE  `wp_options`.`option_name` ='siteurl';
-UPDATE  `wp_4_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/news/') WHERE  `wp_options`.`option_name` ='home';
+UPDATE  `wp_4_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/news/') WHERE  `wp_4_options`.`option_name` ='siteurl';
+UPDATE  `wp_4_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/news/') WHERE  `wp_4_options`.`option_name` ='home';
 
-UPDATE  `wp_3_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/enroll/') WHERE  `wp_options`.`option_name` ='siteurl';
-UPDATE  `wp_3_options` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/enroll/') WHERE  `wp_options`.`option_name` ='home';
+UPDATE  `wp_3_options` SET  `option_value` =  CONCAT('http://', @MOVEDOMAIN, @MOVEFOLDER,'/enroll/') WHERE  `wp_3_options`.`option_name` ='siteurl';
+UPDATE  `wp_3_options` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/enroll/') WHERE  `wp_3_options`.`option_name` ='home';
 
-UPDATE  `wp_2_options` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/portal/') WHERE  `wp_options`.`option_name` ='siteurl';
-UPDATE  `wp_2_options` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/portal/') WHERE  `wp_options`.`option_name` ='home';
+UPDATE  `wp_2_options` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/portal/') WHERE  `wp_2_options`.`option_name` ='siteurl';
+UPDATE  `wp_2_options` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/portal/') WHERE  `wp_2_options`.`option_name` ='home';
 
-UPDATE  `wp_sitemeta` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/ecp/') WHERE  `wp_options`.`option_name` ='siteurl';
+UPDATE  `wp_sitemeta` SET  `option_value` =  CONCAT(''http://'', @MOVEDOMAIN, @MOVEFOLDER,'/ecp/') WHERE  `wp_sitemeta`.`option_name` ='siteurl';
