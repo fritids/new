@@ -9,7 +9,7 @@
 	
 
 	
-	<form name="post" action="<?php echo PLUGIN_DIR; ?>test-save-action.php" method="post" id="post">
+	<form name="test-new" action="<?php echo PLUGIN_DIR; ?>test-save-action.php" method="post" id="post">
 		<div class="title-field">
 			<input type="text" name="test_title" autocomplete="off" id="title" placeholder="Enter title here" value="">
 		</div>

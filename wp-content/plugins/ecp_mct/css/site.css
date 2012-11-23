@@ -1,0 +1,29 @@
+label {
+	font-weight: bold;
+}
+.test-container {
+	background: #eee;
+	padding: 15px;
+}
+
+ul.section-list {
+	list-style: none;
+	margin: 0;
+}
+
+ul.section-list >li {
+	margin-bottom: 25px;
+}
+
+ul.section-list .section-title {
+	font-size: 16px;
+}
+
+ul.question-list {
+	list-style: none;
+}
+
+ol.options-list {
+	list-style: lower-alpha;
+	margin-left: 60px;
+}
