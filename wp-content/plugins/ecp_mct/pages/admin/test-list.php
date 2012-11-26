@@ -8,7 +8,7 @@ $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 
 <link rel="stylesheet" type="text/css" href="<?php echo PLUGIN_DIR; ?>css/admin.css" />
 
-<div class="wrap">
+<div class="wrap tests-list">
 	<div id="theme-options-wrap"><img class="icon32" src="<?php echo PLUGIN_DIR; ?>images/icon-32.png"></div>
 	<h2>
 		Multiple Choice Tests
@@ -16,11 +16,14 @@ $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 	</h2>
 	
 	<?php if($tests): ?>
-	<table>
+	<table class="widefat">
+		<thead>
 		<tr>
 			<th>Name</th>
-			<th>Actions</th>
+			<th style="width: 100px;">Actions</th>
 		</tr>
+		</thead>
+		<tbody id="the-list">
 		<?php foreach($tests as $test): ?>
 		<tr>
 			<td><?php echo $test->name;?></td>
@@ -30,9 +33,10 @@ $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 			</td>
 		</tr>
 		<?php endforeach; ?>
+		</tbody>
 	</table>
 	<?php else: ?>
-	<p>There are no tests created.</p>
+	<p class="info">No Tests found.</p>
 	<?php endif; ?>
 </div>
 

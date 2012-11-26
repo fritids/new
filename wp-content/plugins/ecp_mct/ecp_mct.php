@@ -31,7 +31,6 @@ function ecp_mct_main_install(){
 	$wpdb->query("CREATE TABLE IF NOT EXISTS `".ECP_MCT_TABLE_TESTS."` (
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `name` VARCHAR(512) NOT NULL,
-				  `questions_num` INT NOT NULL,
 				  `options_num` INT NOT NULL,
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
@@ -47,6 +46,7 @@ function ecp_mct_main_install(){
 	$wpdb->query("CREATE TABLE IF NOT EXISTS `".ECP_MCT_TABLE_QUESTIONS."` (
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `section_id` INT(11) NOT NULL,
+				  `type` VARCHAR(255) NOT NULL,
 				  `order` INT NOT NULL,
 				  `options` TEXT DEFAULT NULL,
 				  PRIMARY KEY (`id`)
@@ -54,7 +54,7 @@ function ecp_mct_main_install(){
 	
 	$wpdb->query("CREATE TABLE IF NOT EXISTS `".ECP_MCT_TABLE_USER_ANSWERS."` (
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
-				  `test_id` INT(11) NOT NULL,
+				  `section_id` INT(11) NOT NULL,
 				  `user_id` INT(11) NOT NULL,
 				  `answers` TEXT DEFAULT NULL,
 				  PRIMARY KEY (`id`)
@@ -72,6 +72,7 @@ function ecp_mct_main_uninstall(){
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
+	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
 }
 
 // Add a new submenu under Options:
