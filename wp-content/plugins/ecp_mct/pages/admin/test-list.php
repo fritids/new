@@ -29,7 +29,7 @@ $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 			<td><?php echo $test->name;?></td>
 			<td>
 				<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">View</a> |
-				<a>Edit</a>
+				<a href="<?php echo get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&action=edit&test='.$test->id?>">Edit</a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

@@ -6,16 +6,42 @@ $action = 'new';
 if($_REQUEST['action'] == 'edit') $action = 'edit';
 
 $dtest = array();
+$sections = array();
 if($action == 'edit') {
-	$query = "SELECT id, name, options_num FROM ".ECP_MCT_TABLE_TESTS." WHERE id=%d";
-	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));}
+	$query = "SELECT `id`, `name`, `options_num` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
+	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));
+	
+	// Prepare sections array
+	$query = "SELECT `id`, `name` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
+	$dsections = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test']));
+	
+	foreach($dsections as $k=>$section) {
+		$sections[$k]['id'] = $section->id;
+		$sections[$k]['name'] = stripslashes($section->name);
+		$sections[$k]['options_num'] = stripslashes($dtest->options_num);
+		$sections[$k]['questions'] = array();
+		
+		// Get questions
+		$query = "SELECT `id`, `type`, `options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
+		$dquestions = $wpdb->get_results($wpdb->prepare($query, $section->id));
+		
+		foreach($dquestions as $j=>$question) {
+			$sections[$k]['questions'][$j]['id'] = $question->id;
+			$sections[$k]['questions'][$j]['type'] = stripslashes($question->type);
+			$sections[$k]['questions'][$j]['options'] = json_decode($question->options, true);
+		}
+	}
+}
 
 if($_REQUEST['message'] == 'new_test') {
 	wpframe_message('New test added');
+} else if ($_REQUEST['message'] == 'update_test') {
+	wpframe_message('Test updated');
 }
 
 wp_enqueue_script("jquery");
 ?>
+
 <script type="text/javascript" src="<?php echo PLUGIN_DIR; ?>js/knockout-2.2.0.js"></script>
 <script type="text/javascript" src="<?php echo PLUGIN_DIR; ?>js/jquery.validate.js"></script>
 
@@ -98,14 +124,12 @@ wp_enqueue_script("jquery");
 		<a data-bind="click: $root.addSection" class="add-section">Add Section</a>
 
 		<p class="submit">
-			<input type="hidden" name="action" value="<?php echo $action; ?>" />
+			<input type="hidden" name="action" id="action" value="<?php echo $action; ?>" />
+			<input type="hidden" name="test_id" value="<?php echo $dtest->id; ?>" />
 			<input type="hidden" name="options_num" data-bind="value: $root.options_num" />
 			<input type="hidden" name="sections" data-bind="value: ko.toJSON($root.sections)" />
+			<input type="hidden" name="deleted_sections" data-bind="value: ko.toJSON($root.deleted_sections)" />
 			<input type="submit" name="submit" value="Save" style="font-weight: bold;" tabindex="4" />
-			
-			<!-- Data from DB -->
-			<!-- TODO: show data from existent tests -->
-			
 		</p>
 	</form>
 	
@@ -120,18 +144,34 @@ wp_enqueue_script("jquery");
 	// Class to represent a row in the seat reservations grid
 	function Section(data) {
 		var self = this;
+		self.id = ko.observable(data.id);
 		self.name = ko.observable(data.name);
 		self.questions = ko.observableArray([]);
+		self.deleted_questions = ko.observableArray([]);
 		
 		// Operations
 		self.addQuestion = function() {
 			self.questions.push(new Question({options_num: data.options_num}));
 		}
-		self.removeQuestion = function(question) { self.questions.remove(question) }
+		self.removeQuestion = function(question) {
+			if(question.id()) {
+				self.deleted_questions.push(question.id());
+			}
+			self.questions.remove(question)
+		}
+		
+		// Load from server
+		if(data.questions) {
+			var questions = jQuery.map(data.questions, function(item) {
+				return new Question(item);
+			});
+			self.questions(questions);
+		}
 	}
 	
 	function Question(data) {
 		var self = this;
+		self.id = ko.observable(data.id);
 		self.options = ko.observableArray([]);
 		self.type = ko.observable(data.type);
 		
@@ -151,6 +191,19 @@ wp_enqueue_script("jquery");
 			self.options.push(new FI_Answer([]));
 		}
 		self.removeAnswer = function(answer) { self.options.remove(answer) }
+		
+		// Load from server
+		if(data.options) {
+			var options = jQuery.map(data.options, function(item) {
+				if(self.type() == "Multiple Choice") {
+					return new MC_Option(item);
+				} else if(self.type() == "Fill In"){
+					return new FI_Answer(item);
+				}
+				return new Question(item);
+			});
+			self.options(options);
+		}
 	}
 	
 	function MC_Option(data) {
@@ -171,9 +224,10 @@ wp_enqueue_script("jquery");
 		
 		self.options_num = ko.observable(0);
 		self.sections = ko.observableArray([]);
+		self.deleted_sections = ko.observableArray([]);
 		self.question_types = new Array("Multiple Choice","Fill In");
 		self.field_1_values = self.field_4_values = new Array("",".","0","1","2","3","4","5","6","7","8","9");
-		self.field_2_values =  self.field_3_values = new Array("","/",".","0","1","2","3","4","5","6","7","8","9");
+		self.field_2_values = self.field_3_values = new Array("","/",".","0","1","2","3","4","5","6","7","8","9");
 
 		// Operations
 		self.addSection = function() {
@@ -182,7 +236,24 @@ wp_enqueue_script("jquery");
 			else
 				alert("Please set the number of options per question");
 		}
-		self.removeSection = function(section) { self.sections.remove(section) }
+		self.removeSection = function(section) {
+			if(section.id()) {
+				self.deleted_sections.push(section.id());
+			}
+			self.sections.remove(section)
+		}
+		
+		
+		// Load initial state from server
+		if(jQuery("#action").val() == "edit") {
+			self.options_num('<?php echo $dtest->options_num?$dtest->options_num:0 ?>');
+			
+			var sections = jQuery.map(jQuery.parseJSON('<?php echo json_encode($sections); ?>'), function(item) {
+				return new Section(item);
+			});
+			self.sections(sections);
+		}
+		
 	}
 	
 	ko.applyBindings(new EcpMctViewModel());
