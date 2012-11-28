@@ -39,6 +39,7 @@ function ecp_mct_main_install(){
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `test_id` INT(11) NOT NULL,
 				  `name` VARCHAR(255) NOT NULL,
+				  `duration` INT NOT NULL,
 				  `order` INT NOT NULL,
 				  UNIQUE KEY `id` (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
@@ -57,6 +58,8 @@ function ecp_mct_main_install(){
 				  `section_id` INT(11) NOT NULL,
 				  `user_id` INT(11) NOT NULL,
 				  `answers` TEXT DEFAULT NULL,
+				  `start_time` datetime DEFAULT NULL,
+				  `end_time` datetime DEFAULT NULL,
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 }

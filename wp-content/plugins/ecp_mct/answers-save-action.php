@@ -6,9 +6,8 @@ $current_user = wp_get_current_user();
 
 if(isset($_REQUEST['submit'])) {
 	// Save test information in database
-	$query = "INSERT INTO ".ECP_MCT_TABLE_USER_ANSWERS." (`section_id`, `user_id`, `answers`) VALUES(%d,%d,%s)";
-	$wpdb->get_results($wpdb->prepare($query, $_REQUEST['section_id'], $current_user->ID, json_encode($_REQUEST['answers'])));
-	$test_id = $wpdb->insert_id;
+	$query = "UPDATE ".ECP_MCT_TABLE_USER_ANSWERS." SET `answers` = %s, `end_time` = %s WHERE `id`= %d";
+	$wpdb->get_results($wpdb->prepare($query, json_encode($_REQUEST['answers']), date("Y-m-d H:i:s"), $_REQUEST['answer_id']));
 }
 
 wp_redirect(get_option('home') . '/blog/test/test_'.$_REQUEST['test_id']);

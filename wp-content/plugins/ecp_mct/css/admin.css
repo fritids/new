@@ -22,7 +22,9 @@ label { font-weight: bold; }
 a.remove-section { background: url('../images/remove.png') no-repeat; display: inline-block; height: 16px; padding-left: 20px; color: #EB3436; margin-left: 10px; }
 a.remove-section { float: right; position: relative; top: 5px; line-height: 1.5; }
 .postbox h3.hndle { cursor: default; }
-.postbox h3.hndle input { width: 300px; }
+.postbox h3.hndle input.name { width: 300px; }
+.postbox h3.hndle .duration { margin-left: 25px; }
+.postbox h3.hndle .duration input { margin: 0 5px; }
 ul.questions-list a.remove-question { background: url('../images/remove.png') no-repeat; display: inline-block; height: 16px; padding-left: 20px; color: #EB3436; margin-left: 10px; font-size: 10px; }
 ul.questions-list label.question-lbl { font-size: 14px;}
 .postbox .inside a.add-question { background: url('../images/add.png') no-repeat; display: inline-block; height: 16px; padding-left: 20px; color: #409F02; font-size: 12px; }

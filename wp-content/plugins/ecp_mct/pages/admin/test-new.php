@@ -12,12 +12,13 @@ if($action == 'edit') {
 	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));
 	
 	// Prepare sections array
-	$query = "SELECT `id`, `name` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
+	$query = "SELECT `id`, `name`, `duration` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
 	$dsections = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test']));
 	
 	foreach($dsections as $k=>$section) {
 		$sections[$k]['id'] = $section->id;
 		$sections[$k]['name'] = stripslashes($section->name);
+		$sections[$k]['duration'] = stripslashes($section->duration);
 		$sections[$k]['options_num'] = stripslashes($dtest->options_num);
 		$sections[$k]['questions'] = array();
 		
@@ -78,7 +79,10 @@ wp_enqueue_script("jquery");
 		<div id="poststuff" data-bind="foreach: sections">
 			<div class="postbox">
 				<h3 class="hndle">
-					<input type="text" class="required" autocomplete="off" placeholder="Enter section name" data-bind="value: name, uniqueName: true">
+					<input type="text" class="required name" autocomplete="off" placeholder="Enter section name" data-bind="value: name, uniqueName: true">
+					<span class="duration">
+						Duration:<input type="text" class="required, number" size="3" autocomplete="off" data-bind="value: duration, uniqueName: true" /><em>(in seconds)</em>
+					</span>
 					<a data-bind="click: $root.removeSection" class="remove-section">Remove Section</a>
 				</h3>
 				<div class="inside">
@@ -146,6 +150,7 @@ wp_enqueue_script("jquery");
 		var self = this;
 		self.id = ko.observable(data.id);
 		self.name = ko.observable(data.name);
+		self.duration = ko.observable(data.duration);
 		self.questions = ko.observableArray([]);
 		self.deleted_questions = ko.observableArray([]);
 		
