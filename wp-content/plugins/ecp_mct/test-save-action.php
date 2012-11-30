@@ -8,8 +8,8 @@ if(isset($_REQUEST['submit'])) {
 		$test_id = $_REQUEST['test_id'];
 		
 		// Save test information in database
-		$query = "UPDATE ".ECP_MCT_TABLE_TESTS." SET `name`=%s, `options_num`=%d WHERE `id`=%d";
-		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['options_num'], $test_id));
+		$query = "UPDATE ".ECP_MCT_TABLE_TESTS." SET `name`=%s, `type`=%s, `options_num`=%d WHERE `id`=%d";
+		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['test_type'], $_REQUEST['options_num'], $test_id));
 		
 		// Delete from db sections that where deleted by the user
 		$deleted_sections = json_decode(str_replace(array("\\\"","\\'"), array("\"","'"), $_REQUEST['deleted_sections']), true);
@@ -56,8 +56,8 @@ if(isset($_REQUEST['submit'])) {
 		wp_redirect(get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&message=update_test&action=edit&test='.$test_id);
 	} else {
 		// Save test information in database
-		$query = "INSERT INTO ".ECP_MCT_TABLE_TESTS." (`name`, `options_num`) VALUES(%s,%d)";
-		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['options_num']));
+		$query = "INSERT INTO ".ECP_MCT_TABLE_TESTS." (`name`, `type`, `options_num`) VALUES(%s,%s,%d)";
+		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['test_type'], $_REQUEST['options_num']));
 		$test_id = $wpdb->insert_id;
 
 		$sections = json_decode(str_replace(array("\\\"","\\'"), array("\"","'"), $_REQUEST['sections']), true);

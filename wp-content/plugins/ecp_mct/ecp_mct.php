@@ -31,6 +31,7 @@ function ecp_mct_main_install(){
 	$wpdb->query("CREATE TABLE IF NOT EXISTS `".ECP_MCT_TABLE_TESTS."` (
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `name` VARCHAR(512) NOT NULL,
+				  `type` ENUM('SAT','ACT') NOT NULL,
 				  `options_num` INT NOT NULL,
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
@@ -62,6 +63,19 @@ function ecp_mct_main_install(){
 				  `end_time` datetime DEFAULT NULL,
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+	
+	// Create a page for the tast taker
+	$my_page = array(
+		'post_content'  => '[ECP_MCT_MAIN]',
+		'post_title'    => 'Test Taker',
+		'post_name' => 'test_taker',
+		'post_type' => 'page',
+		'post_status'   => 'publish',
+		'comment_status' => 'closed'
+	);
+
+	// Insert the test into the database
+	wp_insert_post($my_page);
 }
 
 /**
@@ -75,14 +89,20 @@ function ecp_mct_main_uninstall(){
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
+	// Delete test posts
 	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
+	
+	// Delete page for the tast taker
+	$the_page = get_page_by_title('Test Taker');
+	wp_delete_post($the_page->ID);
+	
 }
 
 // Add a new submenu under Options:
 add_action('admin_menu', 'ecp_mct_menu');
 
 function ecp_mct_menu() {
-	add_menu_page( 'Multiple Choice Tests', 'Multiple Choice Tests', 'administrator', 'ecp_mct/pages/admin/test-list.php', null, PLUGIN_DIR."images/icon.png", 100);
+	add_menu_page('Multiple Choice Tests', 'Multiple Choice Tests', 'administrator', 'ecp_mct/pages/admin/test-list.php', null, PLUGIN_DIR."images/icon.png", 100);
 	add_submenu_page('ecp_mct/pages/admin/test-list.php', 'New Test', 'New Test', 'administrator', 'ecp_mct/pages/admin/test-new.php');
 }
 
@@ -107,8 +127,8 @@ function post_type_tests() {
  * This will scan all the content pages that wordpress outputs for our special code.
  * If the code is found, it will replace the requested test.
  */
-add_shortcode( 'ECP_MCT', 'ecp_mct_shortcode' );
-function ecp_mct_shortcode( $attr ) {
+add_shortcode( 'ECP_MCT', 'test_item_shortcode' );
+function test_item_shortcode( $attr ) {
 	$test_id = $attr[0];
 	
 	$contents = '';
@@ -118,5 +138,18 @@ function ecp_mct_shortcode( $attr ) {
 		$contents = ob_get_contents();
 		ob_end_clean();
 	}
+	return $contents;
+}
+
+/**
+ * This will scan all the content pages that wordpress outputs for our special code.
+ * If the code is found, it will replace the requested test.
+ */
+add_shortcode( 'ECP_MCT_MAIN', 'test_taker_shortcode' );
+function test_taker_shortcode( $attr ) {
+	ob_start();
+	include(ABSPATH . 'wp-content/plugins/ecp_mct/pages/site/test_taker.php');
+	$contents = ob_get_contents();
+	ob_end_clean();
 	return $contents;
 }

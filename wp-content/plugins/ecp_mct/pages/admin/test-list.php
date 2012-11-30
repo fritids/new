@@ -2,7 +2,7 @@
 global $wpdb;
 
 // Get all created tests
-$query = "SELECT `id`,`name` FROM ".ECP_MCT_TABLE_TESTS." ORDER BY `id`";
+$query = "SELECT `id`,`name`,`type` FROM ".ECP_MCT_TABLE_TESTS." ORDER BY `id`";
 $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 ?>
 
@@ -15,11 +15,13 @@ $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 		<a href="<?php echo admin_url();?>admin.php?page=ecp_mct/pages/admin/test-new.php" class="add-new-h2">Add New</a>
 	</h2>
 	
+	<h3>Created Tests</h3>
 	<?php if($tests): ?>
 	<table class="widefat">
 		<thead>
 		<tr>
 			<th>Name</th>
+			<th style="width: 100px;">Type</th>
 			<th style="width: 100px;">Actions</th>
 		</tr>
 		</thead>
@@ -27,6 +29,7 @@ $tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 		<?php foreach($tests as $test): ?>
 		<tr>
 			<td><?php echo $test->name;?></td>
+			<td><?php echo $test->type;?></td>
 			<td>
 				<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">View</a> |
 				<a href="<?php echo get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&action=edit&test='.$test->id?>">Edit</a>

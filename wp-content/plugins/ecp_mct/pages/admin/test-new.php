@@ -8,7 +8,7 @@ if($_REQUEST['action'] == 'edit') $action = 'edit';
 $dtest = array();
 $sections = array();
 if($action == 'edit') {
-	$query = "SELECT `id`, `name`, `options_num` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
+	$query = "SELECT `id`, `name`, `type`, `options_num` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
 	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));
 	
 	// Prepare sections array
@@ -67,6 +67,11 @@ wp_enqueue_script("jquery");
 			</div>
 		</div>
 		<?php endif; ?>
+		
+		<div class="field">
+			<label>Test Type</label>
+			<select class="required" data-bind="options: test_type_options, value: test_type, optionsCaption: 'Choose...'"></select>
+		</div>
 		
 		<div class="field">
 			<label>Number of options per question</label>
@@ -130,6 +135,7 @@ wp_enqueue_script("jquery");
 		<p class="submit">
 			<input type="hidden" name="action" id="action" value="<?php echo $action; ?>" />
 			<input type="hidden" name="test_id" value="<?php echo $dtest->id; ?>" />
+			<input type="hidden" name="test_type" data-bind="value: $root.test_type" />
 			<input type="hidden" name="options_num" data-bind="value: $root.options_num" />
 			<input type="hidden" name="sections" data-bind="value: ko.toJSON($root.sections)" />
 			<input type="hidden" name="deleted_sections" data-bind="value: ko.toJSON($root.deleted_sections)" />
@@ -227,12 +233,15 @@ wp_enqueue_script("jquery");
 	function EcpMctViewModel() {
 		var self = this;
 		
+		self.test_type = ko.observable();
+		self.test_type_options = new Array("SAT", "ACT");
 		self.options_num = ko.observable(0);
 		self.sections = ko.observableArray([]);
 		self.deleted_sections = ko.observableArray([]);
 		self.question_types = new Array("Multiple Choice","Fill In");
-		self.field_1_values = self.field_4_values = new Array("",".","0","1","2","3","4","5","6","7","8","9");
+		self.field_1_values = new Array("",".","1","2","3","4","5","6","7","8","9");
 		self.field_2_values = self.field_3_values = new Array("","/",".","0","1","2","3","4","5","6","7","8","9");
+		self.field_4_values = new Array("",".","0","1","2","3","4","5","6","7","8","9");
 
 		// Operations
 		self.addSection = function() {
@@ -252,6 +261,7 @@ wp_enqueue_script("jquery");
 		// Load initial state from server
 		if(jQuery("#action").val() == "edit") {
 			self.options_num('<?php echo $dtest->options_num?$dtest->options_num:0 ?>');
+			self.test_type('<?php echo $dtest->type?$dtest->type:null ?>');
 			
 			var sections = jQuery.map(jQuery.parseJSON('<?php echo json_encode($sections); ?>'), function(item) {
 				return new Section(item);

@@ -41,4 +41,4 @@ ol.options-list li:first-child { margin-left: 0; }
  Validation
 */
 label.validation-error { font-family: Arial,sans-serif; color: red; font-size: 12px; margin-left: 5px; }
-input.validation-error { border-color: red !important; }
+input.validation-error, select.validation-error { border-color: red !important; }

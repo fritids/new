@@ -26,8 +26,9 @@ if(is_user_logged_in() && $current_section && !$answer_id) {
 }
 
 // Fill in options
-$field_1_values = $field_4_values = array("",".","0","1","2","3","4","5","6","7","8","9");
+$field_1_values = array("",".","1","2","3","4","5","6","7","8","9");
 $field_2_values =  $field_3_values = array("","/",".","0","1","2","3","4","5","6","7","8","9");
+$field_4_values = array("",".","0","1","2","3","4","5","6","7","8","9");
 
 // Calculate estimated end time
 $time_left = strtotime($start_time)+$current_section->duration - time();
@@ -40,7 +41,7 @@ $question_count = 1;
 <script type="text/javascript" src="<?php echo PLUGIN_DIR; ?>js/jquery.countdown.js"></script>
 
 <div class="test-container">
-	<?php if ( is_user_logged_in() ): ?> 
+	<?php if ( is_user_logged_in() ): ?>
 		<?php if($current_section): ?>
 		<form name="test-take" action="<?php echo PLUGIN_DIR; ?>answers-save-action.php" method="post" id="test-<?php echo $test_id?>">
 
