@@ -112,13 +112,28 @@ wp_enqueue_script("jquery");
 							<label>Add the possible answer(s)</label>
 							<div class="answers-list-container">
 								<ol class="answers-list" data-bind="foreach: options">
-									<li>
+									<li data-bind="if: type()=='Exact Match', css: {hide: type()=='Range'}">
 										<select data-bind="options: $root.field_1_values, value: field_1"></select>
 										<select data-bind="options: $root.field_2_values, value: field_2"></select>
 										<select data-bind="options: $root.field_3_values, value: field_3"></select>
 										<select data-bind="options: $root.field_4_values, value: field_4"></select>
 										<a data-bind="click: $parent.removeAnswer, visible: $index()>0" class="remove-answer">Remove</a>
+										<div class="answer-type">
+											<input type="radio" checked="checked" /> Exact Match
+											<input type="radio" data-bind="click: changeType" /> Range
+										</div>
 									</li>
+									
+									<li data-bind="if: type()=='Range', css: {hide: type()=='Exact Match'}" >
+										<input type="text" autocomplete="off" data-bind="value: start, uniqueName: true" size="4" class="required" /> to
+										<input type="text" autocomplete="off" data-bind="value: end, uniqueName: true" size="4" class="required" />
+										<a data-bind="click: $parent.removeAnswer, visible: $index()>0" class="remove-answer">Remove</a>
+										<div class="answer-type">
+											<input type="radio" data-bind="click: changeType" /> Exact Match
+											<input type="radio" checked="checked" /> Range
+										</div>
+									</li>
+									
 								</ol>
 								<a data-bind="click: addAnswer" class="add-answer">Add Answer</a>
 							</div>
@@ -143,11 +158,9 @@ wp_enqueue_script("jquery");
 		</p>
 	</form>
 	
-	<!--pre data-bind="text: ko.toJSON($data,null,2)"></pre-->
+	<!--pre data-bind="text: ko.toJSON($data.sections,null,2)"></pre-->
 	
 </div>
-
-
 
 
 <script type="text/javascript">
@@ -224,10 +237,28 @@ wp_enqueue_script("jquery");
 	
 	function FI_Answer(data) {
 		var self = this;
+		self.type = ko.observable(data.type?data.type:"Exact Match");
 		self.field_1 = ko.observable(data.field_1);
 		self.field_2 = ko.observable(data.field_2);
 		self.field_3 = ko.observable(data.field_3);
 		self.field_4 = ko.observable(data.field_4);
+		self.start = ko.observable(data.start);
+		self.end = ko.observable(data.end);
+		
+		// Operations
+		self.changeType = function() {
+			if(self.type() == "Exact Match") {
+				self.type("Range");
+				self.field_1(null);
+				self.field_2(null);
+				self.field_3(null);
+				self.field_4(null);
+			} else {
+				self.type("Exact Match");
+				self.start(null);
+				self.end(null);
+			}
+		}
 	}
 	
 	function EcpMctViewModel() {

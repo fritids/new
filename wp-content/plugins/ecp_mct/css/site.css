@@ -15,7 +15,7 @@ ol.options-list li:first-child { margin-left: 0; }
 
 /* Test taker view */
 .test-taker-container .take-test { text-align: center; }
-.test-taker-container .take-test a { display: inline-block; padding: 1px 10px; background: #F1F1F1; font-size: 12px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #21759B; text-shadow: 1px 1px #fff; }
+.test-taker-container .take-test a { display: inline-block; text-decoration: none; padding: 1px 10px; background: #F1F1F1; font-size: 12px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #21759B; text-shadow: 1px 1px #fff; }
 .test-taker-container .take-test a:hover { text-decoration: none; color: #E59521; }
 .test-taker-container table th { text-align: center; }
 .test-taker-sat, .test-taker-act { width: 49%; float: left; }

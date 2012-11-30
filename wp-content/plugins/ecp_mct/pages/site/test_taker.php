@@ -1,4 +1,7 @@
 <?php
+require(FILE_DIR.'pages/wpframe.php');
+wpframe_stop_direct_call(__FILE__);
+
 global $wpdb;
 
 $current_user = wp_get_current_user();
@@ -12,8 +15,6 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo PLUGIN_DIR; ?>css/site.css" />
-
-<h1>Testing Module</h1>
 
 <div class="test-taker-container">
 	<?php if ( is_user_logged_in() ): ?>

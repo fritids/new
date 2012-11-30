@@ -32,12 +32,31 @@ if(isset($_REQUEST['submit'])) {
 				$wpdb->get_results($wpdb->prepare($query, $section['name'], $k, $section['id']));
 				
 				foreach($section['questions'] as $j=>$question) {
+					if($question['type'] == 'Fill In') {
+						$options = array();
+						foreach($question['options'] as $i=>$option) {
+							$options[$i]['type'] = $option['type'];
+							if($option['type'] == "Exact Match") {
+								$options[$i]['field_1'] = $option['field_1'];
+								$options[$i]['field_2'] = $option['field_2'];
+								$options[$i]['field_3'] = $option['field_3'];
+								$options[$i]['field_4'] = $option['field_4'];
+							} else {
+								$options[$i]['start'] = $option['start'];
+								$options[$i]['end'] = $option['end'];
+							}
+						}
+					} else {
+						$options = $question['options'];
+					}
+					
 					if(isset($question['id'])) { // if $question exists update
 						$query = "UPDATE ".ECP_MCT_TABLE_QUESTIONS." SET `options` = %s, `order` = %d WHERE `id` = %d";
-						$wpdb->get_results($wpdb->prepare($query, json_encode($question['options']), $j, $question['id']));
+						$wpdb->get_results($wpdb->prepare($query, json_encode($options), $j, $question['id']));
 					} else { // if question doesn't exists update
 						$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `order`, `options`) VALUES(%d,%s,%d,%s)";
-						$wpdb->get_results($wpdb->prepare($query, $section['id'], $question['type'], $j, json_encode($question['options'])));
+						
+						$wpdb->get_results($wpdb->prepare($query, $section['id'], $question['type'], $j, json_encode($options)));
 					}
 				}
 				
@@ -47,8 +66,26 @@ if(isset($_REQUEST['submit'])) {
 				$section_id = $wpdb->insert_id;
 
 				foreach($section['questions'] as $j=>$question) {
+					if($question['type'] == 'Fill In') {
+						$options = array();
+						foreach($question['options'] as $i=>$option) {
+							$options[$i]['type'] = $option['type'];
+							if($option['type'] == "Exact Match") {
+								$options[$i]['field_1'] = $option['field_1'];
+								$options[$i]['field_2'] = $option['field_2'];
+								$options[$i]['field_3'] = $option['field_3'];
+								$options[$i]['field_4'] = $option['field_4'];
+							} else {
+								$options[$i]['start'] = $option['start'];
+								$options[$i]['end'] = $option['end'];
+							}
+						}
+					} else {
+						$options = $question['options'];
+					}
+					
 					$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `order`, `options`) VALUES(%d,%s,%d,%s)";
-					$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($question['options'])));
+					$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($options)));
 				}
 			}
 		}
@@ -68,8 +105,26 @@ if(isset($_REQUEST['submit'])) {
 			$section_id = $wpdb->insert_id;
 
 			foreach($section['questions'] as $j=>$question) {
+				if($question['type'] == 'Fill In') {
+					$options = array();
+					foreach($question['options'] as $i=>$option) {
+						$options[$i]['type'] = $option['type'];
+						if($option['type'] == "Exact Match") {
+							$options[$i]['field_1'] = $option['field_1'];
+							$options[$i]['field_2'] = $option['field_2'];
+							$options[$i]['field_3'] = $option['field_3'];
+							$options[$i]['field_4'] = $option['field_4'];
+						} else {
+							$options[$i]['start'] = $option['start'];
+							$options[$i]['end'] = $option['end'];
+						}
+					}
+				} else {
+					$options = $question['options'];
+				}
+					
 				$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `order`, `options`) VALUES(%d,%s,%d,%s)";
-				$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($question['options'])));
+				$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($options)));
 			}
 		}
 

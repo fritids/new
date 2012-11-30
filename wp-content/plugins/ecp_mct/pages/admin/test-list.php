@@ -1,4 +1,7 @@
 <?php
+require(FILE_DIR.'pages/wpframe.php');
+wpframe_stop_direct_call(__FILE__);
+
 global $wpdb;
 
 // Get all created tests
