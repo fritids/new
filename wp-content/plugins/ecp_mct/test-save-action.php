@@ -28,8 +28,8 @@ if(isset($_REQUEST['submit'])) {
 			}
 			
 			if(isset($section['id'])) { // if section exists update
-				$query = "UPDATE ".ECP_MCT_TABLE_SECTIONS." SET `name` = %s, `duration` = %d, `order` = %d WHERE `id` = %d";
-				$wpdb->get_results($wpdb->prepare($query, $section['name'], $k, $section['id']));
+				$query = "UPDATE ".ECP_MCT_TABLE_SECTIONS." SET `name` = %s, `type` = %s, `duration` = %d, `order` = %d WHERE `id` = %d";
+				$wpdb->get_results($wpdb->prepare($query, $section['name'], $section['type'], $section['duration'], $k, $section['id']));
 				
 				foreach($section['questions'] as $j=>$question) {
 					if($question['type'] == 'Fill In') {
@@ -61,8 +61,8 @@ if(isset($_REQUEST['submit'])) {
 				}
 				
 			} else { // if section doesn't exists update
-				$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `duration`, `order`) VALUES(%d,%s,%d,%d)";
-				$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['duration'], $k));
+				$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `type`, `duration`, `order`) VALUES(%d,%s,%s,%d,%d)";
+				$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['type'], $section['duration'], $k));
 				$section_id = $wpdb->insert_id;
 
 				foreach($section['questions'] as $j=>$question) {
@@ -100,8 +100,8 @@ if(isset($_REQUEST['submit'])) {
 		$sections = json_decode(str_replace(array("\\\"","\\'"), array("\"","'"), $_REQUEST['sections']), true);
 
 		foreach ($sections as $k=>$section) {
-			$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `duration`, `order`) VALUES(%d,%s,%d,%d)";
-			$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['duration'], $k));
+			$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `type`, `duration`, `order`) VALUES(%d,%s,%s,%d,%d)";
+			$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['type'], $section['duration'], $k));
 			$section_id = $wpdb->insert_id;
 
 			foreach($section['questions'] as $j=>$question) {

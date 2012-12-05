@@ -1,5 +1,5 @@
 a { cursor: pointer; }
-label { font-weight: bold; }
+label { font-weight: bold; cursor: default; }
 .clearfix:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix {display:block;}
 .page-title { position: relative; top: 3px; }

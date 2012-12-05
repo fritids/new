@@ -34,7 +34,7 @@ $field_2_values =  $field_3_values = array("","/",".","0","1","2","3","4","5","6
 $field_4_values = array("",".","0","1","2","3","4","5","6","7","8","9");
 
 // Calculate estimated end time
-$time_left = strtotime($start_time)+$current_section->duration - time();
+$time_left = strtotime($start_time)+($current_section->duration*60) - time();
 
 $question_count = 1;
 ?>
@@ -68,9 +68,9 @@ $question_count = 1;
 					<?php if($question->type == "Multiple Choice"): ?>
 					<div class="options-list-container clearfix">
 						<ol class="options-list">
-							<?php foreach($options as $option): ?>
+							<?php foreach($options as $k=>$option): ?>
 							<li>
-								<input type="radio" name="answers[<?php echo $question->id; ?>]" value="<?php echo $option['order']; ?>" />
+								<input type="radio" name="answers[<?php echo $question->id; ?>]" value="<?php echo $k; ?>" />
 							</li>
 							<?php  endforeach; ?>
 						</ol>
@@ -107,9 +107,10 @@ $question_count = 1;
 				<?php  endforeach; ?>
 			</ul>
 
-			<input type="submit" name="submit" id="action-button" value="<?php if(count($sections) >1): ?>Next Section<?php else: ?>Finish Test<?php endif; ?>"  />
+			<input type="submit" name="submit" id="action-button" value="<?php if(count($sections) >1): ?>Next Section<?php else: ?>Finish Test<?php endif; ?>"  />	
 			<input type="hidden" name="sections_left" value="<?php echo  count($sections)-1 ?>" />
 			<input type="hidden" name="answer_id" value="<?php echo  $answer_id ?>" />
+			<input type="hidden" name="test_id" value="<?php echo  $test_id ?>" />
 
 		</form>
 		<?php else: ?>

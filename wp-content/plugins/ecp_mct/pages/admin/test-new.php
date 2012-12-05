@@ -12,12 +12,13 @@ if($action == 'edit') {
 	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));
 	
 	// Prepare sections array
-	$query = "SELECT `id`, `name`, `duration` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
+	$query = "SELECT `id`, `name`, `type`, `duration` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
 	$dsections = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test']));
 	
 	foreach($dsections as $k=>$section) {
 		$sections[$k]['id'] = $section->id;
 		$sections[$k]['name'] = stripslashes($section->name);
+		$sections[$k]['type'] = stripslashes($section->type);
 		$sections[$k]['duration'] = stripslashes($section->duration);
 		$sections[$k]['options_num'] = stripslashes($dtest->options_num);
 		$sections[$k]['questions'] = array();
@@ -70,7 +71,7 @@ wp_enqueue_script("jquery");
 		
 		<div class="field">
 			<label>Test Type</label>
-			<select class="required" data-bind="options: test_type_options, value: test_type, optionsCaption: 'Choose...'"></select>
+			<select class="required" data-bind="options: test_type_options, value: test_type, optionsCaption: 'Choose...', enable: sections().length==0"></select>
 		</div>
 		
 		<div class="field">
@@ -85,12 +86,19 @@ wp_enqueue_script("jquery");
 			<div class="postbox">
 				<h3 class="hndle">
 					<input type="text" class="required name" autocomplete="off" placeholder="Enter section name" data-bind="value: name, uniqueName: true">
-					<span class="duration">
-						Duration:<input type="text" class="required, number" size="3" autocomplete="off" data-bind="value: duration, uniqueName: true" /><em>(in seconds)</em>
-					</span>
 					<a data-bind="click: $root.removeSection" class="remove-section">Remove Section</a>
 				</h3>
 				<div class="inside">
+					<div class="field">
+						<label>Section Category:</label>
+						<select data-bind="options: $root.section_types, value: type, optionsCaption: 'Choose...'"></select>
+					</div>
+					<div class="field">
+						<label>Duration:</label>
+						<input type="text" class="required number" size="3" autocomplete="off" data-bind="value: duration, uniqueName: true" /><em>minutes</em>
+					</div>
+					<hr>
+					
 					<ul class="questions-list" data-bind="foreach: questions">
 						<li>
 							<label class="question-lbl">Question <span data-bind="text: $index()+1"></span> <a data-bind="click: $parent.removeQuestion" class="remove-question">Remove</a></label>
@@ -158,7 +166,7 @@ wp_enqueue_script("jquery");
 		</p>
 	</form>
 	
-	<!--pre data-bind="text: ko.toJSON($data.sections,null,2)"></pre-->
+	<!--pre data-bind="text: ko.toJSON($data,null,2)"></pre-->
 	
 </div>
 
@@ -169,6 +177,7 @@ wp_enqueue_script("jquery");
 		var self = this;
 		self.id = ko.observable(data.id);
 		self.name = ko.observable(data.name);
+		self.type = ko.observable(data.type);
 		self.duration = ko.observable(data.duration);
 		self.questions = ko.observableArray([]);
 		self.deleted_questions = ko.observableArray([]);
@@ -269,6 +278,7 @@ wp_enqueue_script("jquery");
 		self.options_num = ko.observable(0);
 		self.sections = ko.observableArray([]);
 		self.deleted_sections = ko.observableArray([]);
+		self.section_types = ko.observableArray([]);
 		self.question_types = new Array("Multiple Choice","Fill In");
 		self.field_1_values = new Array("",".","1","2","3","4","5","6","7","8","9");
 		self.field_2_values = self.field_3_values = new Array("","/",".","0","1","2","3","4","5","6","7","8","9");
@@ -276,10 +286,14 @@ wp_enqueue_script("jquery");
 
 		// Operations
 		self.addSection = function() {
-			if(self.options_num())
-				self.sections.push(new Section({options_num: self.options_num()}));
-			else
-				alert("Please set the number of options per question");
+			if(self.test_type()) {
+				if(self.options_num())
+					self.sections.push(new Section({options_num: self.options_num()}));
+				else
+					alert("Please set the number of options per question");
+			} else {
+				alert("Please set the test type");
+			}
 		}
 		self.removeSection = function(section) {
 			if(section.id()) {
@@ -294,11 +308,26 @@ wp_enqueue_script("jquery");
 			self.options_num('<?php echo $dtest->options_num?$dtest->options_num:0 ?>');
 			self.test_type('<?php echo $dtest->type?$dtest->type:null ?>');
 			
+			if(self.test_type() == "SAT") {
+				self.section_types(["Reading","Math","Writing"]);
+			} else if(self.test_type() == "ACT"){
+				self.section_types(["English", "Math", "Reading", "Science"]);
+			}
+			
 			var sections = jQuery.map(jQuery.parseJSON('<?php echo json_encode($sections); ?>'), function(item) {
 				return new Section(item);
 			});
 			self.sections(sections);
 		}
+		
+		// Subscriptions
+		self.test_type.subscribe(function() {
+			if(self.test_type() == "SAT") {
+				self.section_types(["Reading","Math","Writing"]);
+			} else if(self.test_type() == "ACT"){
+				self.section_types(["English", "Math", "Reading", "Science"]);
+			}
+		});
 		
 	}
 	
