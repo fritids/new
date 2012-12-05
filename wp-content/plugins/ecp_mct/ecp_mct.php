@@ -13,6 +13,7 @@ define( 'ECP_MCT_TABLE_TESTS' , $wpdb->get_blog_prefix().'ecp_mct_tests' );
 define( 'ECP_MCT_TABLE_SECTIONS' , $wpdb->get_blog_prefix().'ecp_mct_sections' );
 define( 'ECP_MCT_TABLE_QUESTIONS' , $wpdb->get_blog_prefix().'ecp_mct_questions' );
 define( 'ECP_MCT_TABLE_USER_ANSWERS' , $wpdb->get_blog_prefix().'ecp_mct_user_answers' );
+define( 'ECP_MCT_TABLE_SCALED_SCORES' , $wpdb->get_blog_prefix().'ecp_mct_scaled_scores' );
 define( 'ECP_MCT_TABLE_USER_NOTES' , $wpdb->get_blog_prefix().'ecp_mct_user_notes' );
 
 define( 'PLUGIN_DIR' , plugin_dir_url( __FILE__ ) );
@@ -66,6 +67,15 @@ function ecp_mct_main_install(){
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 	
+	$wpdb->query("CREATE TABLE IF NOT EXISTS `".ECP_MCT_TABLE_SCALED_SCORES."` (
+				  `id` INT(11) NOT NULL AUTO_INCREMENT,
+				  `test_id` INT(11) NOT NULL,
+				  `section_type` VARCHAR(255) NOT NULL,
+				  `raw_score` INT(11) DEFAULT NULL,
+				  `scaled_score` INT(11) DEFAULT NULL,
+				  PRIMARY KEY (`id`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+	
 	$wpdb->query("CREATE TABLE IF NOT EXISTS `".ECP_MCT_TABLE_USER_NOTES."` (
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `test_id` INT(11) NOT NULL,
@@ -95,12 +105,13 @@ function ecp_mct_main_uninstall(){
 	
 	global $wpdb;
 	
-	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_TESTS.";");
-	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
-	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
-	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
+//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_TESTS.";");
+//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
+//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
+//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SCALED_SCORES.";");
+//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
 	// Delete test posts
-	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
+//	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
 	
 	// Delete page for the tast taker
 	$the_page = get_page_by_title('Test Taker');

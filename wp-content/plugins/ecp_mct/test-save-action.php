@@ -4,6 +4,8 @@ auth_redirect();
 
 
 if(isset($_REQUEST['submit'])) {
+	$error = "";
+	
 	if($_REQUEST['action'] == 'edit') {
 		$test_id = $_REQUEST['test_id'];
 		
@@ -90,6 +92,34 @@ if(isset($_REQUEST['submit'])) {
 			}
 		}
 		
+		if(!empty($_FILES)) {
+			foreach($_FILES as $section_type=>$file) {
+				//READING FILE
+				try {
+					if($file = fopen($file['tmp_name'],"r")) {
+						$row = 0;
+
+						while (($data = fgetcsv($file, 0, ";")) !== FALSE) {
+							// Check that the first row has the names
+							// of the colums in the database table
+							if($row != 0) {
+								$query = "INSERT INTO ".ECP_MCT_TABLE_SCALED_SCORES." (`test_id`, `section_type`, `raw_score`, `scaled_score`) VALUES(%d,%s,%d,%d)";
+								$wpdb->get_results($wpdb->prepare($query, $test_id, $section_type, $data[0], $data[1]));
+							}
+							$row++;
+						}
+						fclose($file);
+					}
+					else {
+						// error message
+					}
+				}
+				catch(Exception $e){
+					$error = "&error=file_error";
+				}
+			}
+		}
+		
 		wp_redirect(get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&message=update_test&action=edit&test='.$test_id);
 	} else {
 		// Save test information in database
@@ -127,6 +157,34 @@ if(isset($_REQUEST['submit'])) {
 				$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($options)));
 			}
 		}
+		
+		if(!empty($_FILES)) {
+			foreach($_FILES as $section_type=>$file) {
+				//READING FILE
+				try {
+					if($file = fopen($file['tmp_name'],"r")) {
+						$row = 0;
+
+						while (($data = fgetcsv($file, 0, ";")) !== FALSE) {
+							// Check that the first row has the names
+							// of the colums in the database table
+							if($row != 0) {
+								$query = "INSERT INTO ".ECP_MCT_TABLE_SCALED_SCORES." (`test_id`, `section_type`, `raw_score`, `scaled_score`) VALUES(%d,%s,%d,%d)";
+								$wpdb->get_results($wpdb->prepare($query, $test_id, $section_type, $data[0], $data[1]));
+							}
+							$row++;
+						}
+						fclose($file);
+					}
+					else {
+						// error message
+					}
+				}
+				catch(Exception $e){
+					$error = "&error=file_error";
+				}
+			}
+		}
 
 		// Create new Test post object
 		$current_user = wp_get_current_user();
@@ -144,7 +202,7 @@ if(isset($_REQUEST['submit'])) {
 		// Insert the test into the database
 		wp_insert_post($my_test);
 		
-		wp_redirect(get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&message=new_test&action=edit&test='.$test_id);
+		wp_redirect(get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&message=new_test'.$error.'&action=edit&test='.$test_id);
 	}
 }
 exit;

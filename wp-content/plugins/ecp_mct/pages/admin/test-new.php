@@ -8,8 +8,13 @@ if($_REQUEST['action'] == 'edit') $action = 'edit';
 $dtest = array();
 $sections = array();
 if($action == 'edit') {
+	// Get test info
 	$query = "SELECT `id`, `name`, `type`, `options_num` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
 	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));
+	
+	// Get score info
+	$query = "SELECT DISTINCT `section_type` FROM ".ECP_MCT_TABLE_SCALED_SCORES." WHERE `test_id`=%d";
+	$dscores = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test']));
 	
 	// Prepare sections array
 	$query = "SELECT `id`, `name`, `type`, `duration` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
@@ -54,7 +59,13 @@ wp_enqueue_script("jquery");
 	<div id="theme-options-wrap"><img class="icon32" src="<?php echo PLUGIN_DIR; ?>images/icon-32.png"></div>
 	<h2 class="page-title">Add New Multiple Choice Test</h2>
 	
-	<form name="test-new" id="test-new" action="<?php echo PLUGIN_DIR; ?>test-save-action.php" method="post">
+	<?php
+		if($_REQUEST['error'] == 'file_error')
+			//wpframe_message ('An error occured uploading the scores files.', 'error');
+			echo '<div class="error"><p>An error occured uploading the scores files.</p></div>';
+	?>
+	
+	<form name="test-new" id="test-new" action="<?php echo PLUGIN_DIR; ?>test-save-action.php" method="post" enctype="multipart/form-data">
 		<div class="title-field">
 			<input type="text" class="required" name="test_title" autocomplete="off" id="title" placeholder="Enter title here" value="<?php echo stripslashes($dtest->name); ?>">
 		</div>
@@ -80,7 +91,27 @@ wp_enqueue_script("jquery");
 			<em>(for multiple choice questions)</em>
 		</div>
 		
-		<h3>Test Sections</h3><hr>
+		<h3>Scaled Scores</h3><hr>
+		
+		<!-- ko ifnot: test_type -->
+		<p>Choose a Test Type</p>
+		<!--/ko-->
+		
+		<!-- ko if: test_type -->
+		<div data-bind="foreach: section_types">
+			<div class="field">
+				<label data-bind="text: $data" style="width: 80px; display: inline-block;"></label>
+				<!-- ko if: $root.uploadedScores.indexOf($data) < 0 -->
+				<input type="file" data-bind="attr: { name: $data }" />
+				<!--/ko-->
+				<!-- ko if: $root.uploadedScores.indexOf($data) >= 0 -->
+				Uploaded
+				<!--/ko-->
+			</div>
+		</div>
+		<!--/ko-->
+		
+		<br><h3>Test Sections</h3><hr>
 		
 		<div id="poststuff" data-bind="foreach: sections">
 			<div class="postbox">
@@ -283,6 +314,7 @@ wp_enqueue_script("jquery");
 		self.field_1_values = new Array("",".","1","2","3","4","5","6","7","8","9");
 		self.field_2_values = self.field_3_values = new Array("","/",".","0","1","2","3","4","5","6","7","8","9");
 		self.field_4_values = new Array("",".","0","1","2","3","4","5","6","7","8","9");
+		self.uploadedScores = ko.observableArray([]);
 
 		// Operations
 		self.addSection = function() {
@@ -307,6 +339,9 @@ wp_enqueue_script("jquery");
 		if(jQuery("#action").val() == "edit") {
 			self.options_num('<?php echo $dtest->options_num?$dtest->options_num:0 ?>');
 			self.test_type('<?php echo $dtest->type?$dtest->type:null ?>');
+			self.uploadedScores = jQuery.map(jQuery.parseJSON('<?php echo json_encode($dscores); ?>'), function(item) {
+				return item.section_type;
+			});
 			
 			if(self.test_type() == "SAT") {
 				self.section_types(["Reading","Math","Writing"]);
