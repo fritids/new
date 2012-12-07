@@ -122,7 +122,7 @@ wp_enqueue_script("jquery");
 				<div class="inside">
 					<div class="field">
 						<label>Section Category:</label>
-						<select data-bind="options: $root.section_types, value: type, optionsCaption: 'Choose...'"></select>
+						<select class="required" data-bind="options: $root.section_types, value: type, optionsCaption: 'Choose...', uniqueName: true"></select>
 					</div>
 					<div class="field">
 						<label>Duration:</label>

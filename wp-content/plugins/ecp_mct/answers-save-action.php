@@ -19,16 +19,16 @@ if(isset($_REQUEST['submit'])) {
 		$sections = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_id']));
 		
 		//Initialize RAW scores
-		$score = array();
+		$scores = array();
 		if($test->type == "SAT") {
-			$score['Reading'] = 0;
-			$score['Math'] = 0;
-			$score['Writing'] = 0;
+			$scores['Reading'] = 0;
+			$scores['Math'] = 0;
+			$scores['Writing'] = 0;
 		} else {
-			$score['English'] = 0;
-			$score['Math'] = 0;
-			$score['Reading'] = 0;
-			$score['Science'] = 0;
+			$scores['English'] = 0;
+			$scores['Math'] = 0;
+			$scores['Reading'] = 0;
+			$scores['Science'] = 0;
 		}
 		
 		foreach($sections as $section) {
@@ -71,16 +71,32 @@ if(isset($_REQUEST['submit'])) {
 				}
 				
 				if($correct) {
-					$score[$section->type] += 1;
+					$scores[$section->type] += 1;
 				} else {
 					if($test->type == "SAT") {
-						$score[$section->type] -= 0.25;
+						$scores[$section->type] -= 0.25;
 					}
 				}
 			}
 			
 		}
-		echo '<pre>';print_r($score);die('</pre>');
+		
+		// Transform to sacaled score
+		$scaled_scores = array();
+		foreach($scores as $k=>$score) {
+			$query = "SELECT `scaled_score` FROM ".ECP_MCT_TABLE_SCALED_SCORES." WHERE `test_id`=%d AND `section_type`=%s AND `raw_score`=%d";
+			$r = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test_id'], $k, $score));
+			
+			if(!$r->scaled_score) {
+				$query = "SELECT MIN(`scaled_score`) FROM ".ECP_MCT_TABLE_SCALED_SCORES." WHERE `test_id`=%d AND `section_type`=%s GROUP BY `section_type`";
+				$r = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test_id'], $k));
+			}
+			$scaled_scores[$k] = $r->scaled_score;
+		}
+		
+		$query = "INSERT INTO ".ECP_MCT_TABLE_USER_NOTES." (`test_id`, `user_id`, `notes`) VALUES(%d,%d,%s)";
+		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_id'], $current_user->ID, json_encode($scaled_scores)));
+		
 	}
 }
 

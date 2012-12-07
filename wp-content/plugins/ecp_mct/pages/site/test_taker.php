@@ -33,8 +33,6 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 			<tbody>
 			<?php
 				foreach($sat_tests as $test):
-				
-					// Get test status
 					// Get test sections
 					$query = "SELECT count(*) as count FROM ".ECP_MCT_TABLE_SECTIONS." `sections`
 						LEFT JOIN ".ECP_MCT_TABLE_USER_ANSWERS." `answers` ON `answers`.`section_id` = `sections`.`id` AND `answers`.`user_id` = %d
@@ -42,6 +40,12 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 						AND `answers`.`end_time` IS NULL";
 
 					$sections = $wpdb->get_row($wpdb->prepare($query, $current_user->ID, $test->id));
+					
+					// Get notes
+					$notes = array();
+					$query = "SELECT `notes` FROM ".ECP_MCT_TABLE_USER_NOTES." WHERE `test_id`=%d AND `user_id`=%d";
+					$r = $wpdb->get_row($wpdb->prepare($query, $test->id, $current_user->ID));
+					$notes = json_decode($r->notes, true);
 			?>
 			<tr>
 				<td><?php echo $test->name;?></td>
@@ -50,9 +54,9 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 						<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
 					</td>
 				<?php else: ?>
-					<td>#note</td>
-					<td>#note</td>
-					<td>#note</td>
+					<td style="text-align: center;"><?php echo $notes['Reading']; ?></td>
+					<td style="text-align: center;"><?php echo $notes['Math']; ?></td>
+					<td style="text-align: center;"><?php echo $notes['Writing']; ?></td>
 				<?php endif; ?>
 			</tr>
 			<?php endforeach; ?>
@@ -84,6 +88,12 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 						WHERE `sections`.`test_id`=%d
 						AND `answers`.`end_time` IS NULL";
 					$sections = $wpdb->get_row($wpdb->prepare($query, $current_user->ID, $test->id));
+					
+					// Get notes
+					$notes = array();
+					$query = "SELECT `notes` FROM ".ECP_MCT_TABLE_USER_NOTES." WHERE `test_id`=%d AND `user_id`=%d";
+					$r = $wpdb->get_row($wpdb->prepare($query, $test->id, $current_user->ID));
+					$notes = json_decode($r->notes, true);
 			?>
 			<tr>
 				<td><?php echo $test->name;?></td>
@@ -92,10 +102,10 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 						<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
 					</td>
 				<?php else: ?>
-					<td>#note</td>
-					<td>#note</td>
-					<td>#note</td>
-					<td>#note</td>
+					<td style="text-align: center;"><?php echo $notes['English']; ?></td>
+					<td style="text-align: center;"><?php echo $notes['Math']; ?></td>
+					<td style="text-align: center;"><?php echo $notes['Reading']; ?></td>
+					<td style="text-align: center;"><?php echo $notes['Science']; ?></td>
 				<?php endif; ?>
 			</tr>
 			<?php endforeach; ?>
