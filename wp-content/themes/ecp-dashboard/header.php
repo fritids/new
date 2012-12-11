@@ -12,22 +12,26 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
-	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-	
-	<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet" media="all">
-	<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet" media="all">
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
-    <!--[if IE]><link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/ie.css" type="text/css" media="screen, projection" /><![endif]-->
-	
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-	<?php
-	if (is_single()) wp_enqueue_script('comment-reply');
-	wp_head();
-	?>
-	
-	<?php wp_enqueue_script('jquery'); ?>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script> 
-</head>
+		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+
+		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet" media="all">
+		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet" media="all">
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
+		<!--[if IE]><link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+
+		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+		<?php
+		if (is_single()) wp_enqueue_script('comment-reply');
+		wp_head();
+		?>
+
+		<?php wp_enqueue_script('jquery'); ?>
+		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
+		<style type="text/css" media="screen">
+			html { margin-top: 0 !important; }
+			* html body { margin-top: 0 !important; }
+		</style>
+	</head>
 <body <?php body_class(); ?>>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner top-nav full-fluid">
@@ -45,7 +49,7 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 							<li><a href="#"><i class="icon-envelope"></i>Notifications<span class="alert-noty">4</span></a></li>
 							<li><a href="#"><i class="icon-cog"></i>Account Settings</a></li>
 							<li class="divider"></li>
-							<li><a href="#"><i class="icon-off"></i><strong>Logout</strong></a></li>
+							<li><a href="<?php echo esc_url( wp_logout_url('') ) ?>"><i class="icon-off"></i><strong>Logout</strong></a></li>
 						</ul>
 					</li>
 				</ul>
@@ -82,13 +86,13 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 			</div>
 			<div class="language_select"></div>
 			<div id="login_menu" class="right">
-				<ul><li id="rss"><?php ECPUser::getUserMenu(); ?></li></ul>
+				<ul><li id="rss"><?php //ECPUser::getUserMenu(); ?></li></ul>
 			</div>
 			<div class="back_to_site_button">
 				<a href="http://edgeincollegeprep.com">Back to the site</a>
 			</div>
 			<div class="clear"></div>
-			<?php if(is_user_logged_in()){ ?>
+			<?php //if(is_user_logged_in()){ ?>
 			<div id="menupacker">
 
 				<?php /*if(ECPUser::getSubType()=="teacher"){ ?>
@@ -98,42 +102,45 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 				<?php }else{ */?>
 				<ul class="menu" id="dropmenu">
 					<li><a href="#">Reading</a>
-						<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Reading' ) ); ?>
+						<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Reading' ) ); ?>
 					</li>
 					<li><a href="#">Math</a>
 						<ul>
 							<li><a href="#">Arithmetic</a>
-								<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Arithmetic' ) ); ?>
+								<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Arithmetic' ) ); ?>
 							</li>
 							<li><a href="#">Algebra</a>
-								<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Algebra' ) ); ?>
+								<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Algebra' ) ); ?>
 							</li>
 							<li><a href="#">Geometry</a>
-								<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Geometry' ) ); ?>
+								<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Geometry' ) ); ?>
 							</li>
 							<li><a href="#">Advanced Topics</a>
-								<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Advanced Topics' ) ); ?>
+								<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Math - Advanced Topics' ) ); ?>
 							</li>
 						</ul>
 					</li>
 					<li><a href="#">Writing</a>
-						<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Writing' ) ); ?>
+						<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Writing' ) ); ?>
 					</li>
 					<li><a href="#">Essay</a>
-						<?php wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Essay' ) ); ?>
+						<?php //wp_nav_menu( array( 'menu_class' => 'menu', 'container' => '', 'menu'=>'Essay' ) ); ?>
 					</li>
 				</ul>
 				<?php // } ?>
 
 			</div>
-			<?php } ?>
+			<?php //} ?>
 		</div>
 	</div--><!-- end header -->
 <div id="main-content" class="full-fluid">
     <div class="container-fluid">
 		<ul class="breadcrumb">
-			<li><a href="#">Home</a><span class="divider">&raquo;</span></li>
-			<li class="active">My Dashboard</li>
+			<?php
+			if(function_exists('bcn_display')) {
+				bcn_display();
+			}
+			?>
 		</ul>
 		
     <div class="leftcolumn widecolumn">
