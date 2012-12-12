@@ -41,7 +41,7 @@
 			setup_postdata($post);
 		?>
 		<div class="side-news">
-			<h5><a href="#"><?php the_title(); ?></a></h5>
+			<h5><?php the_shortlink(get_the_title()) ?></h5>
 			<p><?php the_excerpt(); ?></p>
 		</div>
 		<?php
