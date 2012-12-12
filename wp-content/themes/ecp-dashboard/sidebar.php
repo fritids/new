@@ -33,13 +33,20 @@
 	
 	<div class="new-update">
 		<h2><i class="icon-list-alt"></i> News/Updates</h2>
+		<?php
+		switch_to_blog(4);
+		$args = array( 'numberposts' => '2', 'orderby' => 'post_date', 'order' => 'DESC' );
+		$recent_posts = get_posts( $args );
+		foreach( $recent_posts as $post ):
+			setup_postdata($post);
+		?>
 		<div class="side-news">
-			<h5><a href="#">New Student Platform</a></h5>
-			<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			<h5><a href="#"><?php the_title(); ?></a></h5>
+			<p><?php the_excerpt(); ?></p>
 		</div>
-		<div class="side-news">
-			<h5><a href="#">Updated Math Exercises</a></h5>
-			<p> Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.</p>
-		</div>
+		<?php
+		endforeach;
+		restore_current_blog();
+		?>
 	</div>
 </div>

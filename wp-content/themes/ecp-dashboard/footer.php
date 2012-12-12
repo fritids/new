@@ -43,7 +43,7 @@
 	    <a href="http://edgeincollegeprep.com/terms-and-conditions/" target="_blank">Terms and Conditions</a>
     </div>
 </div><!-- end #footer -->
-/* ?>
+*/ ?>
 <?php 
 restore_current_blog();
 wp_footer(); ?>
