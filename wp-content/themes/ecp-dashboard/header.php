@@ -64,9 +64,9 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon cup"></i> SAT/ACT Edge<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a class="iframe" href="#inline_content">Customize Study Plan</a></li>
-									<li><a href="#">My Dashboard</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">My Dashboard</a></li>
 									<?php
-										get_page_by_title( "Test Taker" );
+										$page = get_page_by_title( "Test Taker" );
 										if ($page->ID):
 									?>
 										<li><a href="<?php echo get_permalink($page->ID) ?>">Take Practice Tests</a></li>
