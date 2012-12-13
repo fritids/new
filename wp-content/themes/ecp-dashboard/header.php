@@ -41,7 +41,7 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 			<div class="navbar-inner top-nav /*full-fluid*/ merge-left">
 				<div class="container-fluid">
 					<div class="branding">
-						<div class="logo"><a href="#">The Edge Logo</a></div>
+						<div class="logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">The Edge Logo</a></div>
 					</div>
 					<ul class="nav pull-right">
 						<li class="dropdown">
@@ -60,12 +60,17 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 					<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
-							<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon frames"></i> Dashboard </a></li>
+							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i> Dashboard </a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon cup"></i> SAT/ACT Edge<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a class="iframe" href="#inline_content">Customize Study Plan</a></li>
 									<li><a href="#">My Dashboard</a></li>
-									<li><a href="#">Take Practice Tests</a></li>
+									<?php
+										get_page_by_title( "Test Taker" );
+										if ($page->ID):
+									?>
+										<li><a href="<?php echo get_permalink($page->ID) ?>">Take Practice Tests</a></li>
+									<?php endif; ?>
 									<li class=" divider"></li>
 									<li class="nav-header">My Shortcuts</li>
 									<li><a href="#">Reading</a></li>

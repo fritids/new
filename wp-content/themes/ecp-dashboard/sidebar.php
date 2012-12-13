@@ -32,7 +32,7 @@
 			setup_postdata($recent);
 		?>
 		<div class="side-news">
-			<h5><a href="<?php echo  wp_get_shortlink($recent->ID) ?>"><?php echo $recent->post_title; ?></a></h5>
+			<h5><a href="<?php echo wp_get_shortlink($recent->ID) ?>"><?php echo $recent->post_title; ?></a></h5>
 			<p><?php the_excerpt(); ?></p>
 		</div>
 		<?php
