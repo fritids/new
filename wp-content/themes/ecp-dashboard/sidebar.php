@@ -28,11 +28,11 @@
 		switch_to_blog(4);
 		$args = array( 'numberposts' => '2', 'orderby' => 'post_date', 'order' => 'DESC', 'post_type' => 'post' );
 		$recent_posts = get_posts( $args );
-		foreach( $recent_posts as $post ):
-			setup_postdata($post);
+		foreach( $recent_posts as $recent ):
+			setup_postdata($recent);
 		?>
 		<div class="side-news">
-			<h5><?php the_shortlink(get_the_title()) ?></h5>
+			<h5><a href="<?php echo  wp_get_shortlink($recent->ID) ?>"><?php echo $recent->post_title; ?></a></h5>
 			<p><?php the_excerpt(); ?></p>
 		</div>
 		<?php
