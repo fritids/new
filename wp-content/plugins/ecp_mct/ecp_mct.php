@@ -87,8 +87,8 @@ function ecp_mct_main_install(){
 	// Create a page for the tast taker
 	$my_page = array(
 		'post_content'  => '[ECP_MCT_MAIN]',
-		'post_title'    => 'Test Taker',
-		'post_name' => 'test_taker',
+		'post_title'    => 'Practice SAT and ACT Exams',
+		'post_name' => 'practice_sat_and_act_exams',
 		'post_type' => 'page',
 		'post_status'   => 'publish',
 		'comment_status' => 'closed'
