@@ -99,7 +99,7 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 /***************
 	Sidebar
 ***************/
-#sidebar { background:#e8e8e8; border-right:#1d1c1c 1px solid; width: 210px; height:100%; position: fixed !important; left:0px; overflow: auto; overflow-y: hidden; top:-1px; z-index:3000; }
+#sidebar { background:#e8e8e8; border-right:#1d1c1c 1px solid; width: 210px; height:100%; position: fixed !important; left:0px; overflow: auto; top:-1px; z-index:3000; }
 .right-sidebar { border-left: 1px solid #1D1C1C; left: auto !important; right: -1px !important; }
 .side-nav { list-style: none outside none; margin: 0; padding: 0; }
 .side-nav li a { border-bottom: 1px solid #19455F; background: #7994a3; background: -moz-linear-gradient(top, #7994a3 0%, #366f90 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7994a3), color-stop(100%, #366f90));

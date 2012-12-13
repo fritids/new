@@ -1,33 +1,24 @@
+<?php $before = '<span class="sidenav-icon"><span class="sidenav-link-color"></span></span>'; ?>
+
 <div id="sidebar" class="right-sidebar">
 	<ul class="side-nav accordion_mnu collapsible">
 		<li><a href="#"><span class="white-icons pencil"></span> SAT & ACT</a>
 			<ul class="acitem">
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Course Intro</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Sentence Completions</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Reading Comprehension</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Advanced Reading</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Overall Test</a></li>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Reading')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Arithmetic')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Algebra')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Geometry')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Advanced Topics')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Writing')); ?>
 			</ul>
 		</li>
 		<li><a href="#"><span class="white-icons pencil"></span> SAT Only</a>
 			<ul class="acitem">
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Course Intro</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Math 1</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Math 2</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Math 3</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Math 4</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Overall Test</a></li>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Essay')); ?>
 			</ul>
 		</li>
 		<li><a href="#"><span class="white-icons pencil"></span> ACT Only</a>
-			<ul class="acitem">
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Course Intro</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Writing 1</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Writing 2</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Writing 3</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Writing 4</a></li>
-				<li><a href="#"><span class="sidenav-icon"><span class="sidenav-link-color"></span></span>Overall Test</a></li>
-			</ul>
+			
 		</li>
 	</ul>
 	
@@ -35,7 +26,7 @@
 		<h2><i class="icon-list-alt"></i> News/Updates</h2>
 		<?php
 		switch_to_blog(4);
-		$args = array( 'numberposts' => '2', 'orderby' => 'post_date', 'order' => 'DESC' );
+		$args = array( 'numberposts' => '2', 'orderby' => 'post_date', 'order' => 'DESC', 'post_type' => 'post' );
 		$recent_posts = get_posts( $args );
 		foreach( $recent_posts as $post ):
 			setup_postdata($post);
