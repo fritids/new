@@ -27,6 +27,8 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 
 		<?php wp_enqueue_script('jquery'); ?>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
+		<script src="<?php echo get_template_directory_uri(); ?>/js/jCProgress-1.0.2.js"></script>
+		
 		<style type="text/css" media="screen">
 			html { margin-top: 0 !important; }
 			* html body { margin-top: 0 !important; }
