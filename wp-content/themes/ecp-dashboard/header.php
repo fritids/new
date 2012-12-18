@@ -49,8 +49,6 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 								Hello <?php echo $current_user->user_login ?> <i class="white-icons admin_user"></i><b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="icon-inbox"></i>Inbox<span class="alert-noty">0</span></a></li>
-								<li><a href="#"><i class="icon-envelope"></i>Notifications<span class="alert-noty">4</span></a></li>
 								<li><a href="#"><i class="icon-cog"></i>Account Settings</a></li>
 								<li class="divider"></li>
 								<li><a href="<?php echo esc_url( wp_logout_url('') ) ?>"><i class="icon-off"></i><strong>Logout</strong></a></li>
@@ -60,27 +58,15 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 					<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
-							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i> Dashboard </a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon cup"></i> SAT/ACT Edge<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a class="iframe" href="#inline_content">Customize Study Plan</a></li>
-									<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">My Dashboard</a></li>
-									<?php
-										$page = get_page_by_title("Practice SAT and ACT Exams");
-										if ($page->ID):
-									?>
-										<li><a href="<?php echo get_permalink($page->ID) ?>">Take Practice Tests</a></li>
-									<?php endif; ?>
-									<li class=" divider"></li>
-									<li class="nav-header">My Shortcuts</li>
-									<li><a href="#">Reading</a></li>
-									<li><a href="#">Writing</a></li>
-									<li><a href="#">Math</a></li>
-									<li><a href="#">Essay</a></li>
-								</ul>
-							</li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon books"></i> Test Prep Tutoring</a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon sign_post"></i> Admissions Counseling</a></li>
+<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i> Course Progress</a></li>
+<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon books"></i> Course Material</a></li>
+<?php
+$page = get_page_by_title("Practice SAT and ACT Exams");
+if ($page->ID):
+                                                                        ?>
+                                                        <li class="dropdown"><a href="<?php echo get_permalink($page->ID) ?>" class="dropdown-toggle" data-toggle="dropdow
+n"><i class="nav-icon cup"></i> Take Practice Tests</b></a></li>
+<?php endif; ?>
 						</ul>
 					</div>
 				</div>

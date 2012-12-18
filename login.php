@@ -12,7 +12,7 @@
 					<div class="the_submit_holder">
 					<input type="submit" value="LOGIN" class="the_submit" id="wp-submit" name="wp-submit" />
 					<a href="/portal/lostpassword/" class="forgot_pass">Forgot Password?</a><br />
-					<a href="#">Not a Member? Sign Up Today!
+					<a href="http://edgeincollegeprep.com/enroll/cart/">Not a Member? Sign Up Today!
 					<div class="clear"></div>
 					</div>
 					
