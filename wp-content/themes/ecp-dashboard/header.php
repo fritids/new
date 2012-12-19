@@ -1,14 +1,17 @@
 <?php
 if(is_user_logged_in()){
 	$current_user = wp_get_current_user();
+	add_filter( 'show_admin_bar', '__return_false' );
+} else {
+	wp_redirect(get_site_url(1));
 }
 
-if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
-	if(is_user_logged_in()){
-		wp_redirect(get_bloginfo("url")."/dashboard/".$current_user->user_login."/profile/");
-		die();
-	}
-}
+//if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
+//	if(is_user_logged_in()){
+//		wp_redirect(get_bloginfo("url")."/dashboard/".$current_user->user_login."/profile/");
+//		die();
+//	}
+//}
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
@@ -58,15 +61,14 @@ if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
 					<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
-<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i> Course Progress</a></li>
-<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon books"></i> Course Material</a></li>
-<?php
-$page = get_page_by_title("Practice SAT and ACT Exams");
-if ($page->ID):
-                                                                        ?>
-                                                        <li class="dropdown"><a href="<?php echo get_permalink($page->ID) ?>" class="dropdown-toggle" data-toggle="dropdow
-n"><i class="nav-icon cup"></i> Take Practice Tests</b></a></li>
-<?php endif; ?>
+							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i>Course Progress</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon books"></i>Course Material</a></li>
+							<?php
+								$page = get_page_by_title("Practice SAT and ACT Exams");
+								if ($page->ID):
+							?>
+							<li class="dropdown"><a href="<?php echo get_permalink($page->ID) ?>" class="dropdown-toggle"><i class="nav-icon cup"></i>Take Practice Tests</b></a></li>
+							<?php endif; ?>
 						</ul>
 					</div>
 				</div>

@@ -27,9 +27,6 @@
 				</div>
 			</div>
 		</div>
-		
-			
-		
 	</div>
 	<div class="span6">
 		<div class=" widget-block">

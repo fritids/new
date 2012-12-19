@@ -2,7 +2,7 @@
 
 <div id="sidebar" class="right-sidebar">
 	<ul class="side-nav accordion_mnu collapsible">
-		<li><a href="#"><span class="white-icons pencil"></span> SAT & ACT</a>
+		<li><a href="#"><span class="white-icons books"></span> SAT & ACT</a>
 			<ul class="acitem">
 				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Reading')); ?>
 				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Arithmetic')); ?>
@@ -12,12 +12,12 @@
 				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Writing')); ?>
 			</ul>
 		</li>
-		<li><a href="#"><span class="white-icons pencil"></span> SAT Only</a>
+		<li><a href="#"><span class="white-icons books"></span> SAT Only</a>
 			<ul class="acitem">
 				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Essay')); ?>
 			</ul>
 		</li>
-		<li><a href="#"><span class="white-icons pencil"></span> ACT Only</a>
+		<li><a href="#"><span class="white-icons books"></span> ACT Only</a>
 			
 		</li>
 	</ul>
