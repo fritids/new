@@ -106,7 +106,7 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 							<tr>
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
-									<td colspan="3" class="take-test">
+									<td colspan="4" class="take-test">
 										<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
 									</td>
 								<?php else: ?>
