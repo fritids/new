@@ -30,8 +30,7 @@ if(is_user_logged_in()){
 
 		<?php wp_enqueue_script('jquery'); ?>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
-		<script src="<?php echo get_template_directory_uri(); ?>/js/accordion.jquery.js"></script>
-		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.nicescroll.min.js"></script>
+		<script src="<?php echo get_template_directory_uri(); ?>/js/multiple-accordion.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/custom-script.js"></script>
 		<style type="text/css" media="screen">
 			html { margin-top: 0 !important; }
