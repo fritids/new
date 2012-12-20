@@ -1,24 +1,21 @@
-<?php $before = '<span class="sidenav-icon"><span class="sidenav-link-color"></span></span>'; ?>
+<?php $before = '<span class="sidenav-icon"></span>'; ?>
 
 <div id="sidebar" class="right-sidebar">
 	<ul class="side-nav accordion_mnu collapsible">
 		<li><a href="#"><span class="white-icons books"></span> SAT & ACT</a>
 			<ul class="acitem">
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Reading')); ?>
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Arithmetic')); ?>
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Algebra')); ?>
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Geometry')); ?>
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Math - Advanced Topics')); ?>
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Writing')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'SAT and ACT')); ?>
 			</ul>
 		</li>
 		<li><a href="#"><span class="white-icons books"></span> SAT Only</a>
 			<ul class="acitem">
-				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'Essay')); ?>
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'SAT Only')); ?>
 			</ul>
 		</li>
 		<li><a href="#"><span class="white-icons books"></span> ACT Only</a>
-			
+			<ul class="acitem">
+				<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'ACT Only')); ?>
+			</ul>
 		</li>
 	</ul>
 	

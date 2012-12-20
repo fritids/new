@@ -8,10 +8,10 @@ $current_user = wp_get_current_user();
 
 // Get all created tests
 $query = "SELECT `id`,`name` FROM ".ECP_MCT_TABLE_TESTS." WHERE `type` = 'SAT' ORDER BY `id`";
-$sat_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
+$sat_tests = $wpdb->get_results($query);
 
 $query = "SELECT `id`,`name` FROM ".ECP_MCT_TABLE_TESTS." WHERE `type` = 'ACT' ORDER BY `id`";
-$act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
+$act_tests = $wpdb->get_results($query);
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo PLUGIN_DIR; ?>css/site.css" />
@@ -54,7 +54,7 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
 									<td colspan="3" class="take-test">
-										<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
+										<a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
 									</td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
@@ -107,7 +107,7 @@ $act_tests = $wpdb->get_results($wpdb->prepare($query, $test_id));
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
 									<td colspan="4" class="take-test">
-										<a href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
+										<a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
 									</td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['English']; ?></td>

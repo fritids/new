@@ -80,6 +80,7 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 .frames{background-position: 0px -80px !important}
 .cup{background-position: -120px 0px !important}
 .books{background-position: -360px 0px !important}
+.pencil { background-position: -840px -80px !important; }
 .sign_post{background-position: -40px -100px !important}
 .admin_user{background-position: -640px -40px !important}
 .dropdown-menu a { display: block; padding: 3px 10px; clear: both; font-weight: normal; line-height: 18px; color: #333333; white-space: nowrap; text-decoration: none; }
@@ -109,12 +110,18 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset; -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset; color: #EEEEEE;
 	display: block; font-size: 11px; font-weight: bold; line-height: 40px; padding-left: 10px; position: relative; text-decoration: none; text-transform: uppercase; }
 .side-nav li a:hover { background: #366f90; color:#fff; }
-.side-nav li a:hover > .white-icons { background:url(images/icon-black.png) no-repeat; }
+.side-nav li a:hover  .white-icons { background:url(images/icon-black.png) no-repeat; }
 .side-nav li ul { list-style: none outside none; margin: 0; padding: 0; }
-.side-nav li ul li a { background: none repeat scroll 0 0 #E8E8E8; color: #666666; font-size: 12px; font-weight: normal; padding-left: 30px; text-transform: none !important; }
-.side-nav li ul li a .sidenav-icon { background: url("images/sidenav-sprite.png") repeat scroll -80px 0 transparent !important; display: block; height: 20px; left: 10px; position: absolute; top: 10px; width: 20px; }
-.side-nav li ul li a .sidenav-icon .sidenav-link-color { background: none repeat scroll 0 0 #FFFFFF; display: block; height: 40px; left: -10px; position: absolute; top: -10px; width: 10px; }
-.pencil { background-position: -840px -80px !important; }
+.side-nav li ul li a { background: none repeat scroll 0 0 #E8E8E8; color: #666666; font-size: 12px; font-weight: normal; padding-left: 20px; text-transform: none !important; }
+.side-nav li ul li a .sidenav-icon { background: url("images/sidenav-sprite.png") repeat scroll -80px 0 transparent !important; display: block; height: 20px; left: 0; position: absolute; top: 10px; width: 20px; }
+
+.side-nav li a[title^=separator] { padding-left: 10px;  }
+.side-nav li a[title^=separator] .sidenav-icon { display: none; }
+.side-nav li a[title=separator1] { background: #595959; color: #E8E8E8; font-weight: bold; }
+.side-nav li a[title=separator2] { background: #898989; color: #ffffff; }
+.side-nav li a[title=separator3] { background: #fff; color: #696969; }
+
+/** Sidebar news **/
 .new-update { background: none repeat scroll 0 0 #F9F9F9; border-top: 1px solid #CCCCCC; padding-top: 10px; }
 .new-update h2 { background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #D8D8D8; border-radius: 4px 4px 4px 4px; font-size: 12px; font-weight: bold; margin: 0 10px 10px; padding: 0 10px; text-transform: uppercase; line-height: 36px; }
 .side-news { border-bottom: 1px solid #999999; margin-bottom: 10px; }
@@ -132,12 +139,9 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 .breadcrumb .divider { color: #999999; padding: 0 5px; }
 .breadcrumb .active a { color: #333333; }
 
-/*************************** CONTENT start ***************************/
-
 /****************
 	Dashboard
 ****************/
-
 .widget-block { margin-bottom:20px; background: #f1f1f1; background: -moz-linear-gradient(top, #f1f1f1 0%, #dbdbdb 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1f1f1), color-stop(100%, #dbdbdb));
 	background: -webkit-linear-gradient(top, #f1f1f1 0%, #dbdbdb 100%); background: -o-linear-gradient(top, #f1f1f1 0%, #dbdbdb 100%); background: -ms-linear-gradient(top, #f1f1f1 0%, #dbdbdb 100%);
 	background: linear-gradient(to bottom, #f1f1f1 0%, #dbdbdb 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#dbdbdb', GradientType=0 ); border: 1px solid #c2c2c2;
@@ -163,25 +167,20 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 .stat-img.sat { background: url('images/SAT-Book.png') no-repeat; }
 .stat-img.act { background: url('images/ACT-Book.png') no-repeat; }
 
+/****************
+	Pages
+****************/
+.video-holder { text-align: center; }
+.video-holder embed { border: solid 8px #ffffff; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888; }
 
-
-/******Test Taker*******/
-.widget-block .widget-box {
-	background:#fff;
-	border-top:#d2d2d2 1px solid;
-	-webkit-box-shadow: inset 0 0 5px #ddd;
-	-moz-box-shadow: inset 0 0 5px #ddd;
-	box-shadow: inset 0 0 5px #ddd;
-}
-.widget-block .widget-content .widget-box {
-	margin-top:0px !important;
-}
-.widget-block .widget-content .widget-box .table {
-	margin-bottom:0px !important;
-}
-.widget-block .post-tbl .center {
-    text-align: center;
-}
+/****************
+	Test Taker
+****************/
+.widget-block .widget-box { background:#fff; border-top:#d2d2d2 1px solid; -webkit-box-shadow: inset 0 0 5px #ddd; -moz-box-shadow: inset 0 0 5px #ddd; box-shadow: inset 0 0 5px #ddd; }
+.widget-block .widget-content .widget-box { margin-top:0px !important; }
+.widget-block .widget-content .widget-box .table { margin-bottom:0px !important; }
+.widget-block .post-tbl .center { text-align: center; }
+a.take-test { float: right; margin-left: 10px; padding: 0px 10px; background: #468847; color: #fff; font-weight: bold; font-size: 11px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
 
 /******* Content LISTS *******/
 .studentlist {
