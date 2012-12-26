@@ -30,19 +30,19 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 				<div class="statistics-wrap">
 					<div class="statistics-block">
 						<div class="stat-info">My <font color="#f0825b">SAT & ACT</font> Material</div>
-						<span id="p1"></span>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" id="p1"></a>
 					</div>
 				</div>
 				<div class="statistics-wrap">
 					<div class="statistics-block">
 						<div class="stat-info">My <font color="#f0825b">SAT Only</font> Material</div>
-						<span id="p2"></span>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" id="p2"></a>
 					</div>
 				</div>
 				<div class="statistics-wrap">
 					<div class="statistics-block">
 						<div class="stat-info">My <font color="#f0825b">ACT Only</font> Material</div>
-						<span id="p3"></span>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" id="p3"></a>
 					</div>
 				</div>
 			</div>
@@ -53,12 +53,13 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 			<div class="widget-head">
 				<h5><i class="black-icons books"></i>Practice Test Progress</h5>
 			</div>
+			<?php $page = get_page_by_title("Practice SAT and ACT Exams"); ?>
 			<div class="widget-content">
 				<div class="statistics-wrap">
 					<div class="statistics-block test-block">
 						<div class="stat-img sat">SAT Text Book</div>
 						<div class="stat-info">
-							<div><font color="#f0825b"><?php echo $sat_user->count; ?></font> of <font color="#f0825b"><?php echo $sat_count->count; ?></font></div>
+							<div><a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $sat_user->count; ?></font></a> of <a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $sat_count->count; ?></font></a></div>
 							<div>Tests complete</div>
 						</div>
 					</div>
@@ -67,7 +68,7 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 					<div class="statistics-block test-block">
 						<div class="stat-img act">ACT Text Book</div>
 						<div class="stat-info">
-							<div><font color="#f0825b"><?php echo $act_user->count; ?></font> of <font color="#f0825b"><?php echo $act_count->count; ?></font></div>
+							<div><a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $act_user->count; ?></font></a> of <a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $act_count->count; ?></font></a></div>
 							<div>Tests complete</div>
 						</div>
 					</div>
