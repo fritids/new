@@ -6,12 +6,6 @@ if(is_user_logged_in()){
 	wp_redirect(get_site_url(1));
 }
 
-//if(Util::curPageURL()=="http://edgeincollegeprep.com/portal/profile/"){
-//	if(is_user_logged_in()){
-//		wp_redirect(get_bloginfo("url")."/dashboard/".$current_user->user_login."/profile/");
-//		die();
-//	}
-//}
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
@@ -51,7 +45,7 @@ if(is_user_logged_in()){
 								Hello <?php echo $current_user->user_login ?> <i class="white-icons admin_user"></i><b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="icon-cog"></i>Account Settings</a></li>
+								<li><a href="<?php echo esc_url( home_url('/')."dashboard/".$current_user->user_login."/profile/"); ?>"><i class="icon-cog"></i>Account Settings</a></li>
 								<li class="divider"></li>
 								<li><a href="<?php echo esc_url( wp_logout_url('') ) ?>"><i class="icon-off"></i><strong>Logout</strong></a></li>
 							</ul>

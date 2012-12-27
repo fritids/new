@@ -51,7 +51,7 @@ if(is_user_logged_in()){
 								Hello <?php echo $current_user->user_login ?> <i class="white-icons admin_user"></i><b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="icon-cog"></i>Account Settings</a></li>
+								<li><a href="<?php echo esc_url( home_url('/')."dashboard/".$current_user->user_login."/profile/"); ?>"><i class="icon-cog"></i>Account Settings</a></li>
 								<li class="divider"></li>
 								<li><a href="<?php echo esc_url( wp_logout_url('') ) ?>"><i class="icon-off"></i><strong>Logout</strong></a></li>
 							</ul>

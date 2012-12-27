@@ -121,6 +121,8 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 .side-nav li a[title=separator2] { background: #898989; color: #ffffff; }
 .side-nav li a[title=separator3] { background: #fff; color: #696969; }
 
+.side-nav li.current-menu-item a { background: #EE6828; color: #fff; font-weight: bold; }
+
 /** Sidebar news **/
 .new-update { background: none repeat scroll 0 0 #F9F9F9; border-top: 1px solid #CCCCCC; padding-top: 10px; }
 .new-update h2 { background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #D8D8D8; border-radius: 4px 4px 4px 4px; font-size: 12px; font-weight: bold; margin: 0 10px 10px; padding: 0 10px; text-transform: uppercase; line-height: 36px; }
