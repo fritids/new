@@ -3,7 +3,9 @@ if(is_user_logged_in()){
 	$current_user = wp_get_current_user();
 	add_filter( 'show_admin_bar', '__return_false' );
 } else {
-	wp_redirect(get_site_url(1));
+	if(Util::curPageURL()!= home_url('/')."lostpassword/" && Util::curPageURL()!= home_url('/')."login/"){
+		wp_redirect(home_url('/')."login/");
+	}
 }
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -39,6 +41,7 @@ if(is_user_logged_in()){
 					<div class="branding">
 						<div class="logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">The Edge Logo</a></div>
 					</div>
+					<?php if(is_user_logged_in()): ?>
 					<ul class="nav pull-right">
 						<li class="dropdown">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -54,7 +57,7 @@ if(is_user_logged_in()){
 					<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
-							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i>Course Progress</a></li>
+							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" class="dropdown-toggle"><i class="nav-icon frames"></i>Course Progress</a></li>
 							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>course-material" class="dropdown-toggle"><i class="nav-icon books"></i>Course Material</a></li>
 							<?php
 								$page = get_page_by_title("Practice SAT and ACT Exams");
@@ -64,6 +67,7 @@ if(is_user_logged_in()){
 							<?php endif; ?>
 						</ul>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
