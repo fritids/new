@@ -31,6 +31,8 @@ $act_tests = $wpdb->get_results($query);
 								<th class="center" style="width: 60px;">Reading</th>
 								<th class="center" style="width: 50px;">Math</th>
 								<th class="center" style="width: 60px;">Writing</th>
+								<th class="center" style="width: 50px;">Total</th>
+								<th class="center" style="width: 90px;"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -53,13 +55,14 @@ $act_tests = $wpdb->get_results($query);
 							<tr>
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
-									<td colspan="3" class="take-test">
-										<a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
-									</td>
+									<td colspan="4"></td>
+									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a></td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
 									<td class="center"><?php echo $notes['Math']; ?></td>
 									<td class="center"><?php echo $notes['Writing']; ?></td>
+									<td class="center"><?php echo $notes['Reading']+$notes['Math']+$notes['Writing']; ?></td>
+									<td><a class="review-test" href="#" target="_blank">Review</a></td>
 								<?php endif; ?>
 							</tr>
 							<?php endforeach; ?>
@@ -85,6 +88,8 @@ $act_tests = $wpdb->get_results($query);
 								<th class="center" style="width: 50px;">Math</th>
 								<th class="center" style="width: 60px;">Reading</th>
 								<th class="center" style="width: 60px;">Science</th>
+								<th class="center" style="width: 50px;">Total</th>
+								<th class="center" style="width: 90px;"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -106,14 +111,15 @@ $act_tests = $wpdb->get_results($query);
 							<tr>
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
-									<td colspan="4" class="take-test">
-										<a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a>
-									</td>
+									<td colspan="5"></td>
+									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a></td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['English']; ?></td>
 									<td class="center"><?php echo $notes['Math']; ?></td>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
 									<td class="center"><?php echo $notes['Science']; ?></td>
+									<td class="center"><?php echo $notes['English']+$notes['Math']+$notes['Reading']+$notes['Science']; ?></td>
+									<td><a class="review-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a></td>
 								<?php endif; ?>
 							</tr>
 							<?php endforeach; ?>
