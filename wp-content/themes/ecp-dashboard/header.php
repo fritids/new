@@ -61,7 +61,7 @@ if(is_user_logged_in()){
 					<div class="nav-collapse collapse">
 						<ul class="nav">
 							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dropdown-toggle"><i class="nav-icon frames"></i>Course Progress</a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"><i class="nav-icon books"></i>Course Material</a></li>
+							<li class="dropdown"><a href="<?php echo esc_url( home_url( '/' ) ); ?>course-material" class="dropdown-toggle"><i class="nav-icon books"></i>Course Material</a></li>
 							<?php
 								$page = get_page_by_title("Practice SAT and ACT Exams");
 								if ($page->ID):
