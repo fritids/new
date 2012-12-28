@@ -196,7 +196,7 @@ a.review-test { float: right; margin-left: 10px; padding: 0px 10px; background: 
 .stepcounter { margin: 10px 0; }
 .stepcounter-inner { float: right; }
 .stepcounter a { display: inline-block; margin-right: 5px; font-size:17px; font-weight: bold;
-padding: 3px; width: 20px; height: 20px; text-align: center; background: #ddd; color: #fff; text-decoration: none; border: solid 3px #fff;
+padding: 3px; width: 17px; height: 17px; text-align: center; background: #ddd; color: #fff; text-decoration: none; border: solid 3px #fff;
 -webkit-border-radius: 25px; -moz-border-radius: 25px; border-radius: 25px; -moz-box-shadow: 0 0 2px #888; -webkit-box-shadow: 0 0 2px #888; box-shadow: 0 0 2px #888; }
 .stepcounter a.active { background:#FA8611; }
 
