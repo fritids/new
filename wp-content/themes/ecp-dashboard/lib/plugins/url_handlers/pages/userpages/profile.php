@@ -47,7 +47,7 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
 </style>
 
 <form action="" method="post">
-<div class="whitebox profile">
+<div class="whitebox profile clearfix">
     
         <?php if($sections=="teacher"): ?>
         <div class="split">   
@@ -87,8 +87,7 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
         <div class="formline hiddeen_label"><span class="label">Graduation Year</span>
             <?php IDGL_Users::IDGL_renderField($userProfile,"Graduation_Year"); ?>
         </div>
-    </div>
-    <div class="split right">
+		
         <div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"ParentName"); ?></div>
 		<div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"ParentEmail"); ?></div>   
 		<div class="formline checks"><?php IDGL_Users::IDGL_renderField($userProfile,"recieve_info"); ?></div>
@@ -101,7 +100,9 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
             <label><span>New Password:</span> <input name="n_pass" type="password" value="" /></label>
             <label><span>Repeat New Password:</span> <input name="n_c_pass" type="password" value="" /></label>
         </div>
-        <input type="submit" class="button green right" value="Update Profile">
+		<div class="profile-save-section">
+			<input type="submit" class="button orange" value="Update Profile" >
+		</div>
     </div>
     <?php endif; ?>
 </div>

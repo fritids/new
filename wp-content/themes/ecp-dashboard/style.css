@@ -33,7 +33,6 @@ input, textarea { font-family: Arial, Helvetica, sans-serif; margin:0; padding: 
 label { clear:both; display:block; margin:0 0 7px 0; line-height:15px; }
 label span, .multilabel span, .form_element label { display:inline-block; width:120px; padding:5px 0 0 0; }
 
-select { padding: 4px 5px 4px 5px; border:0; border-right: 1px solid #474747; border-bottom: 1px solid #474747; background: #7f7f7f; color:#fff; cursor:pointer; }
 .checkbox { background:#fff; padding:5px; border:0; cursor:pointer; }
 
 a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
@@ -242,34 +241,29 @@ span.score-total { float:left; clear:both; color:#648596; }
 .button.right { float: right; }
 #mark_for_review, #btn_submit { padding: 10px 20px; }
 #mark_for_review input { margin: 0; padding: 0; }
-/******* Content LISTS *******/
-.studentlist {
+.note_scores, .note_scores:hover { line-height: 1.5; padding: 1px 20px; margin: 0; margin-left: 10px; position: relative; top: -8px; }
 
-}
-.studentlist li {
-font-weight:bold;
-}
-.studentlist li a {
-font-weight:normal;
-}
+/******************
+	Other Pages
+******************/
+.whitebox { border: 5px solid #f2f2f2; padding: 20px 20px 10px 20px; margin: 0 0 20px 0; }
+.table-holder { border-color: #F2F2F2 !important; }
+.table-holder .main-category { background: #7994a3; background: -moz-linear-gradient(top, #7994a3 0%, #366f90 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7994a3), color-stop(100%, #366f90)); background: -webkit-linear-gradient(top, #7994a3 0%, #366f90 100%);
+	background: -o-linear-gradient(top, #7994a3 0%, #366f90 100%); background: -ms-linear-gradient(top, #7994a3 0%, #366f90 100%); background: linear-gradient(to bottom, #7994a3 0%, #366f90 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7994a3', endColorstr='#366f90', GradientType=0 ); font-size:15px; font-weight:bold; color:#FFFFFF; display:block; padding:8px 10px 8px 25px; }
+.whitebox .label { -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; background: none; color: #000; text-shadow: none; position: relative; top: 4px; }
+
+/******* Content LISTS *******/
+.studentlist li { font-weight:bold; }
+.studentlist li a { font-weight:normal; }
 
 /******* PROFILE pages *******/
-.profile {
-
-}
-
-.bluebox {
-background:#8fafbf;
-border:3px solid #f2f2f2;
-padding:15px;
-margin:10px 0 10px 0;
-clear:both;
-float:left;
-width:400px;
-}
-.bluebox label span {
-width:140px;
-}
+.bluebox { background:#8fafbf; border:5px solid #fff; padding:15px; margin:10px 0 10px 0; float:left; width:400px; -webkit-border-radius: 10px;
+	-moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888; clear: both; }
+.bluebox label span { width:140px; }
+.profile-save-section { width: 100%; float: left; text-align: center; margin: 20px 0; }
+.profile-save-section input, .profile-save-section input:hover { padding: 10px 50px; font-size: 16px; border: solid 5px; }
 
 .formline {
 float:left;
@@ -311,11 +305,6 @@ border:0;
 
 select.elem {
 margin-right:2px;
-}
-
-.profile .button {
-width:170px;
-text-align:center;
 }
 
 /******* DASHBOARD tabs *******/
@@ -385,18 +374,6 @@ margin:0 20px 0 0;
 
 /**********/
 
-/******* Content boxes *******/
-.whitebox {
-border:5px solid #f2f2f2;
-padding:20px 20px 10px 20px;
-margin:0 0 20px 0;
-clear:both;
-float:left;
-width:910px;
-}
-
-/**********/
-
 /***** QUESTIONS content *****/
 .passage {
 background:#fff;
@@ -439,22 +416,6 @@ display:block;
 position:absolute;
 left:5px;
 bottom:-18px;
-}
-a.note_scores {
-font-size:16px;
-line-height:20px;
-color:#fff;
-background:#fa8611;
-border-right:1px solid #474747;
-border-bottom:1px solid #474747;
-padding:2px 5px 1px 5px;
-margin-left:7px;
-display:inline-block;
-vertical-align:super;
-text-decoration:none;
-}
-a.note_scores:hover {
-background:#8fafbf;
 }
 
 .test_qs {

@@ -169,7 +169,7 @@ $data=$test_data[$current_trial];
 </form>
 <?php }else{ ?>
 <div class="leftcolumn widecolumn">
-			<h1 class="left"><?php echo $title; ?><a href="#note_scores" class="note_scores">Scores</a></h1>
+			<h1 class="left"><?php echo $title; ?><a href="#note_scores" class="button orange note_scores">Scores</a></h1>
             <div class="stepcounter clearfix">
 				<div class="stepcounter-inner">
             	<?php 
