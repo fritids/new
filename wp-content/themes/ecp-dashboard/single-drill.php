@@ -45,7 +45,8 @@ $data=$test_data[$current_trial];
 		<input type="hidden" name="drill_begin" value="<?php echo time(); ?>" />
         <div class="leftcolumn widecolumn">
 			<h1 class="left"><?php echo $title; ?></h1>
-            <div class="stepcounter right">
+            <div class="stepcounter clearfix">
+				<div class="stepcounter-inner">
             	<?php 
             		for($i=0;$i<$trials_count;$i++){
             			if($current_trial==$i){
@@ -55,8 +56,9 @@ $data=$test_data[$current_trial];
             			}
             		}
             	?>
+				</div>
             </div>
-            <div class="qcounter">
+            <div class="qcounter clearfix">
             	<?php 
             	for($i=0; $i<count($question_id);$i++){
             		echo '<div class="qnumber"><a href="#qid_'.$question_id[$i].'">'.($i+1).'</a></div>';
@@ -75,106 +77,101 @@ $data=$test_data[$current_trial];
             		$quid=$question_id[$i];
             	?>
             		
-	            	<div class='qpanel' id='qpanel_<?php echo $quid; ?>' style="display:none;">
-	            	<?php edit_post_link('Edit Question', '<p>', '</p>',$quid); ?>
-	            	<h3><?php echo apply_filters('the_content', $qcontent); ?><?php //echo $qcontent; ?></h3>
-	            	<!-- Question passgae begin -->
-		            	<?php 
-		            	$qpassage=getPostMeta($post_data->ID,"ecp_question_passage");
-		            	if($qpassage["passage_type"]!="" && ($qpassage["plain_passage"]!="" || $qpassage["numbered_passage"]!="")){?>
-		            		<div class="passage-container">
-			            		<?php 
-			            			$qpassage=getPostMeta($post_data->ID,"ecp_question_passage");
-			            			if($qpassage["passage_type"]=="plain"){
-			            				echo "<div class='plain passage' style='display:none'>".$qpassage["plain_passage"]."</div>";
-			            			}elseif($qpassage["passage_type"]=="numbered"){
-			            				$passage=$qpassage["numbered_passage"];
-			            				$right_div="";
-			            				$passage_rows=explode("\n",$passage);
-			            				$count=1;
-										foreach($passage_rows as $row){
-											if($count%5==0){
-			            						$right_div.="<div>line-".$count."</div>";
-			            					}else{
-			            						$right_div.="<br/>";
-			            					}
-			            					$count++;
+				<div class='qpanel' id='qpanel_<?php echo $quid; ?>' style="display:none;">
+				<?php edit_post_link('Edit Question', '<p>', '</p>',$quid); ?>
+				<h3><?php echo apply_filters('the_content', $qcontent); ?><?php //echo $qcontent; ?></h3>
+				<!-- Question passgae begin -->
+					<?php
+					$qpassage=getPostMeta($post_data->ID,"ecp_question_passage");
+					if($qpassage["passage_type"]!="" && ($qpassage["plain_passage"]!="" || $qpassage["numbered_passage"]!="")){?>
+						<div class="passage-container clearfix">
+							<?php 
+								$qpassage=getPostMeta($post_data->ID,"ecp_question_passage");
+								if($qpassage["passage_type"]=="plain"){
+									echo "<div class='plain passage' style='display:none'>".$qpassage["plain_passage"]."</div>";
+								}elseif($qpassage["passage_type"]=="numbered"){
+									$passage=$qpassage["numbered_passage"];
+									$right_div="";
+									$passage_rows=explode("\n",$passage);
+									$count=1;
+									foreach($passage_rows as $row){
+										if($count%5==0){
+											$right_div.="<div>line-".$count."</div>";
+										}else{
+											$right_div.="<br/>";
 										}
-			            				?>
-			            				<div class='numbered passage' style='display:none'>
-			            					<div class='passage-numbers' style="float:left; text-align:right; padding-right:5px; border-right:solid 1px #cacaca;margin-right:5px;"><?php echo $right_div; ?></div>
-			            					<div class='passage-content' style="float:left; width:800px;"><?php echo nl2br($qpassage["numbered_passage"]); ?></div>
-			            					<div class="clear"></div>
-				            				<div><strong>
-				            					<?php echo $qpassage["after_passage_description"]; ?>
-				            				</strong></div>
-			            				</div>
-			            				
-			            				<div class="clear"></div>
-			            		<?php } ?>
-			            		
-		            			<a href="#" class="button blue view_passage">View Passage</a>
-		            		</div>
-		            		<div class="clear"></div>
-	            		<?php } ?>
-	            		<!-- Question passgae end -->
-		   
-		            	<!-- Question Answers begin -->
-		            	<?php if($answer_type=="answer_plain"){?>
-		            	<ul class="test_qs">
-		                    <?php 
-		                    	echo "<li val='a'><span>A</span>".$answer["a"]["value"]."</li>";
-		                    	echo "<li val='b'><span>B</span>".$answer["b"]["value"]."</li>";
-		                    	echo "<li val='c'><span>C</span>".$answer["c"]["value"]."</li>";
-		                    	echo "<li val='d'><span>D</span>".$answer["d"]["value"]."</li>";
-		                    	echo "<li val='e'><span>E</span>".$answer["e"]["value"]."</li>";
-		                    ?>
-		                </ul>
-		                 <?php }else if($answer_type=="answer_dropdown"){ ?>
-		                 	<div class="clear" style="margin-bottom:15px;"></div>
-		                 <?php 
-		                 	$chars=array(" ","/",".","0","1","2","3","4","5","6","7","8","9");
-							for($j=0;$j<strlen($answer["dropdown"]);$j++){
-								echo "<select class='partial_value'>";	
-								foreach($chars as $char){
-									echo "<option value='$char'>$char</option>";	
-								}
-								echo "</select>";	
-							}?>
-							<div class="clear" style="margin-bottom:15px;"></div>
-		                <?php }elseif($answer_type=="answer_range"){ ?>
-									<div class="clear" style="margin-bottom:15px;"></div>
-		                 <?php 
-		                 	$chars=array(" ","/",".","0","1","2","3","4","5","6","7","8","9");
-							for($j=0;$j<strlen($answer["range_to"]);$j++){
-								echo "<select class='partial_value'>";	
-								foreach($chars as $char){
-									echo "<option value='$char'>$char</option>";	
-								}
-								echo "</select>";	
-							}?>
-							<div class="clear" style="margin-bottom:15px;"></div>
-						<?php }?>
-		                <!-- Question Answers end -->
-	                </div>
+										$count++;
+									}
+									?>
+									<div class='numbered passage' style='display:none'>
+										<div class='passage-numbers' style="float:left; text-align:right; padding-right:5px; border-right:solid 1px #cacaca;margin-right:5px;"><?php echo $right_div; ?></div>
+										<div class='passage-content' style="float:left; width:800px;"><?php echo nl2br($qpassage["numbered_passage"]); ?></div>
+										<div><strong>
+											<?php echo $qpassage["after_passage_description"]; ?>
+										</strong></div>
+									</div>
+							<?php } ?>
+
+							<a href="#" class="button blue view_passage">View Passage</a>
+						</div>
+					<?php } ?>
+					<!-- Question passgae end -->
+
+					<!-- Question Answers begin -->
+					<?php if($answer_type=="answer_plain"){?>
+					<ul class="test_qs">
+						<?php 
+							echo "<li val='a'><span>A</span>".$answer["a"]["value"]."</li>";
+							echo "<li val='b'><span>B</span>".$answer["b"]["value"]."</li>";
+							echo "<li val='c'><span>C</span>".$answer["c"]["value"]."</li>";
+							echo "<li val='d'><span>D</span>".$answer["d"]["value"]."</li>";
+							echo "<li val='e'><span>E</span>".$answer["e"]["value"]."</li>";
+						?>
+					</ul>
+					 <?php }else if($answer_type=="answer_dropdown"){ ?>
+						<div class="clear" style="margin-bottom:15px;"></div>
+					 <?php 
+						$chars=array(" ","/",".","0","1","2","3","4","5","6","7","8","9");
+						for($j=0;$j<strlen($answer["dropdown"]);$j++){
+							echo "<select class='partial_value'>";	
+							foreach($chars as $char){
+								echo "<option value='$char'>$char</option>";	
+							}
+							echo "</select>";	
+						}?>
+						<div class="clear" style="margin-bottom:15px;"></div>
+					<?php }elseif($answer_type=="answer_range"){ ?>
+								<div class="clear" style="margin-bottom:15px;"></div>
+					 <?php 
+						$chars=array(" ","/",".","0","1","2","3","4","5","6","7","8","9");
+						for($j=0;$j<strlen($answer["range_to"]);$j++){
+							echo "<select class='partial_value'>";	
+							foreach($chars as $char){
+								echo "<option value='$char'>$char</option>";	
+							}
+							echo "</select>";	
+						}?>
+						<div class="clear" style="margin-bottom:15px;"></div>
+					<?php }?>
+					<!-- Question Answers end -->
+				</div>
                 <?php } ?>
                 
-                <div class="mainControlls">
+                <div class="mainControlls clearfix">
 					<a id="mark_for_review" class="button smalltext"><label><input name="" type="checkbox" class="checkbox" value="" /> Mark for Review</label></a>
-	                <a href="#" id="btn_save_question" class="button green">Save</a>     
-	                <a id="btn_prev" href="#" class="button blue">Prev</a>
-	                <a id="btn_next" href="#" class="button blue">Next</a>
+	                <!--a href="#" id="btn_save_question" class="button green">Save</a-->     
+	                <a id="btn_prev" href="#" class="button orange">Prev</a>
+	                <a id="btn_next_save" href="#" class="button orange">Next</a>
 	                <input id="btn_submit" type="submit" value="Submit ALL QUESTIONS" class="button right" />
                 </div>
             </div>
-			<div class="clear"></div>
         </div>
-	<div class="clear"></div>
 </form>
 <?php }else{ ?>
 <div class="leftcolumn widecolumn">
 			<h1 class="left"><?php echo $title; ?><a href="#note_scores" class="note_scores">Scores</a></h1>
-            <div class="stepcounter right">
+            <div class="stepcounter clearfix">
+				<div class="stepcounter-inner">
             	<?php 
 					for($i=0;$i<$trials_count;$i++){
             			if($current_trial==$i){
@@ -184,6 +181,7 @@ $data=$test_data[$current_trial];
             			}
             		}
             	?>
+				</div>
             </div>
             <div class="qcounter results">
             	<?php 
@@ -274,17 +272,14 @@ $data=$test_data[$current_trial];
 			            				<div class='numbered passage' style='display:none'>
 			            					<div class='passage-numbers' style="float:left; text-align:right; padding-right:5px; border-right:solid 1px #cacaca;margin-right:5px;"><?php echo $right_div; ?></div>
 			            					<div class='passage-content' style="float:left;"><?php echo nl2br($qpassage["numbered_passage"]); ?></div>
-			            					<div class="clear"></div>
 				            				<div><strong>
 				            					<?php echo $qpassage["after_passage_description"]; ?>
 				            				</strong></div>
 			            				</div>
-			            				<div class="clear"></div>
 			            		<?php } ?>
 			            		
 		            			<a href="#" class="button blue view_passage">View Passage</a>
 		            		</div>
-		            		<div class="clear"></div>
 	            		<?php } ?>
 		            	
 		            	
@@ -375,11 +370,10 @@ $data=$test_data[$current_trial];
                 
                 
                 <div class="mainControlls">    
-	                <a id="btn_prev" href="#" class="button blue">Prev</a>
-	                <a id="btn_next" href="#" class="button blue">Next</a>
+	                <a id="btn_prev" href="#" class="button orange">Prev</a>
+	                <a id="btn_next" href="#" class="button orange">Next</a>
                 </div>
             </div>
-			<div class="clear"></div>
         </div>
 
 <?php } ?>
@@ -421,37 +415,41 @@ jQuery(function(){
 		jQuery(this).parents("ul:first").find("li").removeClass("selected");
 		jQuery(this).addClass("selected");
 	})
-	jQuery("#btn_save_question").click(function(e){
+	jQuery("#btn_next_save").click(function(e){
 		e.preventDefault();
 		var panel_id="#qpanel_"+jQuery(".qcounter a.current").attr("href").split("_")[1];
-		if(jQuery(panel_id+" .test_qs li.selected").length==0 && jQuery(panel_id+" .test_qs").length>0){ return; /*show notification*/ }
+		if(jQuery(panel_id+" .test_qs li.selected").length==0 && jQuery(panel_id+" .test_qs").length>0){
+			if(!confirm("Are you sure you want to skip this question?"))
+				return;
+		} else {
+			var ans=jQuery(panel_id+" .test_qs li.selected").attr("val")
+			if(ans==null){
 
+				ans="";
+				jQuery(panel_id+" .partial_value").each(function(){
+
+					if(jQuery(this).val()!=" "){
+						//alert(jQuery(this).val());
+						ans+=jQuery(this).val();
+					}else{
+						//return;
+						// notification here
+					}
+				})
+			}
+
+			jQuery(".qcounter a.current").parent().removeClass("review").addClass("answered");
+			jQuery(".qcounter a.current").parent().find("input").remove();
+			jQuery(".qcounter a.current").parent().find("span").remove();
+			jQuery(".qcounter a.current").parent().append("<span>answered</span>");
+			var qid=jQuery(".qcounter a.current").attr("href").split("_")[1];
 		
-
-		var ans=jQuery(panel_id+" .test_qs li.selected").attr("val")
-		if(ans==null){
-			ans="";
-			jQuery(panel_id+" .partial_value").each(function(){
-				
-				if(jQuery(this).val()!=" "){
-					//alert(jQuery(this).val());
-					ans+=jQuery(this).val();
-				}else{
-					//return;
-					// notification here
-				}
-			})
+			jQuery(".qcounter a.current").parent().append("<input type='hidden' value='"+ans+"' name='uans["+qid+"]' />");
+			jQuery("#mark_for_review input").removeAttr("checked");
 		}
-		
-		jQuery(".qcounter a.current").parent().removeClass("review").addClass("answered");
-		jQuery(".qcounter a.current").parent().find("input").remove();
-		jQuery(".qcounter a.current").parent().find("span").remove();
-		jQuery(".qcounter a.current").parent().append("<span>answered</span>");
-		var qid=jQuery(".qcounter a.current").attr("href").split("_")[1];
-		
-		jQuery(".qcounter a.current").parent().append("<input type='hidden' value='"+ans+"' name='uans["+qid+"]' />");
-		jQuery("#mark_for_review input").removeAttr("checked");
+		jQuery(".qcounter a.current").parent().next().find("a").trigger("click");
 	})
+	
 	jQuery("#mark_for_review input").change(function(e){
 		if(jQuery(this).attr("checked")){
 			var panel_id="#qpanel_"+jQuery(".qcounter a.current").attr("href").split("_")[1];
