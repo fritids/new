@@ -56,13 +56,13 @@ $act_tests = $wpdb->get_results($query);
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
 									<td colspan="4"></td>
-									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a></td>
+									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>">Take test</a></td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
 									<td class="center"><?php echo $notes['Math']; ?></td>
 									<td class="center"><?php echo $notes['Writing']; ?></td>
 									<td class="center"><?php echo $notes['Reading']+$notes['Math']+$notes['Writing']; ?></td>
-									<td><a class="review-test" href="#" target="_blank">Review</a></td>
+									<td><a class="review-test" href="#">Review</a></td>
 								<?php endif; ?>
 							</tr>
 							<?php endforeach; ?>
@@ -112,14 +112,14 @@ $act_tests = $wpdb->get_results($query);
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
 									<td colspan="5"></td>
-									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a></td>
+									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>">Take test</a></td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['English']; ?></td>
 									<td class="center"><?php echo $notes['Math']; ?></td>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
 									<td class="center"><?php echo $notes['Science']; ?></td>
 									<td class="center"><?php echo $notes['English']+$notes['Math']+$notes['Reading']+$notes['Science']; ?></td>
-									<td><a class="review-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>" target="_blank">Take test</a></td>
+									<td><a class="review-test" href="">Review</a></td>
 								<?php endif; ?>
 							</tr>
 							<?php endforeach; ?>

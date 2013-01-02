@@ -105,11 +105,20 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 .side-nav li a:hover { background: #366f90; color:#fff; }
 .side-nav li a:hover  .white-icons { background:url(images/icon-black.png) no-repeat; }
 .side-nav li ul { list-style: none outside none; margin: 0; padding: 0; }
-.side-nav li ul li a { background: none repeat scroll 0 0 #E8E8E8; color: #666666; font-size: 12px; font-weight: normal; padding-left: 20px; text-transform: none !important; }
-.side-nav li ul li a .sidenav-icon { background: url("images/sidenav-sprite.png") repeat scroll -80px 0 transparent !important; display: block; height: 20px; left: 0; position: absolute; top: 10px; width: 20px; }
+.side-nav li ul li a { background: none repeat scroll 0 0 #E8E8E8; color: #666666; font-size: 12px; font-weight: normal; text-transform: none !important; cursor: pointer; }
 
-.side-nav li a[title^=separator] { padding-left: 10px; border-bottom: 1px solid #222222; }
-.side-nav li a[title^=separator] .sidenav-icon { display: none; }
+.side-nav li ul li.menu-item-object-page a .sidenav-icon{ display: inline-block; width: 20px; height: 20px; margin-right: .3em;  line-height: 20px; margin-top:-3px; vertical-align: text-top; background:url(images/icon-black.png) no-repeat;}
+.side-nav li ul li.menu-item-object-drill a .sidenav-icon{ display: inline-block; width: 20px; height: 20px; margin-right: .3em;  line-height: 20px; margin-top:-3px; vertical-align: text-top; background:url(images/icon-black.png) no-repeat;}
+.side-nav li ul li.menu-item-object-page.current-menu-item a .sidenav-icon{ background:url('images/white-icons.png') no-repeat;}
+.side-nav li ul li.menu-item-object-drill.current-menu-item a .sidenav-icon{ background:url('images/white-icons.png') no-repeat;}
+
+.side-nav li ul li.menu-item-object-page a .sidenav-icon { background-position: -240px -60px !important; }
+.side-nav li ul li.menu-item-object-drill a .sidenav-icon{ background-position: -840px -80px !important; }
+
+
+.side-nav li a[title^=separator] { padding-left: 20px; border-bottom: 1px solid #222222; }
+.side-nav li a[title^=separator] .sidenav-icon { background: url("images/sidenav-arrow-closed.png") no-repeat 50% 50% !important; display: block; height: 20px; left: 0; position: absolute; top: 10px; width: 20px; }
+.side-nav li a[title^=separator].opened .sidenav-icon { background: url("images/sidenav-arrow-opened.png") no-repeat 50% 50% !important;}
 .side-nav li a[title=separator1] { background: #595959; color: #E8E8E8; font-weight: bold; }
 .side-nav li a[title=separator2] { background: #898989; color: #ffffff; }
 .side-nav li a[title=separator3] { background: #fff; color: #696969; }

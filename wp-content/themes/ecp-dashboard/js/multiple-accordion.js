@@ -39,14 +39,17 @@
 
  		//open active level
  		$this.find("li.current-menu-item").each(function() {
+			$(this).parents("li").find("a:first").addClass("opened");
  			$(this).parents("ul").slideDown(opts.speed);
  		});
 
   		$this.find("li a").click(function() {
   			if($(this).parent().find("ul").size() != 0){
   				if($(this).parent().find("ul:first").is(":visible")){
+					$(this).removeClass("opened");
   					$(this).parent().find("ul:first").slideUp(opts.speed);
   				}else{
+					$(this).addClass("opened");
   					$(this).parent().find("ul:first").slideDown(opts.speed);
   				}
   			}
