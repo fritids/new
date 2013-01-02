@@ -19,8 +19,9 @@ if(is_user_logged_in()){
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 
-		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet" media="all">
-		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet" media="all">
+		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet" media="all" />
+		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet" media="all" />
+		<link href="<?php echo get_template_directory_uri(); ?>/css/jquery.selectBox.css" rel="stylesheet" media="all" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 		<!--[if IE]><link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/ie.css" type="text/css" media="screen, projection" /><![endif]-->
 
@@ -33,6 +34,7 @@ if(is_user_logged_in()){
 		<?php wp_enqueue_script('jquery'); ?>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jCProgress-1.0.2.js"></script>
+		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.selectBox.min.js"></script>
 		
 		<style type="text/css" media="screen">
 			html { margin-top: 0 !important; }

@@ -9,8 +9,4 @@ if($user_name===null){
 }
 $is_admin=false;
 if ( $user_id==1 ) { $is_admin=true; }
-
-
-
 ?>
-<!--h2>Currently viewing <?php //echo $user_name; ?>'s profile</h2-->

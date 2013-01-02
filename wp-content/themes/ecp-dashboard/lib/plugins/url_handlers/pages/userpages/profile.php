@@ -1,5 +1,5 @@
 <?php
-get_header();
+get_header('home');
 
 include dirname(__FILE__)."/../menues/menu_student.php";
 
@@ -71,35 +71,63 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
         <div class="formline hiddeen_label"><span class="label">Gender:</span> 
           <?php IDGL_Users::IDGL_renderField($userProfile,"Gender"); ?>
         </div>
-        <div class="formline hiddeen_label">
+        <div class="formline hiddeen_label dob">
         <span class="label">Date of Birth:</span>
         <?php IDGL_Users::IDGL_renderField($userProfile,"DOB_Day"); ?>
         <?php IDGL_Users::IDGL_renderField($userProfile,"DOB_Month"); ?>
         <?php IDGL_Users::IDGL_renderField($userProfile,"DOB_Year"); ?>
         </div>
-        <div class="formline"><span class="label">E-mail address:</span> <?php echo $userProfile->user_email; ?></div>
+        <div class="formline"><span class="label">E-mail address:</span><span class="email-field"><?php echo $userProfile->user_email; ?></span></div>
         <div class="formline">
-             <?php IDGL_Users::IDGL_renderField($userProfile,"PrimaryPhone"); ?> - primary
+             <?php IDGL_Users::IDGL_renderField($userProfile,"PrimaryPhone"); ?> (primary)
         </div>
         <div class="formline">
             <?php IDGL_Users::IDGL_renderField($userProfile,"SecondaryPhone"); ?>
+        </div>
+		<div class="formline">
+            <?php IDGL_Users::IDGL_renderField($userProfile,"School"); ?>
         </div>
         <div class="formline hiddeen_label"><span class="label">Graduation Year</span>
             <?php IDGL_Users::IDGL_renderField($userProfile,"Graduation_Year"); ?>
         </div>
 		
         <div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"ParentName"); ?></div>
-		<div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"ParentEmail"); ?></div>   
+		<div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"ParentEmail"); ?></div>
+		<br>
 		<div class="formline checks"><?php IDGL_Users::IDGL_renderField($userProfile,"recieve_info"); ?></div>
-		<div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"Pretest_Scores"); ?></div>
-		<div class="formline"><?php IDGL_Users::IDGL_renderField($userProfile,"Final_SAT_Scores"); ?></div>
-        <div class="bluebox">
+		<br>
+		<h4>SAT Scores:</h4>
+		<div class="formline sat-scores">
+			<?php IDGL_Users::IDGL_renderField($userProfile,"SAT_Reading"); ?>
+			<?php IDGL_Users::IDGL_renderField($userProfile,"SAT_Math"); ?>
+			<?php IDGL_Users::IDGL_renderField($userProfile,"SAT_Writing"); ?>
+		</div>
+		
+		<h4>Test Dates:</h4>
+        <div class="formline hiddeen_label"><span class="label">Add Test Date</span>
+            <?php IDGL_Users::IDGL_renderField($userProfile,"Test_Date_1"); ?>
+        </div>
+		<div class="formline hiddeen_label"><span class="label">Add Test Date</span>
+            <?php IDGL_Users::IDGL_renderField($userProfile,"Test_Date_2"); ?>
+        </div>
+		<div class="formline hiddeen_label"><span class="label">Add Test Date</span>
+            <?php IDGL_Users::IDGL_renderField($userProfile,"Test_Date_3"); ?>
+        </div>
+		<div class="formline hiddeen_label"><span class="label">Add Test Date</span>
+            <?php IDGL_Users::IDGL_renderField($userProfile,"Test_Date_4"); ?>
+        </div>
+		<hr>
+		
+		<div class="bluebox">
             <label><strong>Change Password</strong></label>
             <?php if($pass_note) echo "<p style='color:#fff;'>".$pass_note."</p>"; ?>
             <label><span>Old Password:</span> <input name="o_pass" type="password" value="" /></label>
             <label><span>New Password:</span> <input name="n_pass" type="password" value="" /></label>
             <label><span>Repeat New Password:</span> <input name="n_c_pass" type="password" value="" /></label>
         </div>
+		
+		<hr>
+		
 		<div class="profile-save-section">
 			<input type="submit" class="button orange" value="Update Profile" >
 		</div>
@@ -107,4 +135,8 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
     <?php endif; ?>
 </div>
 </form>
+
+<script type="text/javascript">
+	jQuery("SELECT").selectBox();
+</script>
 <?php get_footer(); ?>

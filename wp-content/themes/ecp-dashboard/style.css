@@ -255,7 +255,7 @@ span.score-total { float:left; clear:both; color:#648596; }
 /******************
 	Other Pages
 ******************/
-.whitebox { border: 5px solid #f2f2f2; padding: 20px 20px 10px 20px; margin: 0 0 20px 0; }
+.whitebox { border: 1px solid #C2C2C2; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; padding: 20px 20px 10px 20px; margin: 0 0 20px 0; background: #ffffff; }
 .table-holder { border-color: #F2F2F2 !important; }
 .table-holder .main-category { background: #7994a3; background: -moz-linear-gradient(top, #7994a3 0%, #366f90 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7994a3), color-stop(100%, #366f90)); background: -webkit-linear-gradient(top, #7994a3 0%, #366f90 100%);
@@ -267,57 +267,36 @@ span.score-total { float:left; clear:both; color:#648596; }
 .studentlist li { font-weight:bold; }
 .studentlist li a { font-weight:normal; }
 
-/******* PROFILE pages *******/
-.bluebox { background:#8fafbf; border:5px solid #fff; padding:15px; margin:10px 0 10px 0; float:left; width:400px; -webkit-border-radius: 10px;
-	-moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888; clear: both; }
+/******* PROFILE page *******/
+.whitebox.profile { padding: 30px 50px }
+.bluebox { background:#8fafbf; border:5px solid #fff; padding:15px; margin: 0px auto; width:400px; -webkit-border-radius: 10px;
+	-moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888; }
 .bluebox label span { width:140px; }
-.profile-save-section { width: 100%; float: left; text-align: center; margin: 20px 0; }
+.profile-save-section {text-align: center; margin-top: 20px; }
 .profile-save-section input, .profile-save-section input:hover { padding: 10px 50px; font-size: 16px; border: solid 5px; }
-
-.formline {
-float:left;
-clear:both;
-margin:0 0 5px 0;
-width:100%;
-}
-.label {
-display:inline-block;
-float:left;
-width:120px;
-padding:5px 0 0 0;
-}
-
-.IDGL_listNode {
-display:inline-block;
-float:left;
-}
-.IDGL_Options .label {
-width:0px;
-float:left;
-}
-.formline input, .bluebox input {
-width:220px;
-}
-
-.IDGL_Options input[type="checkbox"] {
-margin:2px 7px 0 0;
-width:10px;
-background:none;
-border:0;
-}
-.formline.checks input {
-margin:2px 7px 0 0;
-width:10px;
-background:none;
-border:0;
-}
-
-select.elem {
-margin-right:2px;
-}
+.formline { margin:0 0 5px 0; }
+.IDGL_listNode { display: inline-block; }
+.label { display:inline-block; width: 120px; padding: 5px 0 0 0; }
+.email-field { display:inline-block; padding: 5px 0 0 0; position: relative; top: 4px; margin-bottom: 20px; }
+.IDGL_Options .label { width: 0px; float: left; }
+.formline input, .bluebox input { width: 220px; border: solid 1px #BBB; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; background: #FFFFFF;
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F8F8F8 100%); 
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F8F8F8 100%);
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #F8F8F8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F8F8F8));
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F8F8F8 100%);
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #F8F8F8 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F8F8F8', GradientType=0); }
+.formline select { width: 234px; }
+.IDGL_Options input[type="checkbox"] { margin:2px 7px 0 0; width:10px; background:none; border:0; }
+.formline.checks input { margin:2px 7px 0 0; width:10px; background:none; border:0; }
+select.elem { margin-right: 2px; }
+.sat-scores input { width: 35px; margin-right: 70px; }
+.formline.dob select { width: 25px !important; margin-right: 70px; }
+.sat-scores .label { width: 55px; }
 
 /******* DASHBOARD tabs *******/
-.tabsdash {
+/*.tabsdash {
 padding:0;
 font-size:14px;
 line-height:16px;
@@ -350,11 +329,11 @@ color:#fff;
 
 a.twoline {
 padding:4px 10px 4px 10px;
-}
+}*/
 
 
 /******* DASHBOARD inside-small tabs *******/
-.tabssmall {
+/*.tabssmall {
 padding:0;
 font-size:15px;
 line-height:16px;
@@ -379,7 +358,7 @@ border-bottom:5px solid #e6eef2;
 color:#648596;
 border-bottom:15px solid #e6eef2;
 margin:0 20px 0 0;
-}
+}*/
 
 /**********/
 

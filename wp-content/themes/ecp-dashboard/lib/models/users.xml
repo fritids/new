@@ -104,6 +104,7 @@
 		    <fieldSetStart class="half" />
 			<Text type="text" name="PrimaryPhone" label="Phone:"></Text>
 			<Text type="text" name="SecondaryPhone" label=""></Text>
+			<Text type="text" name="School" label="School"></Text>
 			<Options type="select" name="Graduation_Year" label="Graduation Year">
 		    	<Option value="2010" label="2010" />
 		    	<Option value="2011" label="2011" />
@@ -116,7 +117,6 @@
 		    	<Option value="2018" label="2018" />
 		    	<Option value="2019" label="2019" />
 		    	<Option value="2020" label="2020" />
-				
 		    </Options>
 			<Options type="checkBoxList" name="recieve_info">
 				<Option value="recieve_newsletters" label="I want to receive Promos and Newsletters from Edge in College Prep" />
@@ -125,8 +125,72 @@
 			<Text type="text" name="ParentName" label="Parent Name:"></Text>
 			<Text type="text" name="ParentEmail" label="Parent Email:"></Text>
 			
-			<Text type="text" name="Pretest_Scores" label="Pretest Scores:"></Text>
-			<Text type="text" name="Final_SAT_Scores" label="Final SAT Scores:"></Text>
+			<Text type="text" name="SAT_Reading" label="Reading:"></Text>
+			<Text type="text" name="SAT_Math" label="Math:"></Text>
+			<Text type="text" name="SAT_Writing" label="Writing:"></Text>
+
+			<Options type="select" name="Test_Date_1" label="Add Test Date">
+				<Option value="0" label="- Select -" />
+		    	<Option value="September ACT" label="September ACT" />
+		    	<Option value="October SAT" label="October SAT" />
+		    	<Option value="October ACT" label="October ACT" />
+		    	<Option value="November SAT" label="November SAT" />
+		    	<Option value="December SAT" label="December SAT" />
+		    	<Option value="December ACT" label="December ACT" />
+		    	<Option value="January SAT" label="January SAT" />
+		    	<Option value="Feburary ACT" label="Feburary ACT" />
+		    	<Option value="March SAT" label="March SAT" />
+		    	<Option value="May SAT" label="May SAT" />
+		    	<Option value="June SAT" label="June SAT" />
+				<Option value="June ACT" label="June ACT" />
+		    </Options>
+			<Options type="select" name="Test_Date_2" label="Add Test Date">
+				<Option value="0" label="- Select -" />
+		    	<Option value="September ACT" label="September ACT" />
+		    	<Option value="October SAT" label="October SAT" />
+		    	<Option value="October ACT" label="October ACT" />
+		    	<Option value="November SAT" label="November SAT" />
+		    	<Option value="December SAT" label="December SAT" />
+		    	<Option value="December ACT" label="December ACT" />
+		    	<Option value="January SAT" label="January SAT" />
+		    	<Option value="Feburary ACT" label="Feburary ACT" />
+		    	<Option value="March SAT" label="March SAT" />
+		    	<Option value="May SAT" label="May SAT" />
+		    	<Option value="June SAT" label="June SAT" />
+				<Option value="June ACT" label="June ACT" />
+		    </Options>
+			<Options type="select" name="Test_Date_3" label="Add Test Date">
+				<Option value="0" label="- Select -" />
+		    	<Option value="September ACT" label="September ACT" />
+		    	<Option value="October SAT" label="October SAT" />
+		    	<Option value="October ACT" label="October ACT" />
+		    	<Option value="November SAT" label="November SAT" />
+		    	<Option value="December SAT" label="December SAT" />
+		    	<Option value="December ACT" label="December ACT" />
+		    	<Option value="January SAT" label="January SAT" />
+		    	<Option value="Feburary ACT" label="Feburary ACT" />
+		    	<Option value="March SAT" label="March SAT" />
+		    	<Option value="May SAT" label="May SAT" />
+		    	<Option value="June SAT" label="June SAT" />
+				<Option value="June ACT" label="June ACT" />
+		    </Options>
+			<Options type="select" name="Test_Date_4" label="Add Test Date">
+				<Option value="0" label="- Select -" />
+		    	<Option value="September ACT" label="September ACT" />
+		    	<Option value="October SAT" label="October SAT" />
+		    	<Option value="October ACT" label="October ACT" />
+		    	<Option value="November SAT" label="November SAT" />
+		    	<Option value="December SAT" label="December SAT" />
+		    	<Option value="December ACT" label="December ACT" />
+		    	<Option value="January SAT" label="January SAT" />
+		    	<Option value="Feburary ACT" label="Feburary ACT" />
+		    	<Option value="March SAT" label="March SAT" />
+		    	<Option value="May SAT" label="May SAT" />
+		    	<Option value="June SAT" label="June SAT" />
+				<Option value="June ACT" label="June ACT" />
+		    </Options>
+
+
 			<fieldSetEnd />
 			<clear/>
 			
