@@ -68,7 +68,7 @@ $test_exists = false;
 if(isset($_GET['id'])) {
 	$test_id = $_GET['id'];
 	
-	$query = "SELECT `id`,`name`,`type` FROM ".$wpdb->get_blog_prefix().'ecp_mct_tests'." WHERE `id`=%d";
+	$query = "SELECT `id`,`name`,`type` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
 	$test = $wpdb->get_row($wpdb->prepare($query, $test_id));
 	
 	if($test) {
