@@ -271,13 +271,14 @@ span.score-total { float:left; clear:both; color:#648596; }
 .two-column .column { float: left; width: 50%;  }
 .whitebox.profile { padding: 30px 50px }
 .purchase-info {
-	border: solid 7px #ffffff;
+	border: solid 5px #ffffff;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	-moz-box-shadow: 0px 0px 5px #666;
 	-webkit-box-shadow: 0px 0px 5px #666;
 	box-shadow: 0px 0px 5px #666;
+	background: #E9E9E9;
 	background: -ms-linear-gradient(top, #F9F9F9 0%, #E9E9E9 100%);
 	background: -moz-linear-gradient(top, #F9F9F9 0%, #E9E9E9 100%);
 	background: -o-linear-gradient(top, #F9F9F9 0%, #E9E9E9 100%);
