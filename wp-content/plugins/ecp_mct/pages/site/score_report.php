@@ -176,9 +176,9 @@ if($test_exists) {
 			$pdf->MultiCell(23, 5, $notes['English'], 0, 'C', 0, 0, 75, 32);
 			$pdf->MultiCell(23, 5, $notes['Math'], 0, 'C', 0, 0, '', '');
 			$pdf->MultiCell(23, 5, $notes['Reading'], 0, 'C', 0, 0, '', '');
-			$pdf->MultiCell(23, 5, $notes['Science'], 0, 'C', 0, 1, '', '');
+			$pdf->MultiCell(23, 5, $notes['Science'], 0, 'C', 0, 0, '', '');
 			$pdf->SetFont('helvetica', 'B', 12);
-			$pdf->MultiCell(30, 5, $notes['English']+$notes['Math']+$notes['Reading']+$notes['Science'], 0, 'C', 0, 0, '', '');
+			$pdf->MultiCell(30, 5, $notes['English']+$notes['Math']+$notes['Reading']+$notes['Science'], 0, 'C', 0, 1, '', '');
 		}
 		
 		$pdf->SetY(50);
@@ -202,6 +202,9 @@ if($test_exists) {
 					$answers = json_decode($section->answers, true);
 
 					$html .= '<tr><td rowspan="3" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
+					
+					echo '<pre>';die(print_r($questions));
+					
 					foreach($questions as $k=>$question) {
 						$html .= '<td width="25" align="center" class="row-desc">'.($k+1).'</td>';
 					}
