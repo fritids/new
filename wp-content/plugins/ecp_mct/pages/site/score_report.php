@@ -198,12 +198,11 @@ if($test_exists) {
 						$html .= '<table cellpadding="2" border="0"><tr><td></td></tr>';
 					// Get section questions
 					$query = "SELECT `id`,`type`,`options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
+					die($wpdb->prepare($query, $section->id));
 					$questions = $wpdb->get_results($wpdb->prepare($query, $section->id));
 					$answers = json_decode($section->answers, true);
 
 					$html .= '<tr><td rowspan="3" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
-					
-					echo '<pre>';die(print_r($questions));
 					
 					foreach($questions as $k=>$question) {
 						$html .= '<td width="25" align="center" class="row-desc">'.($k+1).'</td>';
