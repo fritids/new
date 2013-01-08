@@ -89,7 +89,7 @@ if(isset($_GET['id'])) {
 			$notes = json_decode($r->notes, true);
 			
 			// Get sections and answers
-			$query = "SELECT * FROM ".ECP_MCT_TABLE_SECTIONS." `sections`
+			$query = "SELECT `sections`.`id` as `id`, `sections`.`type` as `type`, `sections`.`name` as `name`, `answers`.`answers` as `answers` FROM ".ECP_MCT_TABLE_SECTIONS." `sections`
 			LEFT JOIN ".ECP_MCT_TABLE_USER_ANSWERS." `answers` ON `answers`.`section_id` = `sections`.`id` AND `answers`.`user_id` = %d
 			WHERE `sections`.`test_id`=%d";
 			$sections = $wpdb->get_results($wpdb->prepare($query, $current_user->ID, $test->id));
@@ -198,7 +198,7 @@ if($test_exists) {
 						$html .= '<table cellpadding="2" border="0"><tr><td></td></tr>';
 					// Get section questions
 					$query = "SELECT `id`,`type`,`options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
-					die($wpdb->prepare($query, $section->id));
+					
 					$questions = $wpdb->get_results($wpdb->prepare($query, $section->id));
 					$answers = json_decode($section->answers, true);
 
