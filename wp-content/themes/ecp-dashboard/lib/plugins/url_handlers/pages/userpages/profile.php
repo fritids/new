@@ -155,7 +155,7 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
 					<div class="column">
 						<div class="label">Products:</div>
 						<?php
-						$products=unserialize(get_user_meta($user_id,"_IDGL_elem_ECP_user_order",true));
+						$products = unserialize(get_user_meta($user_id,"_IDGL_elem_ECP_user_order",true));
 
 						switch_to_blog(3);
 
@@ -167,17 +167,33 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
 						while ( $query->have_posts() ) : $query->the_post(); global $post;
 							if( in_array($post->ID, $products)){
 								echo "<li>".get_the_title()."</li>";
-								
-								$post_categories = get_the_category();
-								echo "<ul>";
-								foreach($post_categories as $cat){
-									echo "<li>".$cat->name."</li>";
-								}
-								echo "</ul>";
 							}
 						endwhile;
 						echo "</ul>";
-
+						wp_reset_postdata();
+						
+						echo '<br><br>';
+						global $wpdb;
+						
+						$post_sql = "SELECT ID, post_content, post_title, post_name
+							FROM {$wpdb -> posts}
+							LEFT JOIN {$wpdb -> term_relationships} ON({$wpdb -> posts}.ID = {$wpdb -> term_relationships}.object_id)
+							LEFT JOIN {$wpdb -> term_taxonomy} ON({$wpdb -> term_relationships}.term_taxonomy_id = {$wpdb -> term_taxonomy}.term_taxonomy_id)
+							LEFT JOIN {$wpdb -> terms} ON({$wpdb -> term_taxonomy}.term_id = {$wpdb -> terms}.term_id)
+							WHERE {$wpdb -> posts}.post_type = 'ECPProduct' 
+							AND {$wpdb -> posts}.post_status = 'publish'
+							AND {$wpdb -> term_taxonomy}.taxonomy = 'ecp-products'
+							AND {$wpdb -> terms}.slug = 'online-sat-course' 
+							ORDER BY {$wpdb -> posts}.menu_order DESC;";
+						$data = $wpdb->get_results($wpdb->prepare($post_sql));
+						$user_plan = null;
+						foreach($data as $plan) {
+							if( in_array($plan->ID, $products)){
+								$user_plan = $plan->post_title;
+								break;
+							}
+						}
+						
 						restore_current_blog();
 						?>
 					</div>
@@ -186,11 +202,14 @@ $sections=get_user_meta($user_id,"_IDGL_elem_user_type",true);
 						<?php
 							$reg_date = new DateTime($userProfile->user_registered);
 							echo $reg_date->format('m/d/Y');
+							if($user_plan) {
 						?>
 						<span class="label">Expiration date:</span>
 						<?php
-							$reg_date = new DateTime($userProfile->user_registered);
-							//echo $reg_date->format('m/d/Y');
+								$exp_date = strtotime($userProfile->user_registered);
+								$exp_date = strtotime(date("Y-m-d", $exp_date) . "+$user_plan");
+								echo date('m/d/Y', $exp_date);
+							}
 						?>
 					</div>
 				</div>
