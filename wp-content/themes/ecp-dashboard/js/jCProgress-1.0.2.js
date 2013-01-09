@@ -41,8 +41,7 @@
 		    base.$progress = $('<div />').addClass('jCProgress');
 		    mt = parseInt(base.$progress.css('marginTop').replace("ems",""));
 		    ml = parseInt(base.$progress.css('marginLeft').replace("ems",""));
-		    //base.$progress.css('marginLeft',(base.$el.width()-base.width)/2+ml).css('marginTop',(base.$el.height()-base.height)/2+mt).css('opacity','0.0');
-
+		    
 		    //percent div
 		    base.$percent = $('<div />').addClass('percent');
 		    //hide?
@@ -153,11 +152,11 @@
 			      
 			      if(base.options.percent<=base.options.limit){
 				   setTimeout(base.methods.draw,base.options.speed);
-				   base.$percent.html(base.options.percent.toFixed(0));
+				   base.$percent.html(base.options.percent.toFixed(0)+"%");
 
-				   base.options.onProgress(base.options.percent.toFixed(0));
+				   base.options.onProgress(base.options.percent.toFixed(0)+"%");
 			      }else{
-				   base.$percent.html(base.options.limit);
+				   base.$percent.html(base.options.limit+"%");
 				   base.methods.coreDraw();
 				   base.options.onProgress(base.options.limit);
 				   base.options.onComplete(base.options.limit);
