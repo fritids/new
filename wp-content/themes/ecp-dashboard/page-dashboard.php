@@ -1,6 +1,8 @@
 <?php get_header('home'); ?>
 
 <?php
+global $wp_query;
+
 // Get created tests count
 $query = "SELECT count(*) as count FROM ".ECP_MCT_TABLE_TESTS." WHERE `type` = 'SAT'";
 $sat_count = $wpdb->get_row($query);
@@ -85,21 +87,21 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 			img1: '<?php echo get_template_directory_uri(); ?>/images/c1.png',
 			img2: '<?php echo get_template_directory_uri(); ?>/images/c3.png',
 			speed: 20,
-			limit: 70
+			limit: <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("SAT and ACT")); ?>
 		};
 			  
 		options2 = {
 			img1: '<?php echo get_template_directory_uri(); ?>/images/c1.png',
 			img2: '<?php echo get_template_directory_uri(); ?>/images/c3.png',
 			speed: 20,
-			limit: 100
+			limit: <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("SAT Only")); ?>
 		};
 
 		options3 = {
 			img1: '<?php echo get_template_directory_uri(); ?>/images/c1.png',
 			img2: '<?php echo get_template_directory_uri(); ?>/images/c3.png',
 			speed: 20,
-			limit: 25
+			limit: <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("ACT Only")); ?>
 		};
 
 	    jQuery('#p1').cprogress(options1);
@@ -107,5 +109,29 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 		jQuery('#p3').cprogress(options3);
      });
 </script>
+
+<?php
+class Wp_Progress {
+	
+	public static function countDrills($menu_items) {
+		global $current_user;
+		$drillCount = 0;
+		$userCount = 0;
+		foreach($menu_items as $item){
+			if($item->object == "drill"){
+				// Add to drill count
+				$drillCount++;
+				
+				$meta = get_user_meta($current_user->ID, "selftest_".$item->object_id, false);
+				if(count($meta)) {
+					$userCount++;
+				}
+			}
+		}
+		
+		return round($userCount*100/$drillCount);
+	}
+}
+?>
 
 <?php get_footer(); ?>
