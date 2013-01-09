@@ -165,6 +165,7 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 	-moz-box-shadow: 0 0 4px rgba(000, 000, 000, 0.1) inset; -webkit-box-shadow:0 0 4px rgba(000, 000, 000, 0.1) inset; box-shadow: 0 0 3px rgba(000, 000, 000, 0.1) inset; height: 150px; width: 100%; display: table; }
 .statistics-block.test-block { height: 229px; }
 .stat-info { padding: 0 25px; margin-bottom: 20px; text-transform: uppercase; font-weight: bold; color: #069; display: table-cell; vertical-align: middle; }
+.stat-info canvas { height: 105px; width: 105px; }
 .jCProgress { float: right; position: relative; margin-top: 25px; margin-right: 20px; }
 .jCProgress > div.percent { font: 18px/27px 'BebasRegular', Arial, sans-serif; color: #595959; text-shadow: 1px 1px 1px #1f1f1f; position: absolute; margin-top: 40px; text-align: center; width: 105px; }
 .stat-img { display: inline-block; float: left; text-indent: -1000em; height: 135px; width: 103px; margin: 45px 25px; -moz-box-shadow: 2px 2px 5px #888; -webkit-box-shadow: 2px 2px 5px #888; box-shadow: 2px 2px 5px #888; }

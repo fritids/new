@@ -129,7 +129,9 @@ class Wp_Progress {
 			}
 		}
 		
-		return round($userCount*100/$drillCount);
+		if($drillCount)
+			return round($userCount*100/$drillCount);
+		return 0;
 	}
 }
 ?>
