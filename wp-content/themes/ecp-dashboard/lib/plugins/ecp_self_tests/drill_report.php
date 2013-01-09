@@ -79,7 +79,7 @@ class Wp_MenuItem{
 			if(!$this->hasChildren()){
 				return;
 			}
-			$out.="<li><a class='category'>".$this->item->title."(".$this->getDrillsNo().")</a>";
+			$out.="<li><a class='category'>".$this->item->title." (".$this->getDrillsNo().")</a>";
 		}
 		if(count($this->submenu) > 0){
 			$out.="<ul>";
@@ -97,7 +97,6 @@ class Wp_MenuItem{
 				$out.='<table class="progress_table drill_header" width="100%" border="0" cellspacing="0" cellpadding="0"><tr>';
 				$out.='<th class="text-blue center" width="20px">#</th>';
 				$out.='<th width="590px">Date taken</th>';
-				//$out.='<th width="450px">Topic - '.$this->item->title.'</th>';
 				$out.='<th width="120px" style="text-align:center;">Total questions</th>';
 				$out.='<th width="40px" style="text-align:center;">Correct</th>';
 				$out.='<th width="40px" style="text-align:center;">Incorrect</th>';
