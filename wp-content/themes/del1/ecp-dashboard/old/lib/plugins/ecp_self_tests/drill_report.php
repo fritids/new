@@ -54,7 +54,7 @@ class Wp_MenuItem{
 			$out.="<li>";
 			$sufix=" ".$this->item->title;
 		}else{
-			$out.="<li><a class='tableslider levelone collapsed'>".$this->item->title."</a>";
+			$out.="<li><a class='tableslider levelone'>".$this->item->title."</a>";
 		}
 		if(count($this->submenu)>0){
 			$out.="<ul>";

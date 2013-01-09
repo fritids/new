@@ -20,15 +20,15 @@ include dirname(__FILE__)."/../menues/menu_student.php";
 	?>
 		<ul>
         	<li>
-	            <a class="main-category">SAT & ACT</a>
+	            <a class="main-category"><span class="white-icons books"></span>SAT & ACT</a>
 	            <?php $wpm=new Wp_Menu(wp_get_nav_menu_items("SAT and ACT"),$user_id);echo $wpm->toString(); ?>
            	</li>
            	<li>
-	            <a class="main-category">SAT Only</a>
+	            <a class="main-category"><span class="white-icons books"></span>SAT Only</a>
 	            <?php $wpm=new Wp_Menu(wp_get_nav_menu_items("SAT Only"),$user_id);echo $wpm->toString(); ?>
            	</li>
            	<li>
-	            <a class="main-category">ACT Only</a>
+	            <a class="main-category"><span class="white-icons books"></span>ACT Only</a>
 	            <?php $wpm=new Wp_Menu(wp_get_nav_menu_items("ACT Only"),$user_id);echo $wpm->toString(); ?>
            	</li>
           </ul>
