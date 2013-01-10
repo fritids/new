@@ -6,10 +6,10 @@
 			<?php wp_nav_menu(array('container'=>'', 'items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>', 'link_before'=>$before, 'menu'=>'SAT and ACT')); ?>
 		</li>
 		<li><a href="#"><span class="white-icons books"></span> SAT Only</a>
-			<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'SAT Only')); ?>
+			<?php wp_nav_menu(array('container'=>'', 'items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>', 'link_before'=>$before, 'menu'=>'SAT Only')); ?>
 		</li>
 		<li><a href="#"><span class="white-icons books"></span> ACT Only</a>
-			<?php wp_nav_menu(array('menu_class'=>'menu', 'container'=>'', 'items_wrap'=>'%3$s', 'link_before'=>$before, 'menu'=>'ACT Only')); ?>
+			<?php wp_nav_menu(array('container'=>'', 'items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>', 'link_before'=>$before, 'menu'=>'ACT Only')); ?>
 		</li>
 	</ul>
 	
