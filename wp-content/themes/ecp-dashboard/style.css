@@ -101,7 +101,7 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 	background: -webkit-linear-gradient(top, #7994a3 0%, #366f90 100%); background: -o-linear-gradient(top, #7994a3 0%, #366f90 100%); background: -ms-linear-gradient(top, #7994a3 0%, #366f90 100%);
 	background: linear-gradient(to bottom, #7994a3 0%, #366f90 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7994a3', endColorstr='#366f90', GradientType=0 );
 	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset; -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset; color: #EEEEEE;
-	display: block; font-size: 11px; font-weight: bold; padding: 12px 10px; position: relative; text-decoration: none; text-transform: uppercase; }
+	display: block; font-size: 11px; font-weight: bold; padding: 10px; position: relative; text-decoration: none; text-transform: uppercase; }
 .side-nav li a:hover { background: #366f90; color:#fff; }
 .side-nav li a:hover  .white-icons { background:url(images/icon-black.png) no-repeat; }
 .side-nav li ul { list-style: none outside none; margin: 0; padding: 0; }
