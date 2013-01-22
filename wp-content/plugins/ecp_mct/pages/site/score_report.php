@@ -197,7 +197,7 @@ if($test_exists) {
 					else
 						$html .= '<table cellpadding="2" border="0"><tr><td></td></tr>';
 					// Get section questions
-					$query = "SELECT `id`,`type`,`options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
+					$query = "SELECT `id`,`type`,`code`,`options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
 					
 					$questions = $wpdb->get_results($wpdb->prepare($query, $section->id));
 					$answers = json_decode($section->answers, true);
@@ -205,18 +205,27 @@ if($test_exists) {
 					$html .= '<tr><td rowspan="3" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
 					
 					foreach($questions as $k=>$question) {
-						$html .= '<td width="22" align="center" class="row-desc">'.($k+1).'</td>';
+						$html .= '<td width="24" align="center" class="row-desc">'.($k+1).'</td>';
+					}
+					
+					$html .= '</tr><tr><td class="row-desc">CODE</td>';
+					foreach($questions as $k=>$question) {
+						$html .= '<td width="24" align="center" class="row-desc">'.$question->code.'</td>';
 					}
 					
 					
 					$html .= '</tr><tr><td class="row-desc">KEY</td>';
 					foreach($questions as $k=>$question) {
 						$options = json_decode($question->options, true);
-						$letter_array = array("A","B","C","D","E","F","G");
+						$letter_array = array("A","B","C","D","E");
+						$letter_array_even = array("F","G","H","J","K");
 						if($question->type == "Multiple Choice") {
-							foreach($options as $k=>$option)
+							foreach($options as $j=>$option)
 								if($option['correct']) {
-									$html .= '<td width="22" align="center" class="row-desc">'.$letter_array[$k].'</td>';
+									if($test->type == "ACT" && ($k+1)%2 == 0)
+										$html .= '<td width="24" align="center" class="row-desc">'.$letter_array_even[$j].'</td>';
+									else
+										$html .= '<td width="24" align="center" class="row-desc">'.$letter_array[$j].'</td>';
 									break;
 								}
 						} else {
@@ -224,9 +233,9 @@ if($test_exists) {
 							$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
 						
 							if($options[0]['type'] == "Range") {
-								$html .= '<td width="22" align="center" class="row-desc">'.$options[0]['start'].'&#62;x&#60;'.$options[0]['end'].'</td>';
+								$html .= '<td width="24" align="center" class="row-desc">'.$options[0]['start'].'&#62;x&#60;'.$options[0]['end'].'</td>';
 							} else {
-								$html .= '<td width="22" align="center" class="row-desc">'.$options[0]['field_1'].$options[0]['field_2'].$options[0]['field_3'].$options[0]['field_4'].'</td>';
+								$html .= '<td width="24" align="center" class="row-desc">'.$options[0]['field_1'].$options[0]['field_2'].$options[0]['field_3'].$options[0]['field_4'].'</td>';
 							}
 						}
 					}
@@ -235,15 +244,20 @@ if($test_exists) {
 					$html .= '</tr><tr><td class="row-desc">STUDENT</td>';
 					foreach($questions as $k=>$question) {
 						$options = json_decode($question->options, true);
-						$letter_array = array("A","B","C","D","E","F","G");
+						$letter_array = array("A","B","C","D","E");
+						$letter_array_even = array("F","G","H","J","K");
 						if($question->type == "Multiple Choice") {
 							$answer = $answers[$question->id];
-							if($options[$answer]['correct'])
-								$html .= '<td width="22" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
-							elseif($letter_array[$answer])
-								$html .= '<td width="22" align="center" class="row-desc wrong">'.$letter_array[$answer].'</td>';
-							else
-								$html .= '<td width="22" align="center" class="row-desc wrong">-</td>';
+							if($options[$answer]['correct']) {
+								$html .= '<td width="24" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
+							} elseif($letter_array[$answer]) {
+								if($test->type == "ACT" && ($k+1)%2 == 0)
+									$html .= '<td width="24" align="center" class="row-desc wrong">'.$letter_array_even[$answer].'</td>';
+								else
+									$html .= '<td width="24" align="center" class="row-desc wrong">'.$letter_array[$answer].'</td>';
+							} else {
+								$html .= '<td width="24" align="center" class="row-desc wrong">-</td>';
+							}
 						} else {
 							$answer = $answers[$question->id];
 							$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
@@ -252,7 +266,7 @@ if($test_exists) {
 								$correct = false;
 								if($option['type'] == "Range") {
 									if($number >= (float) $option['start'] && $number <= (float) $option['end']) {
-										$html .= '<td width="22" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
+										$html .= '<td width="24" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
 										$correct = true;
 										break;
 									}
@@ -260,14 +274,14 @@ if($test_exists) {
 									$a_number = to_number($option['field_1'].$option['field_2'].$option['field_3'].$option['field_4']);
 
 									if($number == $a_number) {
-										$html .= '<td width="22" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
+										$html .= '<td width="24" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
 										$correct = true;
 										break;
 									}
 								}
 							}
 							if(!$correct) {
-								$html .= '<td width="22" align="center" class="row-desc wrong">'.$answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value'].'</td>';
+								$html .= '<td width="24" align="center" class="row-desc wrong">'.$answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value'].'</td>';
 							}
 						}
 						
