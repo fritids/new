@@ -6,6 +6,10 @@ global $wpdb;
 
 $current_user = wp_get_current_user();
 
+// Get test info
+$query = "SELECT `id`,`name`,`type` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
+$test = $wpdb->get_row($wpdb->prepare($query, $test_id));
+
 // Get test sections
 $query = "SELECT `sections`.`id`,`sections`.`name`,`sections`.`duration`,`answers`.`id` as `answer_id`,`answers`.`start_time` FROM ".ECP_MCT_TABLE_SECTIONS." `sections`
 	LEFT JOIN ".ECP_MCT_TABLE_USER_ANSWERS." `answers` ON `answers`.`section_id` = `sections`.`id` AND `answers`.`user_id` = %d
@@ -59,7 +63,7 @@ $question_count = 1;
 			?>
 			<ul class="question-list">
 				<?php
-					foreach($questions as $question):
+					foreach($questions as $k=>$question):
 						$options = json_decode($question->options, true);
 				?>
 				<li>
@@ -67,10 +71,10 @@ $question_count = 1;
 
 					<?php if($question->type == "Multiple Choice"): ?>
 					<div class="options-list-container clearfix">
-						<ol class="options-list">
-							<?php foreach($options as $k=>$option): ?>
-							<li>
-								<input type="radio" name="answers[<?php echo $question->id; ?>]" value="<?php echo $k; ?>" />
+						<ol class="options-list" <?php if($test->type == "ACT" && ($k+1)%2 == 0) echo 'START="6"'?>>
+							<?php foreach($options as $j=>$option): ?>
+							<li <?php if($test->type == "ACT" && ($k+1)%2 == 0 && $j == 3) echo 'VALUE="10"';?>>
+								<input type="radio" name="answers[<?php echo $question->id; ?>]" value="<?php echo $j; ?>" />
 							</li>
 							<?php  endforeach; ?>
 						</ol>

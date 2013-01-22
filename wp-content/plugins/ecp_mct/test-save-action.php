@@ -10,8 +10,8 @@ if(isset($_REQUEST['submit'])) {
 		$test_id = $_REQUEST['test_id'];
 		
 		// Save test information in database
-		$query = "UPDATE ".ECP_MCT_TABLE_TESTS." SET `name`=%s, `type`=%s, `options_num`=%d WHERE `id`=%d";
-		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['test_type'], $_REQUEST['options_num'], $test_id));
+		$query = "UPDATE ".ECP_MCT_TABLE_TESTS." SET `name`=%s, `type`=%s WHERE `id`=%d";
+		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['test_type'], $test_id));
 		
 		// Delete from db sections that where deleted by the user
 		$deleted_sections = json_decode(str_replace(array("\\\"","\\'"), array("\"","'"), $_REQUEST['deleted_sections']), true);
@@ -30,8 +30,8 @@ if(isset($_REQUEST['submit'])) {
 			}
 			
 			if(isset($section['id'])) { // if section exists update
-				$query = "UPDATE ".ECP_MCT_TABLE_SECTIONS." SET `name` = %s, `type` = %s, `duration` = %d, `order` = %d WHERE `id` = %d";
-				$wpdb->get_results($wpdb->prepare($query, $section['name'], $section['type'], $section['duration'], $k, $section['id']));
+				$query = "UPDATE ".ECP_MCT_TABLE_SECTIONS." SET `name` = %s, `type` = %s, `duration` = %d, `options_num`=%d, `order` = %d WHERE `id` = %d";
+				$wpdb->get_results($wpdb->prepare($query, $section['name'], $section['type'], $section['duration'], $section['options_num'], $k, $section['id']));
 				
 				foreach($section['questions'] as $j=>$question) {
 					if($question['type'] == 'Fill In') {
@@ -53,18 +53,17 @@ if(isset($_REQUEST['submit'])) {
 					}
 					
 					if(isset($question['id'])) { // if $question exists update
-						$query = "UPDATE ".ECP_MCT_TABLE_QUESTIONS." SET `options` = %s, `order` = %d WHERE `id` = %d";
-						$wpdb->get_results($wpdb->prepare($query, json_encode($options), $j, $question['id']));
+						$query = "UPDATE ".ECP_MCT_TABLE_QUESTIONS." SET `options` = %s, `code` = %s, `order` = %d WHERE `id` = %d";
+						$wpdb->get_results($wpdb->prepare($query, json_encode($options), $question['code'], $j, $question['id']));
 					} else { // if question doesn't exists update
-						$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `order`, `options`) VALUES(%d,%s,%d,%s)";
-						
-						$wpdb->get_results($wpdb->prepare($query, $section['id'], $question['type'], $j, json_encode($options)));
+						$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `code`, `order`, `options`) VALUES(%d,%s,%s,%d,%s)";
+						$wpdb->get_results($wpdb->prepare($query, $section['id'], $question['type'], $question['code'], $j, json_encode($options)));
 					}
 				}
 				
 			} else { // if section doesn't exists update
-				$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `type`, `duration`, `order`) VALUES(%d,%s,%s,%d,%d)";
-				$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['type'], $section['duration'], $k));
+				$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `type`, `duration`, `options_num`, `order`) VALUES(%d,%s,%s,%d,%d,%d)";
+				$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['type'], $section['duration'], $section['options_num'], $k));
 				$section_id = $wpdb->insert_id;
 
 				foreach($section['questions'] as $j=>$question) {
@@ -86,8 +85,8 @@ if(isset($_REQUEST['submit'])) {
 						$options = $question['options'];
 					}
 					
-					$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `order`, `options`) VALUES(%d,%s,%d,%s)";
-					$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($options)));
+					$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `code`, `order`, `options`) VALUES(%d,%s,%s,%d,%s)";
+					$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $question['code'], $j, json_encode($options)));
 				}
 			}
 		}
@@ -98,15 +97,15 @@ if(isset($_REQUEST['submit'])) {
 		wp_redirect(get_option('home') . '/wp-admin/admin.php?page=ecp_mct/pages/admin/test-new.php&message=update_test'.$error.'&action=edit&test='.$test_id);
 	} else {
 		// Save test information in database
-		$query = "INSERT INTO ".ECP_MCT_TABLE_TESTS." (`name`, `type`, `options_num`) VALUES(%s,%s,%d)";
-		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['test_type'], $_REQUEST['options_num']));
+		$query = "INSERT INTO ".ECP_MCT_TABLE_TESTS." (`name`, `type`) VALUES(%s,%s)";
+		$wpdb->get_results($wpdb->prepare($query, $_REQUEST['test_title'], $_REQUEST['test_type']));
 		$test_id = $wpdb->insert_id;
 
 		$sections = json_decode(str_replace(array("\\\"","\\'"), array("\"","'"), $_REQUEST['sections']), true);
 
 		foreach ($sections as $k=>$section) {
-			$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `type`, `duration`, `order`) VALUES(%d,%s,%s,%d,%d)";
-			$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['type'], $section['duration'], $k));
+			$query = "INSERT INTO ".ECP_MCT_TABLE_SECTIONS." (`test_id`, `name`, `type`, `duration`, `options_num`, `order`) VALUES(%d,%s,%s,%d,%d,%d)";
+			$wpdb->get_results($wpdb->prepare($query, $test_id, $section['name'], $section['type'], $section['duration'], $section['options_num'], $k));
 			$section_id = $wpdb->insert_id;
 
 			foreach($section['questions'] as $j=>$question) {
@@ -128,8 +127,8 @@ if(isset($_REQUEST['submit'])) {
 					$options = $question['options'];
 				}
 					
-				$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `order`, `options`) VALUES(%d,%s,%d,%s)";
-				$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $j, json_encode($options)));
+				$query = "INSERT INTO ".ECP_MCT_TABLE_QUESTIONS." (`section_id`, `type`, `code`, `order`, `options`) VALUES(%d,%s,%s,%d,%s)";
+				$wpdb->get_results($wpdb->prepare($query, $section_id, $question['type'], $question['code'], $j, json_encode($options)));
 			}
 		}
 		

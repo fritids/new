@@ -34,7 +34,6 @@ function ecp_mct_main_install(){
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `name` VARCHAR(512) NOT NULL,
 				  `type` ENUM('SAT','ACT') NOT NULL,
-				  `options_num` INT NOT NULL,
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 	
@@ -44,6 +43,7 @@ function ecp_mct_main_install(){
 				  `name` VARCHAR(255) NOT NULL,
 				  `type` VARCHAR(255) NOT NULL,
 				  `duration` INT NOT NULL,
+				  `options_num` INT NOT NULL,
 				  `order` INT NOT NULL,
 				  UNIQUE KEY `id` (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
@@ -52,6 +52,7 @@ function ecp_mct_main_install(){
 				  `id` INT(11) NOT NULL AUTO_INCREMENT,
 				  `section_id` INT(11) NOT NULL,
 				  `type` VARCHAR(255) NOT NULL,
+				  `code` VARCHAR(255) NOT NULL,
 				  `order` INT NOT NULL,
 				  `options` TEXT DEFAULT NULL,
 				  PRIMARY KEY (`id`)
@@ -105,13 +106,13 @@ function ecp_mct_main_uninstall(){
 	
 	global $wpdb;
 	
-//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_TESTS.";");
-//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
-//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
-//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SCALED_SCORES.";");
-//	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_TESTS.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SCALED_SCORES.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
 	// Delete test posts
-//	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
+	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
 	
 	// Delete page for the tast taker
 	$the_page = get_page_by_title('Test Taker');

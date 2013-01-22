@@ -8,7 +8,7 @@ ul.section-list { list-style: none; margin: 0; }
 ul.section-list >li { margin-bottom: 25px; }
 ul.section-list .section-title { font-size: 16px; }
 ul.question-list { list-style: none; }
-ol.options-list { list-style: lower-alpha; margin-left: 60px; }
+ol.options-list { list-style: upper-alpha; margin-left: 60px; }
 ol.options-list li { float: left; margin-left: 35px; }
 ol.options-list li input { margin: 0; }
 ol.options-list li:first-child { margin-left: 0; }

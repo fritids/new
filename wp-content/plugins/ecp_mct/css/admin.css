@@ -29,7 +29,7 @@ a.remove-section { float: right; position: relative; top: 5px; line-height: 1.5;
 ul.questions-list a.remove-question { background: url('../images/remove.png') no-repeat; display: inline-block; height: 16px; padding-left: 20px; color: #EB3436; margin-left: 10px; font-size: 10px; }
 ul.questions-list label.question-lbl { font-size: 14px;}
 .postbox .inside a.add-question { background: url('../images/add.png') no-repeat; display: inline-block; height: 16px; padding-left: 20px; color: #409F02; font-size: 12px; }
-ol.options-list { margin: 10px 40px 20px; list-style: lower-alpha; }
+ol.options-list { margin: 10px 40px 20px; list-style: upper-alpha; }
 ol.options-list li { float: left; margin-left: 35px; }
 ol.options-list li:first-child { margin-left: 0; }
 

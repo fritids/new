@@ -9,7 +9,7 @@ $dtest = array();
 $sections = array();
 if($action == 'edit') {
 	// Get test info
-	$query = "SELECT `id`, `name`, `type`, `options_num` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
+	$query = "SELECT `id`, `name`, `type` FROM ".ECP_MCT_TABLE_TESTS." WHERE `id`=%d";
 	$dtest = $wpdb->get_row($wpdb->prepare($query, $_REQUEST['test']));
 	
 	// Get score info
@@ -17,7 +17,7 @@ if($action == 'edit') {
 	$dscores = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test']));
 	
 	// Prepare sections array
-	$query = "SELECT `id`, `name`, `type`, `duration` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
+	$query = "SELECT `id`, `name`, `type`, `duration`, `options_num` FROM ".ECP_MCT_TABLE_SECTIONS." WHERE `test_id`=%d ORDER BY `order`";
 	$dsections = $wpdb->get_results($wpdb->prepare($query, $_REQUEST['test']));
 	
 	foreach($dsections as $k=>$section) {
@@ -25,16 +25,17 @@ if($action == 'edit') {
 		$sections[$k]['name'] = stripslashes($section->name);
 		$sections[$k]['type'] = stripslashes($section->type);
 		$sections[$k]['duration'] = stripslashes($section->duration);
-		$sections[$k]['options_num'] = stripslashes($dtest->options_num);
+		$sections[$k]['options_num'] = stripslashes($section->options_num);
 		$sections[$k]['questions'] = array();
 		
 		// Get questions
-		$query = "SELECT `id`, `type`, `options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
+		$query = "SELECT `id`, `type`, `code`, `options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
 		$dquestions = $wpdb->get_results($wpdb->prepare($query, $section->id));
 		
 		foreach($dquestions as $j=>$question) {
 			$sections[$k]['questions'][$j]['id'] = $question->id;
 			$sections[$k]['questions'][$j]['type'] = stripslashes($question->type);
+			$sections[$k]['questions'][$j]['code'] = $question->code;
 			$sections[$k]['questions'][$j]['options'] = json_decode($question->options, true);
 		}
 	}
@@ -61,7 +62,6 @@ wp_enqueue_script("jquery");
 	
 	<?php
 		if($_REQUEST['error'] == 'file_error')
-			//wpframe_message ('An error occured uploading the scores files.', 'error');
 			echo '<div class="error"><p>An error occured uploading the scores files.</p></div>';
 	?>
 	
@@ -83,12 +83,6 @@ wp_enqueue_script("jquery");
 		<div class="field">
 			<label>Test Type</label>
 			<select class="required" data-bind="options: test_type_options, value: test_type, optionsCaption: 'Choose...', enable: sections().length==0"></select>
-		</div>
-		
-		<div class="field">
-			<label>Number of options per question</label>
-			<input type="text" class="required number" autocomplete="off" size="2" data-bind="value: options_num, uniqueName: true, enable: sections().length==0">
-			<em>(for multiple choice questions)</em>
 		</div>
 		
 		<h3>Scaled Scores</h3><hr>
@@ -128,11 +122,20 @@ wp_enqueue_script("jquery");
 						<label>Duration:</label>
 						<input type="text" class="required number" size="3" autocomplete="off" data-bind="value: duration, uniqueName: true" /><em>minutes</em>
 					</div>
+					<div class="field">
+						<label>Number of options per question</label>
+						<input type="text" class="required number" size="2" autocomplete="off" data-bind="value: options_num, uniqueName: true, enable: questions().length==0">
+						<em>(for multiple choice questions)</em>
+					</div>
 					<hr>
 					
 					<ul class="questions-list" data-bind="foreach: questions">
 						<li>
 							<label class="question-lbl">Question <span data-bind="text: $index()+1"></span> <a data-bind="click: $parent.removeQuestion" class="remove-question">Remove</a></label>
+							<div class="field">
+								Question Code:
+								<input type="text" class="required" size="2" autocomplete="off" data-bind="value: code, uniqueName: true">
+							</div>
 							<div class="field" data-bind="ifnot: type">
 								Question Type:
 								<select data-bind="options: $root.question_types, value: type, optionsCaption: 'Choose...'"></select>
@@ -141,9 +144,22 @@ wp_enqueue_script("jquery");
 							<!-- ko if: type() == "Multiple Choice" -->
 							<label>Choose the correct answer(s)</label>
 							<div class="options-list-container clearfix">
+								<!-- ko if: $root.test_type() == "SAT" || ($index()+1)%2 != 0 -->
 								<ol class="options-list" data-bind="foreach: options">
 									<li><input type="checkbox" data-bind="checked: correct" /></li>
 								</ol>
+								<!-- /ko -->
+								
+								<!-- ko if: $root.test_type() == "ACT" && ($index()+1)%2 == 0 -->
+								<ol class="options-list" START="6" data-bind="foreach: options">
+									<!-- ko if: $index() != 3 -->
+									<li><input type="checkbox" data-bind="checked: correct" /></li>
+									<!-- /ko -->
+									<!-- ko if: $index() == 3 -->
+									<li value="10"><input type="checkbox" data-bind="checked: correct" /></li>
+									<!-- /ko -->
+								</ol>
+								<!-- /ko -->
 							</div>
 							<!-- /ko -->
 							
@@ -190,7 +206,6 @@ wp_enqueue_script("jquery");
 			<input type="hidden" name="action" id="action" value="<?php echo $action; ?>" />
 			<input type="hidden" name="test_id" value="<?php echo $dtest->id; ?>" />
 			<input type="hidden" name="test_type" data-bind="value: $root.test_type" />
-			<input type="hidden" name="options_num" data-bind="value: $root.options_num" />
 			<input type="hidden" name="sections" data-bind="value: ko.toJSON($root.sections)" />
 			<input type="hidden" name="deleted_sections" data-bind="value: ko.toJSON($root.deleted_sections)" />
 			<input type="submit" name="submit" value="Save" style="font-weight: bold;" tabindex="4" />
@@ -210,12 +225,16 @@ wp_enqueue_script("jquery");
 		self.name = ko.observable(data.name);
 		self.type = ko.observable(data.type);
 		self.duration = ko.observable(data.duration);
+		self.options_num = ko.observable(data.options_num);
 		self.questions = ko.observableArray([]);
 		self.deleted_questions = ko.observableArray([]);
 		
 		// Operations
 		self.addQuestion = function() {
-			self.questions.push(new Question({options_num: data.options_num}));
+			if(self.options_num())
+					self.questions.push(new Question({options_num: self.options_num()}));
+				else
+					alert("Please set the number of options per question for this section");
 		}
 		self.removeQuestion = function(question) {
 			if(question.id()) {
@@ -238,6 +257,7 @@ wp_enqueue_script("jquery");
 		self.id = ko.observable(data.id);
 		self.options = ko.observableArray([]);
 		self.type = ko.observable(data.type);
+		self.code = ko.observable(data.code);
 		
 		self.type.subscribe(function() {
 			if(self.type() == "Multiple Choice") {
@@ -319,10 +339,7 @@ wp_enqueue_script("jquery");
 		// Operations
 		self.addSection = function() {
 			if(self.test_type()) {
-				if(self.options_num())
-					self.sections.push(new Section({options_num: self.options_num()}));
-				else
-					alert("Please set the number of options per question");
+				self.sections.push(new Section([]));
 			} else {
 				alert("Please set the test type");
 			}
@@ -337,7 +354,6 @@ wp_enqueue_script("jquery");
 		
 		// Load initial state from server
 		if(jQuery("#action").val() == "edit") {
-			self.options_num('<?php echo $dtest->options_num?$dtest->options_num:0 ?>');
 			self.test_type('<?php echo $dtest->type?$dtest->type:null ?>');
 			self.uploadedScores = jQuery.map(jQuery.parseJSON('<?php echo json_encode($dscores); ?>'), function(item) {
 				return item.section_type;
@@ -367,10 +383,6 @@ wp_enqueue_script("jquery");
 	}
 	
 	ko.applyBindings(new EcpMctViewModel());
-	
-	
-	
-	
 	
 	
 	jQuery(document).ready(function() {
