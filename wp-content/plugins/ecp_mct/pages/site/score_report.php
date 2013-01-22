@@ -202,7 +202,7 @@ if($test_exists) {
 					$questions = $wpdb->get_results($wpdb->prepare($query, $section->id));
 					$answers = json_decode($section->answers, true);
 
-					$html .= '<tr><td rowspan="4" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
+					$html .= '<tr><td rowspan="3" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
 					
 					foreach($questions as $k=>$question) {
 						$html .= '<td width="24" align="center" class="row-desc">'.($k+1).'</td>';
