@@ -43,7 +43,7 @@ require_once(IDG_CLASS_PATH."class.BFormValidator.php");
  * Register scripts / maybe these should go in the admin head
  */
 wp_enqueue_script('jquery');
-wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.7.2.custom.min.js');
+wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.8.24.custom.min.js');
 wp_enqueue_script('jquery-ui');
 wp_register_script('ajaxupload', IDGL_THEME_URL . '/lib/js/ajaxupload.js');
 wp_enqueue_script('ajaxupload');
@@ -62,7 +62,7 @@ function IDGL_Admin_head() {
 	$uplData=wp_upload_dir();
 	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/js/colorpicker/css/colorpicker.css" />' . "\n";
 	
-	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/ui-lightness/jquery-ui-1.7.2.custom.css" />' . "\n";
+	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/ui-lightness/jquery-ui-1.8.24.custom.css" />' . "\n";
 	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/styles.css" />' . "\n";
 	echo '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> ';
 	echo "<script type='text/javascript'>

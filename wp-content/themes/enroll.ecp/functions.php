@@ -416,7 +416,8 @@ class Wp_Menu{
 		foreach($menu_items as $item){
 			$menu_item=$this->menu_items[$item->ID]=new Wp_MenuItem($item,$item->menu_item_parent);
 			if($item->menu_item_parent!=0){
-				$this->menu_items[$item->menu_item_parent]->addChild($menu_item);
+				if(isset($this->menu_items[$item->menu_item_parent]))
+					$this->menu_items[$item->menu_item_parent]->addChild($menu_item);
 			}
 		}
 	}

@@ -82,7 +82,7 @@ public function __construct(){
 	//wp_redirect(get_bloginfo("url")."/dashboard/".$user->user_login."/profile/"); 
 	?>
 	<script type="text/javascript">
-	window.location="<?php echo get_bloginfo("url")."/dashboard/".$user->user_login."/profile/"; ?>";
+	window.location="<?php echo get_bloginfo("url"); ?>";
 </script>
 	<?php
 	

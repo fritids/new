@@ -83,7 +83,7 @@ class Wp_MenuItem{
 			if(!$this->hasChildren()){
 				return;
 			}
-			$out.="<li><a class='tableslider levelone collapsed'>".$this->item->title."(".$this->getDrillsNo().")</a>";
+			$out.="<li><a class='tableslider levelone'>".$this->item->title."(".$this->getDrillsNo().")</a>";
 		}
 		if(count($this->submenu)>0){
 			$out.="<ul>";

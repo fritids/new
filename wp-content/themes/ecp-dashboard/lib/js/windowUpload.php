@@ -10,7 +10,7 @@ $path = getPluginPath();
 require  $path."wp-load.php";
 
 wp_enqueue_script('jquery');
-wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.7.2.custom.min.js');
+wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.8.24.custom.min.js');
 wp_enqueue_script('jquery-ui');
 wp_register_script('ajaxupload', IDGL_THEME_URL . '/lib/js/ajaxupload.js');
 wp_enqueue_script('ajaxupload');

@@ -14,7 +14,7 @@ class Wp_Menu{
 		}
 	}
 	public function toString(){
-		$out="<ul>";
+		$out="<ul class='progress-table'>";
 		foreach($this->menu_items as $item){
 			if($item->getParentID()==0){
 				$out.=$item->toString($this->student_id);
@@ -69,77 +69,63 @@ class Wp_MenuItem{
 		return $this->item->object;
 	}
 	public function toString($student_id=null){
-		$sufix="";
-		if($this->item->object!="drill" && count($this->submenu)==0){
+		if($this->item->object != "drill" && count($this->submenu) == 0){
 			return;
 		}
 		
-
 		if($this->item->object=="drill"){
-			
 			$out.="<li>";
-			$sufix=" ".$this->item->title;
 		}else{
 			if(!$this->hasChildren()){
 				return;
 			}
-			$out.="<li><a class='tableslider levelone collapsed'>".$this->item->title."(".$this->getDrillsNo().")</a>";
+			$out.="<li><a class='category'>".$this->item->title." (".$this->getDrillsNo().")</a>";
 		}
-		if(count($this->submenu)>0){
+		if(count($this->submenu) > 0){
 			$out.="<ul>";
 			foreach($this->submenu as $item){
-				if($item->getType()!="page"){
-					$out.=$item->toString($student_id);
+				if($item->getType() != "page") {
+					$out .= $item->toString($student_id);
 				}
 			}
 			$out.="</ul>";
 		}
 		
-		
-		
-		
-		if($this->item->object=="drill"){
+		if($this->item->object=="drill") {
+			if(!$this->hasth) {
+				$out.="<li><a class='category drill'><span class='black-icons pencil'></span>".$this->item->title."</a>";
+				$out.='<table class="progress_table drill_header" width="100%" border="0" cellspacing="0" cellpadding="0"><tr>';
+				$out.='<th class="text-blue center" width="20px">#</th>';
+				$out.='<th width="590px">Date taken</th>';
+				$out.='<th width="120px" style="text-align:center;">Total questions</th>';
+				$out.='<th width="40px" style="text-align:center;">Correct</th>';
+				$out.='<th width="40px" style="text-align:center;">Incorrect</th>';
+				$out.='<th></th>';
+				$out.='</tr>';
+				$this->hasth=true;
+			}
 			
-		if(!$this->hasth){
-			$out.='<table class="progress_table drill_header" width="100%" border="0" cellspacing="0" cellpadding="0"><tr>';
-			$out.='<th class="text-blue center" width="20px">#</th>';
-			$out.='<th width="170px">Date taken</th>';
-			$out.='<th width="450px">Topic - '.$this->item->title.'</th>';
-			$out.='<th width="110px">Total questions</th>';
-			$out.='<th width="20px">Correct</th>';
-			$out.='<th width="20px">Incorrect</th>';
-			$out.='<th>Action</th>';
-			$out.='</tr>';
-			//$out.='</table>';
-			$this->hasth=true;
-		}
-			
-			if($student_id!=null){
+			if($student_id!=null) {
 				$meta=get_user_meta($student_id, "selftest_".$this->item->object_id,false);
-			}else{
+			} else {
 				global $current_user;
 				$meta=get_user_meta($current_user->ID, "selftest_".$this->item->object_id,false);
 			}
-			//$out.='<table class="progress_table" width="100%" border="0" cellspacing="0" cellpadding="0">';
 
-			$count=1;
-			$drill=get_post($this->item->object_id);
-			foreach($meta as $test){
+			$count = 1;
+			foreach($meta as $test) {
 				$cls="";
-				if($count%2==0){
+				if($count%2 != 0){
 					$cls=" class='alt' ";
 				}
 				
-				
-				
 				$out.='<tr'.$cls.'>';
 				$out.='<td class="text-blue center" width="20px">'.$count.'</td>';
-				$out.='<td width="170px">'.date("F j, Y,",$test["drill_end"]).'</td>';
-				$out.='<td width="450px">'.$drill->post_title.$sufix.'</td>';
-				$out.='<td width="110px">'.$test["question_count"].'</td>';
-				$out.='<td width="20px">'.$test["correct_count"].'</td>';
-				$out.='<td width="20px">'.($test["question_count"]-count($test["answers"])).'</td>';
-				$out.='<td><a class="review" href="'.get_permalink($this->item->object_id).'?mode=review&trial='.($count-1).'">review</a></td>';
+				$out.='<td width="590px">'.date("F j, Y",$test["drill_end"]).'</td>';
+				$out.='<td width="120px" style="text-align:center;">'.$test["question_count"].'</td>';
+				$out.='<td width="40px" style="color:#0cb700; text-align:center;">'.$test["correct_count"].'</td>';
+				$out.='<td width="40px" style="color:#ff0000; text-align:center;">'.($test["question_count"]-count($test["answers"])).'</td>';
+				$out.='<td style="text-align:center;"><a class="review" href="'.get_permalink($this->item->object_id).'?mode=review&trial='.($count-1).'">review</a></td>';
 				$out.='</tr>';
 				$count++;
 			}

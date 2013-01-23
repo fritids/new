@@ -8,9 +8,23 @@
 			$videoURL= getPostMeta($post->ID,"VideoURL"); 
 			if($videoURL!=""){ echo getFLVPlayer($videoURL,"qplayer"); }
 		?>
-	 </div>
+	</div>
+	
+	<div class="page-buttons">
+		<?php  
+			$values = get_post_custom($post->ID);
+			if(isset($values['next_section_slug'][0]) && $values['next_section_slug'][0]!=""):
+		?>
+		<a class="next-section-button" href="<?php echo esc_url(home_url('/'.$values['next_section_slug'][0])); ?>">Next Section</a>
+		<?php endif; ?>
+		<?php if(isset($values['drill_slug'][0]) && $values['drill_slug'][0]!=""): ?>
+		<a class="take-drill-button" href="<?php echo esc_url(home_url('/drill/'.$values['drill_slug'][0])); ?>">Take drill</a>
+		<?php endif; ?>
+	</div>
+
 	<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 		<?php the_content(); ?>
 	</div>
-<?php endwhile; endif; ?>						 
+<?php endwhile; endif; ?>
+
 <?php get_footer(); ?>
