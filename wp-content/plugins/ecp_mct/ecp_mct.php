@@ -104,13 +104,13 @@ function ecp_mct_main_install(){
  */
 function ecp_mct_main_uninstall(){
 	
-	global $wpdb;
-	
+	global $wpdb;	
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_TESTS.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SECTIONS.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_QUESTIONS.";");
-	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SCALED_SCORES.";");
 	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_ANSWERS.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_SCALED_SCORES.";");
+	$wpdb->query("DROP TABLE `".ECP_MCT_TABLE_USER_NOTES.";");
 	// Delete test posts
 	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
 	
