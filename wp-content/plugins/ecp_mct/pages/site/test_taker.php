@@ -118,7 +118,7 @@ $act_tests = $wpdb->get_results($query);
 									<td class="center"><?php echo $notes['Math']; ?></td>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
 									<td class="center"><?php echo $notes['Science']; ?></td>
-									<td class="center"><?php echo $notes['English']+$notes['Math']+$notes['Reading']+$notes['Science']; ?></td>
+									<td class="center"><?php echo ($notes['English']+$notes['Math']+$notes['Reading']+$notes['Science'])/4; ?></td>
 									<td><a class="review-test" href="<?php echo plugin_dir_url(__FILE__); ?>score_report.php?id=<?php echo $test->id; ?>" target="_blank">Review</a></td>
 								<?php endif; ?>
 							</tr>
