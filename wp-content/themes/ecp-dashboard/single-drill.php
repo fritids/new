@@ -162,7 +162,7 @@ $data=$test_data[$current_trial];
 	                <!--a href="#" id="btn_save_question" class="button green">Save</a-->     
 	                <a id="btn_prev" href="#" class="button orange">Prev</a>
 	                <a id="btn_next_save" href="#" class="button orange">Next</a>
-	                <input id="btn_submit" type="submit" value="Submit ALL QUESTIONS" class="button right" />
+	                <input id="btn_submit" type="submit" value="Submit ALL QUESTIONS" class="button green right" />
                 </div>
             </div>
         </div>

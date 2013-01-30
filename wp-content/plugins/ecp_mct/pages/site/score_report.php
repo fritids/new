@@ -178,7 +178,7 @@ if($test_exists) {
 			$pdf->MultiCell(23, 5, $notes['Reading'], 0, 'C', 0, 0, '', '');
 			$pdf->MultiCell(23, 5, $notes['Science'], 0, 'C', 0, 0, '', '');
 			$pdf->SetFont('helvetica', 'B', 12);
-			$pdf->MultiCell(30, 5, $notes['English']+$notes['Math']+$notes['Reading']+$notes['Science'], 0, 'C', 0, 1, '', '');
+			$pdf->MultiCell(30, 5, ($notes['English']+$notes['Math']+$notes['Reading']+$notes['Science'])/4, 0, 'C', 0, 1, '', '');
 		}
 		
 		$pdf->SetY(50);
