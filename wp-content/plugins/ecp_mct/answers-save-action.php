@@ -45,10 +45,15 @@ if(isset($_REQUEST['submit'])) {
 			foreach($questions as $question) {
 				$options = json_decode($question->options, true);
 				$correct = false;
+				$blank = false;
 				if($question->type == "Multiple Choice") {
 					$answer = $answers[$question->id];
-					if($options[$answer]['correct'])
-						$correct = true;
+					if($answer) {
+						if($options[$answer]['correct'])
+							$correct = true;
+					} else {
+						$blank = true;
+					}
 				} else {
 					$answer = $answers[$question->id];
 					$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
@@ -73,7 +78,7 @@ if(isset($_REQUEST['submit'])) {
 				if($correct) {
 					$scores[$section->type] += 1;
 				} else {
-					if($test->type == "SAT") {
+					if($test->type == "SAT" && $question->type == "Multiple Choice" && !$blank) {
 						$scores[$section->type] -= 0.25;
 					}
 				}

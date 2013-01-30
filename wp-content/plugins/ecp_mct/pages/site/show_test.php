@@ -119,6 +119,14 @@ $question_count = 1;
 		</form>
 		<?php else: ?>
 		<p>Test finished. Thanks!</p>
+			<?php
+				$page = get_page_by_title("Practice SAT and ACT Exams");
+				if ($page->ID):
+			?>
+			<div>
+				<a href="<?php echo get_permalink($page->ID) ?>" class="button">See Scores</a>
+			</div>
+			<?php endif; ?>
 		<?php endif; ?>
 	<?php else: ?>
 		<p>Sorry! You have to be logged in to take this test.</p>
