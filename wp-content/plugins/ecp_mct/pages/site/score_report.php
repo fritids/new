@@ -18,8 +18,8 @@ class MYPDF extends TCPDF {
     //Page header
     public function Header() {
         // Logo
-        $image_file = K_PATH_IMAGES.'header-logo.png';
-        $this->Image($image_file, 10, 10, '', '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $image_file = K_PATH_IMAGES.'logo-edge.png';
+        $this->Image($image_file, 10, 10, 55, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', '', 14);
 		// Set text color
@@ -187,109 +187,116 @@ if($test_exists) {
 		foreach($section_types as $section_type) {
 			$i=0;
 			$html = '';
-			foreach($sections as $k=>$section) {
+			foreach($sections as $section) {
 				if($section->type == $section_type) {
 					$i++;
-					if($i==1)
-						$html .= '<table cellpadding="2" border="0"><tr class="header"><th colspan="3">'.$section_type.'</th></tr>';
-					elseif($i%2==0)
-						$html .= '<table cellpadding="2" border="0" style="background-color:#eeeeee"><tr><td></td></tr>';
-					else
-						$html .= '<table cellpadding="2" border="0"><tr><td></td></tr>';
+					
 					// Get section questions
 					$query = "SELECT `id`,`type`,`code`,`options` FROM ".ECP_MCT_TABLE_QUESTIONS." WHERE `section_id`=%d ORDER BY `order`";
 					
-					$questions = $wpdb->get_results($wpdb->prepare($query, $section->id));
+					$all_questions = $wpdb->get_results($wpdb->prepare($query, $section->id));
 					$answers = json_decode($section->answers, true);
-
-					$html .= '<tr><td rowspan="4" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
 					
-					foreach($questions as $k=>$question) {
-						$html .= '<td width="24" align="center" class="row-desc">'.($k+1).'</td>';
+					//Create rows of 25 questions
+					$questions_array = array();
+					$row = 0;
+					foreach($all_questions as $kq=>$question) {
+						$questions_array[$row][] = $question;
+						if(($kq+1)%25==0) $row++;
 					}
 					
-					$html .= '</tr><tr><td class="row-desc">CODE</td>';
-					foreach($questions as $k=>$question) {
-						$html .= '<td width="24" align="center" class="row-desc">'.$question->code.'</td>';
-					}
+					$question_num = 1;
+					foreach($questions_array as $m=>$questions) {
+						if($i==1 && $m == 0)
+							$html .= '<table cellpadding="2" border="0"><tr class="header"><th colspan="3">'.$section_type.'</th></tr>';
+						elseif($i%2==0 && $m == 0)
+							$html .= '<table cellpadding="2" border="0" style="background-color:#eeeeee;">';
+						elseif($m == 0)
+							$html .= '<table cellpadding="2" border="0">';
+						else
+							$html .= '<table cellpadding="2" border="0"><tr><td></td></tr>';
 					
-					
-					$html .= '</tr><tr><td class="row-desc">KEY</td>';
-					foreach($questions as $k=>$question) {
-						$options = json_decode($question->options, true);
-						$letter_array = array("A","B","C","D","E");
-						$letter_array_even = array("F","G","H","J","K");
-						if($question->type == "Multiple Choice") {
-							foreach($options as $j=>$option)
-								if($option['correct']) {
-									if($test->type == "ACT" && ($k+1)%2 == 0)
-										$html .= '<td width="24" align="center" class="row-desc">'.$letter_array_even[$j].'</td>';
-									else
-										$html .= '<td width="24" align="center" class="row-desc">'.$letter_array[$j].'</td>';
-									break;
-								}
-						} else {
-							$answer = $answers[$question->id];
-							$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
+						if($m == 0)
+							$html .= '<tr><td rowspan="4" width="60" align="center" class="section-title">'.$section->name.'</td><td width="65" class="row-desc">QUESTION</td>';
+						else
+							$html .= '<tr><td rowspan="4" width="60" align="center" class="section-title"></td><td width="65" class="row-desc">QUESTION</td>';
 						
-							if($options[0]['type'] == "Range") {
-								$html .= '<td width="24" align="center" class="row-desc">'.$options[0]['start'].'&#62;x&#60;'.$options[0]['end'].'</td>';
-							} else {
-								$html .= '<td width="24" align="center" class="row-desc">'.$options[0]['field_1'].$options[0]['field_2'].$options[0]['field_3'].$options[0]['field_4'].'</td>';
-							}
-						}
-					}
-					
-					
-					$html .= '</tr><tr><td class="row-desc">STUDENT</td>';
-					foreach($questions as $k=>$question) {
-						$options = json_decode($question->options, true);
-						$letter_array = array("A","B","C","D","E");
-						$letter_array_even = array("F","G","H","J","K");
-						if($question->type == "Multiple Choice") {
-							$answer = $answers[$question->id];
-							if($options[$answer]['correct']) {
-								$html .= '<td width="24" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
-							} elseif($letter_array[$answer]) {
-								if($test->type == "ACT" && ($k+1)%2 == 0)
-									$html .= '<td width="24" align="center" class="row-desc wrong">'.$letter_array_even[$answer].'</td>';
-								else
-									$html .= '<td width="24" align="center" class="row-desc wrong">'.$letter_array[$answer].'</td>';
-							} else {
-								$html .= '<td width="24" align="center" class="row-desc wrong">-</td>';
-							}
-						} else {
-							$answer = $answers[$question->id];
-							$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
-
-							foreach($options as $option) {
-								$correct = false;
-								if($option['type'] == "Range") {
-									if($number >= (float) $option['start'] && $number <= (float) $option['end']) {
-										$html .= '<td width="24" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
-										$correct = true;
+						foreach($questions as $k=>$question) { $html .= '<td width="22" align="center" class="row-desc">'.($question_num++).'</td>'; }
+						$html .= '</tr><tr><td class="row-desc">CODE</td>';
+						foreach($questions as $k=>$question) { $html .= '<td width="22" align="center" class="row-desc">'.$question->code.'</td>'; }
+						$html .= '</tr><tr><td class="row-desc">KEY</td>';
+						foreach($questions as $k=>$question) {
+							$options = json_decode($question->options, true);
+							$letter_array = array("A","B","C","D","E");
+							$letter_array_even = array("F","G","H","J","K");
+							if($question->type == "Multiple Choice") {
+								foreach($options as $j=>$option)
+									if($option['correct']) {
+										if($test->type == "ACT" && ($k+1)%2 == 0)
+											$html .= '<td width="22" align="center" class="row-desc">'.$letter_array_even[$j].'</td>';
+										else
+											$html .= '<td width="22" align="center" class="row-desc">'.$letter_array[$j].'</td>';
 										break;
 									}
+							} else {
+								$answer = $answers[$question->id];
+								$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
+
+								if($options[0]['type'] == "Range") {
+									$html .= '<td width="22" align="center" class="row-desc">'.$options[0]['start'].'&#62;x&#60;'.$options[0]['end'].'</td>';
 								} else {
-									$a_number = to_number($option['field_1'].$option['field_2'].$option['field_3'].$option['field_4']);
-
-									if($number == $a_number) {
-										$html .= '<td width="24" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
-										$correct = true;
-										break;
-									}
+									$html .= '<td width="22" align="center" class="row-desc">'.$options[0]['field_1'].$options[0]['field_2'].$options[0]['field_3'].$options[0]['field_4'].'</td>';
 								}
 							}
-							if(!$correct) {
-								$html .= '<td width="24" align="center" class="row-desc wrong">'.$answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value'].'</td>';
+						}
+						$html .= '</tr><tr><td class="row-desc">STUDENT</td>';
+						foreach($questions as $k=>$question) {
+							$options = json_decode($question->options, true);
+							$letter_array = array("A","B","C","D","E");
+							$letter_array_even = array("F","G","H","J","K");
+							if($question->type == "Multiple Choice") {
+								$answer = $answers[$question->id];
+								if($options[$answer]['correct']) {
+									$html .= '<td width="22" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
+								} elseif($letter_array[$answer]) {
+									if($test->type == "ACT" && ($k+1)%2 == 0)
+										$html .= '<td width="22" align="center" class="row-desc wrong">'.$letter_array_even[$answer].'</td>';
+									else
+										$html .= '<td width="22" align="center" class="row-desc wrong">'.$letter_array[$answer].'</td>';
+								} else {
+									$html .= '<td width="22" align="center" class="row-desc wrong">-</td>';
+								}
+							} else {
+								$answer = $answers[$question->id];
+								$number = to_number($answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value']);
+
+								foreach($options as $option) {
+									$correct = false;
+									if($option['type'] == "Range") {
+										if($number >= (float) $option['start'] && $number <= (float) $option['end']) {
+											$html .= '<td width="22" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
+											$correct = true;
+											break;
+										}
+									} else {
+										$a_number = to_number($option['field_1'].$option['field_2'].$option['field_3'].$option['field_4']);
+
+										if($number == $a_number) {
+											$html .= '<td width="22" align="center" class="row-desc"><img src="../../images/right.png" border="0" height="10" width="10" /></td>';
+											$correct = true;
+											break;
+										}
+									}
+								}
+								if(!$correct) {
+									$html .= '<td width="22" align="center" class="row-desc wrong">'.$answer['field_1_value'].$answer['field_2_value'].$answer['field_3_value'].$answer['field_4_value'].'</td>';
+								}
 							}
 						}
-						
+						$html .= '</tr></table>';
 					}
-					$html .= '</tr></table>';
 				}
 			}
-			
 			$pdf->writeHTML($css.$html, true, false, true, false, '');
 		}
 		

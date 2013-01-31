@@ -115,7 +115,7 @@ function ecp_mct_main_uninstall(){
 	$wpdb->query("DELETE FROM `wp_posts` WHERE `post_type` = 'test';");
 	
 	// Delete page for the tast taker
-	$the_page = get_page_by_title('Test Taker');
+	$the_page = get_page_by_title('Practice SAT and ACT Exams');
 	wp_delete_post($the_page->ID);
 	
 }
