@@ -1,0 +1,165 @@
+.handler{
+	display:block;
+	float:left;
+	min-height:30px;
+	min-width:3px;
+	background:#cacaca;
+	cursor:move;
+	margin:-7px -10px -8px -10px;	
+}
+
+
+
+/******* DASHBOARD tables *******/
+.progress_table tr, .progress_table{
+	width:910px;
+}
+.progress_table td, .progress_table th {
+padding:8px 10px 8px 10px;
+vertical-align:middle;
+text-align:left;
+}
+
+.progress_table .aligntop td {
+vertical-align:top;
+}
+
+.progress_table .td-30 {
+width:30px;
+}
+.progress_table .td-40 {
+width:40px;
+}
+.progress_table .td-50 {
+width:50px;
+}
+.progress_table .td-60 {
+width:60px;
+}
+.progress_table .td-70 {
+width:70px;
+}
+.progress_table .td-80 {
+width:80px;
+}
+.progress_table .td-100 {
+width:100px;
+}
+.progress_table .center {
+text-align:center;
+}
+.progress_table .text-blue {
+color:#648596;
+font-weight:bold;
+}
+
+
+.progress_table .blue-heading {
+background:#e6eef2;
+padding:5px 10px 10px 10px;
+font-size:15px;
+}
+
+.table-holder {
+clear:both;
+font-size:13px;
+line-height:16px;
+border:5px solid #e6eef2;
+margin-bottom:10px;
+}
+.progress_table .row-heading th ,.progress_table .row-heading td{
+background:#808080;
+color:#fff;
+font-weight:normal;
+text-align:left;
+}
+.progress_table .alt td {
+background:#f2f2f2;
+}
+
+.progress_table .table_head td {
+border-top:1px solid #d0d0d0;
+border-bottom:1px solid #919191;
+background:#f8f8f8;
+font-weight:bold;
+}
+
+.progress_table span.score {
+
+float:left;
+clear:both;
+border-bottom:1px solid #404040;
+color:#fa8611;
+}
+.progress_table span.score-total {
+float:left;
+clear:both;
+color:#648596;
+}
+/**********/
+.IDGL_Textarea .elem{
+		min-height:200px;
+}
+.add_row_link, .table_view_save{
+	display:block;
+	clear:both;
+	width:80px;
+	padding:7px;
+	padding-left:35px;
+	text-decoration:none;
+	border:solid 1px #cacaca;
+	-moz-border-radius:4px 4px 4px 4px;
+	border-radius:4px 4px 4px 4px;
+	margin-top:5px;
+	background:#fafafa url(../images/add.png) 7px center no-repeat;
+	float:right;
+}
+#switch_view{
+	display:block;
+	clear:both;
+	width:80px;
+	padding:7px;
+	padding-left:35px;
+	text-decoration:none;
+	border:solid 1px #cacaca;
+	-moz-border-radius:4px 4px 4px 4px;
+	border-radius:4px 4px 4px 4px;
+	margin-top:5px;
+}
+#switch_view:hover, .add_row_link:hover, .table_view_save:hover{
+	background-color:#fff;
+	border:solid 1px #bababa;
+}
+.table_view_save{
+	float:left;
+}
+a.html_view{
+	background:#fafafa url(../images/html.png) 7px center no-repeat;
+}
+a.table_view{
+	background:#fafafa url(../images/table.png) 7px center no-repeat;
+}
+.delete_row{
+	display:block;
+	float:right;
+	width:20px;
+	height:20px;
+	background:#fafafa url(../images/delete.png) center no-repeat;
+	border:solid 1px #cacaca;
+	-moz-border-radius:4px 4px 4px 4px;
+	border-radius:4px 4px 4px 4px;
+	cursor:pointer;
+}
+#abz_holder{
+	height:380px;
+	overflow:auto;
+	overflow-x:hidden;
+}
+.theHoverTD{
+	background: #ffcaca !important;
+	border: dotted 1px #9a9a9a !important;
+	padding:5px 9px 5px 9px !important;
+}
+.table-holder .full{
+	width: 100% !important;
+}
