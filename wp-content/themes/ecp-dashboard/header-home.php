@@ -31,7 +31,8 @@ if(is_user_logged_in()){
 		wp_head();
 		?>
 
-		<?php wp_enqueue_script('jquery'); ?>
+		<script src="<?php echo get_template_directory_uri(); ?>/lib/js/jquery-1.8.3.min.js"></script>
+		<script src="<?php echo get_template_directory_uri(); ?>/lib/js/jquery-ui-1.8.24.custom.min.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jCProgress-1.0.2.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.selectBox.min.js"></script>

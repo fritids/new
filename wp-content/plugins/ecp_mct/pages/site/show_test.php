@@ -37,15 +37,10 @@ $field_1_values = array("",".","1","2","3","4","5","6","7","8","9");
 $field_2_values =  $field_3_values = array("","/",".","0","1","2","3","4","5","6","7","8","9");
 $field_4_values = array("",".","0","1","2","3","4","5","6","7","8","9");
 
-// Calculate estimated end time
-$time_left = strtotime($start_time)+($current_section->duration*60) - time();
-
 $question_count = 1;
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo PLUGIN_DIR; ?>css/site.css" />
-<script type="text/javascript" src="<?php echo PLUGIN_DIR; ?>js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="<?php echo PLUGIN_DIR; ?>js/jquery.countdown.js"></script>
 
 <div class="test-container">
 	<?php if ( is_user_logged_in() ): ?>
@@ -54,7 +49,7 @@ $question_count = 1;
 
 			<label class="section-title"><?php echo $current_section->name; ?></label>
 			
-			<div id="time-left"></div>
+			<div id="time-left" class="hasCountdown clearfix"></div>
 			
 			<?php
 				// Get test questions
@@ -133,8 +128,29 @@ $question_count = 1;
 	<?php endif; ?>
 </div>
 
+<?php
+// Calculate estimated end time
+$end_time = strtotime($start_time)+($current_section->duration*60);
+?>
+
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#time-left").countdown({until: <?php echo $time_left?>, format: 'MS'});
-	});
+	
+	function updateTimer() {
+		now = new Date().getTime()/1000;
+		kickoff = <?php echo $end_time ?>;
+		diff = kickoff - now;
+		
+		mins = Math.floor( diff / (60) );
+		secs = Math.floor( diff );
+		
+		mm = mins;
+		ss = secs  - mins  * 60;
+		
+		document.getElementById("time-left")
+            .innerHTML = "<span class='countdown_row countdown_show2'>"+
+                "<span class='countdown_section'><span class='countdown_amount'>" + mm + "</span><br> Minutes</span>" +
+                "<span class='countdown_section'><span class='countdown_amount'>" + ss + "</span><br> Seconds</span>" +
+				"</span>";
+	}
+	setInterval('updateTimer()', 1000 );
 </script>
