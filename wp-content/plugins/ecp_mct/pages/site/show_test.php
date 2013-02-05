@@ -49,7 +49,12 @@ $question_count = 1;
 
 			<label class="section-title"><?php echo $current_section->name; ?></label>
 			
-			<div id="time-left" class="hasCountdown clearfix"></div>
+			<div id="time-left" class="hasCountdown clearfix">
+				<span class="countdown_row countdown_show2">
+                <span class="countdown_section"><span class="countdown_amount"></span><br> Minutes</span>
+                <span class="countdown_section"><span class="countdown_amount"></span><br> Seconds</span>
+				</span>
+			</div>
 			
 			<?php
 				// Get test questions
@@ -139,6 +144,8 @@ $end_time = strtotime($start_time)+($current_section->duration*60);
 		now = new Date().getTime()/1000;
 		kickoff = <?php echo $end_time ?>;
 		diff = kickoff - now;
+		
+		if(diff < 0) diff = 0;
 		
 		mins = Math.floor( diff / (60) );
 		secs = Math.floor( diff );
