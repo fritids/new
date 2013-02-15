@@ -1,83 +1,140 @@
 <?php
-PostType::register(IDGL_File::getFileList(dirname(__FILE__) . "/models/"));
 
-register_taxonomy('ecp-products', 'ecpproduct', array('hierarchical' => true, 'label' => __('ECP Product Categories'), 'query_var' => true, 'rewrite' => true));
+// Register ECP Products Post type
+$labels = 
+ $args = array(
+	'labels' => array(
+		'name' => _x('ECP Products', 'post type general name'),
+		'singular_name' => _x('ECP Product', 'post type singular name'),
+		'add_new' => _x('Add New', 'ECP Product'),
+		'add_new_item' => __('Add New ECP Product'),
+		'edit_item' => __('Edit ECP Product'),
+		'new_item' => __('New ECP Product'),
+		'view_item' => __('View ECP Product'),
+		'search_items' => __('Search ECP Product'),
+		'not_found' =>  __('No ECP Product found'),
+		'not_found_in_trash' => __('No ECP Product found in Trash'), 
+		'parent_item_colon' => ''
+	),
+	'public' => true,
+	'publicly_queryable' => true,
+	'show_ui' => true,
+	'query_var' => true,
+	'rewrite' => true,
+	'capability_type' => 'post',
+	'hierarchical' => true,
+	'menu_position' => null,
+	'supports' => array('title','editor','page-attributes'),
+  );
+register_post_type('ecpproduct',$args);
 
-add_action('admin_menu', 'ecp_products_add');
+// Register ECP Products taxonomy
+register_taxonomy(
+	'ecp-products',
+	'ecpproduct',
+	array('hierarchical' => true, 'label' => __('ECP Products Categories'),
+		'query_var' => true,
+		'rewrite' => true
+	)
+);
 
-function ecp_products_add()
-{
-	if(isset($_GET["post_type"]))
-	{
-		$currEditType = $_GET["post_type"];
-	}
-	else
-	{
-		$currEditType = get_post_type($_GET["post"]);
-	}
-	if(strtolower($currEditType) != "ecpproduct")
-	{
-		return;
-	}
-	
-	$postOptions = IDGL_Config::getConfig(dirname(__FILE__) . "/models/" . $currEditType . ".xml");
-	foreach($postOptions as $page)
-	{
-		$name = $page["name"];
-		$title = $page["title"];
-		if(isset($_GET["action"]) && $_GET["action"] == "edit")
-		{
-			IDGL_PostOptionManages::IDGL_addPostOptionFunction($name, $page);
-			add_meta_box($name, __($title, $title), "IDGL_fx_" . $name, $currEditType, 'advanced', 'high');
-		}
-	}
+add_action( 'admin_init', 'my_admin' );
+
+function my_admin() {
+    add_meta_box( 'prices_meta_box',
+        'ECP Product Prices',
+        'display_prices_meta_box',
+        'ecpproduct', 'normal', 'high'
+    );
 }
 
-function ecp_product_dicount_callback($param, $name, $pagename = "")
-{
-	eval('$args="' . $param . '";');
-	$current = getPostMeta($_GET["post"], $name);
+function display_prices_meta_box( $product_prices ) {
+    $price_type = get_post_meta( $product_prices->ID, 'price_type', true );
+	$universal_price = esc_html( get_post_meta( $product_prices->ID, 'universal_price', true ) );
+	$location_prices = unserialize( get_post_meta( $product_prices->ID, 'location_prices', true ) );
 	
-	$out = "<div class='IDGL_listNode'>";
-	$out .= "<div><span class='label'><big>Enter discount ammount to products when selected :</big></span>";
+    $movie_director = esc_html( get_post_meta( $movie_review->ID, 'movie_director', true ) );
+    $movie_rating = intval( get_post_meta( $movie_review->ID, 'movie_rating', true ) );
+    ?>
+	<div style="line-height: 2;">
+		<strong>Select the type of price for this product:</strong>
+		<div><input type="radio" id="price_type_free" value="free" name="price_type" checked> Free Product</div>
+		<div><input type="radio" id="price_type_universal" value="universal" name="price_type" <?php checked("universal", $price_type) ?>> Universal Price</div>
+		<div><input type="radio" id="price_type_location" value="location" name="price_type" <?php checked("location", $price_type) ?>> Price by Location</div>
+	</div>
+	<div id="universal-container" style="display:none;">
+		<hr>
+		<table>
+			<tr>
+				<td>Universal price: </td>
+				<td>$<input type="text" size="10" name="universal_price" value="<?php echo $universal_price; ?>" /></td>
+			</tr>
+		</table>
+	</div>
+	<div id="location-container" style="display:none;">
+		<hr>
+		<table>
+			<tr>
+				<td>New York: </td>
+				<td>$<input type="text" size="10" name="location_prices[new_york]" value="<?php echo $location_prices['new_york']; ?>" /></td>
+			</tr>
+			<tr>
+				<td>London: </td>
+				<td>$<input type="text" size="10" name="location_prices[london]" value="<?php echo $location_prices['london']; ?>" /></td>
+			</tr>
+			<tr>
+				<td>Buenos Aires / Rio: </td>
+				<td>$<input type="text" size="10" name="location_prices[buenos_aires]" value="<?php echo $location_prices['buenos_aires']; ?>" /></td>
+			</tr>
+			<tr>
+				<td>South Florida: </td>
+				<td>$<input type="text" size="10" name="location_prices[south_florida]" value="<?php echo $location_prices['south_florida']; ?>" /></td>
+			</tr>
+			<tr>
+				<td>Skype / Online Tutoring: </td>
+				<td>$<input type="text" size="10" name="location_prices[skype]" value="<?php echo $location_prices['skype']; ?>" /></td>
+			</tr>
+		</table>
+	</div>
 	
-	$current_post_arr = wp_get_object_terms($_GET["post"], 'ecp-products');
-	$current_post_parent = $current_post_arr[0] -> parent;
-	$children_of_the_post = get_term_children( $current_post_arr[0] -> term_id, $current_post_arr[0] -> taxonomy);
-	
-	$ids = array();
-	foreach($current_post_arr as $term)
-	{
-		$ids[] = $term -> term_id;
-	}
-	
-	query_posts(array('posts_per_page'=>'-1','post_type' => 'ecpproduct', 'post__not_in' => array($_GET["post"])));
-	if(have_posts()):
-		while(have_posts()):
-			the_post();
-			global $post;
-			//echo get_the_title($post->ID);
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			hide_prices();
+			jQuery("#price_type_universal").click(function() { hide_prices() });
+			jQuery("#price_type_location").click(function() { hide_prices() });
+			jQuery("#price_type_free").click(function() { hide_prices() });
 			
-			$cat = wp_get_object_terms($post -> ID, 'ecp-products');
-			if($cat[0] -> term_id == $current_post_arr[0] -> term_id){ continue;}
-			$tax_id = $cat[0] -> term_taxonomy_id;
-			if(in_array($tax_id, $children_of_the_post))
-			{
-				$title = get_the_title($post -> ID);
-				$out .= "<span class='label'> Discount to product <big>$title</big>:</span>
-				<input class='elem' type='text' name='IDGL_elem" . $pagename . "[" . $name . "][" . $post -> ID . "]' id='IDGL_elem" . $pagename . "[" . $name . "][" . $post -> ID . "]' value='" . htmlentities($current[$post -> ID],ENT_QUOTES) . "' />";
+			function hide_prices() {
+				if(jQuery("#price_type_universal").is(':checked')) {
+					jQuery("#universal-container").show();
+					jQuery("#location-container").hide();
+				} else if(jQuery("#price_type_location").is(':checked')) {
+					jQuery("#location-container").show();
+					jQuery("#universal-container").hide();
+				} else if(jQuery("#price_type_free").is(':checked')) {
+					jQuery("#location-container").hide();
+					jQuery("#universal-container").hide();
+				}
 			}
-			
-		endwhile;
-	
-	endif;
-	wp_reset_query();
-	
-	$out .= "</div></div>";
-	return $out;
+		});
+	</script>
+    <?php
 }
 
-function ecp_product_quantity_callback($param, $name, $pagename="")
-{
-}
+add_action( 'save_post', 'add_price_fields', 10, 2 );
 
+function add_price_fields( $product_prices_id, $product_prices ) {
+    // Check post type for movie reviews
+    if ( $product_prices->post_type == 'ecpproduct' ) {
+        // Store data in post meta table if present in post data
+        if ( isset( $_POST['price_type'] ) && $_POST['price_type'] != '' ) {
+            update_post_meta( $product_prices_id, 'price_type', $_POST['price_type'] );
+        }
+        if ( isset( $_POST['universal_price'] ) && $_POST['universal_price'] != '' ) {
+            update_post_meta( $product_prices_id, 'universal_price', $_POST['universal_price'] );
+        }
+		if ( isset( $_POST['location_prices'] ) && !empty($_POST['location_prices']) ) {
+            update_post_meta( $product_prices_id, 'location_prices', serialize($_POST['location_prices']));
+        }
+    }
+}

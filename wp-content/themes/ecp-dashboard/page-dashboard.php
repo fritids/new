@@ -57,24 +57,28 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 			</div>
 			<?php $page = get_page_by_title("Practice SAT and ACT Exams"); ?>
 			<div class="widget-content">
-				<div class="statistics-wrap">
-					<div class="statistics-block test-block">
-						<div class="stat-img sat">SAT Text Book</div>
-						<div class="stat-info">
-							<div><a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $sat_user->count; ?></font></a> of <a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $sat_count->count; ?></font></a></div>
-							<div>Tests complete</div>
+				<a href="<?php echo get_permalink($page->ID) ?>">
+					<div class="statistics-wrap">
+						<div class="statistics-block test-block">
+							<div class="stat-img sat">SAT Text Book</div>
+							<div class="stat-info">
+								<div><font color="#f0825b"><?php echo $sat_user->count; ?></font> of <font color="#f0825b"><?php echo $sat_count->count; ?></font></div>
+								<div>Tests complete</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="statistics-wrap">
-					<div class="statistics-block test-block">
-						<div class="stat-img act">ACT Text Book</div>
-						<div class="stat-info">
-							<div><a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $act_user->count; ?></font></a> of <a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $act_count->count; ?></font></a></div>
-							<div>Tests complete</div>
+				</a>
+				<a href="<?php echo get_permalink($page->ID) ?>">
+					<div class="statistics-wrap">
+						<div class="statistics-block test-block">
+							<div class="stat-img act">ACT Text Book</div>
+							<div class="stat-info">
+								<div><font color="#f0825b"><?php echo $act_user->count; ?></font> of <font color="#f0825b"><?php echo $act_count->count; ?></font></div>
+								<div>Tests complete</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>
