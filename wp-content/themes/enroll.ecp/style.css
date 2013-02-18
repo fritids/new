@@ -132,6 +132,10 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 	-webkit-box-shadow: 0 0 5px #666;
 }
 .product-category .product-item.admissions-counseling { width: 187px; }
+.product-category .product-item.essay-grading { width: 266px; background: #F06E30; border-color: #F06E30; }
+.product-category .product-item.essay-grading .price { color: #25546E; }
+.product-category .product-item.essay-grading.selected { border: solid 5px #FFCC7F; }
+
 .product-category .product-item.selected { border: solid 5px #F06E30; }
 .product-category .product-item .title { font-size: 18px; text-transform: uppercase; color: #FFFFFF; height: 120px; }
 
@@ -173,7 +177,14 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8611', endColorstr='#EE6828', GradientType=0 );
 }
 
-
+.upgrade-course {
+	font-size: 26px;
+	text-align: center;
+	color: #d30000;
+}
+.upgrade-course span {
+	font-weight: bold;
+}
 
 
 

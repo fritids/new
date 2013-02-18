@@ -39,8 +39,12 @@
 		$products = $product_array;
 ?>
 
-<div class="product-category" <?php if($category -> slug == "essay-grading"): ?> style="display: none;" <?php endif; ?>>
+<div class="product-category" <?php if($category -> slug == "essay-grading"): ?> id="essay-grading" style="display: none;" <?php endif; ?>>
+	<?php if($category -> slug != "essay-grading"): ?>
 	<h3><?php echo $category -> name ?></h3>
+	<?php else: ?>
+	<div class="upgrade-course">Upgrade your course with an <span>Essay Grading</span> package!</div>
+	<?php endif; ?>
 
 	<?php if($category -> slug == "test-prep-tutoring"): ?>
 	<div class="location-container">
@@ -58,7 +62,7 @@
 	<ul class="clearfix">
 	<? foreach($products as $post_data): ?>
 		<li>
-			<div class="product-item <?php echo $category->slug; ?>">
+			<div class="product-item <?php echo $category->slug; ?>" price-type="<?php echo get_post_meta($post_data->ID, 'price_type', true); ?>" price="<?php echo get_post_meta($post_data->ID, 'universal_price', true); ?>">
 				<div class="title"><?php echo $post_data->post_title ?></div>
 				<div class="description">
 					<a class="show-description" href='#product-info-<?php echo $post_data->ID ?>'>learn more</a>
