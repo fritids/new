@@ -1,10 +1,9 @@
 jQuery(function($){
 	/* Location Select Box */
 	$("SELECT").selectBox();
-	$(".product-item").find("."+$("SELECT").selectBox('value')).show();
+	updateTestPrepTutoringPrices($("SELECT").selectBox('value'));
 	$("SELECT").selectBox().change( function() {
-		$(".product-item").find(".location_prices").hide();
-		$(".product-item").find("."+$(this).val()).show();
+		updateTestPrepTutoringPrices($(this).val());
 	});
 	
 	
@@ -32,9 +31,27 @@ jQuery(function($){
 			
 			$(this).addClass("selected");
 		}
+		getTotal();
 	});
 	
 	$("a.show-description").click(function(evt){ evt.stopPropagation(); });
 	$("a.show-description").fancybox();
+	
+	function updateTestPrepTutoringPrices (location) {
+		$(".product-item").find(".location_prices").hide();
+		$(".product-item").find("."+location).show();
+		$(".product-item.test-prep-tutoring").each(function() {
+			var price = $(this).find("."+location).html().substring(1);
+			$(this).attr("price", price);
+		});
+	}
+	
+	function getTotal() {
+		var total = 0;
+		$(".product-item.selected").each(function() {
+			total += parseFloat($(this).attr("price"));
+		});
+		$("#registration-total").html(total);
+	}
 
 });

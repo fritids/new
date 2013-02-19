@@ -96,6 +96,10 @@
 </div>
 <?php endforeach; ?>
 
+<div class="total-container">
+	Your total purchase: $<span id="registration-total">0</span>
+</div>
+
 
 <div class="register-now-container">
 	<a href="#" id="register-now">REGISTER NOW!</a>

@@ -101,36 +101,10 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 
 /** SHOPING CART **/
 .product-category { margin-top: 50px; }
-.product-category h3 {
-	background: #366f90;
-	padding: 10px 0;
-	color: #ffffff;
-	font-size: 28px;
-	text-align: center;
-	border: solid 3px #fff;
-	-moz-box-shadow: 0 0 5px #666;
-	-webkit-box-shadow: 0 0 5px #666;
-	box-shadow: 0 0 5px #666;
-	-webkit-border-radius: 35px;
-	-moz-border-radius: 35px;
-	border-radius: 35px;
-}
+.product-category h3 { background: #366f90; padding: 10px 0; color: #ffffff; font-size: 28px; text-align: center; border: solid 3px #fff; -moz-box-shadow: 0 0 5px #666; -webkit-box-shadow: 0 0 5px #666; box-shadow: 0 0 5px #666; -webkit-border-radius: 35px; -moz-border-radius: 35px; border-radius: 35px; }
 .product-category ul { list-style: none; margin: 0; padding: 0; }
 .product-category li { float: left; padding: 10px; }
-.product-category .product-item {
-	cursor: pointer;
-	background: #25546E;
-	width: 140px;
-	padding: 10px;
-	text-align: center;
-	border: solid 5px #25546E;
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	box-shadow: 0 0 5px #666;
-	-moz-box-shadow: 0 0 5px #666;
-	-webkit-box-shadow: 0 0 5px #666;
-}
+.product-category .product-item { cursor: pointer; background: #25546E; width: 140px; padding: 10px; text-align: center; border: solid 5px #25546E; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; box-shadow: 0 0 5px #666; -moz-box-shadow: 0 0 5px #666; -webkit-box-shadow: 0 0 5px #666; }
 .product-category .product-item.admissions-counseling { width: 187px; }
 .product-category .product-item.essay-grading { width: 266px; background: #F06E30; border-color: #F06E30; }
 .product-category .product-item.essay-grading .price { color: #25546E; }
@@ -146,8 +120,8 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 .product-category .location-container { text-align: center; font-size: 22px; margin: 15px 0; }
 .product-category .location-container select { font-size: 26px; }
 
-.product-info-popup { width: 400px; }
-.product-info-popup .category-name { text-align: center; color: #25546E; font-weight: bold; font-size: 20px; }
+.product-info-popup { width: 400px; padding: 10px; }
+.product-info-popup .category-name { text-align: center; color: #25546E; font-weight: bold; font-size: 20px; padding: 0 35px; }
 .product-info-popup .product-name { text-align: center; color: #F06E30; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
 
 .register-now-container { text-align: center; margin: 60px 0; }
@@ -177,14 +151,15 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8611', endColorstr='#EE6828', GradientType=0 );
 }
 
-.upgrade-course {
-	font-size: 26px;
-	text-align: center;
-	color: #d30000;
-}
-.upgrade-course span {
-	font-weight: bold;
-}
+.upgrade-course { font-size: 26px; text-align: center; color: #d30000; }
+.upgrade-course span { font-weight: bold; }
 
+.total-container {
+	margin-top: 50px;
+	text-align: center;
+	font-size: 32px;
+	font-weight: bold;
+	color: #25546E;
+}
 
 
