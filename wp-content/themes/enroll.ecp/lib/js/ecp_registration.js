@@ -49,7 +49,9 @@ jQuery(function($){
 	function getTotal() {
 		var total = 0;
 		$(".product-item.selected").each(function() {
-			total += parseFloat($(this).attr("price"));
+			if($(this).attr("price-type") != "free") {
+				total += parseFloat($(this).attr("price"));
+			}
 		});
 		$("#registration-total").html(total);
 	}
