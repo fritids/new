@@ -4,6 +4,7 @@ jQuery(function($){
 	updateTestPrepTutoringPrices($("SELECT").selectBox('value'));
 	$("SELECT").selectBox().change( function() {
 		updateTestPrepTutoringPrices($(this).val());
+		getTotal();
 	});
 	
 	
