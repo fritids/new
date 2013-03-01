@@ -1,7 +1,6 @@
 <?php
 
 // Register ECP Products Post type
-$labels = 
  $args = array(
 	'labels' => array(
 		'name' => _x('ECP Products', 'post type general name'),
