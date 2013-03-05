@@ -223,7 +223,7 @@
 			</div>
 
 			<div class="billing-checkboxes">
-				<div class="field checkbox">
+				<div class="field checkbox terms">
 					<input type="checkbox" name="terms_conditions" class="required" /> I agree to the Edge in College Prep's <a href="#">Terms and Conditions</a>
 				</div>
 				<div class="field checkbox">

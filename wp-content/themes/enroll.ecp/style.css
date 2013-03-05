@@ -144,5 +144,6 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 #billing-form-popup .billing-checkboxes { margin-top: 20px; }
 #billing-form-popup .submit-button { padding: 0 30px; margin: 15px 0; }
 #billing-form-popup .submit-button input[type=submit] { font-size: 22px; font-weight: bold; text-transform: uppercase; color: #ffffff; background: #F06F30; border: solid 2px #ffffff; padding: 8px 15px; -webkit-border-radius: 25px; -moz-border-radius: 25px; border-radius: 25px; float: right; cursor: pointer; }
+#billing-form-popup .field.terms span.validation-error { display: inline-block; }
 
 span.validation-error { display: block; margin-top: 4px; font-weight: bold; padding: 2px 5px; color: #E82020; border: solid 1px #E82020; background: #FCFABD; }
