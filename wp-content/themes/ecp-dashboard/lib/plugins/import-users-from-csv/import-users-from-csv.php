@@ -76,13 +76,14 @@ class IS_IU_Import_Users {
 
 			if ( isset( $_FILES['users_csv']['tmp_name'] ) ) {
 				// Setup settings variables
-				$filename              = $_FILES['users_csv']['tmp_name'];
-				$user_type          = isset( $_POST['user_type'] ) ? $_POST['user_type'] : "student";
-				$student_type          = isset( $_POST['student_type'] ) ? $_POST['student_type'] : array("online-student");
-				$password_nag          = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
-				$new_user_notification = isset( $_POST['new_user_notification'] ) ? $_POST['new_user_notification'] : false;
+				$filename				= $_FILES['users_csv']['tmp_name'];
+				$user_type				= isset( $_POST['user_type'] ) ? $_POST['user_type'] : "student";
+				$student_type			= isset( $_POST['student_type'] ) ? $_POST['student_type'] : array("online-student");
+				$online_package			= isset( $_POST['online-package'] ) ? $_POST['online-package'] : "";
+				$password_nag			= isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
+				$new_user_notification	= isset( $_POST['new_user_notification'] ) ? $_POST['new_user_notification'] : false;
 
-				$results = self::import_csv( $filename, $password_nag, $new_user_notification, $user_type, $student_type );
+				$results = self::import_csv( $filename, $password_nag, $new_user_notification, $user_type, $student_type, $online_package );
 
 				// No users imported?
 				if ( ! $results['user_ids'] )
@@ -122,8 +123,26 @@ class IS_IU_Import_Users {
 			rich_editing, comment_shortcuts, admin_color, use_ssl, show_admin_bar_front, show_admin_bar_admin, role</p>
 	
 	<?php
+	global $wpdb;
+	
 	$error_log_file = self::$log_dir_path . 'is_iu_errors.log';
 	$error_log_url  = self::$log_dir_url . 'is_iu_errors.log';
+	
+	switch_to_blog(3);
+	// Get online products
+	$post_sql = "SELECT ID, post_content, post_title, post_name
+				FROM {$wpdb -> posts}
+				LEFT JOIN {$wpdb -> term_relationships} ON({$wpdb -> posts}.ID = {$wpdb -> term_relationships}.object_id)
+				LEFT JOIN {$wpdb -> term_taxonomy} ON({$wpdb -> term_relationships}.term_taxonomy_id = {$wpdb -> term_taxonomy}.term_taxonomy_id)
+				LEFT JOIN {$wpdb -> terms} ON({$wpdb -> term_taxonomy}.term_id = {$wpdb -> terms}.term_id)
+				WHERE {$wpdb -> posts}.post_type = 'ECPProduct' 
+				AND {$wpdb -> posts}.post_status = 'publish'
+				AND {$wpdb -> term_taxonomy}.taxonomy = 'ecp-products'
+				AND {$wpdb -> terms}.slug = 'satact-edge-online-course' 
+				ORDER BY {$wpdb -> posts}.menu_order ASC;";
+				
+	$products = $wpdb -> get_results($wpdb -> prepare($post_sql));
+	restore_current_blog();
 
 	if ( ! file_exists( $error_log_file ) ) {
 		if ( ! @fopen( $error_log_file, 'x' ) )
@@ -193,6 +212,18 @@ class IS_IU_Import_Users {
 					</div>
 				</fieldset></td>
 			</tr>
+			<tr valign="top" id="online-package-container">
+				<th scope="row"><?php _e( 'Add online package' , 'import-users-from-csv'); ?></th>
+				<td><fieldset>
+					<legend class="screen-reader-text"><span><?php _e( 'Online package' , 'import-users-from-csv'); ?></span></legend>
+					<?php foreach($products as $k=>$product): ?>
+					<div>
+						<label><input name="online-package" type="radio" value="<?php echo $product->ID ?>" <?php if($k==0) echo "checked";?> />
+						<?php echo $product->post_title ?></label>
+					</div>
+					<?php endforeach; ?>
+				</fieldset></td>
+			</tr>
 			<tr valign="top">
 				<th scope="row"><?php _e( 'Notification' , 'import-users-from-csv'); ?></th>
 				<td><fieldset>
@@ -228,9 +259,24 @@ class IS_IU_Import_Users {
 			$('input[name=user_type]').click(function() {
 				if($('input[name=user_type]:checked').val() == "teacher") {
 					$("#student-types-container").hide();
+					$("#online-package-container").hide();
 				} else {
 					$("#student-types-container").show();
+					$('input[name^=student_type]:checked').each(function() {
+						if($(this).val() == "online-student") {
+							$("#online-package-container").show();
+						}
+					});
 				}
+			});
+			$('input[name^=student_type]').click(function() {
+					$("#online-package-container").hide();
+				$('input[name^=student_type]:checked').each(function() {
+					if($(this).val() == "online-student") {
+						$("#online-package-container").show();
+					}
+				});
+				
 			});
 		});
 	</script>
@@ -243,7 +289,7 @@ class IS_IU_Import_Users {
 	 *
 	 * @since 0.5
 	 */
-	public static function import_csv( $filename, $password_nag = false, $new_user_notification = false, $user_type = "student", $student_type = array("online-student" )) {
+	public static function import_csv( $filename, $password_nag = false, $new_user_notification = false, $user_type = "student", $student_type = array("online-student" ), $online_package = "") {
 		$errors = $user_ids = array();
 		
 		// User data fields list used to differentiate with user meta
@@ -354,6 +400,9 @@ class IS_IU_Import_Users {
 			
 			if($user_type == "student") {
 				$usermeta['_IDGL_elem_userSubtype'] = serialize($student_type);
+				if(in_array("online-student", $student_type)) {
+					$usermeta['_IDGL_elem_ECP_user_order'] = serialize(array($online_package));
+				}
 			}
 
 			// Insert or update.
