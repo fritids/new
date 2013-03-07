@@ -47,6 +47,7 @@
 						 FName.meta_value as 'First_Name', 
 						 LName.meta_value AS 'Last_Name', 
 						 School.meta_value AS 'School',
+						 Terms.meta_value AS 'Terms_Approval',
 						 u.user_registered AS 'Register_Date'
 						 FROM $wpdb->users AS u
 						 LEFT JOIN ( 
@@ -74,7 +75,13 @@
 							FROM $wpdb->usermeta 
 							WHERE meta_key = '_IDGL_elem_school'
 						 ) AS School
-						 ON u.ID = School.user_id 
+						 ON u.ID = School.user_id
+						 LEFT OUTER JOIN (
+							SELECT user_id, meta_key, meta_value  
+							FROM $wpdb->usermeta 
+							WHERE meta_key = '_IDGL_elem_terms_approval'
+						 ) AS Terms
+						 ON u.ID = Terms.user_id 
 						 WHERE Meta.meta_value IS NOT NULL";
 		}
 		else
@@ -87,6 +94,7 @@
 						 FName.meta_value as 'First_Name', 
 						 LName.meta_value AS 'Last_Name', 
 						 School.meta_value AS 'School',
+						 Terms.meta_value AS 'Terms_Approval',
 						 u.user_registered AS 'Register_Date'
 						 FROM $wpdb->users AS u
 						 LEFT JOIN ( 
@@ -115,6 +123,12 @@
 							WHERE meta_key = '_IDGL_elem_school'
 						 ) AS School
 						 ON u.ID = School.user_id
+						 LEFT OUTER JOIN (
+							SELECT user_id, meta_key, meta_value  
+							FROM $wpdb->usermeta 
+							WHERE meta_key = '_IDGL_elem_terms_approval'
+						 ) AS Terms
+						 ON u.ID = Terms.user_id
 						 WHERE Meta.meta_value IS NOT NULL";
 		}
 		
@@ -163,5 +177,5 @@
 	table#IDGL_table tr th:first-child { width: 30px; }
 	table#IDGL_table tr th:last-child { width: 110px; }
 	#id { width: 30px; }
-	#login_name, #email { width: 200px; }
+	#login_name, #email { width: 180px; }
 </style>
