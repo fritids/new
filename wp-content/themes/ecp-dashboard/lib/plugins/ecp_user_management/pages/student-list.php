@@ -40,7 +40,7 @@
 			}
 
 			$q = "SELECT u.ID,  
-						 u.user_login AS Login, 
+						 u.user_login AS Login_Name, 
 						 u.user_nicename AS Nicename, 
 						 u.user_email AS Email, 
 						 u.display_name AS Display, 
@@ -80,7 +80,7 @@
 		else
 		{
 			$q = "SELECT u.ID,  
-						 u.user_login AS Login, 
+						 u.user_login AS Login_Name, 
 						 u.user_nicename AS Nicename, 
 						 u.user_email AS Email, 
 						 u.display_name AS Display, 
@@ -158,21 +158,10 @@
 		echo $dg -> render();
 	?>
 </div>
-<script type="text/javascript">
-	// table sorters
-	(function($) {
-		/*$("#IDGL_table").tablesorter({
-			headers : {
-				0 : {
-					sorter : false
-				},
-				1 : {
-					sorter : false
-				},
-				9: {
-					sorter: false
-				}
-			}
-		});*/
-	})(jQuery);
-</script>
+
+<style>
+	table#IDGL_table tr th:first-child { width: 30px; }
+	table#IDGL_table tr th:last-child { width: 110px; }
+	#id { width: 30px; }
+	#login_name, #email { width: 200px; }
+</style>
