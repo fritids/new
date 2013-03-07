@@ -45,14 +45,6 @@ require_once(IDG_CLASS_PATH."class.BFormValidator.php");
 wp_enqueue_script('jquery');
 wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.8.24.custom.min.js');
 wp_enqueue_script('jquery-ui');
-wp_register_script('ajaxupload', IDGL_THEME_URL . '/lib/js/ajaxupload.js');
-wp_enqueue_script('ajaxupload');
-wp_register_script('idgl_colorpicker', IDGL_THEME_URL . '/lib/js/colorpicker/colorpicker.js');
-wp_enqueue_script('idgl_colorpicker');
-wp_register_script('main', IDGL_THEME_URL . '/lib/js/main.js');
-wp_enqueue_script('main');
-wp_register_script('fancybox', IDGL_THEME_URL . '/lib/js/fancybox/jquery.fancybox-1.3.3.js');
-wp_enqueue_script('fancybox');
 /*
  * Print admin head
  */
@@ -90,7 +82,6 @@ function IDGL_Admin_head() {
 
 add_action('wp_head','IDGL_add_scripts_front');
 function IDGL_add_scripts_front(){
-	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/js/fancybox/jquery.fancybox-1.3.3.css" />' . "\n";
 	echo "<script type='text/javascript'>
 			var imagesPath='".IDGL_THEME_URL."/lib/images/';
 			var adminAjax='".get_bloginfo('url')."/wp-admin/admin-ajax.php';

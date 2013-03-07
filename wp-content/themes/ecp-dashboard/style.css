@@ -172,6 +172,17 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 .stat-img.sat { background: url('images/SAT-Book.png') no-repeat; }
 .stat-img.act { background: url('images/ACT-Book.png') no-repeat; }
 
+/***************************
+	Terms and conditions
+***************************/
+#terms-popup { width: 800px; padding: 30px; padding-right: 10px; }
+#terms-popup h2 { color: #455B6A; font-size: 28px; font-weight: bold; margin-bottom: 30px; text-align: center; }
+#terms-popup h3 { color: #F06F30; font-size: 20px; font-weight: bold; }
+#terms-popup div.popup-content { height: 300px; overflow: auto; padding-right: 5px; }
+#terms-popup div.terms-buttons { margin-top: 30px; text-align: center; }
+#terms-popup div.terms-buttons a { display: inline-block; background: none repeat scroll 0 0 #F06F30; border: 2px solid #FFFFFF; -webkit-border-radius: 25px; -moz-border-radius: 25px;
+	border-radius: 25px; color: #FFFFFF; cursor: pointer; font-size: 22px; font-weight: bold; padding: 8px 15px; text-transform: uppercase; }
+
 /****************
 	Pages
 ****************/

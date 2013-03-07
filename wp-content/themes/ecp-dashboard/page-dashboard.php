@@ -20,6 +20,9 @@ $query = "SELECT count(*) as count FROM ".ECP_MCT_TABLE_USER_NOTES." notes
 		  JOIN ".ECP_MCT_TABLE_TESTS." `tests` ON `notes`.`test_id` = `tests`.`id` AND `tests`.`type` = 'ACT'
 		  WHERE `notes`.`user_id` = '%d'";
 $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
+
+// Se if user has accepted the terms and conditions
+$terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", true);
 ?>
 
 <div class="row-fluid">
@@ -84,9 +87,50 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 	</div>
 </div>
 
-<script type="text/javascript">
-     jQuery(document).ready(function(){
+<a id="terms-popup-link" href="#terms-popup" style="display:none">Display Terms and Conditions</a>
 
+<div style="display:none">
+	<div id="terms-popup">
+		<?php
+		 $terms = get_page_by_path("end-user-terms-and-conditions");
+		 
+		 if($terms):
+		?>
+		<h2><?php echo $terms->post_title; ?></h2>
+		<div class="popup-content">
+			<?php echo $terms->post_content; ?>
+			<div class="terms-buttons">
+				<a href="#" id="accept-terms">I accept the terms and conditions</a>
+			</div>
+		</div>
+		<?php endif; ?>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("a#terms-popup-link").fancybox({
+			modal: true
+		});
+		
+		<?php if(! $terms_approval): ?>
+		$('a#terms-popup-link').trigger('click');
+		$('a#accept-terms').click(function(e) {
+			e.preventDefault();
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/accept_terms_and_conditions.php",
+				success: function(data){
+					if(data)
+						parent.$.fancybox.close();
+					else
+						alert("An error occurred. Please try again later.");
+				}
+			});
+		});
+		<?php endif; ?>
+		
 	    options1 = {
 			img1: '<?php echo get_template_directory_uri(); ?>/images/c1.png',
 			img2: '<?php echo get_template_directory_uri(); ?>/images/c3.png',
@@ -111,7 +155,7 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 	    jQuery('#p1').cprogress(options1);
 		jQuery('#p2').cprogress(options2);
 		jQuery('#p3').cprogress(options3);
-     });
+	});
 </script>
 
 <?php
