@@ -312,7 +312,6 @@ class IS_IU_Import_Users {
 		$first = true;
 		$rkey = 0;
 		while ( ( $line = $csv_reader->get_row() ) !== NULL ) {
-
 			// If the first line is empty, abort
 			// If another line is empty, just skip it
 			if ( empty( $line ) ) {
@@ -416,7 +415,8 @@ class IS_IU_Import_Users {
 
 			// Is there an error?
 			if ( is_wp_error( $user_id ) ) {
-				$errors[$rkey] = $user_id;
+				$errors[$rkey]['error'] = $user_id;
+				$errors[$rkey]['userdata'] = $userdata;
 			} else {
 				// If no error, let's update the user meta too!
 				if ( $usermeta ) {
@@ -468,13 +468,12 @@ class IS_IU_Import_Users {
 
 		$log = @fopen( self::$log_dir_path . 'is_iu_errors.log', 'a' );
 		@fwrite( $log, sprintf( __( 'BEGIN %s' , 'import-users-from-csv'), date( 'Y-m-d H:i:s', time() ) ) . "\n" );
-
 		foreach ( $errors as $key => $error ) {
 			$line = $key + 1;
-			$message = $error->get_error_message();
-			@fwrite( $log, sprintf( __( '[Line %1$s] %2$s' , 'import-users-from-csv'), $line, $message ) . "\n" );
+			$message = $error['error']->get_error_message();
+			$user_login = $error['userdata']['user_login'];
+			@fwrite( $log, sprintf( __( '[Line %1$s] %2$s' , 'import-users-from-csv'), $line, $message . "(" . $user_login . ")" ) . "\n" );
 		}
-
 		@fclose( $log );
 	}
 }
