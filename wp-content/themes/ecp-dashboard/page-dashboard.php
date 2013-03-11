@@ -20,6 +20,9 @@ $query = "SELECT count(*) as count FROM ".ECP_MCT_TABLE_USER_NOTES." notes
 		  JOIN ".ECP_MCT_TABLE_TESTS." `tests` ON `notes`.`test_id` = `tests`.`id` AND `tests`.`type` = 'ACT'
 		  WHERE `notes`.`user_id` = '%d'";
 $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
+
+// Se if user has accepted the terms and conditions
+$terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", true);
 ?>
 
 <div class="row-fluid">
@@ -57,32 +60,93 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 			</div>
 			<?php $page = get_page_by_title("Practice SAT and ACT Exams"); ?>
 			<div class="widget-content">
-				<div class="statistics-wrap">
-					<div class="statistics-block test-block">
-						<div class="stat-img sat">SAT Text Book</div>
-						<div class="stat-info">
-							<div><a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $sat_user->count; ?></font></a> of <a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $sat_count->count; ?></font></a></div>
-							<div>Tests complete</div>
+				<a href="<?php echo get_permalink($page->ID) ?>">
+					<div class="statistics-wrap">
+						<div class="statistics-block test-block">
+							<div class="stat-img sat">SAT Text Book</div>
+							<div class="stat-info">
+								<div><font color="#f0825b"><?php echo $sat_user->count; ?></font> of <font color="#f0825b"><?php echo $sat_count->count; ?></font></div>
+								<div>Tests complete</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="statistics-wrap">
-					<div class="statistics-block test-block">
-						<div class="stat-img act">ACT Text Book</div>
-						<div class="stat-info">
-							<div><a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $act_user->count; ?></font></a> of <a href="<?php echo get_permalink($page->ID) ?>"><font color="#f0825b"><?php echo $act_count->count; ?></font></a></div>
-							<div>Tests complete</div>
+				</a>
+				<a href="<?php echo get_permalink($page->ID) ?>">
+					<div class="statistics-wrap">
+						<div class="statistics-block test-block">
+							<div class="stat-img act">ACT Text Book</div>
+							<div class="stat-info">
+								<div><font color="#f0825b"><?php echo $act_user->count; ?></font> of <font color="#f0825b"><?php echo $act_count->count; ?></font></div>
+								<div>Tests complete</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script type="text/javascript">
-     jQuery(document).ready(function(){
+<a id="terms-popup-link" href="#terms-popup" style="display:none">Display Terms and Conditions</a>
 
+<div style="display:none">
+	<div id="terms-popup">
+		<?php
+		 $terms = get_page_by_path("end-user-terms-and-conditions");
+		 
+		 if($terms):
+		?>
+		<div class="popup-content" id="terms-content">
+			<h2><?php echo $terms->post_title; ?></h2>
+			<?php echo $terms->post_content; ?>
+		</div>
+		<div class="terms-buttons">
+			<div class="terms-buttons-checkbox">
+				<input type="checkbox" id="check-terms" />
+				I accept the <a href ="#" id="check-terms-link">END USER TERMS AND CONDITIONS</a>
+			</div>
+			<a href="#" id="accept-terms" class="disabled">Go</a>
+		</div>
+		<?php endif; ?>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("a#terms-popup-link").fancybox({
+			modal: true, centerOnScroll: true
+		});
+		<?php if(! $terms_approval): ?>
+		jQuery('a#terms-popup-link').trigger('click');
+		jQuery("a#check-terms-link").click(function(e) {
+			e.preventDefault();
+			jQuery("#terms-content").show();
+		});
+		jQuery("#check-terms").click(function() {
+			if(jQuery(this).is(':checked')) {
+				jQuery("#accept-terms").removeClass("disabled");
+			} else {
+				jQuery("#accept-terms").addClass("disabled");
+			}
+		});
+		jQuery('a#accept-terms').click(function(e) {
+			e.preventDefault();
+			if(jQuery("#check-terms").is(':checked')) {
+				jQuery.ajax({
+					type: "POST",
+					dataType: "json",
+					url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/accept_terms_and_conditions.php",
+					success: function(data){
+						if(data)
+							parent.jQuery.fancybox.close();
+						else
+							alert("An error occurred. Please try again later.");
+					}
+				});
+			}
+		});
+		<?php endif; ?>
+		
 	    options1 = {
 			img1: '<?php echo get_template_directory_uri(); ?>/images/c1.png',
 			img2: '<?php echo get_template_directory_uri(); ?>/images/c3.png',
@@ -107,7 +171,7 @@ $act_user = $wpdb->get_row($wpdb->prepare($query, $current_user->ID));
 	    jQuery('#p1').cprogress(options1);
 		jQuery('#p2').cprogress(options2);
 		jQuery('#p3').cprogress(options3);
-     });
+	});
 </script>
 
 <?php

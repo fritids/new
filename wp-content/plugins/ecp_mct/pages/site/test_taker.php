@@ -56,7 +56,8 @@ $act_tests = $wpdb->get_results($query);
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
 									<td colspan="4"></td>
-									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>">Take test</a></td>
+									<?php /*<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>">Take test</a></td>*/?>
+									<td><a class="take-test" test_id="<?php echo $test->id; ?>" href="#test-warning">Take test</a></td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['Reading']; ?></td>
 									<td class="center"><?php echo $notes['Math']; ?></td>
@@ -112,7 +113,8 @@ $act_tests = $wpdb->get_results($query);
 								<td><?php echo $test->name;?></td>
 								<?php if($sections->count): ?>
 									<td colspan="5"></td>
-									<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>">Take test</a></td>
+									<?php /*<td><a class="take-test" href="<?php echo get_option('home') . '/blog/test/test_'.$test->id ?>">Take test</a></td>*/?>
+									<td><a class="take-test" test_id="<?php echo $test->id; ?>" href="#test-warning">Take test</a></td>
 								<?php else: ?>
 									<td class="center"><?php echo $notes['English']; ?></td>
 									<td class="center"><?php echo $notes['Math']; ?></td>
@@ -130,3 +132,17 @@ $act_tests = $wpdb->get_results($query);
 		</div>
 	</div>
 </div>
+
+<div style="display:none">
+	<div id="test-warning">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery(".take-test").click( function() {
+			if(confirm("Once you start the test, the countdown will start running. Continue?")) {
+				window.location.href = "<?php echo get_option('home') ?>/blog/test/test_"+jQuery(this).attr('test_id');
+			}
+		});
+	});
+</script>

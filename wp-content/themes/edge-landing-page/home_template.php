@@ -77,16 +77,7 @@
 					    <ul id="content-slider-inside">  
 					        <li id="Private-Tutoring">
 						<h3><img src="images/private-tutoring-title.png" alt="Private Student Tutoring"></h3>
-						Students living in the New York Tri-State area, 
-							London, Buenos Aires, Rio, South Florida, LA, 
-							and the SF Bay area can access in-person 
-							private and group tutoring. For students 
-							outside those areas, we offer high-tech video 
-							tutoring as well as traveling through our 
-							Global Elite program. All tutoring packages 
-							are customized based on the amount of score
-							improvement a student needs to achieve his 
-							goal scores.<br/><br />
+						Students living in the New York Tri-State area, London, Buenos Aires, Rio, and South Florida can access in-person private and group tutoring. For students outside those areas, we offer high-tech video tutoring as well as travel tutoring through our Global Elite program. All tutoring packages are customized based on the score improvement a student needs to achieve his goal scores.<br/><br />
 	<a href="http://info.edgeincollegeprep.com/sat-v-act-which-test-is-right-for-you-or-your-son-or-daughter"><div class="c2a">Get Started Today!</div></a>
 							</li>  
 					        <li id="SAT-ACT-Edge">
@@ -98,7 +89,7 @@
 					        </li>  
 					        <li id="Bootcamps-Teacher-Training">
 						<h3><img src="images/bootcamps-training-title.png" alt="SAT and ACT Bootcamps, Teacher Training"></h3>
-						We work directly with schools to provide SAT/ACT Bootcamps during the summer months and school breaks and can also customize ongoing courses during the school year. We can either provide our instructors or can just provide materials and a teacher training program for your teachers. We also work with tutors and smaller tutoring companies to provide them with materials, discounted access to our online SAT/ACT prep course, and training programs as well. We are also happy to say we've never turned a student away who cannot pay for our classes and not only provide extensive scholarships, but also offer complimentary materials and online course access to non-profits, Title I schools, and any student qualifying for the Reduced Lunch program.
+						We work directly with schools to provide SAT/ACT Edge subscriptions for their students at considerable discounts off our retail prices. We also offer Professional Development workshops to train teachers to incorporate the SAT/ACT Edge into the school's Math & English curriculum. Lastly, we coordinate SAT/ACT Bootcamps during the summer months and school breaks and can also customize ongoing courses during the school year. We also work with tutors and smaller tutoring companies to provide them with materials, discounted access to our online SAT/ACT prep course, and training programs. We are happy to say we've never turned a student away who cannot pay for our classes and not only provide extensive scholarships, but also offer complimentary materials and online course access to non-profits, Title I schools, and students qualifying for the Reduced Lunch program.
 						<br/><br />
 	<a href="http://info.edgeincollegeprep.com/sat-v-act-which-test-is-right-for-you-or-your-son-or-daughter"><div class="c2a">Get Started Today!</div></a>
 							</li>  

@@ -42,16 +42,15 @@ if($ua = "tryout")
 			wp_enqueue_script('json2');
 		?>
 	</head>
+	
 	<body <?php body_class(); ?>>
-	<div id="header">
-		<div class="container-wide">
-	        <a class="left" id="logo" href="<?php bloginfo('url'); ?>"></a>
-	        <div class="clear"></div>
-	    </div>
-	</div><!-- end header -->
-	<div class="back_to_site_button">
-				<a href="http://edgeincollegeprep.com">Back to the site</a>
-			</div>
-	<div id="content">
-	    <div class="container">
-	      <div class="widecolumn">
+		<header>
+			<h1><a href="<?php bloginfo('url'); ?>/registration">THE EDGE in College Prep</a></h1>
+		</header>
+		
+		<div id="sub-title-bar">
+			<h2>ACCOUNT REGISTRATION</h2>
+			<div>Register & Receive a FREE testing trial</div>
+		</div>
+		
+		<div class="container">
