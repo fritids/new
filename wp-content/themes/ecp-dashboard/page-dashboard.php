@@ -96,12 +96,16 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
 		 
 		 if($terms):
 		?>
-		<h2><?php echo $terms->post_title; ?></h2>
-		<div class="popup-content">
+		<div class="popup-content" id="terms-content">
+			<h2><?php echo $terms->post_title; ?></h2>
 			<?php echo $terms->post_content; ?>
-			<div class="terms-buttons">
-				<a href="#" id="accept-terms">I accept the terms and conditions</a>
+		</div>
+		<div class="terms-buttons">
+			<div class="terms-buttons-checkbox">
+				<input type="checkbox" id="check-terms" />
+				I accept the <a href ="#" id="check-terms-link">END USER TERMS AND CONDITIONS</a>
 			</div>
+			<a href="#" id="accept-terms" class="disabled">Go</a>
 		</div>
 		<?php endif; ?>
 	</div>
@@ -110,24 +114,36 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery("a#terms-popup-link").fancybox({
-			modal: true
+			modal: true, centerOnScroll: true
 		});
-		
 		<?php if(! $terms_approval): ?>
-		$('a#terms-popup-link').trigger('click');
-		$('a#accept-terms').click(function(e) {
+		jQuery('a#terms-popup-link').trigger('click');
+		jQuery("a#check-terms-link").click(function(e) {
 			e.preventDefault();
-			$.ajax({
-				type: "POST",
-				dataType: "json",
-				url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/accept_terms_and_conditions.php",
-				success: function(data){
-					if(data)
-						parent.$.fancybox.close();
-					else
-						alert("An error occurred. Please try again later.");
-				}
-			});
+			jQuery("#terms-content").show();
+		});
+		jQuery("#check-terms").click(function() {
+			if(jQuery(this).is(':checked')) {
+				jQuery("#accept-terms").removeClass("disabled");
+			} else {
+				jQuery("#accept-terms").addClass("disabled");
+			}
+		});
+		jQuery('a#accept-terms').click(function(e) {
+			e.preventDefault();
+			if(jQuery("#check-terms").is(':checked')) {
+				jQuery.ajax({
+					type: "POST",
+					dataType: "json",
+					url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/accept_terms_and_conditions.php",
+					success: function(data){
+						if(data)
+							parent.jQuery.fancybox.close();
+						else
+							alert("An error occurred. Please try again later.");
+					}
+				});
+			}
 		});
 		<?php endif; ?>
 		
