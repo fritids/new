@@ -45,6 +45,9 @@ require_once(IDG_CLASS_PATH."class.BFormValidator.php");
 wp_enqueue_script('jquery');
 wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.8.24.custom.min.js');
 wp_enqueue_script('jquery-ui');
+wp_register_script('main', IDGL_THEME_URL . '/lib/js/main.js');
+wp_enqueue_script('main');
+
 /*
  * Print admin head
  */
