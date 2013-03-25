@@ -30,28 +30,16 @@ $payment = new AuthorizeNetAIM();
 $total_cart_price = 0;
 foreach($ecp_cart -> getAllProducts() as $i => $product)
 {
-	//$total_cart_price += $product -> price;
-	/*if($product -> discounted_price)
+	$price = $product -> price;
+	if($product -> discounted_price)
 	{
-		$total_cart_price += $product -> discounted_price;
-		if(!is_null($product -> name))
-		{
-			$payment -> addLineItem(($i + 1), htmlentities(StringUtils::shortenString("{$product -> name}", 25), ENT_QUOTES), htmlentities(StringUtils::shortenString("{$product -> desc}", 25), ENT_QUOTES), $product -> quantity, "{$product -> discounted_price}", "Y");
-		}
+		$price = $product -> discounted_price;
 	}
-	else 
-	{*/
-		$price = $product -> price;
-		if($product -> discounted_price)
-		{
-			$price = $product -> discounted_price;
-		}
-		$total_cart_price += $product -> full_price;
-		if(!is_null($product -> name))
-		{
-			$payment -> addLineItem(($i + 1), htmlentities(StringUtils::shortenString("{$product -> name}", 25), ENT_QUOTES), htmlentities(StringUtils::shortenString("{$product -> desc}", 25), ENT_QUOTES), $product -> quantity, "{$price}", "Y");
-		}
-	//}
+	$total_cart_price += $product -> full_price;
+	if(!is_null($product -> name))
+	{
+		$payment -> addLineItem(($i + 1), htmlentities(StringUtils::shortenString("{$product -> name}", 25), ENT_QUOTES), htmlentities(StringUtils::shortenString("{$product -> desc}", 25), ENT_QUOTES), $product -> quantity, "{$price}", "Y");
+	}
 }
 
 $payment -> setFields(

@@ -40,6 +40,11 @@ register_taxonomy(
 add_action( 'admin_init', 'my_admin' );
 
 function my_admin() {
+	add_meta_box( 'online_subscription_meta_box',
+        'Online Course Subscription',
+        'display_online_subscription_meta_box',
+        'ecpproduct', 'normal', 'high'
+    );
     add_meta_box( 'prices_meta_box',
         'ECP Product Prices',
         'display_prices_meta_box',
@@ -47,13 +52,26 @@ function my_admin() {
     );
 }
 
-function display_prices_meta_box( $product_prices ) {
-    $price_type = get_post_meta( $product_prices->ID, 'price_type', true );
-	$universal_price = esc_html( get_post_meta( $product_prices->ID, 'universal_price', true ) );
-	$location_prices = unserialize( get_post_meta( $product_prices->ID, 'location_prices', true ) );
-	
-    $movie_director = esc_html( get_post_meta( $movie_review->ID, 'movie_director', true ) );
-    $movie_rating = intval( get_post_meta( $movie_review->ID, 'movie_rating', true ) );
+function display_online_subscription_meta_box( $product_data ) {
+	$time_coverage = get_post_meta( $product_data->ID, 'time_coverage', true );
+	$time_measure = get_post_meta( $product_data->ID, 'time_measure', true );
+	?>
+	<div style="line-height: 2;">
+		<strong>If this product allows users to access the online courses, please select the product shelf life:</strong>
+		<div>
+			<label>Online course coverage:</label>
+			<input type="text" name="time_coverage" size="3" value="<?php echo $time_coverage; ?>" />
+			<input type="radio" value="days" name="time_measure" checked /> days
+			<input type="radio" value="months" name="time_measure" <?php checked("months", $time_measure) ?> /> months
+		</div>
+	</div>
+	<?php
+}
+
+function display_prices_meta_box( $product_data ) {
+    $price_type = get_post_meta( $product_data->ID, 'price_type', true );
+	$universal_price = esc_html( get_post_meta( $product_data->ID, 'universal_price', true ) );
+	$location_prices = unserialize( get_post_meta( $product_data->ID, 'location_prices', true ) );
     ?>
 	<div style="line-height: 2;">
 		<strong>Select the type of price for this product:</strong>
@@ -122,18 +140,24 @@ function display_prices_meta_box( $product_prices ) {
 
 add_action( 'save_post', 'add_price_fields', 10, 2 );
 
-function add_price_fields( $product_prices_id, $product_prices ) {
+function add_price_fields( $product_data_id, $product_data ) {
     // Check post type for movie reviews
-    if ( $product_prices->post_type == 'ecpproduct' ) {
+    if ( $product_data->post_type == 'ecpproduct' ) {
         // Store data in post meta table if present in post data
+		if ( isset( $_POST['time_coverage'] ) && !empty($_POST['time_coverage']) ) {
+            update_post_meta( $product_data_id, 'time_coverage', $_POST['time_coverage']);
+        }
+		if ( isset( $_POST['time_measure'] ) && !empty($_POST['time_measure']) ) {
+            update_post_meta( $product_data_id, 'time_measure', $_POST['time_measure']);
+        }
         if ( isset( $_POST['price_type'] ) && $_POST['price_type'] != '' ) {
-            update_post_meta( $product_prices_id, 'price_type', $_POST['price_type'] );
+            update_post_meta( $product_data_id, 'price_type', $_POST['price_type'] );
         }
         if ( isset( $_POST['universal_price'] ) && $_POST['universal_price'] != '' ) {
-            update_post_meta( $product_prices_id, 'universal_price', $_POST['universal_price'] );
+            update_post_meta( $product_data_id, 'universal_price', $_POST['universal_price'] );
         }
 		if ( isset( $_POST['location_prices'] ) && !empty($_POST['location_prices']) ) {
-            update_post_meta( $product_prices_id, 'location_prices', serialize($_POST['location_prices']));
+            update_post_meta( $product_data_id, 'location_prices', serialize($_POST['location_prices']));
         }
     }
 }

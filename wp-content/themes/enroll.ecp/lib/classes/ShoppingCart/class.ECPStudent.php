@@ -48,6 +48,7 @@ class ECPStudent
 		$this -> _user = $user_data["FirstName"]." ".$user_data["LastName"];
 		$data = array(
 			"user_pass" => $this -> _password,
+			"user_password" => $this -> _password,
 			"user_login" => $this -> _username,
 			"user_nicename" => $this -> _user,
 			"user_email" => $this -> _username,
@@ -56,19 +57,7 @@ class ECPStudent
 			"last_name" => $user_data["LastName"]
 		);
 							
-		$idgl_data = ArrayUtils::unsetMultipleKeys($user_data, array(
-																	"timeout", 
-																	"referrer", 
-																	"FirstName", 
-																	"LastName", 
-																	"cc_type", 
-																	"cc_fname", 
-																	"cc_lname", 
-																	"cc_number", 
-																	"cvv2",
-																	"cc_ex_month", 
-																	"cc_ex_year"
-		));
+		$idgl_data = ArrayUtils::unsetMultipleKeys($user_data, array( "timeout", "referrer", "FirstName",  "LastName" ));
 		
 		$this -> _id = wp_insert_user($data);
 		
@@ -78,61 +67,24 @@ class ECPStudent
 			$idgl_data["user_type"] = "student";
 			$idgl_data["userSubtype"] = array("online-student");
 			$idgl_data["registration_date"] = time();
+			$idgl_data["terms_approval"] = date("Y-m-d H:i:s");
 			IDGL_Users::IDGL_addNewUserMeta($idgl_data);
 			
+			// Send Email
 			$this -> _msg_subject = getThemeMeta("ecpRegisterMailSubject", "", "_ecpMail");
 		    $this -> _msg_body = getThemeMeta("ecpRegisterMailBody", "", "_ecpMail");		
 		    $this -> _prepareMail();
 			$this -> _sendMail();
-		    return $this -> _id;
-		}
-		else
-		{
-			return $this -> _err -> get_error_message("insert_user");
-		}	
-	}
-	
-	/**
-	 * 
-	 * Create demo user which account disables in 5 days after registration
-	 * @param Array $user_data
-	 */
-	public function createDemoUser($user_data)
-	{
-		$this -> _password = wp_generate_password( 12, false );
-		
-		$this -> _user = $user_data["fname"]." ".$user_data["lname"];
-		$data = array(
-			"user_pass" => $this -> _password,
-			"user_login" => $this -> _username,
-			"user_nicename" => $this -> _user,
-			"user_email" => $this -> _username,
-			"display_name" => $this -> _user,
-			"first_name" => $user_data["fname"],
-			"last_name" => $user_data["lname"]
-		);
-		
-		$this -> _id = wp_insert_user($data);
-		
-		if(is_int($this -> _id))
-		{		
-			$idgl_data["id"] = $this -> _id;		
-			$idgl_data["user_type"] = "student";
-			$idgl_data["userSubtype"] = array("demo-student");
-			$idgl_data["expiration_date"] = strtotime("+5 day");
-			IDGL_Users::IDGL_addNewUserMeta($idgl_data);
 			
-			$this -> _msg_subject = getThemeMeta("ecpTryoutMailSubject", "", "_ecpMail");
-		    $this -> _msg_body = getThemeMeta("ecpTryoutMailBody", "", "_ecpMail");
-		    
-		    $this -> _prepareMail();
-			$this -> _sendMail();
+			// Login User
+			wp_signon( $data, false );
+			
 		    return $this -> _id;
 		}
 		else
 		{
-			return $this -> _err -> get_error_message("insert_user");
-		}
+			return false;
+		}	
 	}
 	
 	/**
@@ -149,8 +101,6 @@ class ECPStudent
 			$products[$i]["id"] = $single_product -> id;
 			$products[$i]["type"] = $single_product -> name;
 			$products[$i]["price"] = $single_product -> price;
-			$products[$i]["quantity"] = $single_product -> quantity;
-			$products[$i]["discount"] = $single_product -> discount;
 		}
 		//backward compatibility
 		$previous_order = unserialize(get_user_meta($this -> _id, "_IDGL_elem_ECP_user_order", true));
@@ -159,7 +109,7 @@ class ECPStudent
 		$order = array_merge($order, $products);
 		if(!update_user_meta( $this -> _id, "_IDGL_elem_ECP_user_order", serialize($order)))
 		{
-			//return $this -> _err -> get_error_message("insert_products");
+			return false;
 		}		
 		
 		$previous_orders_details = get_user_meta($this -> _id, "_IDGL_elem_ECP_user_orders_details", true);
@@ -168,7 +118,7 @@ class ECPStudent
 		
 		if(!update_user_meta( $this -> _id, "_IDGL_elem_ECP_user_orders_details", $orders_details ))
 		{
-			//return $this -> _err -> get_error_message("insert_products");
+			return false;
 		}
 	}
 	

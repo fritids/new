@@ -1,4 +1,7 @@
 jQuery(function($){
+	// Init masks
+	InputMask.init();
+			
 	/* Location Select Box */
 	$("SELECT").selectBox();
 	updateTestPrepTutoringPrices($("SELECT").selectBox('value'));
@@ -23,10 +26,8 @@ jQuery(function($){
 	/* Cart functionality */
 	$(".product-item").click(function() {
 		if($(this).hasClass("selected")) {
-			$(this).removeClass("selected");
-			if($(this).hasClass("satact-edge-online-course")) {
-				$("#essay-grading").slideUp();
-				$("#essay-grading").find(".product-item").removeClass("selected");
+			if(!$(this).hasClass("satact-edge-online-course")) {
+				$(this).removeClass("selected");
 			}
 		} else {
 			if($(this).hasClass("satact-edge-online-course")) {
@@ -90,7 +91,6 @@ jQuery(function($){
 		}
 	});
 	
-	
 	function updateTestPrepTutoringPrices (location) {
 		$(".product-item").find(".location_prices").hide();
 		$(".product-item").find("."+location).show();
@@ -105,45 +105,27 @@ jQuery(function($){
 	}
 	
 	function getTotal() {
+		var products = new Array();
 		var total = 0;
 		$(".product-item.selected").each(function() {
 			if($(this).attr("price-type") != "free") {
 				total += parseFloat($(this).attr("price"));
 			}
+			
+			// Create product object
+			products.push(new product($(this).attr("post-id"),$(this).attr("name"),$(this).attr("desc"),$(this).attr("price"),$(this).attr("taxonomy_slug")));
 		});
+		//purchase.total = total;
 		$("#registration-total").html(total);
 		$("#popup-registration-total").html(total);
+		$("#purchase-description").val(JSON.stringify(products));
 	}
 	
-	/* Form Validation*/
-	$("#ecp_registration_form").validate({
-		errorClass: "validation-error",
-		validClass: "validation-valid",
-		errorElement: "span"
-	});
-	
-	$("#frmCreatePlan").validate({
-		wrapper: "span",
-		onfocusout: false,
-		onkeyup: false,
-		rules: {
-			name:{
-				required:true,
-				maxlength:100,
-				remote:{
-					type: 'post',
-					url: '<?php echo URL::site("admin/rpc/check_plan_name")?>',
-					data: {
-						id: function(){ return '<?php echo $plan->id; ?>'; }
-					}
-				}
-			},
-			description:{ required:true },
-			status:{ required:true }
-		},
-		messages: {
-			name: { remote: "Name already exists" }
-		}
-	});
-
+	function product(id, name, desc, price, taxonomy_slug) {
+		this.id = id;
+		this.name = name;
+		this.desc = desc;
+		this.price = price;
+		this.taxonomy_slug = taxonomy_slug;
+	}
 });

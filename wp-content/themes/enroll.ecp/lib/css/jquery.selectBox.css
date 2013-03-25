@@ -31,6 +31,6 @@
 
 
 /* Billing form popup styles */
-#billing-form-popup .selectBox-dropdown { min-width: 0; position: relative; border: solid 1px #ffffff; background: #ffffff; -moz-box-shadow: inset -2px 1px 1px #dddddd; -webkit-box-shadow: inset -2px 1px 11px #dddddd; box-shadow: inset -2px 1px 1px #dddddd; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; margin-right: 3px; }
-#billing-form-popup .selectBox-dropdown .selectBox-label { padding: 0 8px; font-size: 22px; }
-#billing-form-popup .selectBox-dropdown .selectBox-arrow { position: absolute; top: 0; right: 0; width: 23px; height: 100%; background: #474747 url(../images/jquery.selectBox-arrow2.png) 50% center no-repeat; border-left: none; }
+.billing-form-popup .selectBox-dropdown { min-width: 0; position: relative; border: solid 1px #ffffff; background: #ffffff; -moz-box-shadow: inset -2px 1px 1px #dddddd; -webkit-box-shadow: inset -2px 1px 11px #dddddd; box-shadow: inset -2px 1px 1px #dddddd; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; margin-right: 3px; }
+.billing-form-popup .selectBox-dropdown .selectBox-label { padding: 0 8px; font-size: 22px; }
+.billing-form-popup .selectBox-dropdown .selectBox-arrow { position: absolute; top: 0; right: 0; width: 23px; height: 100%; background: #474747 url(../images/jquery.selectBox-arrow2.png) 50% center no-repeat; border-left: none; }

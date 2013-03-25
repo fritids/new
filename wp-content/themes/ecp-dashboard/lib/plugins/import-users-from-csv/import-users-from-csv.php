@@ -396,6 +396,7 @@ class IS_IU_Import_Users {
 			$usermeta['_IDGL_elem_Nickname'] = $userdata['user_nicename'];
 			$usermeta['_IDGL_elem_Email'] = $userdata['user_email'];
 			$usermeta['_IDGL_elem_user_type'] = $user_type;
+			$usermeta['_IDGL_elem_registration_date'] = time();
 			
 			if($user_type == "student") {
 				$usermeta['_IDGL_elem_userSubtype'] = serialize($student_type);
