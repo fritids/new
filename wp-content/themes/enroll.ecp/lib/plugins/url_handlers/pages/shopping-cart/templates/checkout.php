@@ -91,7 +91,7 @@ if($student -> userExist()) {
 			if(!in_array($product -> taxonomy_slug, $h))
 			{
 				$slug = ProductFilter::slugFilter($product -> taxonomy_slug);
-				//$student -> sendProductMail($categories[$slug]["subject"], $categories[$slug]["body"]);
+				$student -> sendProductMail($categories[$slug]["subject"], $categories[$slug]["body"]);
 				array_push($h, $product -> taxonomy_slug);
 			}
 		}
@@ -101,14 +101,13 @@ if($student -> userExist()) {
 		// Save users order
 		$student->saveUserProducts($products);
 
-		$transaction_id = $response -> transaction_id;
-		//$session_utils -> addData(array("referrer" => $handler -> getReferrer(), "transaction_id" => $transaction_id));
+		$_SESSION['transaction_id'] = $response -> transaction_id;
 
-		$total=(int) get_option( "donation_amnt", 0 );	
-		$total+=0.05*$total_cart_price;
-		update_option( "donation_amnt", $total );
+//		$total=(int) get_option( "donation_amnt", 0 );	
+//		$total+=0.05*$total_cart_price;
+//		update_option( "donation_amnt", $total );
 
-		$handler -> redirect("/cart/thankyou");
+		$handler -> redirect("/thankyou");
 	}
 	else
 	{

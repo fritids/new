@@ -116,6 +116,7 @@ jQuery(function($){
 			products.push(new product($(this).attr("post-id"),$(this).attr("name"),$(this).attr("desc"),$(this).attr("price"),$(this).attr("taxonomy_slug")));
 		});
 		//purchase.total = total;
+		$("#registration-total-hdn").val(total);
 		$("#registration-total").html(total);
 		$("#popup-registration-total").html(total);
 		$("#purchase-description").val(JSON.stringify(products));

@@ -137,7 +137,8 @@
 
 <div class="total-container">
 	Your total purchase: $<span id="registration-total">0</span>
-
+	<input type="hidden" id="registration-total-hdn" value="0" />
+</div>
 <div class="register-now-container">
 	<a href="#billing-form-popup" id="register-now">REGISTER NOW!</a>
 </div>
@@ -322,7 +323,7 @@
 						<input type="text" name="cc_city" class="required letterswithbasicpunc" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_city']; ?>" />
 					</div>
 					<div style="width: 105px; margin-right: 5px;">
-						<select name="cc_state" class="required" style="width: 100px;">
+						<select name="cc_state" id="cc_state" class="required" style="width: 100px;">
 							<option></option>
 							<?php foreach ($states_list as $state): ?>
 							<option value="<?php echo $state; ?>" <?php if($user_selecction['cc_state'] == $state) echo "selected='selected'"; ?>><?php echo $state; ?></option>
@@ -353,7 +354,7 @@
 				<div class="field clearfix">
 					<label>Expiration</label>
 					<div style="width:89px; margin-right: 5px;">
-						<select name="cc_ex_month" class="required" style="width:84px;">
+						<select name="cc_ex_month" id="cc_ex_month" class="required" style="width:84px;">
 							<option value=""></option>
 							<?php foreach ($cc_months as $month): ?>
 							<option value="<?php echo $month; ?>"><?php echo $month; ?></option>
@@ -361,7 +362,7 @@
 						</select>
 					</div>
 					<div style="width:134px;">
-						<select name="cc_ex_year" class="required" style="width:120px;">
+						<select name="cc_ex_year" id="cc_ex_year" class="required" style="width:120px;">
 							<option value=""></option>
 							<?php foreach ($cc_years as $year): ?>
 							<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
@@ -480,9 +481,13 @@
 					url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/create_user_account.php",
 					success: function(data){
 						if(data) {
-							$("#account-info-form").hide();
-							$("#billing-info-form").show();
-							$("#account-success").show();
+							if($("#registration-total-hdn").val() > 0) {
+								$("#account-info-form").hide();
+								$("#billing-info-form").show();
+								$("#account-success").show();
+							} else {
+								window.location = "<?php echo site_url('/thankyou'); ?>";
+							}
 						} else {
 							$("#account-error").show();
 							$("#first_name").attr('disabled',false);
@@ -525,6 +530,13 @@
 					}
 				});
 				
+			}
+		});
+		
+		$("#finalize-reg").click(function(e) {
+			if($("#ecp_registration_form").valid()) {
+				$(this).attr("disabled", true);
+				$(this).addClass('disabled');
 			}
 		});
 	});
