@@ -529,11 +529,10 @@
 						}
 					}
 				});
-				
 			}
 		});
 		
-		$("#finalize-reg").click(function(e) {
+		$("#finalize-reg").click(function() {
 			if($("#ecp_registration_form").valid()) {
 				$(this).attr("disabled", true);
 				$(this).addClass('disabled');

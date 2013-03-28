@@ -148,6 +148,44 @@ class ECPStudent
 		}		
 	}
 	
+	/**
+	 * 
+	 * Send mail to the site administrator
+	 * @param string $subject
+	 * @param string $body
+	 */
+	public function sendAdminMail($ecp_products)
+	{
+		if(empty($this -> _user))
+		{
+			$user_info = get_userdata($this -> _id);
+			$this -> _user = $user_info -> first_name." ".$user_info -> last_name;
+		}
+		
+		$message = "A new purchase has been made. Here is the description:<br><br>";
+		$message .= "<div><b>User:</b> " . $this->_username . "</div>";
+		$message .= "<div><b>Products: </b></div>";
+		$message .= "<ul>";
+		
+		foreach($ecp_products as $i => $single_product)
+		{
+			$category = get_term_by('slug',$single_product -> taxonomy_slug,"ecp-products");
+			
+			$message .= "<li>";
+			$message .= $single_product -> name . ", " . $category -> name . " - $" . $single_product -> price;
+			$message .= "</li>";
+		}
+		$message .= "</ul>";
+		
+		add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
+		$headers = "From: Edge in College Prep Administrator <info@edgeincollegeprep.com>" . "\r\n\\";
+
+		if(!wp_mail(get_option('admin_email'), "ECP New Purchase", $message, $headers))
+		{
+		   return $this -> _err -> get_error_message("send_mail");
+		}
+	}
+	
 	// PRIVATE METHODS
 	
 	// @TODO: refactor functions in mail class

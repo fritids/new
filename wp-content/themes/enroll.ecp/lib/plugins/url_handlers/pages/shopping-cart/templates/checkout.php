@@ -96,10 +96,11 @@ if($student -> userExist()) {
 			}
 		}
 
-
-
 		// Save users order
 		$student->saveUserProducts($products);
+		
+		// Send email to the admin
+		$student->sendAdminMail($products);
 
 		$_SESSION['transaction_id'] = $response -> transaction_id;
 
