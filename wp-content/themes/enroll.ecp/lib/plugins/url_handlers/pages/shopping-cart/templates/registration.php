@@ -148,7 +148,7 @@
 		<?php /* ACCOUNT INFO POPUP */ ?>
 		<div id="account-info-form" class="billing-form-popup" <?php if($current_user->ID != 0): ?>style="display: none;"<?php endif; ?>>
 			<form method="post" id="ecp_account_form">
-				<div class="title"><span>STEP 1 -</span> ACCOUNT INFO</div>
+				<div class="title"><span>STEP 1 -</span> STUDENT INFO</div>
 				
 				<div id="account-error" class="validation-error login">
 					There was an error creating your account, please contact us on : <a href="mailto:online@edgeincollegeprep.com">online@edgeincollegeprep.com</a>
