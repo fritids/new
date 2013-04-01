@@ -68,13 +68,13 @@
 	
 	<?php if($category -> slug == "essay-grading"): ?>
 	<div class="upgrade-course">Do you want to add on <span>Essay Grading</span> to the course?</div>
-	<div class="upgrade-course-sub">Get up to 15 SAT or ACT essays graded by an Edge test prep expert for $10/essay</div>
+	<div class="upgrade-course-sub">Get up to 15 SAT or ACT essays graded by an Edge test prep expert</div>
 	<?php endif; ?>
 
 	<?php if($category -> slug == "test-prep-tutoring-junior"): ?>
 	<div class="location-container">
 		<label>Select your location: </label>
-		<select id="location-select">
+		<select id="location-select" style="width: 270px;">
 			<option value="new_york">New York</option>
 			<option value="london">London</option>
 			<option value="buenos_aires">Buenos Aires / Rio</option>
