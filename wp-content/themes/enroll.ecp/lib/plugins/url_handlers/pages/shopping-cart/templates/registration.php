@@ -24,8 +24,8 @@
 	$cards_list = array('visa'=>'Visa', 'master_card'=>'Master Card', 'am_ex'=>'American Express');
 	
 	//dob dates
-	$date_utils_dob = new DateUtils();
-	$date_utils_dob->setYearRangeFromToday(date("Y"), 1980);
+	$date_utils_grad = new DateUtils();
+	$date_utils_grad->setYearRangeFromToday(date("Y")+7, date("Y")-3);
 	
 	// cc dates
 	$date_utils = new DateUtils();
@@ -174,45 +174,6 @@
 					</div>
 				</div>
 				<div class="field clearfix">
-					<label>Date of Birth</label>
-					<div style="width: 105px; margin-right: 5px;">
-						<select id="dob_d" name="DOB_Day" class="required" style="width: 100px;">
-							<?php 
-								 $sel_value = NULL; 
-								 if(isset($user_selecction["DOB_Day"]) && !empty($user_selecction["DOB_Day"]))
-								 {
-									 $sel_value = $user_selecction["DOB_Day"];
-								 }
-							?>
-							<?php echo $date_utils_dob -> printDateOptions("days", $sel_value); ?>
-						 </select>
-					</div>
-					<div style="width: 155px; margin-right: 5px;">
-						<select id="dob_m" name="DOB_Month" class="required" style="width: 150px;">
-							<?php 
-								  $sel_value = NULL; 
-								  if(isset($user_selecction["DOB_Month"]) && !empty($user_selecction["DOB_Month"]))
-								  {
-									  $sel_value = $user_selecction["DOB_Month"];
-								  }
-							 ?>
-							<?php echo $date_utils_dob -> printDateOptions("months", $sel_value); ?>
-						  </select>
-					</div>
-					<div style="width: 165px;">
-						<select id="dob_y" name="DOB_Year" class="required" style="width: 160px;">
-							<?php 
-								  $sel_value = NULL; 
-								  if(isset($user_selecction["DOB_Year"]) && !empty($user_selecction["DOB_Year"]))
-								  {
-									  $sel_value = $user_selecction["DOB_Year"];
-								  }
-							 ?>
-							 <?php echo $date_utils_dob -> printDateOptions("years", $sel_value?$sel_value:1980); ?>
-						</select>
-					</div>
-				</div>
-				<div class="field clearfix">
 					<label>Email Address</label>
 					<div style="width: 435px;">
 						<input type="text" name="email" id="email" class="required email" style="width: 420px;" value="<?php echo $user_selecction['email']; ?>" />
@@ -224,6 +185,21 @@
 						<input type="text" name="school" id="school" style="width: 420px;" value="<?php echo $user_selecction["school"]; ?>"/>
 					</div>
 			   </div>
+				<div class="field clearfix">
+					<label>Expected HS Graduation Year</label>
+					<div style="width: 165px;">
+						<select id="dob_y" name="Graduation_Year" class="required" style="width: 160px;">
+							<?php 
+								  $sel_value = NULL; 
+								  if(isset($user_selecction["Graduation_Year"]) && !empty($user_selecction["Graduation_Year"]))
+								  {
+									  $sel_value = $user_selecction["Graduation_Year"];
+								  }
+							 ?>
+							 <?php echo $date_utils_grad -> printDateOptions("years", $sel_value?$sel_value:date("Y")); ?>
+						</select>
+					</div>
+				</div>
 				<div class="billing-checkboxes">
 					<div class="field checkbox terms">
 						<input type="checkbox" name="terms_conditions" class="required" /> I agree to the Edge in College Prep's <a href="#">Terms and Conditions</a>
