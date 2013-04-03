@@ -45,7 +45,7 @@ if($ua = "tryout")
 	
 	<body <?php body_class(); ?>>
 		<header>
-			<h1><a href="<?php bloginfo('url'); ?>/registration">THE EDGE in College Prep</a></h1>
+			<h1><a href="<?php bloginfo('url'); ?>/cart">THE EDGE in College Prep</a></h1>
 		</header>
 		
 		<div id="sub-title-bar">

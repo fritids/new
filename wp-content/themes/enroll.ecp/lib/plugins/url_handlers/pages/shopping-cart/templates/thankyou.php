@@ -1,102 +1,37 @@
 <?php
-require_once IDG_CLASS_PATH."Utils/class.FormPostHandler.php";
-require_once IDG_CLASS_PATH."ShoppingCart/class.ECPStudent.php";
-require_once IDG_CLASS_PATH.'/ShoppingCart/CouponActions/class.ecpCoupons.php';
-require_once IDG_CLASS_PATH.'/ShoppingCart/FormActions/class.ProductFilter.php';
-
-global $ecp_cart;
-global $session_utils;
-$handler = new FormPostHandler();
-$one = $session_utils -> getUserData("referrer");
-$two = $handler -> getReferrer();
-
-if( $one  )
-{	
-	$step = false;
-}
-else 
-{
-	$step = true;
-}
-
-$session_utils -> addData(array("referrer" => $handler -> getReferrer()));
-if($step)
-{
-	wp_redirect(get_bloginfo("url")."/cart/");
-	return;
-}
-
-$user_data = $session_utils -> getAllUserData();
-if(isset($user_data["Email"]))
-{
-	$student = new ECPStudent($user_data["Email"]);
-}
-elseif(isset($user_data["user_email"]))
-{
-	$student = new ECPStudent($user_data["user_email"]);
-}
-
-if(!($student -> userExist()))
-{
-	$student -> createUser($user_data);
-}
-
-if($ecp_cart -> cartExist())
-{
-	$cart_products = $ecp_cart -> getAllProducts();
-	$terms = get_terms("ecp-products");
-	$categories = array();
+	global $wpdb;
+	global $current_user;
 	
-	foreach ($terms as $term)
-	{
-		if(strpos($term -> slug, "essay") !== false)
-		{
-			$categories["essay"] = array("subject" => "essay-subject", "body" => "essay-body");
-		}
-		else
-		{
-			$categories[$term -> slug] = array("subject" => "{$term -> slug}-subject", "body" => "{$term -> slug}-body");			
-		}
-	}
-	
-	$h = array();
-	foreach($cart_products as $product)
-	{
-		$original_price = getPostMeta($product -> id, "ProductPrice");
-		if($original_price != $product -> price)
-		{
-			$product -> discount =  $original_price - $product -> price;
-		}
-		
-		if(!in_array($product -> taxonomy_slug, $h))
-		{
-			$slug = ProductFilter::slugFilter($product -> taxonomy_slug);
-			$student -> sendProductMail($categories[$slug]["subject"], $categories[$slug]["body"]);
-			array_push($h, $product -> taxonomy_slug);
-		}
-	}
-	
-	$student -> saveUserProducts($cart_products);
-	$coupon = $ecp_cart -> getCoupon();
-	
-	if($coupon)
-	{
-		$tashak = ecpCoupons::getInstance();
-		$tashak -> decreaseCouponUsage($coupon -> getCouponId());
-	}
-}
-?>
+	?>
 
-<div class="whitebox">
-	<h4>Thank you for ordering</h4>
-	<div class="ecp_order_wrapper">
-		<?php echo Templator::getCartTemplate("thankyou", array("user_data" => $user_data, "cart_data" => $cart_products), "sections/"); ?>
-	</div>
+<div class="thankyou-page">
+	<?php if(isset($_SESSION['transaction_id'])): unset($_SESSION['transaction_id']); ?>
+	<h3>Thank you so much for making a purchase with The Edge</h3>
+	<?php else: ?>
+	<h3>Thank you so much for registering on The Edge</h3>
+	<?php endif; ?>
+	<p>
+		You should be receiving an e-mail shortly with instructions on how to proceed.
+	</p>
+
+	<p>
+		If you purchased a subscription to The SAT/ACT Edge, you'll be receiving a welcome e-mail with instructions on how to use the course to
+		maximize your score improvement. If you have any issues, please do not hesitate to contact us at
+		<a href="mailto:tech@edgeincollegeprep.com">tech@edgeincollegeprep.com</a> (for any technical issues) or <a href="mailto:online@edgeincollegeprep.com">online@edgeincollegeprep.com</a>
+		(for any questions about the course). To get your essays graded, please email a copy of your essay along with the question and whether it is
+		for an SAT or ACT to <a href="mailto:essays@edgeincollegeprep.com">essays@edgeincollegeprep.com</a>.
+	</p>
+	
+	<p>
+		If you purchased Test Prep Tutoring or Admissions Counseling, you'll be contacted by the appropriate office manager depending on your location.
+		If you need immediate assistance before you hear from her, please reach out to:
+	</p>
+	
+	<p>
+		<ul>
+			<li>Anna Maria Calo: <a href="mailto:anna@edgeincollegeprep.com">anna@edgeincollegeprep.com</a> (New York, London, Skype)</li>
+			<li>Gala Tonconogy: <a href="mailto:gala@edgeincollegeprep.com">gala@edgeincollegeprep.com</a> (Buenos Aires, Rio de Janeiro)</li>
+			<li>Matt Cull: <a href="mailto:matt@edgeincollegeprep.com">matt@edgeincollegeprep.com</a> (South Florida)</li>
+		</ul>
+	</p>
 </div>
-<?php 
-	if($ecp_cart -> cartExist())
-	{
-		$ecp_cart -> destroyCart();
-	}
-	$session_utils -> destroyUserData();
-?>

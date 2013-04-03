@@ -100,6 +100,8 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 
 
 /** SHOPING CART **/
+.error-div { font-weight: bold; margin-top: 30px; padding: 10px; border:2px solid #ddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+
 .product-category { margin-top: 50px; }
 .product-category#test-prep-tutoring-senior { margin: 0; }
 .product-category h3 { background: #366f90; padding: 10px 0; color: #ffffff; font-size: 28px; text-align: center; border: solid 3px #fff; -moz-box-shadow: 0 0 5px #666; -webkit-box-shadow: 0 0 5px #666; box-shadow: 0 0 5px #666; -webkit-border-radius: 35px; -moz-border-radius: 35px; border-radius: 35px; }
@@ -129,21 +131,35 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 #register-now, #register-now:hover { text-decoration: none; cursor: pointer; display: inline-block; padding: 7px 50px; color: #fff; font-size: 24px; text-shadow: 1px 1px #666; font-weight: bold; border: solid 3px #fff; -moz-box-shadow: 0 0 5px #666, inset 0 0 3px #666; -webkit-box-shadow: 0 0 5px #666, inset 0 0 3px #666; box-shadow: 0 0 5px #666, inset 0 0 3px #666; -webkit-border-radius: 35px; -moz-border-radius: 35px; border-radius: 35px; background: #FA8611;
 	background: -ms-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -moz-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -o-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FA8611), color-stop(1, #EE6828)); background: -webkit-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: linear-gradient(to bottom, #FA8611 0%, #EE6828 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8611', endColorstr='#EE6828', GradientType=0 ); }
 
-#billing-form-popup { width: 725px; }
-#billing-form-popup .title { text-align: right; color: #455B6A; font-size: 28px; font-weight: bold; margin-bottom: 10px; padding: 0 30px; }
-#billing-form-popup .title span { color: #F06F30; }
-#billing-form-popup .field { margin: 10px 0; }
-#billing-form-popup .field label { float: left; font-size: 22px; text-transform: uppercase; color: #455B6A; text-align: right; width: 220px; display: inline-block; padding: 0 10px 0 30px; }
-#billing-form-popup .field { margin-bottom:  3px; }
-#billing-form-popup .field div { float: left; }
-#billing-form-popup .field.checkbox { margin-left:  25px; font-weight: bold; color: #455B6A; }
-#billing-form-popup .field.total { font-size: 20px; text-transform: uppercase; color: #455B6A; text-align: right; font-weight: bold; margin: 5px 0; padding-right: 30px; }
-#billing-form-popup .field.total div { float: none; font-size: 26px; display: inline-block; width: 85px; text-align: right; color: #000000; }
-#billing-form-popup .field input[type=text] { border: solid 1px #f6fafd; font-size: 20px; padding: 4px 5px; -moz-box-shadow: inset -2px 1px 1px #dddddd; -webkit-box-shadow: inset -2px 1px 11px #dddddd; box-shadow: inset -2px 1px 1px #dddddd; margin: 0; }
-#billing-form-popup .field label.cvv { width: auto; padding: 0 20px 0 25px; }
-#billing-form-popup .billing-checkboxes { margin-top: 20px; }
-#billing-form-popup .submit-button { padding: 0 30px; margin: 15px 0; }
-#billing-form-popup .submit-button input[type=submit] { font-size: 22px; font-weight: bold; text-transform: uppercase; color: #ffffff; background: #F06F30; border: solid 2px #ffffff; padding: 8px 15px; -webkit-border-radius: 25px; -moz-border-radius: 25px; border-radius: 25px; float: right; cursor: pointer; }
-#billing-form-popup .field.terms span.validation-error { display: inline-block; }
+.billing-form-popup { width: 725px; }
+.billing-form-popup .title { text-align: right; color: #455B6A; font-size: 28px; font-weight: bold; margin-bottom: 10px; padding: 0 30px; }
+.billing-form-popup .title span { color: #F06F30; }
+.billing-form-popup .field { margin: 10px 0; }
+.billing-form-popup .field label { float: left; font-size: 22px; text-transform: uppercase; color: #455B6A; text-align: right; width: 220px; display: inline-block; padding: 0 10px 0 30px; }
+.billing-form-popup .field { margin-bottom:  3px; }
+.billing-form-popup .field div { float: left; }
+.billing-form-popup .field.checkbox { margin-left:  25px; font-weight: bold; color: #455B6A; }
+.billing-form-popup .field input[type=text], .billing-form-popup .field input[type=password] { border: solid 1px #f6fafd; font-size: 20px; padding: 4px 5px; -moz-box-shadow: inset -2px 1px 1px #dddddd; -webkit-box-shadow: inset -2px 1px 11px #dddddd; box-shadow: inset -2px 1px 1px #dddddd; margin: 0; }
+.billing-form-popup .field input[type=text]:disabled, .billing-form-popup .field input[type=password]:disabled { color: #888888; background: #eee; }
+.billing-form-popup .field input[type=text]:read-only { color: #888888; background: #eee; }
+.billing-form-popup .field.total { font-size: 20px; text-transform: uppercase; color: #455B6A; text-align: right; font-weight: bold; margin: 5px 0; padding-right: 30px; }
+.billing-form-popup .field.total div { float: none; font-size: 26px; display: inline-block; width: 85px; text-align: right; color: #000000; }
+.billing-form-popup .field label.cvv { width: auto; padding: 0 20px 0 25px; }
+.billing-form-popup .billing-checkboxes { margin-top: 20px; }
+.billing-form-popup .submit-button { padding: 0 30px; margin: 15px 0; }
+.billing-form-popup .submit-button input[type=submit], .billing-form-popup .submit-button button { font-size: 22px; font-weight: bold; text-transform: uppercase; color: #ffffff; background: #F06F30; border: solid 2px #ffffff; padding: 8px 15px; -webkit-border-radius: 25px; -moz-border-radius: 25px; border-radius: 25px; float: right; cursor: pointer; }
+.billing-form-popup .submit-button input[type=submit].disabled, .billing-form-popup .submit-button button.disabled { cursor: default; background: #ccc; }
+.billing-form-popup .submit-button a { float: right; font-weight: bold; padding: 15px; }
+.billing-form-popup .field.terms span.validation-error { display: inline-block; }
 
-span.validation-error { display: block; margin-top: 4px; font-weight: bold; padding: 2px 5px; color: #E82020; border: solid 1px #E82020; background: #FCFABD; }
+.billing-form-popup span.validation-error, .billing-form-popup div.validation-error { display: block; margin-top: 4px; font-weight: bold; padding: 2px 5px; color: #E82020; border: solid 1px #E82020; background: #FCFABD; }
+.billing-form-popup div.validation-error.login { text-align: center; font-size: 14px; padding: 4px; margin: 0 34px; display: none; }
+
+.billing-form-popup div.account-success { font-size: 14px; padding: 4px; margin: 0 34px; display: block; margin-top: 4px; font-weight: bold; padding: 2px 5px; color: #264409; border: solid 1px #c6d880; background: #e6efc2; display: none; }
+
+/* Thankyou page */
+.thankyou-page { margin: 20px 0; background: #fff; padding: 40px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888;}
+.thankyou-page h3 { text-align: center; color: #F5772F; font-size: 26px; font-weight: bold; }
+.thankyou-page p { font-size: 16px; }
+.thankyou-page ul { list-style: none; margin: 0; padding: 0; }
+
