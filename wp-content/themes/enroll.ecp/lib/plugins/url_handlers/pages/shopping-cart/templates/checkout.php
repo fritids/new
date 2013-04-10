@@ -1,5 +1,4 @@
 <?php
-require_once IDG_CLASS_PATH."Utils/class.FormPostHandler.php";
 require_once IDG_CLASS_PATH."Utils/class.StringUtils.php";
 require_once IDG_CLASS_PATH."ShoppingCart/anet_php_sdk/AuthorizeNet.php";
 require_once IDG_CLASS_PATH."ShoppingCart/class.ECPStudent.php";
@@ -22,8 +21,6 @@ define("AUTHORIZENET_SANDBOX", false);
 $student = new ECPStudent($current_user->user_email);
 
 if($student -> userExist()) {
-
-	$handler = new FormPostHandler();
 
 	$payment = new AuthorizeNetAIM();
 	$total_cart_price = 0;
@@ -107,17 +104,16 @@ if($student -> userExist()) {
 //		$total=(int) get_option( "donation_amnt", 0 );	
 //		$total+=0.05*$total_cart_price;
 //		update_option( "donation_amnt", $total );
-
-		$handler -> redirect("/thankyou");
+		wp_redirect(get_bloginfo("url")."/thankyou");
 	}
 	else
 	{
 		$_SESSION['auth-error'] = $response -> response_reason_text;
 		$_SESSION['user-selection'] = $_POST;
-		$handler -> redirect("/cart");
+		wp_redirect(get_bloginfo("url")."/cart");
 	}
 } else {
 	$_SESSION['auth-error'] = "Problem loadin user's account";
 	$_SESSION['user-selection'] = $_POST;
-	$handler -> redirect("/cart");
+		wp_redirect(get_bloginfo("url")."/cart");
 }

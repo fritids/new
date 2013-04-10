@@ -36,9 +36,9 @@ function coupon_admin() {
         'ecpcoupon', 'normal', 'high'
     );
 	
-    add_meta_box( 'codes_meta_box',
-        'Coupon Codes',
-        'display_codes_meta_box',
+    add_meta_box( 'products_meta_box',
+        'Products to apply this coupon',
+        'display_products_meta_box',
         'ecpcoupon', 'normal', 'high'
     );
 	
@@ -47,8 +47,9 @@ function coupon_admin() {
 }
 
 function display_discount_meta_box( $coupon_data ) {
-	$discount_type = get_post_meta( $coupon_data->ID, 'discount_type', true );
-	$discount_value = esc_html( get_post_meta( $coupon_data->ID, 'discount_value', true ) );
+	$coupon_code = esc_html( get_post_meta( $coupon_data->ID, 'coupon_code', true ));
+	$discount_value = get_post_meta( $coupon_data->ID, 'discount_value', true );
+	$usage = get_post_meta( $coupon_data->ID, 'usage', true );
 	$discount_from = esc_html( get_post_meta( $coupon_data->ID, 'discount_from', true ) );
 	$discount_through = esc_html( get_post_meta( $coupon_data->ID, 'discount_through', true ) );
 	?>
@@ -57,23 +58,28 @@ function display_discount_meta_box( $coupon_data ) {
 		#discount_meta_box span.radio-option {margin-right: 10px;}
 		#discount_meta_box div.field { line-height: 3; }
 		#discount_meta_box #percentual { display: none; }
+		
+		label.validation-error { color:#8a1f11; background:#fbe3e4; border: solid 1px #fbc2c4; line-height: 1; padding: 5px; width: auto !important; }
 	</style>
 	<div class="field">
-		<label>Discount type:</label>
-		<span class="radio-option"><input type="radio" name="discount_type" id="discount-type-ammount" value="ammount" checked /> Ammount</span>
-		<span class="radio-option"><input type="radio" name="discount_type" id="discount-type-percent" value="percent" <?php checked("percent", $discount_type) ?> /> Percentual</span>
+		<label>Coupon Code:</label>
+		<input type="text" name="coupon_code" class="required" value="<?php echo $coupon_code; ?>" />
 	</div>
 	<div class="field">
 		<label>Discount Value:</label>
-		<span id="ammount-sign" id="">$</span><input type="text" name="discount_value" size="3" value="<?php echo $discount_value; ?>" /><span id="percentual-sign">%</span> off
+		$<input type="text" name="discount_value" size="3" class="required number" value="<?php echo $discount_value; ?>" /> off
+	</div>
+	<div class="field">
+		<label>Usage:</label>
+		<input type="text" name="usage" value="<?php echo $usage; ?>" class="required digits" />
 	</div>
 	<div class="field">
 		<label>Valid From:</label>
-		<input type="text" name="discount_from" id="discount-from" value="<?php echo $discount_from; ?>" />
+		<input type="text" name="discount_from" id="discount-from" class="required" value="<?php echo $discount_from; ?>" />
 	</div>
 	<div class="field">
 		<label>Valid Through:</label>
-		<input type="text" name="discount_through" id="discount-through" value="<?php echo $discount_through; ?>" />
+		<input type="text" name="discount_through" id="discount-through" class="required" value="<?php echo $discount_through; ?>" />
 	</div>
 	
 	<script type="text/javascript">
@@ -81,70 +87,52 @@ function display_discount_meta_box( $coupon_data ) {
 			jQuery("#discount-from").datepicker({minDate: 0});
 			jQuery("#discount-through").datepicker({minDate: 0});
 			
-			choose_discount();
-			jQuery("#discount-type-ammount").click(function() { choose_discount() });
-			jQuery("#discount-type-percent").click(function() { choose_discount() });
-			
-			function choose_discount() {
-				if(jQuery("#discount-type-ammount").is(':checked')) {
-					jQuery("#ammount-sign").show();
-					jQuery("#percentual-sign").hide();
-				} else if(jQuery("#discount-type-percent").is(':checked')) {
-					jQuery("#percentual-sign").show();
-					jQuery("#ammount-sign").hide();
-				}
-			}
+			jQuery("form#post").validate({
+				errorClass: "validation-error"
+			});
 		});
 	</script>
 	<?php
 }
 
-function display_codes_meta_box( $coupon_data ) {
-	$coupon_codes = unserialize( get_post_meta( $coupon_data->ID, 'coupon_code', true ) );
-	?>
-	<table>
-		<tr>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[0]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[1]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[2]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[3]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[4]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[5]; ?>" /></td>
-		</tr>
-		<tr>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[6]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[7]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[8]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[9]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[10]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[11]; ?>" /></td>
-		</tr>
-		<tr>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[12]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[13]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[14]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[15]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[16]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[17]; ?>" /></td>
-		</tr>
-		<tr>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[18]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[19]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[20]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[21]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[22]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[23]; ?>" /></td>
-		</tr>
-		<tr>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[24]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[25]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[26]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[27]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[28]; ?>" /></td>
-			<td><input type="text" name="coupon_code[]" value="<?php echo $coupon_codes[29]; ?>" /></td>
-		</tr>
-	</table>
-	<?php
+function display_products_meta_box( $coupon_data ) {
+	$applied_products = unserialize( get_post_meta( $coupon_data->ID, 'applied_products', true ) );
+	
+	global $wpdb;
+	$post_sql = "SELECT ID, post_content, post_title, post_name
+				FROM {$wpdb -> posts}
+				LEFT JOIN {$wpdb -> term_relationships} ON({$wpdb -> posts}.ID = {$wpdb -> term_relationships}.object_id)
+				LEFT JOIN {$wpdb -> term_taxonomy} ON({$wpdb -> term_relationships}.term_taxonomy_id = {$wpdb -> term_taxonomy}.term_taxonomy_id)
+				LEFT JOIN {$wpdb -> terms} ON({$wpdb -> term_taxonomy}.term_id = {$wpdb -> terms}.term_id)
+				WHERE {$wpdb -> posts}.post_type = 'ECPProduct' 
+				AND {$wpdb -> posts}.post_status = 'publish'
+				AND {$wpdb -> term_taxonomy}.taxonomy = 'ecp-products'
+				AND {$wpdb -> terms}.slug = '%s' 
+				ORDER BY {$wpdb -> posts}.menu_order ASC;";
+	
+	// Get all categories
+	$categories = array();
+	foreach(get_terms("ecp-products", "hide_empty=0&orderby=none") as $single_category)
+	{
+		$categories[$single_category -> term_id] = $single_category;
+	}
+	
+	foreach(wp_get_nav_menu_items("Product Order") as $menu_item) {
+		$category = $categories[$menu_item -> object_id];
+		$s_sql = sprintf($post_sql, $category -> slug);
+		$products = $wpdb -> get_results($wpdb -> prepare($s_sql));
+		
+		echo "<h4>".$category -> name."</h4><ul>";
+		
+		foreach($products as $post_data){ ?>
+		<li>
+			<input type="checkbox" name="products[]" value="<?php echo $post_data->ID; ?>" <?php if(in_array($post_data->ID, $applied_products)) echo "checked"; ?> />
+			<?php echo $post_data->post_title; ?>
+		</li>
+		<?php
+		}
+		echo "</ul>";
+	}
 }
 
 add_action( 'save_post', 'add_coupon_fields', 10, 2 );
@@ -153,11 +141,14 @@ function add_coupon_fields( $post_id, $post ) {
     // Check post type for movie reviews
     if ( $post->post_type == 'ecpcoupon' ) {
         // Store data in post meta table if present in post data
-        if ( isset( $_POST['discount_type'] ) && $_POST['discount_type'] != '' ) {
-            update_post_meta( $post_id, 'discount_type', $_POST['discount_type'] );
+		if ( isset( $_POST['coupon_code'] ) && !empty($_POST['coupon_code']) ) {
+            update_post_meta( $post_id, 'coupon_code', $_POST['coupon_code']);
         }
         if ( isset( $_POST['discount_value'] ) && $_POST['discount_value'] != '' && $_POST['discount_value'] > 0 ) {
             update_post_meta( $post_id, 'discount_value', $_POST['discount_value'] );
+        }
+		if ( isset( $_POST['usage'] ) && !empty($_POST['usage']) ) {
+            update_post_meta( $post_id, 'usage', $_POST['usage']);
         }
 		if ( isset( $_POST['discount_from'] ) && !empty($_POST['discount_from']) ) {
             update_post_meta( $post_id, 'discount_from', $_POST['discount_from']);
@@ -165,8 +156,8 @@ function add_coupon_fields( $post_id, $post ) {
 		if ( isset( $_POST['discount_through'] ) && !empty($_POST['discount_through']) ) {
             update_post_meta( $post_id, 'discount_through', $_POST['discount_through']);
         }
-		if ( isset( $_POST['coupon_code'] ) && !empty($_POST['coupon_code']) ) {
-            update_post_meta( $post_id, 'coupon_code', serialize($_POST['coupon_code']));
+		if ( isset( $_POST['products'] ) && !empty($_POST['products']) ) {
+            update_post_meta( $post_id, 'applied_products', serialize($_POST['products']));
         }
     }
 }
