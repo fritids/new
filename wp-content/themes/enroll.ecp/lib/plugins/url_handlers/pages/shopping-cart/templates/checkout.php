@@ -7,15 +7,15 @@ global $current_user;
 
 // live keys
 
-//define("AUTHORIZENET_API_LOGIN_ID", "2jt82yBg6Rz");
-//define("AUTHORIZENET_TRANSACTION_KEY", "9Y25KQhQ66xxEA2r");
-//define("AUTHORIZENET_SANDBOX", false);
+define("AUTHORIZENET_API_LOGIN_ID", "2jt82yBg6Rz");
+define("AUTHORIZENET_TRANSACTION_KEY", "9Y25KQhQ66xxEA2r");
+define("AUTHORIZENET_SANDBOX", false);
 
 // sandbox keys
 
-define("AUTHORIZENET_API_LOGIN_ID", "67HRz6n8");
-define("AUTHORIZENET_TRANSACTION_KEY", "9Kb427hZR6Xe5Q96");
-define("AUTHORIZENET_SANDBOX", true);
+//define("AUTHORIZENET_API_LOGIN_ID", "67HRz6n8");
+//define("AUTHORIZENET_TRANSACTION_KEY", "9Kb427hZR6Xe5Q96");
+//define("AUTHORIZENET_SANDBOX", true);
 
 
 $student = new ECPStudent($current_user->user_email);
