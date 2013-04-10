@@ -264,26 +264,24 @@ function ecp_coupons_callback_manage() {
 	function couponUpdateButton(){
 	//UPDATE COUPON - gotovo
 	 jQuery('#update_coupon_button').click(function(){
-
-		 var thisrow = jQuery(this).parent();
-		 var thiseditform = thisrow.parent().parent().parent();
-		 var coupon_id = thiseditform.find('.edit_coupon_id').val();
-		 var coupon_code = thiseditform.find('#edit_coupon_code').val();
-        var coupon_price = thiseditform.find('.edit_coupon_price').val();
-        var coupon_times = thiseditform.find('.edit_coupon_times').val();
-        var validity_time_from = thiseditform.find('.edit_validity_time_from').val();
-        var validity_time_till = thiseditform.find('.edit_validity_time_till').val();
+		var thisrow = jQuery(this).parent();
+		var thiseditform = thisrow.parent().parent().parent();
+		var coupon_id = thiseditform.find('.edit_coupon_id').val();
+		var coupon_code = thiseditform.find('#edit_coupon_code').val();
+		var coupon_price = thiseditform.find('.edit_coupon_price').val();
+		var coupon_times = thiseditform.find('.edit_coupon_times').val();
+		var validity_time_from = thiseditform.find('.edit_validity_time_from').val();
+		var validity_time_till = thiseditform.find('.edit_validity_time_till').val();
 		 
 		 jQuery.post("<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/update_coupon.php", { coupon_id: coupon_id, coupon_code: coupon_code, coupon_price: coupon_price,coupon_times: coupon_times,validity_time_from: validity_time_from,validity_time_till: validity_time_till }, function(data){
-				if(data == 1){
-					thiseditform.find('.update_coupon_message').text("Coupon is updated refresh page to see result");
-					
-					}
-				else{
-					thiseditform.find('.update_coupon_message').text("Coupon cannot be updated");
-					}
-				});
-		 
+			if(data == 1){
+				thiseditform.find('.update_coupon_message').text("Coupon is updated refresh page to see result");
+
+				}
+			else{
+				thiseditform.find('.update_coupon_message').text("Coupon cannot be updated");
+				}
+			});
 		 });
 	}
 
@@ -306,9 +304,6 @@ function ecp_coupons_callback_manage() {
 		return jQuery('#AvailableCoupons_1');
 	}
 	
-	
-
-    
     </script>
 	<style type="text/css">
     	div.couponWrapper ul li{

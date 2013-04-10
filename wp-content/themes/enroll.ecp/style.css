@@ -157,6 +157,8 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 
 .billing-form-popup div.account-success { font-size: 14px; padding: 4px; margin: 0 34px; display: block; margin-top: 4px; font-weight: bold; padding: 2px 5px; color: #264409; border: solid 1px #c6d880; background: #e6efc2; display: none; }
 
+.billing-form-popup #applyCoupon { display: inline-block; position: relative; top: -10px; text-indent: -1000em; height: 33px; width: 23px; background: #474747 url('images/button-arrow.png') 50% 50% no-repeat; border: solid 1px #fff; }
+
 /* Thankyou page */
 .thankyou-page { margin: 20px 0; background: #fff; padding: 40px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888;}
 .thankyou-page h3 { text-align: center; color: #F5772F; font-size: 26px; font-weight: bold; }

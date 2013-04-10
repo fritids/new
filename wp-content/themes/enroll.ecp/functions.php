@@ -43,6 +43,8 @@ wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.8.24.custo
 wp_enqueue_script('jquery-ui');
 wp_register_script('idgl_colorpicker', IDGL_THEME_URL . '/lib/js/colorpicker/colorpicker.js');
 wp_enqueue_script('idgl_colorpicker');
+wp_register_script('jquery-validate', IDGL_THEME_URL . '/lib/js/jquery-validate/jquery.validate.js');
+wp_enqueue_script('jquery-validate');
 wp_register_script('main', IDGL_THEME_URL . '/lib/js/main.js');
 wp_enqueue_script('main');
 
@@ -54,8 +56,8 @@ function IDGL_Admin_head() {
 	global $IDGL_model;
 	$uplData=wp_upload_dir();
 	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/js/colorpicker/css/colorpicker.css" />' . "\n";
-	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/smoothness/jquery-ui-1.10.0.custom.min.css" />' . "\n";
-	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/styles.css" />' . "\n";
+	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/smoothness/jquery-ui-1.10.2.custom.min.css" />' . "\n";
+	//echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/styles.css" />' . "\n";
 	echo '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> ';
 	echo "<script type='text/javascript'>
 			var imagesPath='".IDGL_THEME_URL."/lib/images/';
