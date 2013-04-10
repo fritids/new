@@ -92,7 +92,7 @@
 	<?php endif; ?>
 
 	<ul class="clearfix" <?php if($category -> slug == "test-prep-tutoring-senior"): ?> style="display: none;" <?php endif; ?>>
-	<? foreach($products as $post_data): ?>
+	<?php foreach($products as $post_data): ?>
 		<li>
 			<div class="product-item <?php echo $category->slug; ?> <?php if(get_post_meta($post_data->ID, 'price_type', true) == "free") echo "selected"; ?>"
 				 post-id="<?php echo $post_data->ID; ?>"
@@ -353,6 +353,7 @@
 				<div class="field clearfix" style="display: none;">
 					<label>Coupon Code</label>
 					<input type="text" style="width:150px;" />
+					<a href="#" id="applyCoupon">Apply Coupon</a>
 				</div>
 				<div class="field clearfix total">
 					Your total purchase:
@@ -512,6 +513,7 @@
 			if($("#ecp_registration_form").valid()) {
 				$(this).attr("disabled", true);
 				$(this).addClass('disabled');
+				$("#ecp_registration_form").submit();
 			}
 		});
 	});
