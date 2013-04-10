@@ -513,6 +513,7 @@
 			if($("#ecp_registration_form").valid()) {
 				$(this).attr("disabled", true);
 				$(this).addClass('disabled');
+				$("#ecp_registration_form").submit();
 			}
 		});
 	});
