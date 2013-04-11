@@ -1,0 +1,26 @@
+.widefat{border-spacing:0;width:100%;clear:both;margin:0}
+.widefat *{word-wrap:break-word}
+.widefat a{text-decoration:none}
+.widefat td,.widefat th{border-width:1px 0;border-style:solid}
+.widefat tfoot th{border-bottom:0}
+.widefat .no-items td{border-bottom-width:0}
+.widefat td{font-size:12px;padding:4px 7px 2px;vertical-align:top}
+.widefat td p,.widefat td ol,.widefat td ul{font-size:12px}
+.widefat th{padding:7px 7px 8px;text-align:left;line-height:1.3em;font-size:14px}
+.widefat th input{margin:0 0 0 8px;padding:0;vertical-align:text-top}
+.tablenav select[name="action"],.tablenav select[name="action2"]{width:130px}
+.tablenav select[name="m"]{width:155px}
+.tablenav select#cat{width:170px}
+.tablenav-pages a{border-bottom-style:solid;border-bottom-width:2px;font-weight:bold;margin-right:1px;padding:0 2px}
+.tablenav-pages .current-page{text-align:center}
+.tablenav-pages .next-page{margin-left:2px}
+.tablenav a.button-secondary{display:block;margin:3px 8px 0 0}
+.tablenav{clear:both;height:30px;margin:6px 0 4px;vertical-align:middle}
+.tablenav.themes{max-width:98%}
+.tablenav .tablenav-pages{float:right;display:block;cursor:default;height:30px;line-height:30px;font-size:12px}
+.tablenav .no-pages,.tablenav .one-page .pagination-links{display:none}
+.tablenav .tablenav-pages a,.tablenav-pages span.current{text-decoration:none;padding:3px 6px}
+.tablenav .tablenav-pages a.disabled:hover,.tablenav .tablenav-pages a.disabled:active{cursor:default}
+.tablenav .displaying-num{margin-right:10px;font-size:12px;font-style:italic}
+.tablenav .actions{padding:2px 8px 0 0}
+.tablenav .delete{margin-right:20px}

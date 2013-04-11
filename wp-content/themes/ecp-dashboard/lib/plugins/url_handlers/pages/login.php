@@ -5,8 +5,8 @@ $user = new BUser();
 
 //filtered $_POST
 $post = $user->sanitizedPost();
-if($post['wp-submit']) $errors = $user->login();
 
+if($post['wp-submit']) $errors = $user->login();
 
 
 get_header(); 
