@@ -4,14 +4,8 @@
 	
 	$user_selecction;
 	
-	if(isset($_SESSION['auth-error'])) {
+	if(isset($_SESSION['user-selection'])) {
 		$user_selecction = $_SESSION['user-selection'];
-	?>
-	<div class="error-div">
-		There has been an error with your authorization, the reason being: <?php echo  $_SESSION['auth-error'] ?>
-	</div>
-	<?php
-		unset($_SESSION['auth-error']);
 		unset($_SESSION['user-selection']);
 	}
 	
@@ -259,44 +253,46 @@
 	
 		<?php /* BILLING INFO POPUP */ ?>
 		<div id="billing-info-form" class="billing-form-popup" <?php if($current_user->ID == 0): ?>style="display: none;"<?php endif; ?>>
-			<form action="index.php?user_action=shopping-cart&section=checkout" method="post" id="ecp_registration_form">
+			<form <?php /*action="index.php?user_action=shopping-cart&section=checkout"*/?> method="post" id="ecp_registration_form">
 				<div class="title"><span>STEP 2 -</span> PAYMENT INFO</div>
 				
 				<div id="account-success" class="account-success">
 					Thank you for registering on college prep. Check your email for login credentials. If you don't receive any email from us, please contact us on : <a href="mailto:online@edgeincollegeprep.com">online@edgeincollegeprep.com</a>
 				</div>
 				
+				<div class="error-div" id="checkout-error" style="display:none;"></div>
+				
 				<div class="field clearfix">
 					<label>First & Last Name</label>
 					<div style="width: 215px; margin-right: 5px;">
-						<input type="text" name="cc_fname" class="required lettersonly" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_fname']; ?>" />
+						<input type="text" name="cc_fname" id="cc_fname" class="required lettersonly" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_fname']; ?>" />
 					</div>
 					<div style="width: 215px;">
-						<input type="text" name="cc_lname" class="required lettersonly" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_lname']; ?>" />
+						<input type="text" name="cc_lname" id="cc_lname" class="required lettersonly" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_lname']; ?>" />
 					</div>
 				</div>
 				<div class="field clearfix">
 					<label>Email Address</label>
 					<div style="width: 435px;">
-						<input type="text" name="cc_email" class="required email" style="width: 420px;" autocomplete="off" value="<?php echo $user_selecction['cc_email']; ?>" />
+						<input type="text" name="cc_email" id="cc_email" class="required email" style="width: 420px;" autocomplete="off" value="<?php echo $user_selecction['cc_email']; ?>" />
 					</div>
 				</div>
 				<div class="field clearfix">
 					<label>Phone Number</label>
 					<div style="width: 435px;">
-						<input type="text" name="cc_phone" class="required" mask="[###] ### #######" style="width: 420px;" autocomplete="off" value="<?php echo $user_selecction['cc_phone']; ?>" />
+						<input type="text" name="cc_phone" id="cc_phone" class="required" mask="[###] ### #######" style="width: 420px;" autocomplete="off" value="<?php echo $user_selecction['cc_phone']; ?>" />
 					</div>
 				</div>
 				<div class="field clearfix">
 					<label>Billing Address</label>
 					<div style="width: 435px;">
-					<input type="text" name="ba_1" class="required" style="width: 420px;" autocomplete="off" value="<?php echo $user_selecction['ba_1']; ?>" />
+					<input type="text" name="ba_1" id="ba_1" class="required" style="width: 420px;" autocomplete="off" value="<?php echo $user_selecction['ba_1']; ?>" />
 					</div>
 				</div>
 				<div class="field clearfix">
 					<label>City, State & Zip</label>
 					<div style="width: 215px; margin-right: 5px;">
-						<input type="text" name="cc_city" class="required letterswithbasicpunc" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_city']; ?>" />
+						<input type="text" name="cc_city" id="cc_city" class="required letterswithbasicpunc" style="width: 200px;" autocomplete="off" value="<?php echo $user_selecction['cc_city']; ?>" />
 					</div>
 					<div style="width: 105px; margin-right: 5px;">
 						<select name="cc_state" id="cc_state" class="required" style="width: 100px;">
@@ -307,13 +303,13 @@
 						</select>
 					</div>
 					<div style="width: 105px;">
-						<input type="text" name="cc_zip" class="required" style="width: 90px;" value="<?php echo $user_selecction['cc_zip']; ?>" />
+						<input type="text" name="cc_zip" id="cc_zip" class="required" style="width: 90px;" value="<?php echo $user_selecction['cc_zip']; ?>" />
 					</div>
 				</div>
 				<div class="field clearfix">
 					<label>Card Type</label>
 					<div style="width: 365px;">
-						<select id="cc_type" name="cc_type" class="required" style="width: 350px;">
+						<select name="cc_type" id="cc_type" class="required" style="width: 350px;">
 							<option value="">CHOOSE CARD TYPE</option>
 							<?php foreach ($cards_list as $k=>$card): ?>
 							<option value="<?php echo $k; ?>"><?php echo $card; ?></option>
@@ -324,7 +320,7 @@
 				<div class="field clearfix">
 					<label>Credit Card #</label>
 					<div style="width: 435px;">
-						<input type="text" id="cc_number" name="cc_number" class="required" style="width: 420px;" autocomplete="off" readonly />
+						<input type="text" name="cc_number" id="cc_number" class="required" style="width: 420px;" autocomplete="off" readonly />
 					</div>
 				</div>
 				<div class="field clearfix">
@@ -347,7 +343,7 @@
 					</div>
 					<label class="cvv">CVV#</label>
 					<div style="width:105px;">
-						<input type="text" id="cvv2" name="cvv2" class="required" style="width:90px;" autocomplete="off" readonly />
+						<input type="text" name="cvv2" id="cvv2" class="required" style="width:90px;" autocomplete="off" readonly />
 					</div>
 				</div>
 				<div class="field clearfix" style="display: none;">
@@ -365,156 +361,9 @@
 				</div>
 
 				<div class="submit-button clearfix">
-					<input type="submit" id="finalize-reg" value="Finalize Registration" />
+					<button type="button" id="finalize-reg">Finalize Registration</button>
 					<input type="hidden" name="purchase-description" id="purchase-description" />
 				</div>
 			</form>
 		</div>
 </div>
-	
-<script type="text/javascript">
-    jQuery(document).ready(function($){
-		/* Form Validation*/
-		var validator1 = $("#ecp_account_form").validate({
-			errorClass: "validation-error",
-			validClass: "validation-valid",
-			errorElement: "span",
-			rules: {
-				email:{
-					remote:{
-						type: 'post',
-						url: '<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/verify_username.php'
-					}
-				}
-			},
-			messages: {
-				email: {
-					remote: "This email is already registered in the system"
-				}
-			}
-		});
-		
-		var validator2 = $("#ecp_login_form").validate({
-			errorClass: "validation-error",
-			validClass: "validation-valid",
-			errorElement: "span"
-		});
-
-		var validator3 = $("#ecp_registration_form").validate({
-			errorClass: "validation-error",
-			validClass: "validation-valid",
-			errorElement: "span"
-		});
-
-		
-	
-		$("#go-to-login").click(function(e) {
-			e.preventDefault();
-			validator1.resetForm();
-			$("#account-info-form").hide();
-			$("#login-info-form").show();
-			$("#first_name").val("");
-			$("#last_name").val("");
-			$("#email").val("");
-			$("#school").val("");
-		});
-
-		$("#back-btn").click(function(e) {
-			e.preventDefault();
-			validator2.resetForm();
-			$("#login-error").hide();
-			$("#account-info-form").show();
-			$("#login-info-form").hide();
-			$("#login_username").val("");
-			$("#login_pass").val("");
-		});
-
-		$("#create-account").click(function() {
-			var link = $(this);
-			if($("#ecp_account_form").valid()) {
-				$("#account-error").hide();
-				$("#first_name").attr('disabled',true);
-				$("#last_name").attr('disabled',true);
-				$("#gender").selectBox('disable');
-				$("#email").attr('disabled',true);
-				$("#school").attr('disabled',true);
-				$("#dob_d").selectBox('disable');
-				$("#dob_m").selectBox('disable');
-				$("#dob_y").selectBox('disable');
-				link.addClass('disabled');
-				jQuery.ajax({
-					type: "POST",
-					dataType: "json",
-					data: {
-						FirstName: $("#first_name").val(),
-						LastName: $("#last_name").val(),
-						Gender: $("#gender").selectBox('value'),
-						Email: $("#email").val(),
-						School: $("#school").val(),
-						DOB_Day: $("#dob_d").selectBox('value'),
-						DOB_Month: $("#dob_m").selectBox('value'),
-						DOB_Year: $("#dob_y").selectBox('value')
-					},
-					url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/create_user_account.php",
-					success: function(data){
-						if(data) {
-							if($("#registration-total-hdn").val() > 0) {
-								$("#account-info-form").hide();
-								$("#billing-info-form").show();
-								$("#account-success").show();
-							} else {
-								window.location = "<?php echo site_url('/thankyou'); ?>";
-							}
-						} else {
-							$("#account-error").show();
-							$("#first_name").attr('disabled',false);
-							$("#last_name").attr('disabled',false);
-							$("#gender").selectBox('enable');
-							$("#email").attr('disabled',false);
-							$("#school").attr('disabled',false);
-							$("#dob_d").selectBox('enable');
-							$("#dob_m").selectBox('enable');
-							$("#dob_y").selectBox('enable');
-							link.removeClass('disabled');
-						}
-					}
-				});
-			}
-		});
-	
-		$("#login").click(function() {
-			var link = $(this);
-			if($("#ecp_login_form").valid()) {
-				$("#login-error").hide();
-				$("#login_username").attr('disabled',true);
-				$("#login_pass").attr('disabled',true);
-				link.addClass('disabled');
-				jQuery.ajax({
-					type: "POST",
-					dataType: "json",
-					data: {login: $("#login_username").val(), password: $("#login_pass").val()},
-					url: "<?php echo get_bloginfo('template_url'); ?>/lib/plugins/callbacks/ajax/login_user.php",
-					success: function(data){
-						if(data) {
-							$("#login-info-form").hide();
-							$("#billing-info-form").show();
-						} else {
-							$("#login_username").attr('disabled',false);
-							$("#login_pass").attr('disabled',false);
-							link.removeClass('disabled');
-							$("#login-error").show();
-						}
-					}
-				});
-			}
-		});
-		
-		$("#finalize-reg").click(function() {
-			if($("#ecp_registration_form").valid()) {
-				$(this).attr("disabled", true);
-				$(this).addClass('disabled');
-				$("#ecp_registration_form").submit();
-			}
-		});
-	});
-</script>

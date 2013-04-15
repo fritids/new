@@ -26,9 +26,10 @@ jQuery(function($){
 	/* Cart functionality */
 	$(".product-item").click(function() {
 		if($(this).hasClass("selected")) {
-			if(!$(this).hasClass("satact-edge-online-course")) {
-				$(this).removeClass("selected");
+			if($(this).hasClass("satact-edge-online-course")) {
+				$("#essay-grading").slideUp();
 			}
+			$(this).removeClass("selected");
 		} else {
 			if($(this).hasClass("satact-edge-online-course")) {
 				$(this).parents('ul').find(".satact-edge-online-course").removeClass("selected");
@@ -54,10 +55,65 @@ jQuery(function($){
 	$("a.show-description").click(function(evt){ evt.stopPropagation(); });
 	$("a.show-description").fancybox();
 	
-	/* Billing info popup */
+	/***********************
+	 * Registration popups
+	 ***********************/
 	$("a#register-now").fancybox({
 		hideOnOverlayClick: false,
 		centerOnScroll: true
+	});
+	
+	/* Form Validation*/
+	var validator1 = $("#ecp_account_form").validate({
+		errorClass: "validation-error",
+		validClass: "validation-valid",
+		errorElement: "span",
+		rules: {
+			email:{
+				remote:{
+					type: 'post',
+					url: TEMPLATE_PATH+'/lib/plugins/callbacks/ajax/verify_username.php'
+				}
+			}
+		},
+		messages: {
+			email: {
+				remote: "This email is already registered in the system"
+			}
+		}
+	});
+
+	var validator2 = $("#ecp_login_form").validate({
+		errorClass: "validation-error",
+		validClass: "validation-valid",
+		errorElement: "span"
+	});
+
+	var validator3 = $("#ecp_registration_form").validate({
+		errorClass: "validation-error",
+		validClass: "validation-valid",
+		errorElement: "span"
+	});
+	
+	$("#go-to-login").click(function(e) {
+		e.preventDefault();
+		validator1.resetForm();
+		$("#account-info-form").hide();
+		$("#login-info-form").show();
+		$("#first_name").val("");
+		$("#last_name").val("");
+		$("#email").val("");
+		$("#school").val("");
+	});
+
+	$("#back-btn").click(function(e) {
+		e.preventDefault();
+		validator2.resetForm();
+		$("#login-error").hide();
+		$("#account-info-form").show();
+		$("#login-info-form").hide();
+		$("#login_username").val("");
+		$("#login_pass").val("");
 	});
 	
 	/* Card Type selectbox */
@@ -90,6 +146,131 @@ jQuery(function($){
 			InputMask.init();
 		}
 	});
+	
+	$("#create-account").click(function() {
+		var link = $(this);
+		if($("#ecp_account_form").valid()) {
+			$("#account-error").hide();
+			$("#first_name").attr('disabled',true);
+			$("#last_name").attr('disabled',true);
+			$("#gender").selectBox('disable');
+			$("#email").attr('disabled',true);
+			$("#school").attr('disabled',true);
+			$("#dob_d").selectBox('disable');
+			$("#dob_m").selectBox('disable');
+			$("#dob_y").selectBox('disable');
+			link.addClass('disabled');
+			jQuery.ajax({
+				type: "POST",
+				dataType: "json",
+				data: {
+					FirstName: $("#first_name").val(),
+					LastName: $("#last_name").val(),
+					Gender: $("#gender").selectBox('value'),
+					Email: $("#email").val(),
+					School: $("#school").val(),
+					DOB_Day: $("#dob_d").selectBox('value'),
+					DOB_Month: $("#dob_m").selectBox('value'),
+					DOB_Year: $("#dob_y").selectBox('value')
+				},
+				url: TEMPLATE_PATH+"/lib/plugins/callbacks/ajax/create_user_account.php",
+				success: function(data){
+					if(data) {
+						if($("#registration-total-hdn").val() > 0) {
+							$("#account-info-form").hide();
+							$("#billing-info-form").show();
+							$("#account-success").show();
+						} else {
+							window.location = SITE_PATH+"/thankyou";
+						}
+					} else {
+						$("#account-error").show();
+						$("#first_name").attr('disabled',false);
+						$("#last_name").attr('disabled',false);
+						$("#gender").selectBox('enable');
+						$("#email").attr('disabled',false);
+						$("#school").attr('disabled',false);
+						$("#dob_d").selectBox('enable');
+						$("#dob_m").selectBox('enable');
+						$("#dob_y").selectBox('enable');
+						link.removeClass('disabled');
+					}
+				}
+			});
+		}
+	});
+	
+	$("#login").click(function() {
+		var link = $(this);
+		if($("#ecp_login_form").valid()) {
+			$("#login-error").hide();
+			$("#login_username").attr('disabled',true);
+			$("#login_pass").attr('disabled',true);
+			link.addClass('disabled');
+			jQuery.ajax({
+				type: "POST",
+				dataType: "json",
+				data: {login: $("#login_username").val(), password: $("#login_pass").val()},
+				url: TEMPLATE_PATH+"/lib/plugins/callbacks/ajax/login_user.php",
+				success: function(data){
+					if(data) {
+						$("#login-info-form").hide();
+						$("#billing-info-form").show();
+					} else {
+						$("#login_username").attr('disabled',false);
+						$("#login_pass").attr('disabled',false);
+						link.removeClass('disabled');
+						$("#login-error").show();
+					}
+				}
+			});
+		}
+	});
+
+	$("#finalize-reg").click(function() {
+		if($("#ecp_registration_form").valid()) {
+			var button = $(this);
+			button.attr("disabled", true);
+			button.addClass('disabled');
+			$("#checkout-error").hide();
+			
+			jQuery.ajax({
+				type: "POST",
+				dataType: "json",
+				data: {
+					cc_fname: $("#cc_fname").val(),
+					cc_lname: $("#cc_lname").val(),
+					cc_email: $("#cc_email").val(),
+					cc_phone: $("#cc_phone").val(),
+					ba_1: $("#ba_1").val(),
+					cc_city: $("#cc_city").val(),
+					cc_state: $("#cc_state").selectBox('value'),
+					cc_zip: $("#cc_zip").val(),
+					cc_type: $("#cc_type").selectBox('value'),
+					cc_number: $("#cc_number").val(),
+					cc_ex_month: $("#cc_ex_month").selectBox('value'),
+					cc_ex_year: $("#cc_ex_year").selectBox('value'),
+					cvv2: $("#cvv2").val(),
+					purchase_description: $("#purchase-description").val()
+				},
+				url: TEMPLATE_PATH+"/lib/plugins/callbacks/ajax/checkout.php",
+				success: function(data){
+					if(data.auth_error) {
+						$("#checkout-error").html(data.auth_error);
+						$("#checkout-error").show();
+						button.attr("disabled", false);
+						button.removeClass('disabled');
+					} else {
+						window.location = SITE_PATH+"/thankyou";
+					}
+				}
+			});
+		}
+	});
+	
+	/************
+	 * FUNCTIONS
+	 ************/
 	
 	function updateTestPrepTutoringPrices (location) {
 		$(".product-item").find(".location_prices").hide();
@@ -129,4 +310,6 @@ jQuery(function($){
 		this.price = price;
 		this.taxonomy_slug = taxonomy_slug;
 	}
+	
+	
 });

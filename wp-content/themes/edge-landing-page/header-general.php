@@ -325,7 +325,7 @@
 
 <body>	
 	<div class="header" id="topheader">
-		<div id="Top"><div id="Top-container"><a id="login" href="#">Login</a> or <a href="<?php echo get_bloginfo('wpurl') . '/enroll/tryout/'; ?>">Register</a></div></div>
+		<div id="Top"><div id="Top-container"><a id="login" href="#">Login</a> or <a href="<?php echo get_bloginfo('wpurl') . '/enroll/cart/'; ?>">Register</a></div></div>
 		<header class="main container">	
 			<h1 class="logo"><a href="<?php echo get_bloginfo('wpurl'); ?>">The Edge in College Prep</a></h1>	
 			<div id="tray">
