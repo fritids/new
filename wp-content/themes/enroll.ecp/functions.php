@@ -21,6 +21,11 @@ define("IDG_USERS_CONF_FILE", TEMPLATEPATH."/lib/models/users.xml");
 define("IDGL_THEME_URL", get_bloginfo('template_directory'));
 
 /*
+ * Disable Admin top bar
+ */
+add_filter('show_admin_bar', '__return_false'); 
+
+/*
  * Include base classes
  */
 require_once(IDG_CLASS_PATH."class.Util.php");
