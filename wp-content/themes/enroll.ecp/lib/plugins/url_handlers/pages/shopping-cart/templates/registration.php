@@ -88,7 +88,7 @@
 	<ul class="clearfix" <?php if($category -> slug == "test-prep-tutoring-senior"): ?> style="display: none;" <?php endif; ?>>
 	<?php foreach($products as $post_data): ?>
 		<li>
-			<div class="product-item <?php echo $category->slug; ?> <?php if(get_post_meta($post_data->ID, 'price_type', true) == "free") echo "selected"; ?>"
+			<div class="product-item <?php echo $category->slug; ?>"
 				 post-id="<?php echo $post_data->ID; ?>"
 				 name="<?php echo $post_data->post_title; ?>"
 				 desc="<?php echo htmlspecialchars($post_data->post_content); ?>"
