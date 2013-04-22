@@ -20,12 +20,12 @@ if(is_user_logged_in()){
 		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 
 		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet" media="all" />
-        <link href="<?php echo get_template_directory_uri(); ?>/css/colors-fresh.css" rel="stylesheet" media="all" />
-        <link href="<?php echo get_template_directory_uri(); ?>/css/datagrid.css" rel="stylesheet" media="all" />
 		<link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet" media="all" />
 		<link href="<?php echo get_template_directory_uri(); ?>/css/jquery.selectBox.css" rel="stylesheet" media="all" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 		<!--[if IE]><link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+        <link href="<?php echo get_template_directory_uri(); ?>/css/TableTools.css" rel="stylesheet" media="all" />
+        <link href="<?php echo get_template_directory_uri(); ?>/css/demo_table_jui.css" rel="stylesheet" media="all" />        
 
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 		<?php
@@ -36,6 +36,8 @@ if(is_user_logged_in()){
 		<script src="<?php echo get_template_directory_uri(); ?>/lib/js/jquery-1.8.3.min.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/lib/js/jquery-ui-1.8.24.custom.min.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.js"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.dataTables.js"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/TableTools.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jCProgress-1.0.2.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.selectBox.min.js"></script>
 		

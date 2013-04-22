@@ -3,9 +3,11 @@ $level=0;
 class Wp_Menu{
 	private $menu_items;
 	private $student_id;
-	public function Wp_Menu($menu_items,$student_id){
+    private $with_review_button;
+	public function Wp_Menu($menu_items,$student_id,$with_review_button = TRUE){
 		$this->menu_items=array();
 		$this->student_id=$student_id;
+        $this->with_review_button = $with_review_button;    
 		foreach($menu_items as $item){
 			$menu_item=$this->menu_items[$item->ID]=new Wp_MenuItem($item,$item->menu_item_parent);
 			if($item->menu_item_parent!=0){
@@ -17,7 +19,7 @@ class Wp_Menu{
 		$out="<ul class='progress-table'>";
 		foreach($this->menu_items as $item){
 			if($item->getParentID()==0){
-				$out.=$item->toString($this->student_id);
+				$out.=$item->toString($this->student_id, $this->with_review_button);
 			}
 		}
 		$out.="</ul>";
@@ -68,7 +70,7 @@ class Wp_MenuItem{
 	public function getType(){
 		return $this->item->object;
 	}
-	public function toString($student_id=null){
+	public function toString($student_id=null, $with_review_button=TRUE){
 		if($this->item->object != "drill" && count($this->submenu) == 0){
 			return;
 		}
@@ -85,7 +87,7 @@ class Wp_MenuItem{
 			$out.="<ul>";
 			foreach($this->submenu as $item){
 				if($item->getType() != "page") {
-					$out .= $item->toString($student_id);
+					$out .= $item->toString($student_id,$with_review_button);
 				}
 			}
 			$out.="</ul>";
@@ -125,7 +127,10 @@ class Wp_MenuItem{
 				$out.='<td width="120px" style="text-align:center;">'.$test["question_count"].'</td>';
 				$out.='<td width="40px" style="color:#0cb700; text-align:center;">'.$test["correct_count"].'</td>';
 				$out.='<td width="40px" style="color:#ff0000; text-align:center;">'.($test["question_count"]-count($test["answers"])).'</td>';
-				$out.='<td style="text-align:center;"><a class="review" href="'.get_permalink($this->item->object_id).'?mode=review&trial='.($count-1).'">review</a></td>';
+				if($with_review_button)
+                    $out.='<td><a class="review" href="'.get_permalink($this->item->object_id).'?mode=review&trial='.($count-1).'">review</a></td>';
+                else
+                    $out.='<td>&nbsp;</td>';
 				$out.='</tr>';
 				$count++;
 			}
