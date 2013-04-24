@@ -346,23 +346,30 @@
 						<input type="text" name="cvv2" id="cvv2" class="required" style="width:90px;" autocomplete="off" readonly />
 					</div>
 				</div>
-				<div class="field clearfix" style="display: none;">
+				<div class="field clearfix">
 					<label>Coupon Code</label>
-					<input type="text" style="width:150px;" />
+					<input type="text" style="width:150px;" id="couponCode" />
 					<a href="#" id="applyCoupon">Apply Coupon</a>
+					<span class="success" id="couponValid" style="display: none;"></span>
+					<span class="error" id="couponInvalid" style="display: none;"></span>
 				</div>
 				<div class="field clearfix total">
 					Your total purchase:
-					<div>$<span id="popup-registration-total">0</span></div>
+					<div>$<span id="popup-registration-subtotal">0</span></div>
 				</div>
-				<div class="field clearfix total" style="display: none;">
+				<div class="field clearfix total discount" id="popup-registration-discount-container" style="display: none;">
+					Discount:
+					<div>$<span id="popup-registration-discount">0</span></div>
+				</div>
+				<div class="field clearfix total" id="popup-registration-total-container" style="display: none;">
 					You have to pay:
-					<div>$<span>0</span></div>
+					<div>$<span id="popup-registration-total">0</span></div>
 				</div>
 
 				<div class="submit-button clearfix">
 					<button type="button" id="finalize-reg">Finalize Registration</button>
 					<input type="hidden" name="purchase-description" id="purchase-description" />
+					<input type="hidden" name="coupons-applied" id="coupons-applied" />
 				</div>
 			</form>
 		</div>

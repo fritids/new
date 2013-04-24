@@ -12,14 +12,14 @@ require_once IDG_CLASS_PATH."ShoppingCart/FormActions/class.ProductFilter.php";
 global $current_user;
 
 // live keys
-define("AUTHORIZENET_API_LOGIN_ID", "2jt82yBg6Rz");
-define("AUTHORIZENET_TRANSACTION_KEY", "9Y25KQhQ66xxEA2r");
-define("AUTHORIZENET_SANDBOX", false);
+//define("AUTHORIZENET_API_LOGIN_ID", "2jt82yBg6Rz");
+//define("AUTHORIZENET_TRANSACTION_KEY", "9Y25KQhQ66xxEA2r");
+//define("AUTHORIZENET_SANDBOX", false);
 
 // sandbox keys
-//define("AUTHORIZENET_API_LOGIN_ID", "67HRz6n8");
-//define("AUTHORIZENET_TRANSACTION_KEY", "9Kb427hZR6Xe5Q96");
-//define("AUTHORIZENET_SANDBOX", true);
+define("AUTHORIZENET_API_LOGIN_ID", "67HRz6n8");
+define("AUTHORIZENET_TRANSACTION_KEY", "9Kb427hZR6Xe5Q96");
+define("AUTHORIZENET_SANDBOX", true);
 
 
 $student = new ECPStudent($current_user->user_login);
@@ -33,11 +33,11 @@ if($student -> userExist()) {
 
 	foreach($products as $i => $product)
 	{
-		$price = $product -> price;
-		$total_cart_price += $product -> price;
-		if(!is_null($product -> name))
+		$price = (double)$product->price - (double)$product->discount;
+		$total_cart_price += $price;
+		if(!is_null($product->name))
 		{
-			$payment -> addLineItem(($i + 1), htmlentities(StringUtils::shortenString("{$product -> name}", 25), ENT_QUOTES), htmlentities(StringUtils::shortenString("{$product -> desc}", 25), ENT_QUOTES), 1, "{$price}", "Y");
+			$payment -> addLineItem(($i + 1), htmlentities(StringUtils::shortenString("{$product->name}", 25), ENT_QUOTES), htmlentities(StringUtils::shortenString("{$product->desc}", 25), ENT_QUOTES), 1, "{$price}", "Y");
 		}
 	}
 
@@ -63,7 +63,7 @@ if($student -> userExist()) {
 
 	if($response -> approved)
 	{
-
+		// Send product mails
 		$terms = get_terms("ecp-products");
 		$categories = array();
 
@@ -86,7 +86,7 @@ if($student -> userExist()) {
 				$categories["satact-edge-online-course"] = array("subject" => "online-sat-course-subject", "body" => "online-sat-course-body");	
 			}
 		}
-
+		
 		$h = array();
 		foreach($products as $product)
 		{
@@ -106,11 +106,19 @@ if($student -> userExist()) {
 
 		$_SESSION['transaction_id'] = $response -> transaction_id;
 		$result['auth_error'] = false;
-
-//		$total=(int) get_option( "donation_amnt", 0 );	
-//		$total+=0.05*$total_cart_price;
-//		update_option( "donation_amnt", $total );
-//		wp_redirect(get_bloginfo("url")."/thankyou");
+		
+		// Update applied coupons
+		$coupons = json_decode(stripslashes($_POST['coupons_applied']));
+		
+		foreach($coupons as $coupon) {
+			$usage = get_post_meta($coupon->id, 'usage', true);
+			update_post_meta($coupon->id, 'usage', ($usage-1));
+		}
+		
+		// Update donations
+		$total=(int) get_option( "donation_amnt", 0 );	
+		$total+=0.05*$total_cart_price;
+		update_option( "donation_amnt", $total );
 	}
 	else
 	{
