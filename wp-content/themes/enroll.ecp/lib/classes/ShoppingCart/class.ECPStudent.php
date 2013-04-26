@@ -156,10 +156,10 @@ class ECPStudent
 	 */
 	public function sendAdminMail($ecp_products)
 	{
-		if(empty($this -> _user))
+		if(empty($this->_user))
 		{
-			$user_info = get_userdata($this -> _id);
-			$this -> _user = $user_info -> first_name." ".$user_info -> last_name;
+			$user_info = get_userdata($this->_id);
+			$this->_user = $user_info->first_name." ".$user_info->last_name;
 		}
 		
 		$message = "A new purchase has been made. Here is the description:<br><br>";
@@ -169,10 +169,10 @@ class ECPStudent
 		
 		foreach($ecp_products as $i => $single_product)
 		{
-			$category = get_term_by('slug',$single_product -> taxonomy_slug,"ecp-products");
+			$category = get_term_by('slug',$single_product->taxonomy_slug,"ecp-products");
 			
 			$message .= "<li>";
-			$message .= $single_product -> name . ", " . $category -> name . " - $" . $single_product -> price;
+			$message .= $single_product->name . ", " . $category->name . " - $" . ($single_product->price - $single_product->discount);
 			$message .= "</li>";
 		}
 		$message .= "</ul>";
@@ -182,7 +182,7 @@ class ECPStudent
 
 		if(!wp_mail(get_option('admin_email'), "ECP New Purchase", $message, $headers))
 		{
-		   return $this -> _err -> get_error_message("send_mail");
+		   return $this->_err->get_error_message("send_mail");
 		}
 	}
 	

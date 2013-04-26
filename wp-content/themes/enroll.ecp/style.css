@@ -145,6 +145,7 @@ header h1 a { display: inline-block; background: url('images/logo-edge.png') no-
 .billing-form-popup .field input[type=text]:read-only { color: #888888; background: #eee; }
 .billing-form-popup .field.total { font-size: 20px; text-transform: uppercase; color: #455B6A; text-align: right; font-weight: bold; margin: 5px 0; padding-right: 30px; }
 .billing-form-popup .field.total div { float: none; font-size: 26px; display: inline-block; width: 85px; text-align: right; color: #000000; }
+.billing-form-popup .field.total.discount div { color: #55c65b; }
 .billing-form-popup .field label.cvv { width: auto; padding: 0 20px 0 25px; }
 .billing-form-popup .billing-checkboxes { margin-top: 20px; }
 .billing-form-popup .submit-button { padding: 0 30px; margin: 15px 0; }

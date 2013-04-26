@@ -226,6 +226,52 @@ jQuery(function($){
 			});
 		}
 	});
+	
+	var coupons = new Array();
+	$("#applyCoupon").click(function(e) {
+		e.preventDefault();
+		if($("#couponCode").val()) {
+			jQuery.ajax({
+				type: "POST",
+				dataType: "json",
+				data: {
+					code: $("#couponCode").val()
+				},
+				url: TEMPLATE_PATH+"/lib/plugins/callbacks/ajax/verify_coupon.php",
+				success: function(data){
+					if(data) {
+						// verify if coupon is already applied
+						var applied = false;
+						for(var i=0; i<coupons.length; i++) {
+							if(data.id == coupons[i].id) {
+								applied = true;
+								$("#couponInvalid").html("Coupon already applied");
+								$("#couponInvalid").fadeIn();
+								setTimeout(function () { $("#couponInvalid").fadeOut(); }, 2000);
+								break;
+							}
+						}
+						
+						// If coupon is not already applied, apply it
+						if(!applied) {
+							$("#couponCode").val("");
+							coupons.push(new coupon(data.id,data.name,data.value,data.products));
+							$("#coupons-applied").val(JSON.stringify(coupons));
+							getTotal();
+							
+							$("#couponValid").html(data.name);
+							$("#couponValid").fadeIn();
+							setTimeout(function () { $("#couponValid").fadeOut(); }, 2000);
+						}
+					} else {
+						$("#couponInvalid").html("Invalid Code");
+						$("#couponInvalid").fadeIn();
+						setTimeout(function () { $("#couponInvalid").fadeOut(); }, 2000);
+					}
+				}
+			});
+		}
+	});
 
 	$("#finalize-reg").click(function() {
 		if($("#ecp_registration_form").valid()) {
@@ -251,7 +297,8 @@ jQuery(function($){
 					cc_ex_month: $("#cc_ex_month").selectBox('value'),
 					cc_ex_year: $("#cc_ex_year").selectBox('value'),
 					cvv2: $("#cvv2").val(),
-					purchase_description: $("#purchase-description").val()
+					purchase_description: $("#purchase-description").val(),
+					coupons_applied: $("#coupons-applied").val()
 				},
 				url: TEMPLATE_PATH+"/lib/plugins/callbacks/ajax/checkout.php",
 				success: function(data){
@@ -287,28 +334,58 @@ jQuery(function($){
 	
 	function getTotal() {
 		var products = new Array();
-		var total = 0;
+		var subtotal = 0;
+		var discount = 0;
 		$(".product-item.selected").each(function() {
-			if($(this).attr("price-type") != "free") {
-				total += parseFloat($(this).attr("price"));
+			var item = $(this);
+			var item_discount = 0;
+			// Add price to subtotal
+			if(item.attr("price-type") != "free") {
+				subtotal += parseFloat(item.attr("price"));
+				
+				for(var i=0; i<coupons.length; i++) {
+					for(var j=0; j<coupons[i].products.length; j++) {
+						if(item.attr("post-id") == coupons[i].products[j]) {
+							item_discount += parseFloat(coupons[i].value);
+						}
+					}
+				}
+				discount += item_discount;
 			}
 			
 			// Create product object
-			products.push(new product($(this).attr("post-id"),$(this).attr("name"),$(this).attr("desc"),$(this).attr("price"),$(this).attr("taxonomy_slug")));
+			products.push(new product(item.attr("post-id"),item.attr("name"),item.attr("desc"),item.attr("price"),item_discount,item.attr("taxonomy_slug")));
 		});
-		//purchase.total = total;
-		$("#registration-total-hdn").val(total);
-		$("#registration-total").html(total);
-		$("#popup-registration-total").html(total);
+		
+		if(discount > 0) {
+			$("#popup-registration-discount-container").show();
+			$("#popup-registration-total-container").show();
+		}
+		
+		$("#registration-total-hdn").val(subtotal - discount);
+		$("#registration-total").html(subtotal - discount);
+		
+		$("#popup-registration-subtotal").html(subtotal);
+		$("#popup-registration-discount").html(discount);
+		$("#popup-registration-total").html(subtotal - discount);
 		$("#purchase-description").val(JSON.stringify(products));
+		
 	}
 	
-	function product(id, name, desc, price, taxonomy_slug) {
+	function product(id, name, desc, price, discount, taxonomy_slug) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.price = price;
+		this.discount = discount;
 		this.taxonomy_slug = taxonomy_slug;
+	}
+	
+	function coupon(id, name, value, products) {
+		this.id = id;
+		this.name = name;
+		this.value = value;
+		this.products = products;
 	}
 	
 	
