@@ -25,9 +25,9 @@ if(is_user_logged_in()){
 		restore_current_blog();
 		
 		// 5 days of free trial
-		if(strtotime(date("Y-m-d", strtotime($current_user->user_registered)) . " +5 days") > time()) {
-			$access = true;
-		}
+//		if(strtotime(date("Y-m-d", strtotime($current_user->user_registered)) . " +5 days") > time()) {
+//			$access = true;
+//		}
 		
 		if(! $access)
 			wp_redirect(home_url('/')."order-expired/");
