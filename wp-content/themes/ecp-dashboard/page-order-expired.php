@@ -7,4 +7,12 @@
 	</div>
 <?php endwhile; endif; ?>
 
+<div class="goto-cart-container">
+	<a href="http://edgeincollegeprep.com/enroll/cart/" id="goto-cart">GO TO CART</a>
+</div>
+
+<style>
+	p { font-size: 20px; margin-top: 50px; }
+</style>
+
 <?php get_footer(); ?>

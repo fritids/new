@@ -354,3 +354,6 @@ select.elem { margin-right: 2px; }
 
 
 
+.goto-cart-container { text-align: center; margin: 60px 0; }
+#goto-cart, #goto-cart:hover { text-decoration: none; cursor: pointer; display: inline-block; padding: 12px 60px; color: #fff; font-size: 24px; text-shadow: 1px 1px #666; font-weight: bold; border: solid 3px #fff; -moz-box-shadow: 0 0 5px #666, inset 0 0 3px #666; -webkit-box-shadow: 0 0 5px #666, inset 0 0 3px #666; box-shadow: 0 0 5px #666, inset 0 0 3px #666; -webkit-border-radius: 35px; -moz-border-radius: 35px; border-radius: 35px; background: #FA8611;
+	background: -ms-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -moz-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -o-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FA8611), color-stop(1, #EE6828)); background: -webkit-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: linear-gradient(to bottom, #FA8611 0%, #EE6828 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8611', endColorstr='#EE6828', GradientType=0 ); }
