@@ -14,28 +14,22 @@ function url_handlers_flush_rules()
 function url_handlers_insert_rewrite_rules($rules)
 {
 	$newrules = array();
-	/*$newrules['(logout)'] = 'index.php?user_action=logout';
-	$newrules['(login)'] = 'index.php?user_action=login';
-	$newrules['(lostpassword)'] = 'index.php?user_action=lostpassword';
-	$newrules['(register)'] = 'index.php?user_action=register';
-	$newrules['(profile)'] = 'index.php?user_action=profile';
-	$newrules['(student-list)'] = 'index.php?user_action=student-list';*/
+	$newrules['(cart)'] = 'index.php?user_action=shopping-cart&section=registration';
 	$newrules['(demo-expired)'] = 'index.php?user_action=demo-expired';
-	$newrules['(tryout)/handler'] = 'index.php?user_action=tryout&section=form-handler';
-	$newrules['(tryout)'] = 'index.php?user_action=tryout';	
-	$newrules['(cart)/checkout_error'] = 'index.php?user_action=shopping-cart&section=checkout_error';
-	$newrules['(cart)/thankyou'] = 'index.php?user_action=shopping-cart&section=thankyou';
-	$newrules['(cart)/checkout'] = 'index.php?user_action=shopping-cart&section=checkout';
-	$newrules['(cart)/review'] = 'index.php?user_action=shopping-cart&section=review';
-	$newrules['(cart)/billing'] = 'index.php?user_action=shopping-cart&section=billing-info';
-	$newrules['(cart)/account'] = 'index.php?user_action=shopping-cart&section=account-setup';
-	$newrules['(cart)'] = 'index.php?user_action=shopping-cart&section=selection';
-	
-	//$newrules['(dashboard)'] = 'index.php?user_action=dashboard';
+	$newrules['(thankyou)'] = 'index.php?user_action=shopping-cart&section=thankyou';
+//	$newrules['(tryout)/handler'] = 'index.php?user_action=tryout&section=form-handler';
+//	$newrules['(tryout)'] = 'index.php?user_action=tryout';
+//	$newrules['(cart)/checkout_error'] = 'index.php?user_action=shopping-cart&section=checkout_error';
+//	$newrules['(cart)/thankyou'] = 'index.php?user_action=shopping-cart&section=thankyou';
+//	$newrules['(cart)/checkout'] = 'index.php?user_action=shopping-cart&section=checkout';
+//	$newrules['(cart)/review'] = 'index.php?user_action=shopping-cart&section=review';
+//	$newrules['(cart)/billing'] = 'index.php?user_action=shopping-cart&section=billing-info';
+//	$newrules['(cart)/account'] = 'index.php?user_action=shopping-cart&section=account-setup';
+//	$newrules['(cart)'] = 'index.php?user_action=shopping-cart&section=selection';
 	
 	$newrules['(dashboard)/([^/]+)/([^/]+)/*$'] = 'index.php?user_action=dashboard&uname=$matches[2]&upage=$matches[3]';
 	
-	// $aNewRules = array('msds-pif/([^/]+)/?$' => 'index.php?pagename=msds-pif&msds_pif_cat=$matches[1]');
+
 	return $newrules + $rules;
 }
 
@@ -105,18 +99,6 @@ function processECPReqests()
 			add_action('template_redirect', 'all_on_one');
 		}
 	}
-	/*switch($action){
-		case "logout":
-			
-			break;
-		case "login":
-			//require_once "pages/login.php";
-			
-			break;
-		case "dashboard":
-			
-			break;
-	}*/
 }
 
 add_action("wp_login", "processAfterLogin");

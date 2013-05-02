@@ -21,6 +21,11 @@ define("IDG_USERS_CONF_FILE", TEMPLATEPATH."/lib/models/users.xml");
 define("IDGL_THEME_URL", get_bloginfo('template_directory'));
 
 /*
+ * Disable Admin top bar
+ */
+add_filter('show_admin_bar', '__return_false'); 
+
+/*
  * Include base classes
  */
 require_once(IDG_CLASS_PATH."class.Util.php");
@@ -39,12 +44,12 @@ require_once(IDG_CLASS_PATH."class.IDGL_DataGrid.php");
  * Register scripts / maybe these should go in the admin head
  */
 wp_enqueue_script('jquery');
-wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.7.2.custom.min.js');
+wp_register_script('jquery-ui', IDGL_THEME_URL . '/lib/js/jquery-ui-1.8.24.custom.min.js');
 wp_enqueue_script('jquery-ui');
-wp_register_script('ajaxupload', IDGL_THEME_URL . '/lib/js/ajaxupload.js');
-wp_enqueue_script('ajaxupload');
 wp_register_script('idgl_colorpicker', IDGL_THEME_URL . '/lib/js/colorpicker/colorpicker.js');
 wp_enqueue_script('idgl_colorpicker');
+wp_register_script('jquery-validate', IDGL_THEME_URL . '/lib/js/jquery-validate/jquery.validate.js');
+wp_enqueue_script('jquery-validate');
 wp_register_script('main', IDGL_THEME_URL . '/lib/js/main.js');
 wp_enqueue_script('main');
 
@@ -56,8 +61,8 @@ function IDGL_Admin_head() {
 	global $IDGL_model;
 	$uplData=wp_upload_dir();
 	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/js/colorpicker/css/colorpicker.css" />' . "\n";
-	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/ui-lightness/jquery-ui-1.7.2.custom.css" />' . "\n";
-	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/styles.css" />' . "\n";
+	echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/smoothness/jquery-ui-1.10.2.custom.min.css" />' . "\n";
+	//echo '<link type="text/css" rel="stylesheet" href="'.IDGL_THEME_URL.'/lib/css/styles.css" />' . "\n";
 	echo '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> ';
 	echo "<script type='text/javascript'>
 			var imagesPath='".IDGL_THEME_URL."/lib/images/';
@@ -331,15 +336,10 @@ if(is_dir(dirname(__FILE__)."/lib/plugins")){
  */
 function getECPProductMeta($pid)
 {
-	$error = array(
-				"id" => $pid,
-				"price" => 0,
-				"discount" => 0
-			);
 	$post_meta = array(
 				"id" => $pid,
-				"price" => getPostMeta($pid, "ProductPrice", $error),
-				"discount" => getPostMeta($pid, "productDiscount", $error)
+				"price" => getPostMeta($pid, "universal_price", true),
+				"discount" => getPostMeta($pid, "productDiscount", true)
 	);
 
 	return $post_meta;

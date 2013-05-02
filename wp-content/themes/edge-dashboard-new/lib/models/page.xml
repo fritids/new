@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<IDGConfig>
-<OptionPage name="AnswerDetails" title="AnswerDetails">
-    <TabBegin id="pageVideo" />
-			<Callback name="VideoURL" label="Select Video:" fname="ecp_question_video" params="array()"></Callback>
-	   <TabEnd />
-	   </OptionPage>
-</IDGConfig>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<IDGConfig>
-    <OptionPage name="DrillDetails" title="DrillDetails">
-       <TabBegin id="QuestionInDrill" />
-	   	<Callback name="ecp_drill_questions" label="Progress table template:" fname="ecp_drill_questions_callback" params="array()"></Callback>
-	   <TabEnd />
-    </OptionPage>
-</IDGConfig>

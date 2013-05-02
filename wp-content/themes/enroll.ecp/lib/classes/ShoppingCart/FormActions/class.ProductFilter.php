@@ -120,6 +120,9 @@ class ProductFilter
 		{
 			return "essay";
 		}
+		else if(strpos($slug, "test-prep-tutoring") !== false) {
+			return "online-test-prep";
+		}
 		
 		return $slug;
 	}

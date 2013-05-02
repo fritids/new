@@ -492,7 +492,10 @@ function student_product_details($params,$name){
 	}
 	$products=get_user_meta($user_id,"_IDGL_elem_ECP_user_order",true);
 	
-	$products=unserialize($products);
+	if(!$products)
+		$products = array();
+	else if(!is_array($products))
+		$products=unserialize($products);
 	//print_r($products);
 	
  ?>

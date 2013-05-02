@@ -1,10 +1,6 @@
-	<div class="clear"></div>
-        </div><!-- end .widecolumn -->
 
-	<div class="clear"></div>
-	</div>
-</div><!-- end #content -->
-<?php switch_to_blog(1); ?>
+</div><!-- end container -->
+<?php /* switch_to_blog(1); ?>
 <div id="footer">
 	<div class="container">
 		<div class="before-desclamer">
@@ -54,8 +50,8 @@
     </div>
 </div><!-- end #footer -->
 <?php 
-restore_current_blog();
-wp_footer(); ?>
+restore_current_blog(); */ ?>
+<? wp_footer(); ?>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
