@@ -120,7 +120,7 @@ class IS_IU_Import_Users {
 	
 	<p><label>Name of the colums your file can have:</label> user_login, user_pass, user_email, user_url, user_nicename,
 			display_name, user_registered, first_name, last_name, nickname, description,
-			rich_editing, comment_shortcuts, admin_color, use_ssl, show_admin_bar_front, show_admin_bar_admin, role</p>
+			rich_editing, comment_shortcuts, admin_color, use_ssl, show_admin_bar_front, show_admin_bar_admin, role, teacher_email</p>
 	
 	<?php
 	global $wpdb;
@@ -300,7 +300,7 @@ class IS_IU_Import_Users {
 			'last_name', 'nickname', 'description',
 			'rich_editing', 'comment_shortcuts', 'admin_color',
 			'use_ssl', 'show_admin_bar_front', 'show_admin_bar_admin',
-			'role'
+			'role', 'teacher_email'
 		);
 
 		include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
@@ -402,7 +402,30 @@ class IS_IU_Import_Users {
 				$usermeta['_IDGL_elem_userSubtype'] = serialize($student_type);
 				if(in_array("online-student", $student_type)) {
 					$usermeta['_IDGL_elem_ECP_user_order'] = serialize(array($online_package));
+                    
 				}
+                
+                //search for teacher if the field is set in the file
+                if(isset($userdata['teacher_email'])){
+                    $teacher = new WP_User_Query( array( 'search' => $userdata['teacher_email'], 'search_columns'=>'user_email' ) );
+                            
+                    //if there are no teachers with the entered email, just skip this process.
+                    if ( !empty( $teacher->results ) ) {
+                        foreach($teacher->results as $current){
+                            //getting current teacher id
+                            $teacher_id = $current->ID;
+                            $metadata = get_user_meta($teacher_id,_IDGL_elem_user_type,true);
+                            //you can't set a student as a teacher
+                            if($metadata != 'teacher'){
+                                unset($teacher_id);
+                            }
+                            break;
+                        }
+                    }
+                    unset($userdata['teacher_email']);
+                }
+                
+                
 			}
 
 			// Insert or update.
@@ -426,6 +449,14 @@ class IS_IU_Import_Users {
 						update_user_meta( $user_id, $metakey, $metavalue );
 					}
 				}
+                
+                //create student-teacher realtionship
+                if(isset($teacher_id)){                    
+                    global $wpdb;
+                    $q = "INSERT IGNORE INTO wp_teacherstudent (student_ID,teacher_ID) VALUES ";
+                    $q .= "($user_id, $teacher_id)";			
+                    $wpdb->query($q);
+                }
 
 				// If we created a new user, maybe set password nag and send new user notification?
 				if ( ! $update ) {
