@@ -2,12 +2,43 @@
 if(is_user_logged_in()){
 	$current_user = wp_get_current_user();
 	add_filter( 'show_admin_bar', '__return_false' );
+	
+	// Verify students orders expiration
+	if(Util::curPageURL()!= home_url('/')."lostpassword/" && Util::curPageURL()!= home_url('/')."login/"  && Util::curPageURL()!= home_url('/')."order-expired/"){
+		$access = false;
+		$orders_details = get_user_meta($current_user->ID, "_IDGL_elem_ECP_user_orders_details", true);
+		
+		switch_to_blog(3);
+		foreach($orders_details as $order_date=>$order) {
+			foreach($order as $product) {
+				$coverage = get_post_meta( $product['id'], 'time_coverage', true);
+				$coverage_measure = get_post_meta( $product['id'], 'time_measure', true);
+				
+				if($coverage && $coverage_measure) {
+					$expiration = strtotime(date("Y-m-d", $order_date) . " +{$coverage} {$coverage_measure}");
+					if($expiration > time()) {
+						$access = true;
+					}
+				}
+			}
+		}
+		restore_current_blog();
+		
+		// 5 days of free trial
+		if(strtotime(date("Y-m-d", strtotime($current_user->user_registered)) . " +5 days") > time()) {
+			$access = true;
+		}
+		
+		if(! $access)
+			wp_redirect(home_url('/')."order-expired/");
+	}
 } else {
 	if(Util::curPageURL()!= home_url('/')."lostpassword/" && Util::curPageURL()!= home_url('/')."login/"){
 		wp_redirect(home_url('/')."login/");
 	}
 }
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />

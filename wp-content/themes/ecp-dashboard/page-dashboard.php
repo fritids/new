@@ -32,24 +32,24 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
 				<h5><i class="black-icons books"></i>Course Progress</h5>
 			</div>
 			<div class="widget-content">
-				<div class="statistics-wrap">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" class="statistics-wrap">
 					<div class="statistics-block">
 						<div class="stat-info">My <font color="#f0825b">SAT & ACT</font> Material</div>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" id="p1"></a>
+						<span id="p1"></span>
 					</div>
-				</div>
-				<div class="statistics-wrap">
+				</a>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" class="statistics-wrap">
 					<div class="statistics-block">
 						<div class="stat-info">My <font color="#f0825b">SAT Only</font> Material</div>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" id="p2"></a>
+						<span id="p2"></span>
 					</div>
-				</div>
-				<div class="statistics-wrap">
+				</a>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" class="statistics-wrap">
 					<div class="statistics-block">
 						<div class="stat-info">My <font color="#f0825b">ACT Only</font> Material</div>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/online-sat-progress/" id="p3"></a>
+						<span id="p3"></span>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>

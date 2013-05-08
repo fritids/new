@@ -155,7 +155,7 @@ a label, a label input { margin:0; padding:0; height:17px; vertical-align:top; }
 	-webkit-border-radius: 3px 3px 0 0; -moz-border-radius: 3px 3px 0 0; border-radius: 3px 3px 0 0; -webkit-box-shadow: inset 0 1px 0 #f9f9f9, 0 0 3px #ddd; -moz-box-shadow: inset 0 1px 0 #f9f9f9, 0 0 3px #ddd; box-shadow: inset 0 1px 0 #f9f9f9, 0 0 3px #ddd; }
 .widget-block .widget-head h5 { padding-left: 10px; padding-top:11px; text-transform:uppercase; font-size:12px; margin:0px; }
 .widget-block .widget-content { background:#eee; -webkit-border-radius: 0 0 3px 3px; -moz-border-radius: 0 0 3px 3px; border-radius: 0 0 3px 3px; margin-bottom: 15px; }
-.statistics-wrap { padding:3px; border:#bbb 0px solid; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background:#eee; }
+.statistics-wrap { display: block; padding:3px; border:#bbb 0px solid; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background:#eee; }
 .statistics-block { background: rgb(255,255,255); background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(47%, rgba(246, 246, 246, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
 	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%); background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
@@ -354,3 +354,6 @@ select.elem { margin-right: 2px; }
 
 
 
+.goto-cart-container { text-align: center; margin: 60px 0; }
+#goto-cart, #goto-cart:hover { text-decoration: none; cursor: pointer; display: inline-block; padding: 12px 60px; color: #fff; font-size: 24px; text-shadow: 1px 1px #666; font-weight: bold; border: solid 3px #fff; -moz-box-shadow: 0 0 5px #666, inset 0 0 3px #666; -webkit-box-shadow: 0 0 5px #666, inset 0 0 3px #666; box-shadow: 0 0 5px #666, inset 0 0 3px #666; -webkit-border-radius: 35px; -moz-border-radius: 35px; border-radius: 35px; background: #FA8611;
+	background: -ms-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -moz-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -o-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FA8611), color-stop(1, #EE6828)); background: -webkit-linear-gradient(top, #FA8611 0%, #EE6828 100%); background: linear-gradient(to bottom, #FA8611 0%, #EE6828 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8611', endColorstr='#EE6828', GradientType=0 ); }
