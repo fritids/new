@@ -1,6 +1,11 @@
 <?php get_header('home'); ?>
 
 <?php
+
+echo '<pre>';
+print_r($_COOKIE);
+echo '</pre>';
+die();
 //Get students if the current logged in user is a teacher
 $current_user = wp_get_current_user();
 $user_id = $current_user->ID;

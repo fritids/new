@@ -120,7 +120,7 @@ class IS_IU_Import_Users {
 	
 	<p><label>Name of the colums your file can have:</label> user_login, user_pass, user_email, user_url, user_nicename,
 			display_name, user_registered, first_name, last_name, nickname, description,
-			rich_editing, comment_shortcuts, admin_color, use_ssl, show_admin_bar_front, show_admin_bar_admin, role, teacher_email</p>
+			rich_editing, comment_shortcuts, admin_color, use_ssl, show_admin_bar_front, show_admin_bar_admin, role, teacher_email,casenex_id</p>
 	
 	<?php
 	global $wpdb;
@@ -300,7 +300,7 @@ class IS_IU_Import_Users {
 			'last_name', 'nickname', 'description',
 			'rich_editing', 'comment_shortcuts', 'admin_color',
 			'use_ssl', 'show_admin_bar_front', 'show_admin_bar_admin',
-			'role', 'teacher_email'
+			'role', 'teacher_email', 'casenex_id'
 		);
 
 		include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
@@ -450,7 +450,7 @@ class IS_IU_Import_Users {
 					}
 				}
                 
-                //create student-teacher realtionship
+                //create student-teacher relationship
                 if(isset($teacher_id)){                    
                     global $wpdb;
                     $q = "INSERT IGNORE INTO wp_teacherstudent (student_ID,teacher_ID) VALUES ";

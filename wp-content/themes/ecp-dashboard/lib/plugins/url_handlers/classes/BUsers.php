@@ -53,6 +53,7 @@ public function __construct(){
 	
 	if(isset($this->post['wp-submit']))
 	{
+        
 		//sign in and return errors if any..
 		$user = wp_signon($this->post,false);
 	
