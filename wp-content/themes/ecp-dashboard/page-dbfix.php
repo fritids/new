@@ -1,17 +1,24 @@
 <?php
-/**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
- *
- * @package WordPress
- */
+global $wpdb;
 
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- */
-define('WP_USE_THEMES', true);
+$metadatas = "SELECT umeta_id, user_id, meta_value
+            FROM wp_usermeta
+            WHERE meta_key = '_IDGL_elem_ECP_user_order'";
 
-/** Loads the WordPress Environment and Template */
-require('./wp-blog-header.php');
+$metadata = $wpdb -> get_results($wpdb -> prepare($metadatas));
+
+foreach($metadata as $current){
+    $meta_id = $current->umeta_id;
+    $user_id = $current->user_id;
+    $order = unserialize(unserialize($current->meta_value));
+    
+    echo '<pre>';
+    print_r($order);
+    echo '</pre>';
+    echo '<hr>';
+}
+
+
+
+
+die('dbfix');

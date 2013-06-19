@@ -435,7 +435,7 @@ jQuery(function(){
 						//return;
 						// notification here
 					}
-				})
+				});
 			}
 
 			jQuery(".qcounter a.current").parent().removeClass("review").addClass("answered");
@@ -475,6 +475,7 @@ jQuery(function(){
 		}
 	})
 	jQuery("#btn_next").click(function(e){
+        alert('este');
 		e.preventDefault();
 		if(jQuery("#qpanel_scores").css("display")=="block"){
 			jQuery(".qcounter a:first").trigger("click");
