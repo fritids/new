@@ -2,10 +2,6 @@
 
 <?php
 
-echo '<pre>';
-print_r($_COOKIE);
-echo '</pre>';
-die();
 //Get students if the current logged in user is a teacher
 $current_user = wp_get_current_user();
 $user_id = $current_user->ID;
@@ -59,42 +55,62 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
                 </div>
                 <div class="widget-content">
                     <div class="statistics-wrap" >
-                        <div style="padding:5px;" class="clearfix">
+                        <div style="padding:5px; text-align: center;" class="clearfix">
                             <table id="students_table" style="width: 100%; line-height: 25px;">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>first name</th>
-                                        <th>last name</th>
-                                        <th>user email</th>
-                                        <th>user login</th>
+                                        <th>NAME</th>
+                                        <th>E-MAIL</th>
+                                        <th>USER LOGIN</th>
                                         <th>SAT & ACT</th>
                                         <th>SAT ONLY</th>
                                         <th>ACT ONLY</th>
+                                        <th>SAT Tests</th>
+                                        <th>ACT Tests</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $cont = 1; foreach($students as $student): ?>
+                                    <?php foreach($students as $student): ?>
                                         <tr>
-                                            <td><?php echo $cont++; ?></td>
-                                            <td><?php echo $student->first_name; ?></td>
-                                            <td><?php echo $student->last_name; ?></td>
+                                            <td>
+                                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/student-dashboard/?std=<?php echo $student->ID; ?>">
+                                                    <?php echo trim($student->last_name).' '.trim($student->first_name); ?>
+                                                </a>
+                                            </td>
                                             <td><?php echo $student->user_email; ?></td>
                                             <td><?php echo $student->user_login; ?></td>
                                             <td>
                                                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/student-progress/?std=<?php echo $student->ID; ?>&t=satact">
-                                                    <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("SAT and ACT"),$student->ID); ?>
+                                                    <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("SAT and ACT"),$student->ID).'%'; ?>
                                                 </a>
                                             </td>
                                             <td>
                                                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/student-progress/?std=<?php echo $student->ID; ?>&t=sat">
-                                                    <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("SAT Only"),$student->ID); ?>
+                                                    <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("SAT Only"),$student->ID).'%'; ?>
                                                 </a>
                                             </td>
                                             <td>
                                                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>dashboard/admin/student-progress/?std=<?php echo $student->ID; ?>&t=act">
-                                                    <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("ACT Only"),$student->ID); ?>
+                                                    <?php echo Wp_Progress::countDrills(wp_get_nav_menu_items("ACT Only"),$student->ID).'%'; ?>
                                                 </a>
+                                            </td>
+                                            <td>
+                                                <?php 
+                                                    $query = "SELECT count(*) as count FROM ".ECP_MCT_TABLE_USER_NOTES." notes
+                                                            JOIN ".ECP_MCT_TABLE_TESTS." `tests` ON `notes`.`test_id` = `tests`.`id` AND `tests`.`type` = 'SAT'
+                                                            WHERE `notes`.`user_id` = '%d'";
+                                                    $sat_user = $wpdb->get_row($wpdb->prepare($query, $student->ID));
+                                                    echo '#'.$sat_user->count;
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php 
+                                                    $query = "SELECT count(*) as count FROM ".ECP_MCT_TABLE_USER_NOTES." notes
+                                                            JOIN ".ECP_MCT_TABLE_TESTS." `tests` ON `notes`.`test_id` = `tests`.`id` AND `tests`.`type` = 'ACT'
+                                                            WHERE `notes`.`user_id` = '%d'";
+                                                    $act_user = $wpdb->get_row($wpdb->prepare($query, $student->ID));
+                                                    echo '#'.$act_user->count;
+                                                ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

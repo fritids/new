@@ -402,7 +402,6 @@ class IS_IU_Import_Users {
 				$usermeta['_IDGL_elem_userSubtype'] = serialize($student_type);
 				if(in_array("online-student", $student_type)) {
 					$usermeta['_IDGL_elem_ECP_user_order'] = serialize(array($online_package));
-                    
 				}
                 
                 //search for teacher if the field is set in the file
@@ -448,6 +447,30 @@ class IS_IU_Import_Users {
 						$metavalue = maybe_unserialize( $metavalue );
 						update_user_meta( $user_id, $metakey, $metavalue );
 					}
+                    // order details metadata
+                    global $wpdb;
+                    
+                    $post_sql = "SELECT ID, post_name, meta_value
+                                FROM wp_3_posts post
+                                JOIN wp_3_postmeta meta ON post.ID = meta.post_id 
+                                WHERE post.ID = $online_package
+                                AND meta_key = 'universal_price'";
+                    
+                    $product = $wpdb -> get_results($wpdb -> prepare($post_sql));
+                    
+                    $previous_orders_details = get_user_meta($user_id, "_IDGL_elem_ECP_user_orders_details", true);
+                    
+                    $orders_details = (empty($previous_orders_details)) ? array() : $previous_orders_details;
+                    $product_as_array = array();
+                    if( ! empty($product)){
+                        foreach($product as $key => $product){
+                            $product_as_array[$key]["id"] = $product->ID;
+                            $product_as_array[$key]["type"] = $product->post_name;
+                            $product_as_array[$key]["price"] = $product->meta_value;
+                        }
+                        $orders_details[time()]=$product_as_array;
+                    }
+                    update_user_meta($user_id, "_IDGL_elem_ECP_user_orders_details", $orders_details);
 				}
                 
                 //create student-teacher relationship

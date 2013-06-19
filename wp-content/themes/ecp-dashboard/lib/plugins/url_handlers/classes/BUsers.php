@@ -73,8 +73,7 @@ public function __construct(){
 				
 			}
 			
-		}
-		else{
+		}else{
 			
 				//$current_user = wp_get_current_user();
 
@@ -86,8 +85,6 @@ public function __construct(){
 	window.location="<?php echo get_bloginfo("url"); ?>";
 </script>
 	<?php
-	
-	die();
 
 
 			
