@@ -388,6 +388,12 @@ jQuery(function(){
 	jQuery(".qcounter a, .note_scores").click(function(e){
 		e.preventDefault();
 		var panel_id="#qpanel_"+jQuery(this).attr("href").split("_")[1];
+        var last_panel_id = "#"+jQuery('.greybox').children('.qpanel:last').attr("id");
+        if(last_panel_id==panel_id){
+            jQuery('#btn_next_save').hide();
+        }else{
+            jQuery('#btn_next_save').show();
+        }
 		jQuery(".qpanel").hide();
 		jQuery(panel_id).show();
 		jQuery(this).parents(".qcounter").find("a").removeClass("current");
@@ -475,7 +481,6 @@ jQuery(function(){
 		}
 	})
 	jQuery("#btn_next").click(function(e){
-        alert('este');
 		e.preventDefault();
 		if(jQuery("#qpanel_scores").css("display")=="block"){
 			jQuery(".qcounter a:first").trigger("click");
