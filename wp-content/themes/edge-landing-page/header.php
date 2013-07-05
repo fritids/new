@@ -62,7 +62,22 @@
 		$(document).ready(function($) {	
 			//prettyphoto
 			$("a[class^='prettyPhoto']").prettyPhoto({social_tools:false});
-
+            $(document).on('scroll',function(){
+                var position = $(window).scrollTop();
+                $('.internal').removeClass('active');
+                if(position<560){
+                    $('[href="#Top"]').addClass('active');
+                }else if(position>=560 && position<1140){
+                    $('[href="#Why-The-Edge"]').addClass('active');
+                }else if(position>=1140 && position<1850){
+                    $('[href="#Tutoring"]').addClass('active');
+                }else if(position>=1850 && position<2463){
+                    $('[href="#Admissions"]').addClass('active');
+                }else if(position>=2463){
+                    $('[href="#Testimonials"]').addClass('active');
+                }
+            });
+            
 			//Superfish menu
 			$("ul.sf-menu").supersubs({ 
 	            minWidth:    12,   // minimum width of sub-menus in em units 
@@ -128,16 +143,16 @@
 				} else {
 					$.address.value($(this).attr('href'));
 				}
-				//Set class to 'active'
-				if ($(this).hasClass('active'))
-				{
-                   $(this).removeClass('active');
-                }
-				else 
-				{
-                   $(this).parents().siblings().find('a').removeClass('active');
-                   $(this).addClass('active');
-				}
+//				//Set class to 'active'
+//				if ($(this).hasClass('active'))
+//				{
+//                   $(this).removeClass('active');
+//                }
+//				else 
+//				{
+//                   $(this).parents().siblings().find('a').removeClass('active');
+//                   $(this).addClass('active');
+//				}
 				return false;				
 			});
 			//------ Listen on scroll event to modify nav position as needed

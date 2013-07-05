@@ -100,7 +100,7 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
                                                             JOIN ".ECP_MCT_TABLE_TESTS." `tests` ON `notes`.`test_id` = `tests`.`id` AND `tests`.`type` = 'SAT'
                                                             WHERE `notes`.`user_id` = '%d'";
                                                     $sat_user = $wpdb->get_row($wpdb->prepare($query, $student->ID));
-                                                    echo '#'.$sat_user->count;
+                                                    echo $sat_user->count;
                                                 ?>
                                             </td>
                                             <td>
@@ -109,7 +109,7 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
                                                             JOIN ".ECP_MCT_TABLE_TESTS." `tests` ON `notes`.`test_id` = `tests`.`id` AND `tests`.`type` = 'ACT'
                                                             WHERE `notes`.`user_id` = '%d'";
                                                     $act_user = $wpdb->get_row($wpdb->prepare($query, $student->ID));
-                                                    echo '#'.$act_user->count;
+                                                    echo $act_user->count;
                                                 ?>
                                             </td>
                                         </tr>
