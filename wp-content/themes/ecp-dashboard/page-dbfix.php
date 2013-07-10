@@ -24,10 +24,7 @@ foreach($metadata as $current){
     if(isset($detail[0])){ 
         $cur_detail = $detail[0];
         $detail_value = unserialize($cur_detail->meta_value);
-        echo '<pre>';
-                print_r($detail_value);
-                echo '</pre>';
-                echo '<hr>';
+        
         //USERS WHICH HAVE EMPTY DETAILS
         if(empty($detail_value)){ 
             $cur_user = get_userdata($user_id);
@@ -68,7 +65,4 @@ foreach($metadata as $current){
     }
 }
 
-
-
-
-die('dbfix');
+die('Database fixed');
