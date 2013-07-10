@@ -352,7 +352,7 @@ class IS_IU_Import_Users {
 			// A plugin may need to filter the data and meta
 			$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
 			$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
-
+            
 			// If no user data, bailout!
 			if ( empty( $userdata ) )
 				continue;
@@ -363,9 +363,19 @@ class IS_IU_Import_Users {
 			// Are we updating an old user or creating a new one?
 			$update = false;
 			$user_id = 0;
-			if ( ! empty( $userdata['ID'] ) ) {
-				$update = true;
-				$user_id = $userdata['ID'];
+            
+			if ( ! empty( $userdata['last_name'] ) ) {
+                $std = new WP_User_Query( array( 'search' => $userdata['user_email'], 'search_columns'=>'user_email' ) );
+                            
+                //if there are no teachers with the entered email, just skip this process.
+                if ( !empty( $std->results ) ) {
+                    $update = true;
+                    foreach($std->results as $current){
+                        //getting current user id
+                        $user_id = $current->ID;
+                        break;
+                    }
+                }
 			}
 			
 			// If creating a new user and no user_login was set, use the email.
@@ -431,11 +441,12 @@ class IS_IU_Import_Users {
 			// If only user ID was provided, we don't need to do anything at all.
 			if ( array( 'ID' => $user_id ) == $userdata )
 				$user_id = get_userdata( $user_id )->ID; // To check if the user id exists
-			else if ( $update )
+			else if ( $update ){
+                $userdata['ID'] = $user_id;
 				$user_id = wp_update_user( $userdata );
-			else
+			}else
 				$user_id = wp_insert_user( $userdata );
-
+                
 			// Is there an error?
 			if ( is_wp_error( $user_id ) ) {
 				$errors[$rkey]['error'] = $user_id;
@@ -474,7 +485,7 @@ class IS_IU_Import_Users {
 				}
                 
                 //create student-teacher relationship
-                if(isset($teacher_id)){                    
+                if(isset($teacher_id)){
                     global $wpdb;
                     $q = "INSERT IGNORE INTO wp_teacherstudent (student_ID,teacher_ID) VALUES ";
                     $q .= "($user_id, $teacher_id)";			
