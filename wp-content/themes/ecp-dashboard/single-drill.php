@@ -421,7 +421,7 @@ jQuery(function(){
 		jQuery(this).parents("ul:first").find("li").removeClass("selected");
 		jQuery(this).addClass("selected");
 	})
-	jQuery("#btn_next_save").click(function(e){
+	jQuery("#btn_next_save").bind('click',function(e){
 		e.preventDefault();
 		var panel_id="#qpanel_"+jQuery(".qcounter a.current").attr("href").split("_")[1];
 		if(jQuery(panel_id+" .test_qs li.selected").length==0 && jQuery(panel_id+" .test_qs").length>0){
@@ -502,6 +502,7 @@ jQuery(function(){
 
 	jQuery("#btn_submit").click(function(e){
 		e.preventDefault();
+        jQuery("#btn_next_save").trigger('click');
 		jQuery(this).parent().append('<div class="note_info">Check your Answers? <br/> <a href="#" onclick="jQuery(this).parents(\'form:first\').submit()">Submit Anyway</a><span></span></div>');
 		return false;
 	})

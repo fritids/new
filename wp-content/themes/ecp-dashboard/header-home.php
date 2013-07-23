@@ -69,6 +69,8 @@ if(is_user_logged_in()){
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jCProgress-1.0.2.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.selectBox.min.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.fancybox-1.3.4.js"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/multiple-accordion.js"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/custom-script.js"></script>
 		
 		<style type="text/css" media="screen">
 			html { margin-top: 0 !important; }

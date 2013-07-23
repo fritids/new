@@ -80,7 +80,7 @@ class Walker {
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
 	 */
-	function start_el( &$output, $object, $depth, $args, $current_object_id = 0 )  {}
+	function start_el( &$output, $object, $depth, $args, $current_object_id = 0, $summary = "" )  {}
 
 	/**
 	 * Ends the element output, if needed.
@@ -93,7 +93,7 @@ class Walker {
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
 	 */
-	function end_el( &$output, $object, $depth = 0, $args = array() )    {}
+	function end_el( &$output, $object, $depth = 0, $args = array())    {}
 
 	/**
 	 * Traverse elements to create list from elements.
@@ -115,8 +115,7 @@ class Walker {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @return null Null on failure with no changes to parameters.
 	 */
-	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-
+	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output, $summary = "holamundo" ) {
 		if ( !$element )
 			return;
 
@@ -125,7 +124,8 @@ class Walker {
 		//display this element
 		if ( is_array( $args[0] ) )
 			$args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
-		$cb_args = array_merge( array(&$output, $element, $depth), $args);
+		$cb_args = array_merge( array(&$output, $element, $depth), $args, array($summary));
+
 		call_user_func_array(array(&$this, 'start_el'), $cb_args);
 
 		$id = $element->$id_field;
@@ -141,7 +141,7 @@ class Walker {
 					$cb_args = array_merge( array(&$output, $depth), $args);
 					call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
 				}
-				$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
+				$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output, $summary );
 			}
 			unset( $children_elements[ $id ] );
 		}
@@ -171,8 +171,7 @@ class Walker {
 	 * @param int $max_depth
 	 * @return string
 	 */
-	function walk( $elements, $max_depth) {
-
+	function walk( $elements, $max_depth, $trash, $summary = "") {
 		$args = array_slice(func_get_args(), 2);
 		$output = '';
 
@@ -189,7 +188,7 @@ class Walker {
 		if ( -1 == $max_depth ) {
 			$empty_array = array();
 			foreach ( $elements as $e )
-				$this->display_element( $e, $empty_array, 1, 0, $args, $output );
+				$this->display_element( $e, $empty_array, 1, 0, $args, $output, $summary);
 			return $output;
 		}
 
@@ -228,7 +227,7 @@ class Walker {
 		}
 
 		foreach ( $top_level_elements as $e )
-			$this->display_element( $e, $children_elements, $max_depth, 0, $args, $output );
+			$this->display_element( $e, $children_elements, $max_depth, 0, $args, $output, $summary );
 
 		/*
 		 * if we are displaying all levels, and remaining children_elements is not empty,
@@ -238,7 +237,7 @@ class Walker {
 			$empty_array = array();
 			foreach ( $children_elements as $orphans )
 				foreach( $orphans as $op )
-					$this->display_element( $op, $empty_array, 1, 0, $args, $output );
+					$this->display_element( $op, $empty_array, 1, 0, $args, $output, $summary );
 		 }
 
 		 return $output;

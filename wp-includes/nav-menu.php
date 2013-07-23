@@ -21,7 +21,6 @@
 function wp_get_nav_menu_object( $menu ) {
 	if ( ! $menu )
 		return false;
-
 	$menu_obj = get_term( $menu, 'nav_menu' );
 
 	if ( ! $menu_obj )
@@ -505,7 +504,7 @@ function wp_get_nav_menu_items( $menu, $args = array() ) {
 			$object_id = get_post_meta( $item->ID, '_menu_item_object_id', true );
 			$object    = get_post_meta( $item->ID, '_menu_item_object',    true );
 			$type      = get_post_meta( $item->ID, '_menu_item_type',      true );
-
+            
 			if ( 'post_type' == $type )
 				$posts[$object][] = $object_id;
 			elseif ( 'taxonomy' == $type)
