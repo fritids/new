@@ -62,6 +62,43 @@ foreach($metadata as $current){
                 update_user_meta($user_id, "_IDGL_elem_ECP_user_orders_details", $orders_details);
             }
         }
+    }else{
+        { 
+            $cur_user = get_userdata($user_id);
+            $date = new DateTime($cur_user->user_registered);
+            $date = date_format($date, 'U');
+            
+            //handle every different possibility
+            if(is_array($order)){
+                ;
+            }else{//lest's try unserializing again
+                $order = unserialize($order);
+            }
+                
+            if(is_array($order)){
+                $orders_details = array();
+                foreach($order as $index => $current){
+                    $post_sql = "SELECT ID, post_name, meta_value
+                        FROM wp_3_posts post
+                        JOIN wp_3_postmeta meta ON post.ID = meta.post_id 
+                        WHERE post.ID = $current
+                        AND meta_key = 'universal_price'";
+
+                    $product = $wpdb -> get_results($wpdb -> prepare($post_sql));
+                    if( ! empty($product)){
+                        $product_as_array = array();
+                        foreach($product as $product){
+                            $product_as_array[$index]["id"] = $product->ID;
+                            $product_as_array[$index]["type"] = $product->post_name;
+                            $product_as_array[$index]["price"] = $product->meta_value;
+                            break;
+                        }
+                        $orders_details[$date]=$product_as_array;
+                    }
+                }
+                add_user_meta($user_id, "_IDGL_elem_ECP_user_orders_details", $orders_details);
+            }
+        }
     }
 }
 
