@@ -71,6 +71,10 @@ if(is_user_logged_in()){
 		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.fancybox-1.3.4.js"></script>
         <script src="<?php echo get_template_directory_uri(); ?>/js/multiple-accordion.js"></script>
         <script src="<?php echo get_template_directory_uri(); ?>/js/custom-script.js"></script>
+        <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.validate.pack.js"></script>
+        <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/additional-methods.js"></script>
+        <script type="text/javascript">var SITE_PATH = "<?php bloginfo("url") ?>";</script>
+        
 		
 		<style type="text/css" media="screen">
 			html { margin-top: 0 !important; }
