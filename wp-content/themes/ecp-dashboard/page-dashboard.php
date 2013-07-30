@@ -122,36 +122,7 @@ $terms_approval = get_user_meta($current_user->ID, "_IDGL_elem_terms_approval", 
             </div>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="widget-block">
-                <div class="widget-head">
-                    <h5><i class="black-icons books"></i>STUDENTS TESTS REPORT</h5>
-                </div>
-                <div class="widget-content">
-                    <div class="statistics-wrap">
-                        <div style="padding:5px; " class="clearfix">
-                            <?php 
-                                $before = '<span class="sidenav-icon"></span>';
-                            ?>
-
-                            <ul class="side-nav accordion_mnu collapsible">
-                                <li><a href="#"><span class="white-icons books"></span> SAT & ACT</a>
-                                    <?php student_test_report_menu(array('container'=>'', 'items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>', 'link_before'=>$before, 'menu'=>'SAT and ACT')); ?>
-                                </li>
-                                <li><a href="#"><span class="white-icons books"></span> SAT Only</a>
-                                    <?php student_test_report_menu(array('container'=>'', 'items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>', 'link_before'=>$before, 'menu'=>'SAT Only')); ?>
-                                </li>
-                                <li><a href="#"><span class="white-icons books"></span> ACT Only</a>
-                                    <?php student_test_report_menu(array('container'=>'', 'items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>', 'link_before'=>$before, 'menu'=>'ACT Only')); ?>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 <?php endif; ?>
 <div class="row-fluid">
 	<div class="span6">
