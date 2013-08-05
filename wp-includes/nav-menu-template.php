@@ -64,7 +64,7 @@ class Walker_Nav_Menu extends Walker {
 	 * @param int $current_page Menu item ID.
 	 * @param object $args
 	 */
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0, $summary = 'asdf' ) {
+	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0, $summary = '' ) {
         
 		global $wp_query;
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -88,9 +88,16 @@ class Walker_Nav_Menu extends Walker {
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 
 		$item_output = $args->before;
-		$item_output .= '<a'. $attributes .'>';
-		$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-		$item_output .= '</a>';
+        if($summary === TRUE AND $depth == 2){
+            $item_output .= '<div>';
+            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+            $item_output .= '</div>';
+            $item_output .= 'table';
+        }else{
+            $item_output .= '<a'. $attributes .'>';
+            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+            $item_output .= '</a>';
+        }
 		$item_output .= $args->after;
 
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
@@ -330,12 +337,7 @@ function student_test_report_menu( $args = array() ) {
     
 	$sorted_menu_items = apply_filters( 'wp_nav_menu_objects', $sorted_menu_items, $args );
     
-	$items .= walk_nav_menu_tree( $sorted_menu_items, $args->depth, $args );
-    
-    echo '<pre>';
-    print_r($sorted_menu_items);
-    echo '</pre>';
-    die();
+	$items .= walk_nav_menu_tree( $sorted_menu_items, $args->depth, $args, TRUE);
     
 	unset($sorted_menu_items);
 
@@ -605,9 +607,9 @@ function _wp_menu_item_classes_by_context( &$menu_items ) {
  * @since 3.0.0
  * @see Walker::walk() for parameters and return description.
  */
-function walk_nav_menu_tree( $items, $depth, $r ) {
+function walk_nav_menu_tree( $items, $depth, $r, $summary="" ) {
 	$walker = ( empty($r->walker) ) ? new Walker_Nav_Menu : $r->walker;
-	$args = array( $items, $depth, $r );
+	$args = array( $items, $depth, $r, $summary );
 
 	return call_user_func_array( array(&$walker, 'walk'), $args );
 }
