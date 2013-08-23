@@ -88,16 +88,9 @@ class Walker_Nav_Menu extends Walker {
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 
 		$item_output = $args->before;
-        if($summary === TRUE AND $depth == 2){
-            $item_output .= '<div>';
-            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-            $item_output .= '</div>';
-            $item_output .= 'table';
-        }else{
-            $item_output .= '<a'. $attributes .'>';
-            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-            $item_output .= '</a>';
-        }
+        $item_output .= '<a'. $attributes .'>';
+        $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+        $item_output .= '</a>';
 		$item_output .= $args->after;
 
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
@@ -239,137 +232,6 @@ function wp_nav_menu( $args = array() ) {
 
 	$nav_menu = apply_filters( 'wp_nav_menu', $nav_menu, $args );
 
-	if ( $args->echo )
-		echo $nav_menu;
-	else
-		return $nav_menu;
-}
-
-
-/**
- * Generates the teacher report menu.
- *
- * Optional $args contents:
- *
- * menu - The menu that is desired. Accepts (matching in order) id, slug, name. Defaults to blank.
- * menu_class - CSS class to use for the ul element which forms the menu. Defaults to 'menu'.
- * menu_id - The ID that is applied to the ul element which forms the menu. Defaults to the menu slug, incremented.
- * container - Whether to wrap the ul, and what to wrap it with. Defaults to 'div'.
- * container_class - the class that is applied to the container. Defaults to 'menu-{menu slug}-container'.
- * container_id - The ID that is applied to the container. Defaults to blank.
- * fallback_cb - If the menu doesn't exists, a callback function will fire. Defaults to 'wp_page_menu'. Set to false for no fallback.
- * before - Text before the link text.
- * after - Text after the link text.
- * link_before - Text before the link.
- * link_after - Text after the link.
- * echo - Whether to echo the menu or return it. Defaults to echo.
- * depth - how many levels of the hierarchy are to be included. 0 means all. Defaults to 0.
- * walker - allows a custom walker to be specified.
- * theme_location - the location in the theme to be used. Must be registered with register_nav_menu() in order to be selectable by the user.
- * items_wrap - How the list items should be wrapped. Defaults to a ul with an id and class. Uses printf() format with numbered placeholders.
- *
- *
- * @param array $args Arguments
- */
-function student_test_report_menu( $args = array() ) {
-	static $menu_id_slugs = array();
-
-	$defaults = array( 'menu' => '', 'container' => 'div', 'container_class' => '', 'container_id' => '', 'menu_class' => 'menu', 'menu_id' => '',
-	'echo' => true, 'fallback_cb' => 'wp_page_menu', 'before' => '', 'after' => '', 'link_before' => '', 'link_after' => '', 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-	'depth' => 0, 'walker' => '', 'theme_location' => '' );
-
-	$args = wp_parse_args( $args, $defaults );
-	$args = apply_filters( 'wp_nav_menu_args', $args );
-	$args = (object) $args;
-
-	// Get the nav menu based on the requested menu
-	$menu = wp_get_nav_menu_object( $args->menu );
-
-	// get the first menu that has items if we still can't find a menu
-	if ( ! $menu && !$args->theme_location ) {
-		$menus = wp_get_nav_menus();
-		foreach ( $menus as $menu_maybe ) {
-			if ( $menu_items = wp_get_nav_menu_items($menu_maybe->term_id) ) {
-				$menu = $menu_maybe;
-				break;
-			}
-		}
-	}
-
-	// If the menu exists, get its items.
-	if ( $menu && ! is_wp_error($menu) && !isset($menu_items) ){
-		$menu_items = wp_get_nav_menu_items( $menu->term_id );
-    }
-	// If no menu was found or if the menu has no items and no location was requested, call the fallback_cb if it exists
-	if ( ( !$menu || is_wp_error($menu) || ( isset($menu_items) && empty($menu_items) && !$args->theme_location ) )
-		&& $args->fallback_cb && is_callable( $args->fallback_cb ) )
-			return call_user_func( $args->fallback_cb, (array) $args );
-
-	// If no fallback function was specified and the menu doesn't exists, bail.
-	if ( !$menu || is_wp_error($menu) )
-		return false;
-
-	$nav_menu = $items = '';
-
-	$show_container = false;
-	if ( $args->container ) {
-		$allowed_tags = apply_filters( 'wp_nav_menu_container_allowedtags', array( 'div', 'nav' ) );
-		if ( in_array( $args->container, $allowed_tags ) ) {
-			$show_container = true;
-			$class = $args->container_class ? ' class="' . esc_attr( $args->container_class ) . '"' : ' class="menu-'. $menu->slug .'-container"';
-			$id = $args->container_id ? ' id="' . esc_attr( $args->container_id ) . '"' : '';
-			$nav_menu .= '<'. $args->container . $id . $class . '>';
-		}
-	}
-
-	// Set up the $menu_item variables
-	_wp_menu_item_classes_by_context( $menu_items );
-    
-	$sorted_menu_items = array();
-	foreach ( (array) $menu_items as $key => $menu_item ){
-        if(($menu_item->object == 'drill' OR $menu_item->object == 'custom') AND $menu_item->post_title != 'Homework'){ // AND $menu_item->post_title != 'Homework' ???
-            $sorted_menu_items[$menu_item->menu_order] = $menu_item;
-        }else{
-            unset($menu_items[$key]);
-        }
-    }
-	unset($menu_items);
-    
-	$sorted_menu_items = apply_filters( 'wp_nav_menu_objects', $sorted_menu_items, $args );
-    
-	$items .= walk_nav_menu_tree( $sorted_menu_items, $args->depth, $args, TRUE);
-    
-	unset($sorted_menu_items);
-
-	// Attributes
-	if ( ! empty( $args->menu_id ) ) {
-		$wrap_id = $args->menu_id;
-	} else {
-		$wrap_id = 'menu-' . $menu->slug;
-		while ( in_array( $wrap_id, $menu_id_slugs ) ) {
-			if ( preg_match( '#-(\d+)$#', $wrap_id, $matches ) )
-				$wrap_id = preg_replace('#-(\d+)$#', '-' . ++$matches[1], $wrap_id );
-			else
-				$wrap_id = $wrap_id . '-1';
-		}
-	}
-	$menu_id_slugs[] = $wrap_id;
-
-	$wrap_class = $args->menu_class ? $args->menu_class : '';
-
-	// Allow plugins to hook into the menu to add their own <li>'s
-	$items = apply_filters( 'wp_nav_menu_items', $items, $args );
-	$items = apply_filters( "wp_nav_menu_{$menu->slug}_items", $items, $args );
-    
-    
-	$nav_menu .= sprintf( $args->items_wrap, esc_attr( $wrap_id ), esc_attr( $wrap_class ), $items );
-	unset( $items );
-
-	if ( $show_container )
-		$nav_menu .= '</' . $args->container . '>';
-    
-    
-	$nav_menu = apply_filters( 'wp_nav_menu', $nav_menu, $args );
 	if ( $args->echo )
 		echo $nav_menu;
 	else

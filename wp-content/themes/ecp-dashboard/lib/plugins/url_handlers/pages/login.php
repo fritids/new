@@ -1,6 +1,10 @@
 <?php 
 require_once(IDG_PLUGINS_PATH."url_handlers/classes/BUsers.php");
+require_once(IDG_PLUGINS_PATH."url_handlers/classes/Datacation.php");
 $user = new BUser();
+
+$_SESSION['code'] = $_GET['code'];
+$_SESSION['state'] = $_GET['state'];
 
 if($_SESSION['state'] != '' AND $_SESSION['code'] != ''){
 	if($_SESSION['state'] === $_SESSION['auth']){
@@ -18,6 +22,16 @@ if($_SESSION['state'] != '' AND $_SESSION['code'] != ''){
 //            'username'=>'skdteacher@casenex.com',
 //            'email'=>'skdteacher@casenex.com');
 		
+        /*IMPORT USERS*/
+//            $datacation = new Datacation('371783663'); //STUDENT
+//            $datacation = new Datacation('skdteacher@casenex.com'); //TEACHER
+            $datacation = new Datacation($result->user_id);
+            $datacation->save_data();
+            if($datacation->get_userType() == 'skdTeacher'){
+                $datacation->save_students();
+            }
+        
+        /*REMOTE LOGIN*/
 		$user_temp = new WP_User_Query( array( 'search' => $result->user_id, 'search_columns'=>array('casenex_id') ) );
 //        $user_temp = new WP_User_Query( array( 'search' => $result['user_id'], 'search_columns'=>array('casenex_id') ) );
 		
@@ -41,7 +55,8 @@ if($_SESSION['state'] != '' AND $_SESSION['code'] != ''){
 
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     $str = substr(str_shuffle($chars), 0, 10);
-    $_SESSION['auth'] = $authorization_key = $str;
+    $_SESSION['auth'] = $str;
+    $authorization_key = $str;
     
 //filtered $_POST
 $post = $user->sanitizedPost();

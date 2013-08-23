@@ -25,6 +25,17 @@ class Wp_Menu{
 		$out.="</ul>";
 		return $out;
 	}
+    public function toReport(){
+		$out="<ul class='progress-table'>";
+		foreach($this->menu_items as $item){
+			if($item->getParentID()==0){
+				$out.=$item->toReport($this->student_id, $this->with_review_button);
+			}
+		}
+		$out.="</ul>";
+		return $out;
+	}
+    
 }
 class Wp_MenuItem{
 	private $item;
@@ -140,4 +151,76 @@ class Wp_MenuItem{
 		$out.="</li>";
 		return $out;
 	}
+    
+    public function toReport($teacher_id=null){
+		if($this->item->object != "drill" && count($this->submenu) == 0){
+			return;
+		}
+		
+		if($this->item->object=="drill"){
+			$out.="<li>";
+		}else{
+			if(!$this->hasChildren()){
+				return;
+			}
+			$out.="<li><a class='category'>".$this->item->title." (".$this->getDrillsNo().")</a>";
+		}
+		if(count($this->submenu) > 0){
+			$out.="<ul>";
+			foreach($this->submenu as $item){
+				if($item->getType() != "page") {
+					$out .= $item->toReport($teacher_id);
+				}
+			}
+			$out.="</ul>";
+		}
+		
+		if($this->item->object=="drill") {
+			if(!$this->hasth) {
+				$out.="<li><a class='category drill'><span class='black-icons pencil'></span>".$this->item->title."</a>";
+				$out.='<table class="progress_table drill_header" width="100%" border="0" cellspacing="0" cellpadding="0"><tr>';
+				$out.='<th class="text-blue center" width="20px">#</th>';
+				$out.='<th width="590px">Date taken</th>';
+				$out.='<th width="120px" style="text-align:center;">Total questions</th>';
+				$out.='<th width="40px" style="text-align:center;">Correct</th>';
+				$out.='<th width="40px" style="text-align:center;">Incorrect</th>';
+				$out.='<th></th>';
+				$out.='</tr>';
+				$this->hasth=true;
+			}
+			
+			if($teacher_id!=null) {
+				$meta=get_user_meta($teacher_id, "selftest_".$this->item->object_id,false);
+			} else {
+				global $current_user;
+				$meta=get_user_meta($current_user->ID, "selftest_".$this->item->object_id,false);
+			}
+
+			$count = 1;
+			foreach($meta as $test) {
+				$cls="";
+				if($count%2 != 0){
+					$cls=" class='alt' ";
+				}
+				
+				$out.='<tr'.$cls.'>';
+				$out.='<td class="text-blue center" width="20px">'.$count.'</td>';
+				$out.='<td width="590px">'.date("F j, Y",$test["drill_end"]).'</td>';
+				$out.='<td width="120px" style="text-align:center;">'.$test["question_count"].'</td>';
+				$out.='<td width="40px" style="color:#0cb700; text-align:center;">'.$test["correct_count"].'</td>';
+				$out.='<td width="40px" style="color:#ff0000; text-align:center;">'.($test["question_count"]-count($test["answers"])).'</td>';
+				if($with_review_button)
+                    $out.='<td><a class="review" href="'.get_permalink($this->item->object_id).'?mode=review&trial='.($count-1).'">review</a></td>';
+                else
+                    $out.='<td>&nbsp;</td>';
+				$out.='</tr>';
+				$count++;
+			}
+			$out.='</table>';
+		}
+		
+		$out.="</li>";
+		return $out;
+	}
+    
 }

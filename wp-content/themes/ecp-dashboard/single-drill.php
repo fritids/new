@@ -207,8 +207,8 @@ $data=$test_data[$current_trial];
 						if($data["answers"][$question_id[$i]]==null){
 	            			echo '<div class="qnumber unanswered"><a href="#qid_'.$question_id[$i].'">'.($i+1).'</a><span>left blank</span></div>';
 	            		}else if(	
-								(float)$data["answers"][$question_id[$i]]>floatval($options["answer"]["range_from"]) &&
-								(float)$data["answers"][$question_id[$i]]<floatval($options["answer"]["range_to"]) ){
+								(float)$data["answers"][$question_id[$i]]>=floatval($options["answer"]["range_from"]) &&
+								(float)$data["answers"][$question_id[$i]]<=floatval($options["answer"]["range_to"]) ){
 	            			echo '<div class="qnumber correct"><a href="#qid_'.$question_id[$i].'">'.($i+1).'</a><span></span></div>';
 	            		}else{
 	            			echo '<div class="qnumber incorrect"><a href="#qid_'.$question_id[$i].'">'.($i+1).'</a><span></span></div>';
